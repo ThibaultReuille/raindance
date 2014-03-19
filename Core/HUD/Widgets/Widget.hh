@@ -1,0 +1,224 @@
+#pragma once
+
+#include "Core/Headers.hh"
+
+class IWidget
+{
+public:
+	IWidget(const char* name, IWidget* parent, glm::vec3 position, glm::vec2 dimension)
+	{
+		m_Name = std::string(name);
+		m_Parent = parent;
+		m_Position = position;
+		m_Dimension = dimension;
+		m_Visible = true;
+
+		m_Shader = ResourceManager::getInstance().loadShader("widget", Resources_Shaders_widget_vert, sizeof(Resources_Shaders_widget_vert),
+		                                                               Resources_Shaders_widget_frag, sizeof(Resources_Shaders_widget_frag));
+		// m_Shader->dump();
+	}
+
+	virtual ~IWidget()
+	{
+	    ResourceManager::getInstance().unload(m_Shader);
+	}
+
+	virtual void draw(Context* context, glm::mat4 model, glm::mat4 view, glm::mat4 projection) = 0;
+
+	void drawQuad(Context* context, const glm::mat4& model, const glm::mat4& view, const glm::mat4& projection)
+    {
+        Transformation transformation;
+
+        transformation.set(model);
+        transformation.scale(glm::vec3(m_Dimension.x, -m_Dimension.y, 1.0));
+
+        m_Shader->use();
+        m_Shader->uniform("u_ModelViewProjection").set(projection * view * transformation.state());
+        m_Shader->uniform("u_Mode").set(0);
+
+        context->geometry().bind(m_Quad.getVertexBuffer(), *m_Shader);
+        context->geometry().drawElements(GL_TRIANGLES, m_Quad.getTriangleBuffer().size(), GL_UNSIGNED_BYTE, m_Quad.getTriangleBuffer().ptr());
+        context->geometry().unbind(m_Quad.getVertexBuffer());
+
+        m_Shader->uniform("u_Mode").set(1);
+
+        context->geometry().bind(m_Quad.getVertexBuffer(), *m_Shader);
+        glDrawElements(GL_LINES, m_Quad.getLineBuffer().size(), GL_UNSIGNED_BYTE, m_Quad.getLineBuffer().ptr());
+        context->geometry().unbind(m_Quad.getVertexBuffer());
+    }
+
+	virtual void onMouseClick(MessageQueue& messages, int x, int y) = 0;
+
+	inline const std::string& name() { return m_Name; }
+	inline const glm::vec2 dimension() { return m_Dimension; }
+	inline const glm::vec3 position() { return m_Position; }
+
+	inline bool visible() { return m_Visible; }
+	inline void visible(const bool v) { m_Visible = v; }
+
+protected:
+	std::string m_Name;
+	IWidget* m_Parent;
+	Icon* m_Icon;
+	glm::vec3 m_Position;
+	glm::vec2 m_Dimension;
+	bool m_Visible;
+
+private:
+    Quad m_Quad;
+    Shader::Program* m_Shader;
+};
+
+class WidgetGroup : public IWidget
+{
+	struct WidgetItem
+	{
+		IWidget* Widget;
+	};
+
+public:
+	enum OriginType
+	{
+		TOP_LEFT,
+		TOP_RIGHT,
+		BOTTOM_LEFT,
+		BOTTOM_RIGHT,
+		CENTER,
+		TOP_CENTER,
+		BOTTOM_CENTER
+	};
+
+	WidgetGroup(const char* name)
+	: IWidget(name, NULL, glm::vec3(0, 0, 0), glm::vec2(0, 0))
+	{
+		m_Origin = TOP_LEFT;
+		m_WindowWidth = 0;
+		m_WindowHeight = 0;
+	}
+
+	WidgetGroup(const char* name, OriginType type)
+	: IWidget(name, NULL, glm::vec3(0, 0, 0), glm::vec2(0, 0))
+	{
+		m_Origin = type;
+	}
+
+	~WidgetGroup()
+	{
+		std::vector<WidgetItem>::iterator it;
+		for (it = m_Widgets.begin(); it != m_Widgets.end(); ++it)
+		{
+			delete it->Widget;
+		}
+	}
+
+	inline void add(IWidget* widget)
+	{
+		WidgetItem item;
+		item.Widget = widget;
+		m_Widgets.push_back(item);
+	}
+
+	virtual void draw(Context* context, glm::mat4 model, glm::mat4 view, glm::mat4 projection)
+	{
+	    (void) context;
+		(void) model;
+
+		glDisable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
+
+		Transformation transformation;
+
+		std::vector<WidgetItem>::iterator it;
+		for (it = m_Widgets.begin(); it != m_Widgets.end(); ++it)
+		{
+			if (it->Widget->visible())
+			{
+				transformation.push();
+				{
+					transformation.translate(this->position() + it->Widget->position());
+					it->Widget->draw(context, transformation.state(), view, projection);
+				    //it->Widget->drawQuad(context, transformation.state(), view, projection);
+				}
+				transformation.pop();
+			}
+		}
+
+		glEnable(GL_DEPTH_TEST);
+	}
+
+	virtual void reshape(int width, int height)
+	{
+		m_WindowWidth = width;
+		m_WindowHeight = height;
+
+		switch(m_Origin)
+		{
+		case TOP_LEFT:
+			m_Position = glm::vec3(0, m_WindowHeight, 0);
+			break;
+		case TOP_RIGHT:
+			m_Position = glm::vec3(m_WindowWidth, m_WindowHeight, 0);
+			break;
+		case BOTTOM_LEFT:
+			m_Position = glm::vec3(0, 0, 0);
+			break;
+		case BOTTOM_RIGHT:
+			m_Position = glm::vec3(m_WindowWidth, 0, 0);
+			break;
+		case CENTER:
+			m_Position = glm::vec3(m_WindowWidth / 2, m_WindowHeight / 2, 0);
+			break;
+		case TOP_CENTER:
+		    m_Position = glm::vec3(m_WindowWidth / 2, m_WindowHeight, 0);
+		    break;
+		case BOTTOM_CENTER:
+		    m_Position = glm::vec3(m_WindowWidth / 2, 0, 0);
+		    break;
+		default:
+			break;
+		}
+	}
+
+	virtual IWidget* pickWidget(int x, int y)
+	{
+		std::vector<WidgetItem>::iterator it;
+		for (it = m_Widgets.begin(); it != m_Widgets.end(); ++it)
+		{
+			glm::vec3 topleft = this->position() + it->Widget->position();
+			glm::vec2 dimension = it->Widget->dimension();
+
+			if (x > topleft.x && x < topleft.x + dimension.x &&
+				m_WindowHeight - y + dimension.y > topleft.y && m_WindowHeight - y < topleft.y)
+			{
+				return it->Widget;
+			}
+		}
+
+		return NULL;
+	}
+
+	virtual void onMouseClick(MessageQueue& messages, int x, int y)
+	{
+		std::vector<WidgetItem>::iterator it;
+		for (it = m_Widgets.begin(); it != m_Widgets.end(); ++it)
+		{
+			glm::vec3 topleft = this->position() + it->Widget->position();
+			glm::vec2 dimension = it->Widget->dimension();
+
+			if (x > topleft.x && x < topleft.x + dimension.x &&
+	           m_WindowHeight - y + dimension.y > topleft.y && m_WindowHeight - y < topleft.y)
+			{
+				it->Widget->onMouseClick(messages, x, y);
+				return;
+			}
+		}
+	}
+
+private:
+	OriginType m_Origin;
+	int m_WindowWidth;
+	int m_WindowHeight;
+	std::vector<WidgetItem> m_Widgets;
+};
+
