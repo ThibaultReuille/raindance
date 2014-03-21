@@ -50,10 +50,10 @@ all:
 	xxd -i Resources/Shaders/isovolume.vert > Pack/Shaders/isovolume.vert
 	xxd -i Resources/Shaders/isovolume.frag > Pack/Shaders/isovolume.frag
 
+	mkdir -p Pack/Shaders/Charts
+
 	xxd -i Resources/Shaders/Charts/LineChartBackground.vert > Pack/Shaders/Charts/LineChartBackground.vert
 	xxd -i Resources/Shaders/Charts/LineChartBackground.frag > Pack/Shaders/Charts/LineChartBackground.frag
-
-	mkdir -p Pack/Shaders/Charts
 
 	xxd -i Resources/Shaders/Charts/LineChartGraph.vert > Pack/Shaders/Charts/LineChartGraph.vert
 	xxd -i Resources/Shaders/Charts/LineChartGraph.frag > Pack/Shaders/Charts/LineChartGraph.frag
