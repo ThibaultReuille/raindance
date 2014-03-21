@@ -41,6 +41,13 @@
 #include "Core/Log.hh"
 #include "Core/Resources/ResourceManager.hh"
 
+#define HEX_COLOR(C)                                                    \
+        glm::vec3(static_cast<float>(((C) & 0xFF0000) >> 16) / 255.0f,  \
+                  static_cast<float>(((C) & 0x00FF00) >> 8) / 255.0f,   \
+                  static_cast<float>(((C) & 0x0000FF) >> 0) / 255.0f)
+
+const glm::vec3 BLACK =           HEX_COLOR(0x000000);
+const glm::vec3 WHITE =           HEX_COLOR(0xFFFFFF);
 const glm::vec3 NEON_PINK =       glm::vec3(0.96, 0.20, 0.66);
 const glm::vec3 SKY_BLUE =        glm::vec3(0.50, 0.79, 1.00);
 const glm::vec3 LOVE_RED =        glm::vec3(0.89, 0.11, 0.09);
@@ -50,12 +57,16 @@ const glm::vec3 GUNMETAL =        glm::vec3(0.17, 0.20, 0.22);
 const glm::vec3 INDIGO =          glm::vec3(0.29, 0.00, 0.50);
 const glm::vec3 COFFEE_BROWN =    glm::vec3(0.43, 0.30, 0.21);
 
+const glm::vec3 AQUAMARINE = HEX_COLOR(0x4E78A0);
+
 #define SAFE_DELETE(ptr) 	\
 	if ((ptr) != NULL) 		\
 	{						\
 		delete (ptr);		\
 		ptr = NULL;			\
 	}						\
+
+#define RANDOM_FLOAT(A, B) ((((B) - (A)) * (static_cast<float>(rand()) / RAND_MAX)) + (A))
 
 // --- Packed resources ---
 
@@ -97,9 +108,16 @@ const glm::vec3 COFFEE_BROWN =    glm::vec3(0.43, 0.30, 0.21);
 #include "Pack/Shaders/isovolume.vert"
 #include "Pack/Shaders/isovolume.frag"
 
+#include "Pack/Shaders/Charts/LineChartBackground.vert"
+#include "Pack/Shaders/Charts/LineChartBackground.frag"
+
+#include "Pack/Shaders/Charts/LineChartGraph.vert"
+#include "Pack/Shaders/Charts/LineChartGraph.frag"
+
 // Textures
 
 #include "Pack/Textures/umbrella-logo.png"
 #include "Pack/Textures/script.png"
 #include "Pack/Textures/mark.png"
+#include "Pack/Textures/chart-disk.png"
 

@@ -47,11 +47,23 @@ all:
 	xxd -i Resources/Shaders/isovolume.vert > Pack/Shaders/isovolume.vert
 	xxd -i Resources/Shaders/isovolume.frag > Pack/Shaders/isovolume.frag
 
+	xxd -i Resources/Shaders/isovolume.vert > Pack/Shaders/isovolume.vert
+	xxd -i Resources/Shaders/isovolume.frag > Pack/Shaders/isovolume.frag
+
+	xxd -i Resources/Shaders/Charts/LineChartBackground.vert > Pack/Shaders/Charts/LineChartBackground.vert
+	xxd -i Resources/Shaders/Charts/LineChartBackground.frag > Pack/Shaders/Charts/LineChartBackground.frag
+
+	mkdir -p Pack/Shaders/Charts
+
+	xxd -i Resources/Shaders/Charts/LineChartGraph.vert > Pack/Shaders/Charts/LineChartGraph.vert
+	xxd -i Resources/Shaders/Charts/LineChartGraph.frag > Pack/Shaders/Charts/LineChartGraph.frag
+
 	mkdir -p Pack/Textures
 
 	xxd -i Resources/Textures/umbrella-logo.png > Pack/Textures/umbrella-logo.png
 	xxd -i Resources/Textures/script.png > Pack/Textures/script.png
 	xxd -i Resources/Textures/mark.png > Pack/Textures/mark.png
+	xxd -i Resources/Textures/chart-disk.png > Pack/Textures/chart-disk.png
 
 clean:
 	rm -rf Pack

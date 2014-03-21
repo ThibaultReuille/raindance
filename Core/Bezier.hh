@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Core/Headers.hh"
 #include "Core/Geometry.hh"
 
 class BezierCurve
