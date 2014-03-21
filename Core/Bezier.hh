@@ -8,18 +8,18 @@ class BezierCurve
 public:
 	struct ControlPoint
 	{
-		ControlPoint(const glm::vec3& pos, const glm::vec3& color) : Position(pos), Color(color) {}
-		ControlPoint(const glm::vec3& pos) : Position(pos), Color(glm::vec3(1.0, 1.0, 1.0)) {}
+		ControlPoint(const glm::vec3& pos, const glm::vec4& color) : Position(pos), Color(color) {}
+		ControlPoint(const glm::vec4& pos) : Position(pos), Color(glm::vec4(1.0, 1.0, 1.0, 1.0)) {}
 		glm::vec3 Position;
-		glm::vec3 Color;
+		glm::vec4 Color;
 	};
 
 	struct Vertex
 	{
-		Vertex(const glm::vec3& pos, const glm::vec3& color) : Position(pos), Color(color) {}
-		Vertex(const glm::vec3& pos) : Position(pos), Color(glm::vec3(1.0, 1.0, 1.0)) {}
+		Vertex(const glm::vec3& pos, const glm::vec4& color) : Position(pos), Color(color) {}
+		Vertex(const glm::vec3& pos) : Position(pos), Color(glm::vec4(1.0, 1.0, 1.0, 1.0)) {}
 		glm::vec3 Position;
-		glm::vec3 Color;
+		glm::vec4 Color;
 	};
 
 	BezierCurve()
@@ -66,14 +66,14 @@ public:
 		if (m_FirstUpdate)
 		{
 			m_VertexBuffer.describe("a_Position", 3, GL_FLOAT, sizeof(Vertex), 0);
-			m_VertexBuffer.describe("a_Color",    3, GL_FLOAT, sizeof(Vertex), sizeof(glm::vec3));
+			m_VertexBuffer.describe("a_Color",    4, GL_FLOAT, sizeof(Vertex), sizeof(glm::vec3));
 			m_VertexBuffer.generate(Buffer::DYNAMIC);
 		}
 		else
 		{
 			m_VertexBuffer.update();
 			m_VertexBuffer.describe("a_Position", 3, GL_FLOAT, sizeof(Vertex), 0);
-			m_VertexBuffer.describe("a_Color", 3, GL_FLOAT, sizeof(Vertex), sizeof(glm::vec3));
+			m_VertexBuffer.describe("a_Color", 4, GL_FLOAT, sizeof(Vertex), sizeof(glm::vec3));
 		}
 		m_FirstUpdate = false;
 	}
@@ -85,7 +85,7 @@ public:
 		case 0:
 		case 1:
 			LOG("[BEZIER] Not enough control points to make a curve !\n");
-			return Vertex(glm::vec3(0, 0, 0), glm::vec3(1.0, 1.0, 1.0));
+			return Vertex(glm::vec3(0, 0, 0), glm::vec4(1.0, 1.0, 1.0, 1.0));
 		case 2:
 			return Vertex(linear(points[0].Position, points[1].Position, t),
 						  linear(points[0].Color,    points[1].Color,    t));
@@ -100,7 +100,7 @@ public:
 						  hypercubic(points[0].Color,    points[1].Color,    points[2].Color,    points[3].Color,    points[4].Color,    t));
 		default:
 			LOG("[BEZIER] High order curves are not supported yet !\n"); // TODO
-			return Vertex(glm::vec3(0, 0, 0), glm::vec3(1.0, 1.0, 1.0));
+			return Vertex(glm::vec3(0, 0, 0), glm::vec4(1.0, 1.0, 1.0, 1.0));
 		}
 	}
 

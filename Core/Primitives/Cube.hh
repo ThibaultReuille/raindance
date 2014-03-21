@@ -9,18 +9,18 @@ public:
 		glm::vec3 Normal;
 	};
 
-	Cube()
+	Cube(glm::vec3 step = glm::vec3(0, 0, 0))
 	{
 		//                Position                       Normal
-		m_VertexBuffer << glm::vec3(-0.5,  0.5, -0.5) << glm::normalize(glm::vec3(-1,  1,  1));
-		m_VertexBuffer << glm::vec3( 0.5,  0.5, -0.5) << glm::normalize(glm::vec3( 1,  1, -1));
-		m_VertexBuffer << glm::vec3( 0.5,  0.5,  0.5) << glm::normalize(glm::vec3( 1,  1,  1));
-		m_VertexBuffer << glm::vec3(-0.5,  0.5,  0.5) << glm::normalize(glm::vec3(-1,  1,  1));
+		m_VertexBuffer << glm::vec3(-0.5,  0.5, -0.5) + step << glm::normalize(glm::vec3(-1,  1,  1));
+		m_VertexBuffer << glm::vec3( 0.5,  0.5, -0.5) + step << glm::normalize(glm::vec3( 1,  1, -1));
+		m_VertexBuffer << glm::vec3( 0.5,  0.5,  0.5) + step << glm::normalize(glm::vec3( 1,  1,  1));
+		m_VertexBuffer << glm::vec3(-0.5,  0.5,  0.5) + step << glm::normalize(glm::vec3(-1,  1,  1));
 
-		m_VertexBuffer << glm::vec3(-0.5, -0.5, -0.5) << glm::normalize(glm::vec3(-1, -1, -1));
-		m_VertexBuffer << glm::vec3( 0.5, -0.5, -0.5) << glm::normalize(glm::vec3( 1, -1, -1));
-		m_VertexBuffer << glm::vec3( 0.5, -0.5,  0.5) << glm::normalize(glm::vec3( 1,  1, -1));
-		m_VertexBuffer << glm::vec3(-0.5, -0.5,  0.5) << glm::normalize(glm::vec3(-1,  1, -1));
+		m_VertexBuffer << glm::vec3(-0.5, -0.5, -0.5) + step << glm::normalize(glm::vec3(-1, -1, -1));
+		m_VertexBuffer << glm::vec3( 0.5, -0.5, -0.5) + step << glm::normalize(glm::vec3( 1, -1, -1));
+		m_VertexBuffer << glm::vec3( 0.5, -0.5,  0.5) + step << glm::normalize(glm::vec3( 1,  1, -1));
+		m_VertexBuffer << glm::vec3(-0.5, -0.5,  0.5) + step << glm::normalize(glm::vec3(-1,  1, -1));
 
 		unsigned short int triangles_indices[] =
 		{
