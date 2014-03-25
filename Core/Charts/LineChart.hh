@@ -171,7 +171,6 @@ public:
 
             context.geometry().bind(m_BackgroundQuad->getVertexBuffer(), *m_Shader);
             context.geometry().drawElements(GL_TRIANGLES, m_BackgroundQuad->getTriangleBuffer().size(), GL_UNSIGNED_BYTE, m_BackgroundQuad->getTriangleBuffer().ptr());
-            //context.geometry().drawElements(GL_LINES, m_BackgroundQuad->getLineBuffer().size(), GL_UNSIGNED_BYTE, m_BackgroundQuad->getLineBuffer().ptr());
             context.geometry().unbind(m_BackgroundQuad->getVertexBuffer());
         }
 

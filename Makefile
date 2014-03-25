@@ -54,9 +54,11 @@ all:
 
 	xxd -i Resources/Shaders/Charts/LineChartBackground.vert > Pack/Shaders/Charts/LineChartBackground.vert
 	xxd -i Resources/Shaders/Charts/LineChartBackground.frag > Pack/Shaders/Charts/LineChartBackground.frag
-
 	xxd -i Resources/Shaders/Charts/LineChartGraph.vert > Pack/Shaders/Charts/LineChartGraph.vert
 	xxd -i Resources/Shaders/Charts/LineChartGraph.frag > Pack/Shaders/Charts/LineChartGraph.frag
+
+	xxd -i Resources/Shaders/Charts/HeightMap.vert > Pack/Shaders/Charts/HeightMap.vert
+	xxd -i Resources/Shaders/Charts/HeightMap.frag > Pack/Shaders/Charts/HeightMap.frag
 
 	mkdir -p Pack/Textures
 

@@ -114,6 +114,9 @@ const glm::vec3 AQUAMARINE = HEX_COLOR(0x4E78A0);
 #include "Pack/Shaders/Charts/LineChartGraph.vert"
 #include "Pack/Shaders/Charts/LineChartGraph.frag"
 
+#include "Pack/Shaders/Charts/HeightMap.vert"
+#include "Pack/Shaders/Charts/HeightMap.frag"
+
 // Textures
 
 #include "Pack/Textures/umbrella-logo.png"
