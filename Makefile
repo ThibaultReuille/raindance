@@ -67,8 +67,28 @@ all:
 	xxd -i Resources/Textures/mark.png > Pack/Textures/mark.png
 	xxd -i Resources/Textures/chart-disk.png > Pack/Textures/chart-disk.png
 
+	mkdir -p Pack/Textures/Shapes
+
+	xxd -i Resources/Textures/Shapes/cloud.png > Pack/Textures/Shapes/cloud.png
+	xxd -i Resources/Textures/Shapes/cross.png > Pack/Textures/Shapes/cross.png
+	xxd -i Resources/Textures/Shapes/disk.png > Pack/Textures/Shapes/disk.png
+	xxd -i Resources/Textures/Shapes/heart.png > Pack/Textures/Shapes/heart.png
+	xxd -i Resources/Textures/Shapes/hexagon.png > Pack/Textures/Shapes/hexagon.png
+	xxd -i Resources/Textures/Shapes/house.png > Pack/Textures/Shapes/house.png
+	xxd -i Resources/Textures/Shapes/losange.png > Pack/Textures/Shapes/losange.png
+	xxd -i Resources/Textures/Shapes/octagon.png > Pack/Textures/Shapes/octagon.png
+	xxd -i Resources/Textures/Shapes/patch.png > Pack/Textures/Shapes/patch.png
+	xxd -i Resources/Textures/Shapes/pentagon.png > Pack/Textures/Shapes/pentagon.png
+	xxd -i Resources/Textures/Shapes/semicircle.png > Pack/Textures/Shapes/semicircle.png
+	xxd -i Resources/Textures/Shapes/square.png > Pack/Textures/Shapes/square.png
+	xxd -i Resources/Textures/Shapes/star.png > Pack/Textures/Shapes/star.png
+	xxd -i Resources/Textures/Shapes/triangle.png > Pack/Textures/Shapes/triangle.png
+	xxd -i Resources/Textures/Shapes/triangle1.png > Pack/Textures/Shapes/triangle1.png
+	xxd -i Resources/Textures/Shapes/triangle2.png > Pack/Textures/Shapes/triangle2.png
+
 clean:
 	rm -rf Pack
 	rm -rf *~
 	rm -rf */*~
+
 
