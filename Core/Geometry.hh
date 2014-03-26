@@ -59,6 +59,9 @@ public:
 
 		for (it = buffer.descriptions_begin(); it != buffer.descriptions_end(); ++it)
 		{
+		    if (it->Mute)
+		        continue;
+
 			if (it->Location == -1)
 			{
 				it->Location = shader.attribute(it->Attribute.c_str()).location();
@@ -68,6 +71,8 @@ public:
 
 		for (it = buffer.descriptions_begin(); it != buffer.descriptions_end(); ++it)
 		{
+            if (it->Mute)
+                continue;
 			glEnableVertexAttribArray(it->Location);
 		}
 	}
@@ -78,6 +83,8 @@ public:
 
 		for (it = buffer.descriptions_begin(); it != buffer.descriptions_end(); ++it)
 		{
+		    if (it->Mute)
+		        continue;
 			glDisableVertexAttribArray(it->Location);
 		}
 	}

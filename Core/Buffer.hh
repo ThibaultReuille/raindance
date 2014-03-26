@@ -14,6 +14,7 @@ public:
 		GLuint Offset;
 		std::string Attribute;
 		GLint Location;
+		bool Mute;
 	};
 
 	enum BufferFlag
@@ -80,8 +81,22 @@ public:
 		description.Offset = offset;
 		description.Attribute = std::string(attribute);
 		description.Location = -1;
+		description.Mute = false;
 
 		m_Descriptions.push_back(description);
+	}
+
+	void mute(const char* attribute, bool flag)
+	{
+	    std::string a(attribute);
+	    for (auto& d : m_Descriptions)
+	    {
+	        if (d.Attribute == a)
+	        {
+	            d.Mute = flag;
+	            return;
+	        }
+	    }
 	}
 
 	void clear()
