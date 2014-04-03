@@ -70,7 +70,7 @@ const glm::vec3 AQUAMARINE = HEX_COLOR(0x4E78A0);
 
 // --- Packed resources ---
 
-// Shaders
+// SHADERS
 
 #include "Pack/Shaders/ray.vert"
 #include "Pack/Shaders/ray.frag"
@@ -99,14 +99,21 @@ const glm::vec3 AQUAMARINE = HEX_COLOR(0x4E78A0);
 #include "Pack/Shaders/checkbox.vert"
 #include "Pack/Shaders/checkbox.frag"
 
-#include "Pack/Shaders/box.vert"
-#include "Pack/Shaders/box.frag"
-
 #include "Pack/Shaders/pointcloud.vert"
 #include "Pack/Shaders/pointcloud.frag"
 
 #include "Pack/Shaders/isovolume.vert"
 #include "Pack/Shaders/isovolume.frag"
+
+// Primitives
+
+#include "Pack/Shaders/Primitives/box.vert"
+#include "Pack/Shaders/Primitives/box.frag"
+
+#include "Pack/Shaders/Primitives/grid.vert"
+#include "Pack/Shaders/Primitives/grid.frag"
+
+// Charts
 
 #include "Pack/Shaders/Charts/LineChartBackground.vert"
 #include "Pack/Shaders/Charts/LineChartBackground.frag"
@@ -117,7 +124,7 @@ const glm::vec3 AQUAMARINE = HEX_COLOR(0x4E78A0);
 #include "Pack/Shaders/Charts/HeightMap.vert"
 #include "Pack/Shaders/Charts/HeightMap.frag"
 
-// Textures
+// TEXTURES
 
 #include "Pack/Textures/umbrella-logo.png"
 #include "Pack/Textures/script.png"

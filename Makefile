@@ -11,9 +11,6 @@ all:
 	xxd -i Resources/Shaders/axis.vert > Pack/Shaders/axis.vert
 	xxd -i Resources/Shaders/axis.frag > Pack/Shaders/axis.frag
 
-	xxd -i Resources/Shaders/box.vert > Pack/Shaders/box.vert
-	xxd -i Resources/Shaders/box.frag > Pack/Shaders/box.frag
-
 	xxd -i Resources/Shaders/ray.vert > Pack/Shaders/ray.vert
 	xxd -i Resources/Shaders/ray.frag > Pack/Shaders/ray.frag
 
@@ -49,6 +46,14 @@ all:
 
 	xxd -i Resources/Shaders/isovolume.vert > Pack/Shaders/isovolume.vert
 	xxd -i Resources/Shaders/isovolume.frag > Pack/Shaders/isovolume.frag
+
+	mkdir -p Pack/Shaders/Primitives
+
+	xxd -i Resources/Shaders/Primitives/box.vert > Pack/Shaders/Primitives/box.vert
+	xxd -i Resources/Shaders/Primitives/box.frag > Pack/Shaders/Primitives/box.frag
+
+	xxd -i Resources/Shaders/Primitives/grid.vert > Pack/Shaders/Primitives/grid.vert
+	xxd -i Resources/Shaders/Primitives/grid.frag > Pack/Shaders/Primitives/grid.frag
 
 	mkdir -p Pack/Shaders/Charts
 

@@ -18,14 +18,6 @@ public:
 
     IconMap(unsigned long width, unsigned long height)
     {
-        Layout test[] = {
-                { 0, glm::vec4(1.0, 1.0, 1.0, 1.0), 1.0 },
-                { 0, glm::vec4(1.0, 1.0, 1.0, 1.0), 1.0 },
-                { 0, glm::vec4(1.0, 1.0, 1.0, 1.0), 1.0 },
-                { 0, glm::vec4(1.0, 1.0, 1.0, 1.0), 1.0 },
-                { 0, glm::vec4(1.0, 1.0, 1.0, 1.0), 1.0 }
-        };
-
         m_Width = width;
         m_Height = height;
 

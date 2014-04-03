@@ -7,8 +7,9 @@ class Box
 public:
 	Box()
 	{
-		m_Shader = ResourceManager::getInstance().loadShader("box", Resources_Shaders_box_vert, sizeof(Resources_Shaders_box_vert),
-		                                                            Resources_Shaders_box_frag, sizeof(Resources_Shaders_box_frag));
+		m_Shader = ResourceManager::getInstance().loadShader("Primitives/box",
+		        Resources_Shaders_Primitives_box_vert, sizeof(Resources_Shaders_Primitives_box_vert),
+		        Resources_Shaders_Primitives_box_frag, sizeof(Resources_Shaders_Primitives_box_frag));
 		// m_Shader->dump();
 
 		m_VertexBuffer.disable(Buffer::GPU_SYNC);
