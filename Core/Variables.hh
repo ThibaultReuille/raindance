@@ -22,7 +22,7 @@ public:
 	inline void type(VariableType type) { m_Type = type; }
 
 	inline const std::string& name() const { return m_Name; }
-	inline void name(std::string& name) { m_Name = name; }
+	inline void name(const std::string& name) { m_Name = name; }
 
 	virtual void set(const std::string& str) = 0;
 	virtual IVariable* duplicate() = 0;
@@ -36,7 +36,13 @@ class StringVariable : public IVariable
 public:
 	inline virtual void set(const std::string& str) { m_Type = STRING; m_Value = str; }
 	inline const std::string& value() { return m_Value; }
-	virtual IVariable* duplicate() { StringVariable* variable = new StringVariable(); variable->set(m_Value); return variable; }
+	virtual IVariable* duplicate()
+	{
+	    StringVariable* variable = new StringVariable();
+	    variable->name(m_Name);
+	    variable->set(m_Value);
+	    return variable;
+	}
 private:
 	std::string m_Value;
 };
@@ -45,11 +51,18 @@ class IntVariable : public IVariable
 {
 public:
 	inline virtual void set(const std::string& str) { m_Type = INT; m_Value = atoi(str.c_str()); }
-	inline virtual void set(int value) { m_Type = INT; m_Value = value; }
-	inline int value() { return m_Value; }
-	virtual IVariable* duplicate() { IntVariable* variable = new IntVariable(); variable->set(m_Value); return variable; }
+    inline virtual void set(int value) { m_Type = INT; m_Value = value; }
+    inline virtual void set(long value) { m_Type = INT; m_Value = value; }
+	inline long value() { return m_Value; }
+	virtual IVariable* duplicate()
+	{
+        IntVariable* variable = new IntVariable();
+        variable->name(m_Name);
+        variable->set(m_Value);
+        return variable;
+	}
 private:
-	int m_Value;
+	long m_Value;
 };
 
 class BooleanVariable : public IVariable
@@ -65,7 +78,13 @@ public:
 	}
 	inline virtual void set(bool value) { m_Type = BOOLEAN; m_Value = value; }
 	inline bool value() { return m_Value; }
-	virtual BooleanVariable* duplicate() { BooleanVariable* variable = new BooleanVariable(); variable->set(m_Value); return variable; }
+	virtual BooleanVariable* duplicate()
+	{
+	    BooleanVariable* variable = new BooleanVariable();
+	    variable->name(m_Name);
+	    variable->set(m_Value);
+	    return variable;
+	}
 private:
 	bool m_Value;
 };
@@ -76,7 +95,13 @@ public:
 	inline virtual void set(const std::string& str) { m_Type = FLOAT; m_Value = atof(str.c_str()); }
 	inline virtual void set(float value) { m_Type = FLOAT; m_Value = value; }
 	inline float value() { return m_Value; }
-	virtual IVariable* duplicate() { FloatVariable* variable = new FloatVariable(); variable->set(m_Value); return variable; }
+	virtual IVariable* duplicate()
+	{
+	    FloatVariable* variable = new FloatVariable();
+	    variable->name(m_Name);
+	    variable->set(m_Value);
+	    return variable;
+	}
 private:
 	float m_Value;
 };
@@ -92,7 +117,13 @@ public:
 	}
 	inline virtual void set(glm::vec2 value) { m_Type = VEC2; m_Value = value; }
 	inline const glm::vec2& value() { return m_Value; }
-	virtual IVariable* duplicate() { Vec2Variable* variable = new Vec2Variable(); variable->set(m_Value); return variable; }
+	virtual IVariable* duplicate()
+	{
+	    Vec2Variable* variable = new Vec2Variable();
+	    variable->name(m_Name);
+	    variable->set(m_Value);
+	    return variable;
+	}
 private:
 	glm::vec2 m_Value;
 };
@@ -108,7 +139,13 @@ public:
     }
     inline virtual void set(glm::vec3 value) { m_Type = VEC3; m_Value = value; }
     inline const glm::vec3& value() { return m_Value; }
-    virtual IVariable* duplicate() { Vec3Variable* variable = new Vec3Variable(); variable->set(m_Value); return variable; }
+    virtual IVariable* duplicate()
+    {
+        Vec3Variable* variable = new Vec3Variable();
+        variable->name(m_Name);
+        variable->set(m_Value);
+        return variable;
+    }
 private:
     glm::vec3 m_Value;
 };
@@ -124,11 +161,16 @@ public:
     }
     inline virtual void set(glm::vec4 value) { m_Type = VEC4; m_Value = value; }
     inline const glm::vec4& value() { return m_Value; }
-    virtual IVariable* duplicate() { Vec4Variable* variable = new Vec4Variable(); variable->set(m_Value); return variable; }
+    virtual IVariable* duplicate()
+    {
+        Vec4Variable* variable = new Vec4Variable();
+        variable->name(m_Name);
+        variable->set(m_Value);
+        return variable;
+    }
 private:
     glm::vec4 m_Value;
 };
-
 
 class Variables
 {
@@ -148,7 +190,27 @@ public:
         */
     }
 
-	const IVariable* set(std::string& name, VariableType type, std::string& value)
+    const IVariable* add(IVariable* var)
+    {
+        std::string name = var->name();
+
+        std::vector<IVariable*>::iterator it;
+        for (it = m_Variables.begin(); it != m_Variables.end(); ++it)
+        {
+            if (name == (*it)->name())
+            {
+                LOG("[VARIABLES] Variable name '%s' already exists!\n", name.c_str());
+                return NULL;
+            }
+        }
+
+        IVariable* newVar = var->duplicate();
+        m_Variables.push_back(newVar);
+
+        return newVar;
+    }
+
+	const IVariable* set(const std::string& name, VariableType type, const std::string& value)
 	{
 		// TODO : All of this can be optimized with a hash table
 
@@ -202,9 +264,14 @@ public:
 		return variable;
 	}
 
-	IVariable* get(const std::string& name)
+	const IVariable* set(const char* name, VariableType type, std::string& value)
 	{
-		std::vector<IVariable*>::iterator it;
+	    return this->set(std::string(name), type, value);
+	}
+
+	IVariable* get(const std::string& name) const
+	{
+		std::vector<IVariable*>::const_iterator it;
 		for (it = m_Variables.begin(); it != m_Variables.end(); ++it)
 		{
 			if (name == (*it)->name())
@@ -213,7 +280,7 @@ public:
 		return NULL;
 	}
 
-	IVariable* get(const char* name)
+	IVariable* get(const char* name) const
 	{
 		return this->get(std::string(name));
 	}
