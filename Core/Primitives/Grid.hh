@@ -39,7 +39,7 @@ public:
         m_Shader = ResourceManager::getInstance().loadShader("Primitives/grid",
                 Resources_Shaders_Primitives_grid_vert, sizeof(Resources_Shaders_Primitives_grid_vert),
                 Resources_Shaders_Primitives_grid_frag, sizeof(Resources_Shaders_Primitives_grid_frag));
-        m_Shader->dump();
+        // m_Shader->dump();
 	}
 
 	virtual ~Grid()
@@ -61,6 +61,9 @@ public:
 
 	inline Buffer& getVertexBuffer() { return m_VertexBuffer; }
 	inline Buffer& getLineBuffer() { return m_LineBuffer; }
+
+	inline unsigned long width() { return m_Width; }
+	inline unsigned long height() { return m_Height; }
 
 private:
 	unsigned long m_Width;
