@@ -30,8 +30,7 @@ public:
 
 		m_Acceleration = glm::vec3(0, 0, 0);
 
-		m_Clock.reset();
-		m_LastTime = 0;
+		m_LastTime = m_Sequencer->clock().milliseconds();
 
 		updateCamera();
 	}
@@ -42,7 +41,7 @@ public:
 
 	virtual void updateCamera()
 	{
-		Timecode time = m_Clock.milliseconds();
+		Timecode time = m_Sequencer->clock().milliseconds();
 
 		float dt = (float)(time - m_LastTime) / 1000.0f;
 
@@ -112,8 +111,8 @@ public:
 
 	void playZoomSequence(glm::vec3 newTarget, float newRadius, unsigned int time)
 	{
-		m_Sequencer->add(new VertexSequence(&m_Target, newTarget, time), Track::Event::START);
-		m_Sequencer->add(new FloatSequence(&m_Radius, newRadius, time), Track::Event::START);
+		m_Sequencer->add("animation", new VertexSequence(&m_Target, newTarget, time), Track::Event::START);
+		m_Sequencer->add("animation", new FloatSequence(&m_Radius, newRadius, time), Track::Event::START);
 	}
 
 	void playAimSequence(glm::vec3 newTarget, unsigned int time)
@@ -123,16 +122,15 @@ public:
 		float newAngle0 = acos(newPos.y / newRadius);
 		float newAngle1 = atan(-newPos.z / newPos.x);
 
-		m_Sequencer->add(new VertexSequence(&m_Target, newTarget, time),    Track::Event::START);
-		m_Sequencer->add(new FloatSequence(&m_Radius, newRadius, time),     Track::Event::START);
-		m_Sequencer->add(new FloatSequence(&m_Angles[0], newAngle0, time),  Track::Event::START);
-		m_Sequencer->add(new FloatSequence(&m_Angles[1], newAngle1, time),  Track::Event::START);
+		m_Sequencer->add("animation", new VertexSequence(&m_Target, newTarget, time),    Track::Event::START);
+		m_Sequencer->add("animation", new FloatSequence(&m_Radius, newRadius, time),     Track::Event::START);
+		m_Sequencer->add("animation", new FloatSequence(&m_Angles[0], newAngle0, time),  Track::Event::START);
+		m_Sequencer->add("animation", new FloatSequence(&m_Angles[1], newAngle1, time),  Track::Event::START);
 	}
 
 protected:
 	Camera* m_Camera;
 	Sequencer* m_Sequencer;
-	Clock m_Clock;
 	Timecode m_LastTime;
 
 	GLfloat m_Angles[2];
@@ -153,14 +151,13 @@ public:
 		m_LastDx = 0;
 		m_LastDy = 0;
 
-		m_Clock.reset();
-		m_LastTime = 0;
+		m_LastTime = m_Sequencer->clock().milliseconds();
 
 		updateCamera();
 	}
 	virtual void updateCamera()
 	{
-		Timecode time = m_Clock.milliseconds();
+		Timecode time = m_Sequencer->clock().milliseconds();
 
 		float dt = (float)(time - m_LastTime) / 1000.0f;
 
@@ -207,13 +204,12 @@ public:
 	}
 	void sequence(glm::vec3 newTarget, float newRadius, unsigned int time)
 	{
-		m_Sequencer->add(new VertexSequence(&m_Camera->getPosition(), newTarget - newRadius * m_Camera->front(), time), Track::Event::START);
+		m_Sequencer->add("animation", new VertexSequence(&m_Camera->getPosition(), newTarget - newRadius * m_Camera->front(), time), Track::Event::START);
 	}
 
 protected:
 	Camera* m_Camera;
 	Sequencer* m_Sequencer;
-	Clock m_Clock;
 
 	Timecode m_LastTime;
 	int m_LastDx;

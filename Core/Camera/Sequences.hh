@@ -22,7 +22,7 @@ public:
 
 	virtual void start(Timecode timecode)
 	{
-	    LOG("%lu > %s START\n", timecode, m_Name.c_str());
+	    LOG("%lu > %s START\n", timecode, name().c_str());
 	    m_StartTime = timecode;
 	    m_InitialValue = m_Camera->getPosition() + m_Camera->front();
 	}
@@ -35,7 +35,7 @@ public:
 		if (t >= 1)
 		{
 			m_Camera->lookAt(m_TargetValue);
-	        LOG("%lu > %s KILL\n", timecode, m_Name.c_str());
+	        LOG("%lu > %s KILL\n", timecode, name().c_str());
 			return KILL;
 		}
 

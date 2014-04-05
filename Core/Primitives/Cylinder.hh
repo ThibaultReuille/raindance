@@ -16,7 +16,7 @@ public:
 
 	Cylinder(float radius, float halfLength, int slices, int stacks, glm::vec3 step = glm::vec3(0, 0, 0))
 	{
-	    float d = 1.0f / sqrt(2.0);
+	    const float d = 1.0f / sqrt(2.0);
 	    float length;
 
 		for(int i = 0; i < slices; i++)

@@ -7,22 +7,30 @@ typedef unsigned long Timecode;
 class Sequence
 {
 public:
-	enum Status
+    typedef unsigned long ID;
+
+    enum Status
 	{
 		LIVE,
 		KILL
 	};
 
-	Sequence(const char* name) : m_Name(name) {}
+	Sequence(const char* name) : m_Name(name)
+    {
+        static ID NextID = 0;
+        m_ID = NextID++;
+    }
 	virtual ~Sequence() {}
 
 	virtual void start(Timecode timecode) = 0;
 	virtual Status play(Timecode timecode) = 0;
 	virtual void stop(Timecode timecode) = 0;
 
+	inline ID id() const { return m_ID; }
 	inline const std::string& name() const { return m_Name; }
 
-protected:
+private:
+	ID m_ID;
 	std::string m_Name;
 };
 
@@ -139,6 +147,12 @@ public:
         m_LastTimecode = timecode;
     }
 
+    inline void play(Clock& clock)
+    {
+        this->play(clock.milliseconds());
+    }
+
+
     void dump()
     {
         std::multiset<Event>::iterator it;
@@ -148,6 +162,8 @@ public:
             it->dump();
         }
     }
+
+    inline const std::string& name() { return m_Name; }
 
 private:
     std::string m_Name;
@@ -161,40 +177,85 @@ private:
 class Sequencer
 {
 public:
-
 	Sequencer()
     {
-	    m_Track = new Track("default");
+	    this->add(new Track("default"));
 	    m_Delay = 100;
     }
-
 	virtual ~Sequencer()
 	{
-	    SAFE_DELETE(m_Track);
+	    for (auto t : m_Tracks)
+	    {
+	        SAFE_DELETE(t);
+	    }
 	}
 
-    inline void add(Sequence* sequence, Track::Event::Type type)
+    inline void add(const char* name, Sequence* sequence, Track::Event::Type type)
     {
-        m_Track->insert(sequence, type, m_Clock.milliseconds() + m_Delay);
+        this->track(name)->insert(sequence, type, m_Clock.milliseconds() + m_Delay);
     }
-    inline void add(Sequence* sequence, Timecode duration)
+    inline void add(const char* name, Sequence* sequence, Track::Event::Type type, Timecode timecode)
     {
-        m_Track->insert(sequence, m_Clock.milliseconds() + m_Delay, duration);
+        this->track(name)->insert(sequence, type, timecode);
     }
 
-	void run()
+    inline void add(const char* name, Sequence* sequence, Timecode duration)
+    {
+        this->track(name)->insert(sequence, m_Clock.milliseconds() + m_Delay, duration);
+    }
+    inline void add(const char* name, Sequence* sequence, Timecode time, Timecode duration)
+    {
+        this->track(name)->insert(sequence, time, duration);
+    }
+
+	void play()
 	{
-		m_Track->play(m_Clock.milliseconds());
+		for (auto track : m_Tracks)
+		    track->play(m_Clock.milliseconds());
+	}
+
+	void play(Timecode timecode)
+	{
+	    for (auto track : m_Tracks)
+	        track->play(timecode);
+	}
+
+	void play(const char* trackName)
+	{
+	    track(trackName)->play(m_Clock.milliseconds());
 	}
 
 	void dump()
 	{
-	    m_Track->dump();
+	    for (auto track : m_Tracks)
+	        track->dump();
 	}
+
+	inline void add(Track* track)
+	{
+	    for (auto t : m_Tracks)
+	        if (track->name() == t->name())
+	        {
+	            LOG("[SEQUENCER] Track '%s' already exists!\n", track->name().c_str());
+	            return;
+	        }
+	    m_Tracks.push_back(track);
+	}
+
+	Track* track(const char* name = "default")
+	{
+	    std::string sname(name);
+	    for (auto track : m_Tracks)
+	        if (track->name() == sname)
+	            return track;
+	    return NULL;
+	}
+
+	inline Clock& clock() { return m_Clock; }
 
 protected:
 	Clock m_Clock;
-    Track* m_Track;
+    std::vector<Track*> m_Tracks;
     unsigned int m_Delay;
 };
 
@@ -220,7 +281,7 @@ public:
     {
         m_StartTime = timecode;
         m_InitialValue = *m_Vertex;
-        LOG("%lu > %s START\n", timecode, m_Name.c_str());
+        LOG("%lu > %s START\n", timecode, name().c_str());
     }
 
 	virtual Status play(Timecode timecode)
@@ -231,7 +292,7 @@ public:
 		if (t >= 1)
 		{
 			*m_Vertex = m_TargetValue;
-	        LOG("%lu > %s KILL\n", timecode, m_Name.c_str());
+	        LOG("%lu > %s KILL\n", timecode, name().c_str());
 			return KILL;
 		}
 
@@ -275,7 +336,7 @@ public:
 
     virtual void start(Timecode timecode)
     {
-        LOG("%lu > %s START\n", timecode, m_Name.c_str());
+        LOG("%lu > %s START\n", timecode, name().c_str());
     }
 
 	virtual Status play(Timecode timecode)
@@ -292,7 +353,7 @@ public:
 		if (t >= 1)
 		{
 			*m_Pointer = m_TargetValue;
-	        LOG("%lu > %s KILL\n", timecode, m_Name.c_str());
+	        LOG("%lu > %s KILL\n", timecode, name().c_str());
 			return KILL;
 		}
 
