@@ -4,6 +4,8 @@
 
 #include "Core/Headers.hh"
 
+typedef unsigned long Timecode;
+
 class Clock
 {
 public:
@@ -17,7 +19,9 @@ public:
 	{
 	    gettimeofday(&m_ZeroTime, NULL);
 		reset();
+		pause();
 		start();
+        LOG("[CLOCK] Clock created at (%ld s, %d us).\n", m_ZeroTime.tv_sec, m_ZeroTime.tv_usec);
 	}
 
 	void reset()

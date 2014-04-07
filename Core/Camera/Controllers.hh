@@ -6,7 +6,7 @@
 class ICameraController : public Controller
 {
 public:
-	virtual void bind(Camera* camera, Sequencer* sequencer) = 0;
+	virtual void bind(Context* context, Camera* camera) = 0;
 	virtual void updateCamera() = 0;
 	virtual void onMouseClick(int x, int y) { (void) x; (void) y; }
 	virtual void onMouseDoubleClick(int x, int y) { (void) x; (void) y; }
@@ -18,10 +18,10 @@ public:
 class SphericalCameraController : public ICameraController
 {
 public:
-	virtual void bind(Camera* camera, Sequencer* sequencer)
+	virtual void bind(Context* context, Camera* camera)
 	{
-		m_Camera = camera;
-		m_Sequencer = sequencer;
+        m_Context = context;
+        m_Camera = camera;
 
 		m_Angles[0] = 0;
 		m_Angles[1] = M_PI / 2;
@@ -30,7 +30,7 @@ public:
 
 		m_Acceleration = glm::vec3(0, 0, 0);
 
-		m_LastTime = m_Sequencer->clock().milliseconds();
+		m_LastTime = m_Context->clock().milliseconds();
 
 		updateCamera();
 	}
@@ -41,7 +41,7 @@ public:
 
 	virtual void updateCamera()
 	{
-		Timecode time = m_Sequencer->clock().milliseconds();
+		Timecode time = m_Context->clock().milliseconds();
 
 		float dt = (float)(time - m_LastTime) / 1000.0f;
 
@@ -111,8 +111,8 @@ public:
 
 	void playZoomSequence(glm::vec3 newTarget, float newRadius, unsigned int time)
 	{
-		m_Sequencer->add("animation", new VertexSequence(&m_Target, newTarget, time), Track::Event::START);
-		m_Sequencer->add("animation", new FloatSequence(&m_Radius, newRadius, time), Track::Event::START);
+		m_Context->sequencer().track("animation")->insert(new VertexSequence(&m_Target, newTarget, time), Track::Event::START);
+		m_Context->sequencer().track("animation")->insert(new FloatSequence(&m_Radius, newRadius, time), Track::Event::START);
 	}
 
 	void playAimSequence(glm::vec3 newTarget, unsigned int time)
@@ -122,15 +122,15 @@ public:
 		float newAngle0 = acos(newPos.y / newRadius);
 		float newAngle1 = atan(-newPos.z / newPos.x);
 
-		m_Sequencer->add("animation", new VertexSequence(&m_Target, newTarget, time),    Track::Event::START);
-		m_Sequencer->add("animation", new FloatSequence(&m_Radius, newRadius, time),     Track::Event::START);
-		m_Sequencer->add("animation", new FloatSequence(&m_Angles[0], newAngle0, time),  Track::Event::START);
-		m_Sequencer->add("animation", new FloatSequence(&m_Angles[1], newAngle1, time),  Track::Event::START);
+		m_Context->sequencer().track("animation")->insert(new VertexSequence(&m_Target, newTarget, time),    Track::Event::START);
+		m_Context->sequencer().track("animation")->insert(new FloatSequence(&m_Radius, newRadius, time),     Track::Event::START);
+		m_Context->sequencer().track("animation")->insert(new FloatSequence(&m_Angles[0], newAngle0, time),  Track::Event::START);
+		m_Context->sequencer().track("animation")->insert(new FloatSequence(&m_Angles[1], newAngle1, time),  Track::Event::START);
 	}
 
 protected:
 	Camera* m_Camera;
-	Sequencer* m_Sequencer;
+	Context* m_Context;
 	Timecode m_LastTime;
 
 	GLfloat m_Angles[2];
@@ -143,21 +143,21 @@ protected:
 class FirstPersonCameraController : public ICameraController
 {
 public:
-	virtual void bind(Camera* camera, Sequencer* sequencer)
+	virtual void bind(Context* context, Camera* camera)
 	{
+	    m_Context = context;
 		m_Camera = camera;
-		m_Sequencer = sequencer;
 
 		m_LastDx = 0;
 		m_LastDy = 0;
 
-		m_LastTime = m_Sequencer->clock().milliseconds();
+		m_LastTime = m_Context->clock().milliseconds();
 
 		updateCamera();
 	}
 	virtual void updateCamera()
 	{
-		Timecode time = m_Sequencer->clock().milliseconds();
+		Timecode time = m_Context->clock().milliseconds();
 
 		float dt = (float)(time - m_LastTime) / 1000.0f;
 
@@ -204,12 +204,12 @@ public:
 	}
 	void sequence(glm::vec3 newTarget, float newRadius, unsigned int time)
 	{
-		m_Sequencer->add("animation", new VertexSequence(&m_Camera->getPosition(), newTarget - newRadius * m_Camera->front(), time), Track::Event::START);
+	    m_Context->sequencer().track("animation")->insert(new VertexSequence(&m_Camera->getPosition(), newTarget - newRadius * m_Camera->front(), time), Track::Event::START);
 	}
 
 protected:
+	Context* m_Context;
 	Camera* m_Camera;
-	Sequencer* m_Sequencer;
 
 	Timecode m_LastTime;
 	int m_LastDx;

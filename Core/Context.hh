@@ -2,7 +2,7 @@
 
 #include "Core/Clock.hh"
 #include "Core/Scheduler.hh"
-#include "Core/Sequencer.hh"
+#include "Core/Sequencer/Sequencer.hh"
 #include "Core/Geometry.hh"
 #include "Core/Log.hh"
 
