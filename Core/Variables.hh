@@ -285,6 +285,47 @@ public:
 		return this->get(std::string(name));
 	}
 
+	void dump() const
+	{
+	    glm::vec2 v2;
+	    glm::vec3 v3;
+	    glm::vec4 v4;
+
+	    for (auto v : m_Variables)
+	    {
+	        switch(v->type())
+	        {
+	        case STRING:
+	            LOG("[VARIABLES] string %s = %s\n", v->name().c_str(), static_cast<StringVariable*>(v)->value().c_str());
+	            break;
+	        case INT:
+	            LOG("[VARIABLES] int %s = %lu\n", v->name().c_str(), static_cast<IntVariable*>(v)->value());
+	            break;
+	        case FLOAT:
+	            LOG("[VARIABLES] int %s = %f\n", v->name().c_str(), static_cast<FloatVariable*>(v)->value());
+	            break;
+	        case BOOLEAN:
+	            LOG("[VARIABLES] int %s = %i\n", v->name().c_str(), static_cast<BooleanVariable*>(v)->value());
+	            break;
+	        case VEC2:
+	            v2 = static_cast<Vec2Variable*>(v)->value();
+	            LOG("[VARIABLES] int %s = (%f, %f)\n", v->name().c_str(), v2.x, v2.y);
+	            break;
+	        case VEC3:
+	            v3 = static_cast<Vec3Variable*>(v)->value();
+	            LOG("[VARIABLES] int %s = (%f, %f, %f)\n", v->name().c_str(), v3.x, v3.y, v3.z);
+	            break;
+	        case VEC4:
+	            v4 = static_cast<Vec4Variable*>(v)->value();
+	            LOG("[VARIABLES] int %s = (%f, %f, %f, %f)\n", v->name().c_str(), v4.x, v4.y, v4.z, v4.w);
+	            break;
+	        default:
+	            LOG("[VARIABLES] Unknown type!\n");
+	            break;
+	        }
+	    }
+	}
+
 private:
 	std::vector<IVariable*> m_Variables;
 };

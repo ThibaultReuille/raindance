@@ -61,8 +61,6 @@ public:
     {
         Timecode deltaTime = timecode - m_StartTime;
 
-        LOG("VERTEX SEQUENCE PLAY\n");
-
         float t = deltaTime == 0 ? 0 : (float)deltaTime / (float)m_Duration;
         if (t >= 1)
         {

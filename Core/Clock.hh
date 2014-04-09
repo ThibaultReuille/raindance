@@ -18,8 +18,8 @@ public:
 	Clock()
 	{
 	    gettimeofday(&m_ZeroTime, NULL);
-		reset();
-		pause();
+        pause();
+        reset();
 		start();
         LOG("[CLOCK] Clock created at (%ld s, %d us).\n", m_ZeroTime.tv_sec, m_ZeroTime.tv_usec);
 	}
