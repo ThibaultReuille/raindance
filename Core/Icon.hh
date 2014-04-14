@@ -16,8 +16,8 @@ public:
 
 		m_Buffer << glm::vec3(dimension.x * (-0.5 + step.x), dimension.y * (-0.5 + step.y), 0) << glm::vec2(0, 1);
 		m_Buffer << glm::vec3(dimension.x * ( 0.5 + step.x), dimension.y * (-0.5 + step.y), 0) << glm::vec2(1, 1);
+        m_Buffer << glm::vec3(dimension.x * (-0.5 + step.x), dimension.y * ( 0.5 + step.y), 0) << glm::vec2(0, 0);
 		m_Buffer << glm::vec3(dimension.x * ( 0.5 + step.x), dimension.y * ( 0.5 + step.y), 0) << glm::vec2(1, 0);
-		m_Buffer << glm::vec3(dimension.x * (-0.5 + step.x), dimension.y * ( 0.5 + step.y), 0) << glm::vec2(0, 0);
 
 		m_Buffer.describe("a_Position", 3, GL_FLOAT, 5 * sizeof(GLfloat), 0);
 		m_Buffer.describe("a_Texcoord", 2, GL_FLOAT, 5 * sizeof(GLfloat), 3 * sizeof(GLfloat));
@@ -42,15 +42,13 @@ public:
 
 	void draw(Context* context, glm::mat4 mvp, glm::vec4 color, unsigned int mode)
 	{
-		unsigned short int indices[] = { 0, 1, 2, 0, 2, 3 };
-
 		m_Shader->use();
 		m_MvpUniform->set(mvp);
 		m_ColorUniform->set(color);
 		m_TextureUniform->set(*m_Textures[mode]);
 
 		context->geometry().bind(m_Buffer, *m_Shader);
-		context->geometry().drawElements(GL_TRIANGLES, sizeof(indices) / sizeof(short int), GL_UNSIGNED_SHORT, indices);
+		context->geometry().drawArrays(GL_TRIANGLE_STRIP, 0, m_Buffer.size() / (3 * sizeof(GLfloat) + 2 * sizeof(GLfloat)));
 		context->geometry().unbind(m_Buffer);
 	}
 

@@ -90,7 +90,7 @@ public:
 		m_Font = NULL;
 	}
 
-	~Text()
+	virtual ~Text()
 	{
 		m_Font = NULL;
 	}
