@@ -8,9 +8,6 @@ all:
 	xxd -i Resources/Shaders/logo.vert > Pack/Shaders/logo.vert
 	xxd -i Resources/Shaders/logo.frag > Pack/Shaders/logo.frag
 
-	xxd -i Resources/Shaders/axis.vert > Pack/Shaders/axis.vert
-	xxd -i Resources/Shaders/axis.frag > Pack/Shaders/axis.frag
-
 	xxd -i Resources/Shaders/ray.vert > Pack/Shaders/ray.vert
 	xxd -i Resources/Shaders/ray.frag > Pack/Shaders/ray.frag
 
@@ -39,6 +36,9 @@ all:
 	xxd -i Resources/Shaders/isovolume.frag > Pack/Shaders/isovolume.frag
 
 	mkdir -p Pack/Shaders/Primitives
+
+	xxd -i Resources/Shaders/Primitives/axis.vert > Pack/Shaders/Primitives/axis.vert
+	xxd -i Resources/Shaders/Primitives/axis.frag > Pack/Shaders/Primitives/axis.frag
 
 	xxd -i Resources/Shaders/Primitives/box.vert > Pack/Shaders/Primitives/box.vert
 	xxd -i Resources/Shaders/Primitives/box.frag > Pack/Shaders/Primitives/box.frag
