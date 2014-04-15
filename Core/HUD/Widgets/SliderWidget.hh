@@ -8,8 +8,8 @@ public:
     SliderWidget(const char* name, IWidget* parent, glm::vec3 position, glm::vec2 dimension)
     : IWidget(name, parent, position, dimension)
     {
-        m_Shader = ResourceManager::getInstance().loadShader("slider", Resources_Shaders_slider_vert, sizeof(Resources_Shaders_slider_vert),
-                                                                       Resources_Shaders_slider_frag, sizeof(Resources_Shaders_slider_frag));
+        m_Shader = ResourceManager::getInstance().loadShader("slider", Resources_Shaders_Widgets_slider_vert, sizeof(Resources_Shaders_Widgets_slider_vert),
+                                                                       Resources_Shaders_Widgets_slider_frag, sizeof(Resources_Shaders_Widgets_slider_frag));
         // m_Shader->dump();
 
         value(0.5f);

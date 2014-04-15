@@ -29,15 +29,6 @@ all:
 	xxd -i Resources/Shaders/text.vert > Pack/Shaders/text.vert
 	xxd -i Resources/Shaders/text.frag > Pack/Shaders/text.frag
 
-	xxd -i Resources/Shaders/widget.vert > Pack/Shaders/widget.vert
-	xxd -i Resources/Shaders/widget.frag > Pack/Shaders/widget.frag
-
-	xxd -i Resources/Shaders/slider.vert > Pack/Shaders/slider.vert
-	xxd -i Resources/Shaders/slider.frag > Pack/Shaders/slider.frag
-
-	xxd -i Resources/Shaders/checkbox.vert > Pack/Shaders/checkbox.vert
-	xxd -i Resources/Shaders/checkbox.frag > Pack/Shaders/checkbox.frag
-
 	xxd -i Resources/Shaders/environment.vert > Pack/Shaders/environment.vert
 	xxd -i Resources/Shaders/environment.frag > Pack/Shaders/environment.frag
 
@@ -54,6 +45,20 @@ all:
 
 	xxd -i Resources/Shaders/Primitives/grid.vert > Pack/Shaders/Primitives/grid.vert
 	xxd -i Resources/Shaders/Primitives/grid.frag > Pack/Shaders/Primitives/grid.frag
+
+	mkdir -p Pack/Shaders/Widgets
+
+	xxd -i Resources/Shaders/Widgets/widget.vert > Pack/Shaders/Widgets/widget.vert
+	xxd -i Resources/Shaders/Widgets/widget.frag > Pack/Shaders/Widgets/widget.frag
+
+	xxd -i Resources/Shaders/Widgets/slider.vert > Pack/Shaders/Widgets/slider.vert
+	xxd -i Resources/Shaders/Widgets/slider.frag > Pack/Shaders/Widgets/slider.frag
+
+	xxd -i Resources/Shaders/Widgets/checkbox.vert > Pack/Shaders/Widgets/checkbox.vert
+	xxd -i Resources/Shaders/Widgets/checkbox.frag > Pack/Shaders/Widgets/checkbox.frag
+
+	xxd -i Resources/Shaders/Widgets/timeline.vert > Pack/Shaders/Widgets/timeline.vert
+	xxd -i Resources/Shaders/Widgets/timeline.frag > Pack/Shaders/Widgets/timeline.frag
 
 	mkdir -p Pack/Shaders/Charts
 

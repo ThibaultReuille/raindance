@@ -13,8 +13,8 @@ public:
 		m_Dimension = dimension;
 		m_Visible = true;
 
-		m_Shader = ResourceManager::getInstance().loadShader("widget", Resources_Shaders_widget_vert, sizeof(Resources_Shaders_widget_vert),
-		                                                               Resources_Shaders_widget_frag, sizeof(Resources_Shaders_widget_frag));
+		m_Shader = ResourceManager::getInstance().loadShader("widget", Resources_Shaders_Widgets_widget_vert, sizeof(Resources_Shaders_Widgets_widget_vert),
+		                                                               Resources_Shaders_Widgets_widget_frag, sizeof(Resources_Shaders_Widgets_widget_frag));
 		// m_Shader->dump();
 	}
 
