@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core/HUD/Widgets/Widget.hh"
+#include "Core/Icon.hh"
 
 class TimelineWidget : public IWidget
 {
@@ -12,14 +13,22 @@ public:
                                                                          Resources_Shaders_Widgets_timeline_frag, sizeof(Resources_Shaders_Widgets_timeline_frag));
         // m_Shader->dump();
 
-        value(0.5f);
+        m_Track = NULL;
+        m_EventIcon = new Icon(glm::vec2(10.0, 10.0));
+        m_EventIcon->load("timeline_event_start", Resources_Textures_Shapes_square_png, sizeof(Resources_Textures_Shapes_square_png));
+        m_EventIcon->load("timeline_event_stop", Resources_Textures_Shapes_triangle_png, sizeof(Resources_Textures_Shapes_triangle_png));
+        m_EventIcon->load("timeline_event_once", Resources_Particle_ball_png, sizeof(Resources_Particle_ball_png));
+
+        m_Before = 2000;
+        m_After = 6000;
+        update();
     }
     virtual ~TimelineWidget()
     {
         ResourceManager::getInstance().unload(m_Shader);
     }
 
-    void updateSlider()
+    void update()
     {
         m_VertexBuffer.clear();
 
@@ -28,8 +37,9 @@ public:
         m_VertexBuffer << glm::vec3( 1.0,  0.0, 0);
         m_VertexBuffer << glm::vec3( 1.0, -1.0, 0);
 
-        m_VertexBuffer << glm::vec3(m_Value, -1.0, 0);
-        m_VertexBuffer << glm::vec3(m_Value,  0.0, 0);
+        float x = (float) m_Before / ((float)m_Before + (float)m_After);
+        m_VertexBuffer << glm::vec3(x, -1.0, 0);
+        m_VertexBuffer << glm::vec3(x,  0.0, 0);
 
         m_VertexBuffer.describe("a_Position", 3, GL_FLOAT, 3 * sizeof(GLfloat), 0);
 
@@ -38,29 +48,111 @@ public:
 
     virtual void draw(Context* context, glm::mat4 model, glm::mat4 view, glm::mat4 projection)
     {
-        static unsigned short int lines_indices[] = { 0, 1, 2, 3 };
-        static unsigned short int triangles_indices[] = { 0, 1, 5, 0, 5, 4 };
+        static unsigned short int lines_indices[] = { 0, 1, 1, 2, 2, 3, 3, 0, 4, 5 };
+        static unsigned short int triangles_indices[] = { 0, 1, 2, 0, 2, 3 };
 
-        m_Shader->use();
-        m_Shader->uniform("u_ModelViewProjection").set(projection * view * glm::scale(model, glm::vec3(m_Dimension, 1.0)));
-        context->geometry().bind(m_VertexBuffer, *m_Shader);
-        context->geometry().drawElements(GL_LINE_LOOP, sizeof(lines_indices) / sizeof(short int), GL_UNSIGNED_SHORT, lines_indices);
-        context->geometry().drawElements(GL_TRIANGLES, sizeof(triangles_indices) / sizeof(short int), GL_UNSIGNED_SHORT, triangles_indices);
-        context->geometry().unbind(m_VertexBuffer);
+        Transformation transformation;
+
+        glm::mat4 viewProjection = projection * view;
+
+        transformation.push();
+        {
+            transformation.set(model);
+            transformation.scale(glm::vec3(m_Dimension, 1.0));
+
+            m_Shader->use();
+            m_Shader->uniform("u_ModelViewProjection").set(viewProjection * transformation.state());
+            context->geometry().bind(m_VertexBuffer, *m_Shader);
+            m_Shader->uniform("u_Color").set(glm::vec4(0.2, 0.2, 0.2, 0.7));
+            context->geometry().drawElements(GL_TRIANGLES, sizeof(triangles_indices) / sizeof(short int), GL_UNSIGNED_SHORT, triangles_indices);
+            m_Shader->uniform("u_Color").set(glm::vec4(1.0, 1.0, 1.0, 1.0));
+            context->geometry().drawElements(GL_LINES, sizeof(lines_indices) / sizeof(short int), GL_UNSIGNED_SHORT, lines_indices);
+            context->geometry().unbind(m_VertexBuffer);
+        }
+        transformation.pop();
+
+        if (m_Track != NULL)
+        {
+            Timecode current = m_Track->clock().milliseconds();
+
+            Timecode lastTimecode = 0;
+            glm::vec3 cursor;
+            glm::vec4 color;
+            unsigned int mode;
+            float simultaneous = 0.0f;
+
+            Track::EventIterator eit = m_Track->events_from(current <= m_Before ? 0 : current - m_Before);
+            Track::EventIterator stop = m_Track->events_to(current + m_After);
+            for( ; eit != stop && eit != m_Track->events_end(); ++eit)
+            {
+                switch(eit->type())
+                {
+                case Track::Event::START:
+                    mode = 0;
+                    break;
+                case Track::Event::STOP:
+                    mode = 1;
+                    break;
+                case Track::Event::ONCE:
+                    mode = 2;
+                    break;
+                default:
+                    break;
+                }
+
+                Timecode timecode = eit->timecode();
+
+                float d = fabs((float)timecode - (float)current);
+                if (timecode < current)
+                {
+                    d /= (float)m_Before;
+                    color = glm::vec4(1.0, 0.0, 0.0, 1.0 - d);
+                }
+                else
+                {
+                    d /= (float) m_After;
+                    color = glm::vec4(d, 1.0,  d, 1.0);
+                }
+
+                if (timecode == lastTimecode)
+                {
+                    simultaneous += 1.0f;
+                }
+                else
+                {
+                    simultaneous = 0.0;
+                }
+
+                transformation.push();
+
+                cursor.x = m_Dimension.x * ((float)timecode - (float) current + (float) m_Before) / ((float)m_Before + (float)m_After);
+                cursor.y = - m_Dimension.y / 2 + simultaneous * m_Dimension.y / 5;
+
+                transformation.translate(m_Position + cursor);
+                m_EventIcon->draw(context, viewProjection * transformation.state(), color, mode);
+
+                transformation.pop();
+
+                lastTimecode = timecode;
+            }
+        }
     }
+
     virtual void onMouseClick(MessageQueue& messages, int x, int y)
     {
+        (void) messages;
+        (void) x;
         (void) y;
-
-        value(((float) x - this->position().x) / this->dimension().x);
-        messages.push(static_cast<IMessage*>(new WidgetMessage(m_Name.c_str(), "update")));
     }
 
-    inline void value(const float value) { m_Value = value; updateSlider(); }
-    inline float value() { return m_Value; }
+    inline void bindTrack(Track* track) { m_Track = track; }
 
 private:
     Buffer m_VertexBuffer;
     Shader::Program* m_Shader;
-    float m_Value;
+    Icon* m_EventIcon;
+    Timecode m_Before;
+    Timecode m_After;
+    Track* m_Track;
+
 };

@@ -90,18 +90,6 @@ const glm::vec3 AQUAMARINE = HEX_COLOR(0x4E78A0);
 #include "Pack/Shaders/environment.vert"
 #include "Pack/Shaders/environment.frag"
 
-#include "Pack/Shaders/Widgets/widget.vert"
-#include "Pack/Shaders/Widgets/widget.frag"
-
-#include "Pack/Shaders/Widgets/slider.vert"
-#include "Pack/Shaders/Widgets/slider.frag"
-
-#include "Pack/Shaders/Widgets/checkbox.vert"
-#include "Pack/Shaders/Widgets/checkbox.frag"
-
-#include "Pack/Shaders/Widgets/timeline.vert"
-#include "Pack/Shaders/Widgets/timeline.frag"
-
 #include "Pack/Shaders/pointcloud.vert"
 #include "Pack/Shaders/pointcloud.frag"
 
@@ -115,6 +103,20 @@ const glm::vec3 AQUAMARINE = HEX_COLOR(0x4E78A0);
 
 #include "Pack/Shaders/Primitives/grid.vert"
 #include "Pack/Shaders/Primitives/grid.frag"
+
+// Widgets
+
+#include "Pack/Shaders/Widgets/widget.vert"
+#include "Pack/Shaders/Widgets/widget.frag"
+
+#include "Pack/Shaders/Widgets/slider.vert"
+#include "Pack/Shaders/Widgets/slider.frag"
+
+#include "Pack/Shaders/Widgets/checkbox.vert"
+#include "Pack/Shaders/Widgets/checkbox.frag"
+
+#include "Pack/Shaders/Widgets/timeline.vert"
+#include "Pack/Shaders/Widgets/timeline.frag"
 
 // Charts
 

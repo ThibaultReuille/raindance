@@ -45,6 +45,8 @@ public:
         EXTERNAL
     };
 
+    typedef typename std::multiset<Event>::iterator EventIterator;
+
     Track(const char* name)
     {
         m_Name = std::string(name);
@@ -96,7 +98,7 @@ public:
         std::multiset<Event>::iterator itprocess;
         for(itprocess = itlow; itprocess != itup; ++itprocess)
         {
-            LOG("PROCESS : "); itprocess->dump();
+            // itprocess->dump();
             switch(itprocess->type())
             {
             case Event::START:
@@ -159,6 +161,11 @@ public:
     inline void setExternalClock(Clock* clock) { m_ExternalClock = clock; }
 
     inline Clock& clock() { return m_Synchronization == INTERNAL ? m_InternalClock : *m_ExternalClock; }
+
+    inline EventIterator events_begin() { return m_Events.begin(); }
+    inline EventIterator events_from(Timecode timecode) { return m_Events.lower_bound(Event(Event::ONCE, timecode, NULL)); }
+    inline EventIterator events_to(Timecode timecode) { return m_Events.upper_bound(Event(Event::ONCE, timecode, NULL)); }
+    inline EventIterator events_end() { return m_Events.end(); }
 
 private:
     std::string m_Name;

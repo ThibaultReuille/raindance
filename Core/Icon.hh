@@ -25,7 +25,7 @@ public:
 		m_Buffer.generate(Buffer::STATIC);
 	}
 
-	~Icon()
+	virtual ~Icon()
 	{
 		ResourceManager::getInstance().unload(m_Shader);
 
