@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core/Headers.hh"
+#include "Core/Scheduler.hh"
 
 class Track
 {

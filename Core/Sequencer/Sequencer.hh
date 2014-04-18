@@ -12,7 +12,6 @@ public:
 	Sequencer()
     {
 	    this->add(new Track("default"));
-	    m_Delay = 1000;
     }
 	virtual ~Sequencer()
 	{
@@ -64,5 +63,4 @@ public:
 protected:
 	Clock m_Clock;
     std::vector<Track*> m_Tracks;
-    unsigned int m_Delay;
 };

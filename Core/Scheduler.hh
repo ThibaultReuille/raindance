@@ -15,6 +15,7 @@ public:
 		CORE = 0,
 		SCRIPT = 1,
 		WIDGET = 2,
+		SEQUENCER = 3,
 
 		CUSTOM = 100
 	};
@@ -39,6 +40,15 @@ struct WidgetMessage : public IMessage
 	unsigned int type() { return IMessage::WIDGET; }
 	std::string Name;
 	std::string Message;
+};
+
+struct SequencerMessage : public IMessage
+{
+    SequencerMessage(const char* message) : Track("all"), Message(message) {}
+    SequencerMessage(const char* track, const char* message) : Track(track), Message(message) {}
+    unsigned int type() { return IMessage::SEQUENCER; }
+    std::string Track;
+    std::string Message;
 };
 
 class IListener

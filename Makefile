@@ -76,6 +76,7 @@ all:
 	xxd -i Resources/Textures/script.png > Pack/Textures/script.png
 	xxd -i Resources/Textures/mark.png > Pack/Textures/mark.png
 	xxd -i Resources/Textures/chart-disk.png > Pack/Textures/chart-disk.png
+	xxd -i Resources/Textures/clock.png > Pack/Textures/clock.png
 
 	mkdir -p Pack/Textures/Shapes
 

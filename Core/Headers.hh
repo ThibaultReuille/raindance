@@ -135,6 +135,7 @@ const glm::vec3 AQUAMARINE = HEX_COLOR(0x4E78A0);
 #include "Pack/Textures/script.png"
 #include "Pack/Textures/mark.png"
 #include "Pack/Textures/chart-disk.png"
+#include "Pack/Textures/clock.png"
 
 #include "Pack/Textures/Shapes/cloud.png"
 #include "Pack/Textures/Shapes/cross.png"

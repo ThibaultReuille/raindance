@@ -13,19 +13,26 @@ public:
                                                                          Resources_Shaders_Widgets_timeline_frag, sizeof(Resources_Shaders_Widgets_timeline_frag));
         // m_Shader->dump();
 
-        m_Track = NULL;
-        m_EventIcon = new Icon(glm::vec2(10.0, 10.0));
+        m_EventIcon = new Icon(glm::vec2(7.5, 7.5));
         m_EventIcon->load("timeline_event_start", Resources_Textures_Shapes_square_png, sizeof(Resources_Textures_Shapes_square_png));
         m_EventIcon->load("timeline_event_stop", Resources_Textures_Shapes_triangle_png, sizeof(Resources_Textures_Shapes_triangle_png));
         m_EventIcon->load("timeline_event_once", Resources_Particle_ball_png, sizeof(Resources_Particle_ball_png));
 
+        m_Track = NULL;
+
         m_Before = 2000;
         m_After = 6000;
+        m_NeedsEventCursorUpdate = true;
+        m_LastCurrentTimecode = 0;
+
         update();
     }
+
     virtual ~TimelineWidget()
     {
         ResourceManager::getInstance().unload(m_Shader);
+        m_Track = NULL;
+        SAFE_DELETE(m_EventIcon);
     }
 
     void update()
@@ -75,16 +82,26 @@ public:
         {
             Timecode current = m_Track->clock().milliseconds();
 
+            if (m_NeedsEventCursorUpdate || current != m_LastCurrentTimecode)
+            {
+                m_EventCursor = m_Track->events_from(current <= m_Before ? 0 : current - m_Before);
+                m_NeedsEventCursorUpdate = false;
+            }
+            m_LastCurrentTimecode = current;
+
             Timecode lastTimecode = 0;
             glm::vec3 cursor;
             glm::vec4 color;
             unsigned int mode;
             float simultaneous = 0.0f;
 
-            Track::EventIterator eit = m_Track->events_from(current <= m_Before ? 0 : current - m_Before);
-            Track::EventIterator stop = m_Track->events_to(current + m_After);
-            for( ; eit != stop && eit != m_Track->events_end(); ++eit)
+            Track::EventIterator eit = m_EventCursor;
+            while(eit != m_Track->events_end())
             {
+                Timecode timecode = eit->timecode();
+                if (timecode >= current + m_After)
+                    break;
+
                 switch(eit->type())
                 {
                 case Track::Event::START:
@@ -100,8 +117,6 @@ public:
                     break;
                 }
 
-                Timecode timecode = eit->timecode();
-
                 float d = fabs((float)timecode - (float)current);
                 if (timecode < current)
                 {
@@ -115,25 +130,22 @@ public:
                 }
 
                 if (timecode == lastTimecode)
-                {
                     simultaneous += 1.0f;
-                }
                 else
-                {
                     simultaneous = 0.0;
-                }
 
                 transformation.push();
 
                 cursor.x = m_Dimension.x * ((float)timecode - (float) current + (float) m_Before) / ((float)m_Before + (float)m_After);
                 cursor.y = - m_Dimension.y / 2 + simultaneous * m_Dimension.y / 5;
 
-                transformation.translate(m_Position + cursor);
-                m_EventIcon->draw(context, viewProjection * transformation.state(), color, mode);
+                transformation.translate(cursor);
+                m_EventIcon->draw(context, viewProjection * model * transformation.state(), color, mode);
 
                 transformation.pop();
 
                 lastTimecode = timecode;
+                ++eit;
             }
         }
     }
@@ -145,7 +157,9 @@ public:
         (void) y;
     }
 
-    inline void bindTrack(Track* track) { m_Track = track; }
+    inline void bindTrack(Track* track) { m_Track = track; setDirty(); }
+
+    inline void setDirty() { m_NeedsEventCursorUpdate = true; }
 
 private:
     Buffer m_VertexBuffer;
@@ -154,5 +168,7 @@ private:
     Timecode m_Before;
     Timecode m_After;
     Track* m_Track;
-
+    Timecode m_LastCurrentTimecode;
+    Track::EventIterator m_EventCursor;
+    bool m_NeedsEventCursorUpdate;
 };
