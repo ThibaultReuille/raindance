@@ -5,8 +5,8 @@
 class TextWidget : public IWidget
 {
 public:
-    TextWidget(const char* name, IWidget* parent, glm::vec3 pos, glm::vec2 dimension)
-    : IWidget(name, parent, pos, dimension)
+    TextWidget(const char* name, IWidget* parent, glm::vec3 position, glm::vec2 dimension)
+    : IWidget(name, parent, position, dimension)
     {
         m_Text = new Text();
         m_Size = 1.0;

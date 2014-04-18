@@ -101,10 +101,6 @@ public:
 
 		m_Text = std::string(str);
 		m_Font->build(str, m_Buffer);
-
-		m_MvpUniform = &m_Font->shader().uniform("u_ModelViewProjection");
-		m_ColorUniform = &m_Font->shader().uniform("u_Color");
-		m_FontUniform = &m_Font->shader().uniform("u_Font");
 	}
 
 	void draw(Context* context, glm::mat4 mvp)
@@ -116,9 +112,9 @@ public:
 		}
 
 		m_Font->shader().use();
-		m_MvpUniform->set(mvp);
-		m_FontUniform->set(m_Font->texture());
-		m_ColorUniform->set(m_Color);
+		m_Font->shader().uniform("u_ModelViewProjection").set(mvp);
+		m_Font->shader().uniform("u_Font").set(m_Font->texture());
+		m_Font->shader().uniform("u_Color").set(m_Color);
 
 		context->geometry().bind(m_Buffer, m_Font->shader());
 		context->geometry().drawArrays(GL_TRIANGLES, 0, m_Buffer.size() / (4 * sizeof(GLfloat)));
@@ -134,9 +130,5 @@ private:
 	glm::vec4 m_Color;
 	std::string m_Text;
 	Buffer m_Buffer;
-
-	const Shader::Uniform* m_MvpUniform;
-	const Shader::Uniform* m_FontUniform;
-	const Shader::Uniform* m_ColorUniform;
 };
 
