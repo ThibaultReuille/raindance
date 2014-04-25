@@ -48,6 +48,14 @@ public:
 		update();
 	}
 
+	void get(Vertex* v1, Vertex* v2)
+	{
+	    if (v1 != NULL)
+	        m_VertexBuffer.get(0, v1, sizeof(Vertex));
+	    if (v2 != NULL)
+	        m_VertexBuffer.get(1, v2, sizeof(Vertex));
+	}
+
 	void setPositions(const glm::vec3& pos1, const glm::vec3& pos2)
 	{
 		Vertex v1;

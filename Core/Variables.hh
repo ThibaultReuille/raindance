@@ -247,7 +247,10 @@ public:
 		case BOOLEAN:
 			variable = new BooleanVariable();
 			break;
-        case VEC3:
+		case VEC2:
+		    variable = new Vec2Variable();
+		    break;
+		case VEC3:
             variable = new Vec3Variable();
             break;
         case VEC4:
