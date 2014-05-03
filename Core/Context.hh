@@ -5,6 +5,7 @@
 #include "Core/Sequencer/Sequencer.hh"
 #include "Core/Geometry.hh"
 #include "Core/Log.hh"
+#include "Core/View.hh"
 
 class Context
 {
@@ -29,5 +30,7 @@ private:
 	Geometry m_Geometry;
 
 	unsigned int m_Pass;
+
+	std::vector<View*> m_Views;
 };
 

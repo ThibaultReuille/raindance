@@ -4,6 +4,7 @@
 
 enum VariableType
 {
+    UNDEFINED,
 	STRING,
 	INT,
 	FLOAT,
@@ -16,6 +17,7 @@ enum VariableType
 class IVariable
 {
 public:
+    IVariable() : m_Type(UNDEFINED) {}
 	virtual ~IVariable() {}
 
 	inline VariableType type() const { return m_Type; }
@@ -328,6 +330,9 @@ public:
 	        }
 	    }
 	}
+
+	inline std::vector<IVariable*>::iterator begin() { return m_Variables.begin(); }
+	inline std::vector<IVariable*>::iterator end() { return m_Variables.end(); }
 
 private:
 	std::vector<IVariable*> m_Variables;
