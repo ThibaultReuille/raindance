@@ -53,7 +53,7 @@ class IntVariable : public IVariable
 {
 public:
 	inline virtual void set(const std::string& str) { m_Type = INT; m_Value = atoi(str.c_str()); }
-    inline virtual void set(int value) { m_Type = INT; m_Value = value; }
+   //inline virtual void set(int value) { m_Type = INT; m_Value = value; }
     inline virtual void set(long value) { m_Type = INT; m_Value = value; }
 	inline long value() { return m_Value; }
 	virtual IVariable* duplicate()
@@ -290,6 +290,69 @@ public:
 		return this->get(std::string(name));
 	}
 
+    bool getString(const char* name, std::string& variable) const
+    {
+        IVariable* var = get(name);
+        if (var == NULL || var->type() != STRING)
+            return false;
+        variable.assign(static_cast<StringVariable*>(var)->value());
+        return true;
+    }
+
+    bool getInt(const char* name, long* variable) const
+    {
+        IVariable* var = get(name);
+        if (var == NULL || var->type() != INT)
+            return false;
+        *variable = static_cast<IntVariable*>(var)->value();
+        return true;
+    }
+
+    bool getFloat(const char* name, float* variable) const
+    {
+        IVariable* var = get(name);
+        if (var == NULL || var->type() != FLOAT)
+            return false;
+        *variable = static_cast<FloatVariable*>(var)->value();
+        return true;
+    }
+
+    bool getBoolean(const char* name, bool* variable) const
+    {
+        IVariable* var = get(name);
+        if (var == NULL || var->type() != BOOLEAN)
+            return false;
+        *variable = static_cast<BooleanVariable*>(var)->value();
+        return true;
+    }
+
+    bool getVec2(const char* name, glm::vec2* variable) const
+    {
+        IVariable* var = get(name);
+        if (var == NULL || var->type() != VEC2)
+            return false;
+        *variable = static_cast<Vec2Variable*>(var)->value();
+        return true;
+    }
+
+    bool getVec3(const char* name, glm::vec3* variable) const
+    {
+        IVariable* var = get(name);
+        if (var == NULL || var->type() != VEC3)
+            return false;
+        *variable = static_cast<Vec3Variable*>(var)->value();
+        return true;
+    }
+
+    bool getVec4(const char* name, glm::vec4* variable) const
+    {
+        IVariable* var = get(name);
+        if (var == NULL || var->type() != VEC4)
+            return false;
+        *variable = static_cast<Vec4Variable*>(var)->value();
+        return true;
+    }
+
 	void dump() const
 	{
 	    glm::vec2 v2;
@@ -307,22 +370,22 @@ public:
 	            LOG("[VARIABLES] int %s = %lu\n", v->name().c_str(), static_cast<IntVariable*>(v)->value());
 	            break;
 	        case FLOAT:
-	            LOG("[VARIABLES] int %s = %f\n", v->name().c_str(), static_cast<FloatVariable*>(v)->value());
+	            LOG("[VARIABLES] float %s = %f\n", v->name().c_str(), static_cast<FloatVariable*>(v)->value());
 	            break;
 	        case BOOLEAN:
-	            LOG("[VARIABLES] int %s = %i\n", v->name().c_str(), static_cast<BooleanVariable*>(v)->value());
+	            LOG("[VARIABLES] bool %s = %i\n", v->name().c_str(), static_cast<BooleanVariable*>(v)->value());
 	            break;
 	        case VEC2:
 	            v2 = static_cast<Vec2Variable*>(v)->value();
-	            LOG("[VARIABLES] int %s = (%f, %f)\n", v->name().c_str(), v2.x, v2.y);
+	            LOG("[VARIABLES] vec2 %s = (%f, %f)\n", v->name().c_str(), v2.x, v2.y);
 	            break;
 	        case VEC3:
 	            v3 = static_cast<Vec3Variable*>(v)->value();
-	            LOG("[VARIABLES] int %s = (%f, %f, %f)\n", v->name().c_str(), v3.x, v3.y, v3.z);
+	            LOG("[VARIABLES] vec3 %s = (%f, %f, %f)\n", v->name().c_str(), v3.x, v3.y, v3.z);
 	            break;
 	        case VEC4:
 	            v4 = static_cast<Vec4Variable*>(v)->value();
-	            LOG("[VARIABLES] int %s = (%f, %f, %f, %f)\n", v->name().c_str(), v4.x, v4.y, v4.z, v4.w);
+	            LOG("[VARIABLES] vec4 %s = (%f, %f, %f, %f)\n", v->name().c_str(), v4.x, v4.y, v4.z, v4.w);
 	            break;
 	        default:
 	            LOG("[VARIABLES] Unknown type!\n");
