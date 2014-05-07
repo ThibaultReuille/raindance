@@ -17,6 +17,7 @@ public:
 
         void reset()
         {
+            GeometryObjects = 0;
             Frames = 0;
             DrawArrays = 0;
             DrawElements = 0;
@@ -24,6 +25,7 @@ public:
 
         void dump() const
         {
+            LOG("[METRICS] Geometry Objects : %u\n", GeometryObjects);
             LOG("[METRICS] Frames : %u\n", Frames);
             LOG("[METRICS] DrawArrays : %u\n", DrawArrays);
             LOG("[METRICS] DrawElements : %u\n", DrawElements);
@@ -31,6 +33,7 @@ public:
             LOG("[METRICS] ---\n");
         }
 
+        unsigned int GeometryObjects;
         unsigned int Frames;
         unsigned int DrawArrays;
         unsigned int DrawElements;
@@ -38,6 +41,7 @@ public:
 
     Geometry()
     {
+        getMetrics().GeometryObjects++;
     }
 
     static glm::mat4 billboard(glm::mat4 mv)
@@ -89,30 +93,31 @@ public:
 		}
 	}
 
-	inline void beginFrame()
+	static inline void beginFrame()
 	{
-	    m_Metrics.Frames++;
+	    getMetrics().Frames++;
 	}
 
-	inline void endFrame()
+	static inline void endFrame()
 	{
 	}
 
 	inline void drawArrays(GLenum mode, GLint first, GLsizei count)
 	{
 	    glDrawArrays(mode, first, count);
-        m_Metrics.DrawArrays++;
+	    getMetrics().DrawArrays++;
 	}
 
 	inline void drawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid * indices)
 	{
 	    glDrawElements(mode, count, type, indices);
-	    m_Metrics.DrawElements++;
+	    getMetrics().DrawElements++;
 	}
 
-	inline Metrics& getMetrics() { return m_Metrics; }
-
-private:
-	Metrics m_Metrics;
+    static inline Metrics& getMetrics()
+    {
+        static Metrics instance;
+        return instance;
+    }
 };
 

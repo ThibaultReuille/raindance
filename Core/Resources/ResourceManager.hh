@@ -173,7 +173,6 @@ public:
 	}
 
 private:
-
 	std::vector<ResourceItem> m_Resources;
 };
 

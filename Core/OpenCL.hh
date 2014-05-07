@@ -314,6 +314,14 @@ public:
         return buffer;
     }
 
+    void destroyBuffer(Memory** memory)
+    {
+        LOG("[OpenCL] Destroying buffer %p\n", *memory);
+        clReleaseMemObject((*memory)->Object);
+        delete *memory;
+        *memory = NULL;
+    }
+
     void enqueueWriteBuffer(const CommandQueue& queue,
                             const Memory& buffer,
                             cl_bool blocking_write,
