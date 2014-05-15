@@ -7,12 +7,16 @@
 # include <OpenGL/gl.h>
 # include <OpenGL/glu.h>
 # include <Glut/glut.h>
-# include <OpenCL/opencl.h>
+# ifndef EMSCRIPTEN
+#  include <OpenCL/opencl.h>
+# endif
 #else
 # include <GL/gl.h>
 # include <GL/glu.h>
 # include <GL/glut.h>
-# include <CL/cl.h>
+# ifndef EMSCRIPTEN
+#  include <CL/cl.h>
+# endif
 #endif
 
 #define GLM_SWIZZLE
