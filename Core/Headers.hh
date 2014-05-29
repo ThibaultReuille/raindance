@@ -158,4 +158,5 @@ const glm::vec3 AQUAMARINE = HEX_COLOR(0x4E78A0);
 #include "Pack/Textures/Shapes/triangle.png"
 #include "Pack/Textures/Shapes/triangle1.png"
 #include "Pack/Textures/Shapes/triangle2.png"
+#include "Pack/Textures/Shapes/forbidden.png"
 

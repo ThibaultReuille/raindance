@@ -36,8 +36,24 @@ public:
 
 	unsigned long load(const char* name, unsigned char* image, unsigned int size)
 	{
-		m_Textures.push_back(ResourceManager::getInstance().loadTexture(name, image, size));
-		return m_Textures.size() - 1;
+	    std::string sname(name);
+	    std::unordered_map<std::string, unsigned long>::const_iterator search = m_TextureMap.find(sname);
+
+	    Texture* texture = ResourceManager::getInstance().loadTexture(name, image, size);
+
+	    if (search != m_TextureMap.end())
+	    {
+	        LOG("[ICON] Texture '%s' already defined! Overwriting.\n", search->first.c_str());
+	        ResourceManager::getInstance().unload(m_Textures[search->second]);
+	        m_Textures[search->second] = texture;
+	        return search->second;
+	    }
+	    else
+	    {
+	        m_Textures.push_back(texture);
+	        m_TextureMap[sname] = m_Textures.size() - 1;
+	        return m_Textures.size() - 1;
+	    }
 	}
 
 	void draw(Context* context, glm::mat4 mvp, glm::vec4 color, unsigned int mode)
@@ -54,9 +70,22 @@ public:
 
 	inline unsigned long countTextures() const { return m_Textures.size(); }
 
+	bool getTexture(const char* name, unsigned long* id)
+	{
+	    std::string sname(name);
+	    std::unordered_map<std::string, unsigned long>::const_iterator search = m_TextureMap.find(sname);
+
+	    if (search == m_TextureMap.end())
+	        return false;
+
+	    *id = search->second;
+	    return true;
+	}
+
 private:
 	Buffer m_Buffer;
 	std::vector<Texture*> m_Textures;
+	std::unordered_map<std::string, unsigned long> m_TextureMap;
 
 	Shader::Program* m_Shader;
 	const Shader::Uniform* m_MvpUniform;

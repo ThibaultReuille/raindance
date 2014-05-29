@@ -96,6 +96,7 @@ all:
 	xxd -i Resources/Textures/Shapes/triangle.png > Pack/Textures/Shapes/triangle.png
 	xxd -i Resources/Textures/Shapes/triangle1.png > Pack/Textures/Shapes/triangle1.png
 	xxd -i Resources/Textures/Shapes/triangle2.png > Pack/Textures/Shapes/triangle2.png
+	xxd -i Resources/Textures/Shapes/forbidden.png > Pack/Textures/Shapes/forbidden.png
 
 clean:
 	rm -rf Pack

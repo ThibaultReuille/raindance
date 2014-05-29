@@ -21,7 +21,7 @@ public:
         pause();
         reset();
 		start();
-        LOG("[CLOCK] Clock created at (%ld s, %ld us).\n", m_ZeroTime.tv_sec, m_ZeroTime.tv_usec);
+        LOG("[CLOCK] Clock created at (%ld s, %d us).\n", m_ZeroTime.tv_sec, m_ZeroTime.tv_usec);
 	}
 
 	void reset()
