@@ -2,6 +2,7 @@
 
 #include "Core/Headers.hh"
 #include "Core/Transformation.hh"
+#include "Core/Octree.hh"
 
 namespace Scene
 {
@@ -44,19 +45,20 @@ namespace Scene
 		inline void setDrawable(IDrawable* drawable, bool owner) { m_Drawable = drawable; m_Owner = owner; }
 		inline IDrawable* getDrawable() { return m_Drawable; }
 
-		inline bool isOwner() { return m_Owner; }
+		inline bool isOwner() const { return m_Owner; }
 
 		inline void setPosition(const glm::vec3& position) { m_Position = position; m_DirtyModelMatrix = true; }
-		inline const glm::vec3& getPosition() { return m_Position; }
+		inline const glm::vec3& getPosition() const { return m_Position; }
 
 		inline void setOrientation(const glm::quat& orientation) { m_Orientation = orientation; m_DirtyModelMatrix = true; }
-		inline const glm::quat& getOrientation() { return m_Orientation; }
+		inline const glm::quat& getOrientation() const { return m_Orientation; }
 
 		inline void setScale(const glm::vec3& scale) { m_Scale = scale; m_DirtyModelMatrix = true; }
-		inline const glm::vec3& setScale() { return m_Scale; }
+		inline const glm::vec3& getScale() const { return m_Scale; }
 
 		inline void setDirection(const glm::vec3& direction, bool normalize) { m_Direction = normalize ? glm::normalize(direction) : direction; }
-		inline const glm::vec3& getDirection() { return m_Direction; }
+		inline const glm::vec3& getDirection() const { return m_Direction; }
+
 		inline void normalizeDirection()
 		{
 			if (glm::length2(m_Direction) > 0.0f)
@@ -70,15 +72,16 @@ namespace Scene
 
 		void updateModelMatrix()
 		{
-			m_Transformation.clear();
-			m_Transformation.translate(m_Position);
-			m_Transformation.rotate(m_Orientation);
-			m_Transformation.scale(m_Scale);
-			m_ModelMatrix = m_Transformation.state();
+		    Transformation transformation;
+
+		    transformation.translate(m_Position);
+		    transformation.rotate(m_Orientation);
+		    transformation.scale(m_Scale);
+
+			m_ModelMatrix = transformation.state();
 			m_DirtyModelMatrix = false;
 		}
 
-		Transformation m_Transformation;
 		glm::vec3 m_Position;
 		glm::quat m_Orientation;
 		glm::vec3 m_Scale;
@@ -93,6 +96,19 @@ namespace Scene
 
 		bool m_PositionLock;
 	};
+
+    class OctreeNode : public OctreeElement
+    {
+    public:
+        OctreeNode(Node* node) { m_Node = node; }
+
+        virtual ~OctreeNode() { m_Node = NULL; }
+
+        virtual const glm::vec3& getPosition() const { return m_Node->getPosition(); }
+
+    private:
+        Node* m_Node;
+    };
 
 	class NodeVector : public IDrawable
 	{

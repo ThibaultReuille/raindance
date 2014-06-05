@@ -31,16 +31,15 @@ public:
 			4, 5, 1, 4, 1, 0,
 			6, 7, 3, 6, 3, 2
 		};
-		m_IndexBuffer.push(triangles_indices, sizeof(triangles_indices));
+		m_TriangleBuffer.push(triangles_indices, sizeof(triangles_indices));
 
-		/*
 		unsigned short int lines_indices[] =
 		{
 			0, 1, 1, 2, 2, 3, 3, 0,
 			4, 5, 5, 6, 6, 7, 7, 4,
 			0, 4, 1, 5, 2, 6, 3, 7
 		};
-		*/
+		m_LineBuffer.push(lines_indices, sizeof(lines_indices));
 
 		m_FirstUpdate = true;
 		update();
@@ -61,11 +60,13 @@ public:
 	}
 
 	inline Buffer& getVertexBuffer() { return m_VertexBuffer; }
-	inline Buffer& getIndexBuffer() { return m_IndexBuffer; }
+    inline Buffer& getTriangleBuffer() { return m_TriangleBuffer; }
+    inline Buffer& getLineBuffer() { return m_LineBuffer; }
 
 private:
 	Buffer m_VertexBuffer;
-	Buffer m_IndexBuffer;
+    Buffer m_TriangleBuffer;
+    Buffer m_LineBuffer;
 	bool m_FirstUpdate;
 };
 

@@ -50,7 +50,7 @@ public:
 	void draw(Context& context, const glm::mat4& model, const glm::mat4& view, const glm::mat4& projection)
 	{
 	    m_Shader->use();
-        m_Shader->uniform("u_ModelViewProjectionMatrix").set(projection * view * model);
+        m_Shader->uniform("u_ModelViewProjection").set(projection * view * model);
         m_Shader->uniform("u_Color").set(m_Color);
         context.geometry().bind(m_VertexBuffer, *m_Shader);
         context.geometry().drawElements(GL_LINES, m_LineBuffer.size() / sizeof(unsigned short int), GL_UNSIGNED_SHORT, m_LineBuffer.ptr());
