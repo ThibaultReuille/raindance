@@ -84,6 +84,64 @@ public:
         }
     }
 
+    void getElementsInsideBox(const glm::vec3& bmin, const glm::vec3& bmax, std::vector<OctreeElement*>& results)
+    {
+        if (isLeaf())
+        {
+            if (m_Elements.size() == 0)
+                return;
+
+            for (auto e : m_Elements)
+            {
+                const glm::vec3& p = e->getPosition();
+                if (p.x > bmax.x || p.y > bmax.y || p.z > bmax.z)
+                    continue;
+                if (p.x < bmin.x || p.y < bmin.y || p.z < bmin.z)
+                    continue;
+                results.push_back(e);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                glm::vec3 cmax = m_Children[i]->getCenter() + 0.5f * m_Children[i]->getDimension();
+                glm::vec3 cmin = m_Children[i]->getCenter() - 0.5f * m_Children[i]->getDimension();
+
+                if (cmax.x < bmin.x || cmax.y < bmin.y || cmax.z < bmin.z)
+                    continue;
+                if (cmin.x > bmax.x || cmin.y > bmax.y || cmin.z > bmax.z)
+                    continue;
+
+                m_Children[i]->getElementsInsideBox(bmin, bmax, results);
+            }
+        }
+    }
+
+    void getElementsInsideFrustrum(const Frustrum& frustrum, std::vector<OctreeElement*>& results)
+    {
+        if (isLeaf())
+        {
+            if (m_Elements.size() == 0)
+                return;
+
+            for (auto e : m_Elements)
+                if (frustrum.classifyPoint(e->getPosition()) != Frustrum::OUTSIDE)
+                    results.push_back(e);
+        }
+        else
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                glm::vec3 cmin = m_Children[i]->getCenter() - 0.5f * m_Children[i]->getDimension();
+                glm::vec3 cmax = m_Children[i]->getCenter() + 0.5f * m_Children[i]->getDimension();
+
+                if (frustrum.classifyBox(cmin, cmax) != Frustrum::OUTSIDE)
+                    m_Children[i]->getElementsInsideFrustrum(frustrum, results);
+            }
+        }
+    }
+
     void draw(Context* context, const glm::mat4& projection, const glm::mat4& view, const glm::mat4& model)
     {
         if (isLeaf())
@@ -112,6 +170,9 @@ public:
     inline bool isLeaf() const { return m_Children[0] == NULL; }
 
     inline void setMaxElementsPerLeaf(unsigned int value) { m_MaxElementsPerLeaf = value; }
+
+    inline const glm::vec3& getCenter() const { return m_Center; }
+    inline const glm::vec3& getDimension() const { return m_Dimension; }
 
 private:
 

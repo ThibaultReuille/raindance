@@ -106,6 +106,8 @@ namespace Scene
 
         virtual const glm::vec3& getPosition() const { return m_Node->getPosition(); }
 
+        inline Node* getNode() { return m_Node; }
+
     private:
         Node* m_Node;
     };

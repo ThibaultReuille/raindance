@@ -3,6 +3,7 @@
 #include "Core/Headers.hh"
 #include "Core/Intersection.hh"
 #include "Core/Controller.hh"
+#include "Core/Camera/Frustrum.hh"
 
 class Camera
 {
