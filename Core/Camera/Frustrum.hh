@@ -31,17 +31,17 @@ public:
     void setMatrix(const glm::mat4& m, bool normalize = true)
     {
         m_Planes[LEFT].setEquation(
-                glm::vec4(m[3][0] + m[0][0], m[3][1] + m[0][1], m[3][2] + m[0][2], m[3][3] + m[0][3]));
+                glm::vec4(m[0][3] + m[0][0], m[1][3] + m[1][0], m[2][3] + m[2][0], m[3][3] + m[3][0]));
         m_Planes[RIGHT].setEquation(
-                glm::vec4(m[3][0] - m[0][0], m[3][1] - m[0][1], m[3][2] - m[0][2], m[3][3] - m[0][3]));
+                glm::vec4(m[0][3] - m[0][0], m[1][3] - m[1][0], m[2][3] - m[2][0], m[3][3] - m[3][0]));
         m_Planes[BOTTOM].setEquation(
-                glm::vec4(m[3][0] - m[1][0], m[3][1] - m[1][1], m[3][2] - m[1][2], m[3][3] - m[1][3]));
+                glm::vec4(m[0][3] + m[0][1], m[1][3] + m[1][1], m[2][3] + m[2][1], m[3][3] + m[3][1]));
         m_Planes[TOP].setEquation(
-                glm::vec4(m[3][0] + m[1][0], m[3][1] + m[1][1], m[3][2] + m[1][2], m[3][3] + m[1][3]));
+                glm::vec4(m[0][3] - m[0][1], m[1][2] - m[1][1], m[2][3] - m[2][1], m[3][3] - m[3][1]));
         m_Planes[NEAR].setEquation(
-                glm::vec4(m[3][0] + m[2][0], m[3][1] + m[2][1], m[3][2] + m[2][2], m[3][3] + m[2][3]));
+                glm::vec4(m[0][3] + m[0][2], m[1][3] + m[1][2], m[2][3] + m[2][2], m[3][3] + m[3][2]));
         m_Planes[FAR].setEquation(
-                glm::vec4(m[3][0] - m[2][0], m[3][1] - m[2][1], m[3][2] - m[2][2], m[3][3] - m[2][3]));
+                glm::vec4(m[0][3] - m[0][2], m[1][3] - m[1][2], m[2][3] - m[2][2], m[3][3] - m[3][2]));
 
         if (normalize)
             for (int i = 0; i < 6; i++)
@@ -50,11 +50,14 @@ public:
 
     Classification classifyPoint(const glm::vec3& point) const
     {
+        // TODO : ClassifyPoint in Frustrum
+        /*
         for (int plane = 0; plane < 6; plane++)
         {
             if (m_Planes[plane].classify(point) == Plane::NEGATIVE)
                 return OUTSIDE;
         }
+        */
         return INSIDE;
     }
 
@@ -72,30 +75,20 @@ public:
         vertices[6] = glm::vec3(max.x, max.y, max.z);
         vertices[7] = glm::vec3(min.x, max.y, max.z);
 
-        int totalIn = 0;
-        for (int plane = 0; plane < 6; plane++)
+        for (auto& p : m_Planes)
         {
-            bool in = true;
-            int countIn = 8;
-            for (int v = 0; v < 8; v++)
-            {
-                if (m_Planes[plane].classify(vertices[v]) == Plane::NEGATIVE)
-                {
-                    in = false;
-                    countIn--;
-                }
-            }
+            int negatives = 0;
 
-            if (countIn == 0)
+            for (auto& v : vertices)
+               negatives += p.classify(v) == Plane::NEGATIVE ? 1 : 0;
+
+            if (negatives == 8)
                 return OUTSIDE;
-
-            totalIn += in ? 1 : 0;
         }
 
-        if (totalIn == 6)
-            return INSIDE;
+        // TODO : Do the intersect case in frustrum culling
 
-        return INTERSECT;
+        return INSIDE;
     }
 
     Classification classifySphere(const glm::vec3& origin, float radius) const

@@ -84,7 +84,7 @@ public:
         }
     }
 
-    void getElementsInsideBox(const glm::vec3& bmin, const glm::vec3& bmax, std::vector<OctreeElement*>& results)
+    void findElementsInsideBox(const glm::vec3& bmin, const glm::vec3& bmax, std::vector<OctreeElement*>& results)
     {
         if (isLeaf())
         {
@@ -113,12 +113,12 @@ public:
                 if (cmin.x > bmax.x || cmin.y > bmax.y || cmin.z > bmax.z)
                     continue;
 
-                m_Children[i]->getElementsInsideBox(bmin, bmax, results);
+                m_Children[i]->findElementsInsideBox(bmin, bmax, results);
             }
         }
     }
 
-    void getElementsInsideFrustrum(const Frustrum& frustrum, std::vector<OctreeElement*>& results)
+    void findElementsInsideFrustrum(const Frustrum& frustrum, std::vector<OctreeElement*>& results)
     {
         if (isLeaf())
         {
@@ -137,7 +137,7 @@ public:
                 glm::vec3 cmax = m_Children[i]->getCenter() + 0.5f * m_Children[i]->getDimension();
 
                 if (frustrum.classifyBox(cmin, cmax) != Frustrum::OUTSIDE)
-                    m_Children[i]->getElementsInsideFrustrum(frustrum, results);
+                    m_Children[i]->findElementsInsideFrustrum(frustrum, results);
             }
         }
     }

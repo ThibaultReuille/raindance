@@ -28,9 +28,9 @@ public:
         m_Equation /= magnitude;
     }
 
-    inline float getDistanceToPoint(const glm::vec3& p) const
+    inline float getDistanceToPoint(const glm::vec3& point) const
     {
-        return m_Equation.x * p.x + m_Equation.y * p.y + m_Equation.z * p.z + m_Equation.w;
+        return glm::dot(m_Equation, glm::vec4(point, 1.0));
     }
 
     Side classify(const glm::vec3& point) const
