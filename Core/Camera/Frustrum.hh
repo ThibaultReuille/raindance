@@ -51,6 +51,7 @@ public:
     Classification classifyPoint(const glm::vec3& point) const
     {
         // TODO : ClassifyPoint in Frustrum
+        (void) point;
         /*
         for (int plane = 0; plane < 6; plane++)
         {
@@ -94,6 +95,8 @@ public:
     Classification classifySphere(const glm::vec3& origin, float radius) const
     {
         // TODO : Frustrum::classifySphere
+        (void) origin;
+        (void) radius;
         return INSIDE;
     }
 
