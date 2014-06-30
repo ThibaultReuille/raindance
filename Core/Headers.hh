@@ -109,6 +109,9 @@ const glm::vec3 AQUAMARINE = HEX_COLOR(0x4E78A0);
 #include "Pack/Shaders/Primitives/grid.vert"
 #include "Pack/Shaders/Primitives/grid.frag"
 
+#include "Pack/Shaders/Primitives/wideline.vert"
+#include "Pack/Shaders/Primitives/wideline.frag"
+
 // Widgets
 
 #include "Pack/Shaders/Widgets/widget.vert"

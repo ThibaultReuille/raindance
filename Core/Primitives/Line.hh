@@ -56,7 +56,7 @@ public:
 	        m_VertexBuffer.get(1, v2, sizeof(Vertex));
 	}
 
-	void setPositions(const glm::vec3& pos1, const glm::vec3& pos2)
+	virtual void setPositions(const glm::vec3& pos1, const glm::vec3& pos2)
 	{
 		Vertex v1;
 		Vertex v2;
@@ -90,7 +90,7 @@ public:
 	    return v.Color;
 	}
 
-	void update()
+	virtual void update()
 	{
 		if (m_FirstUpdate)
 		{
@@ -109,7 +109,7 @@ public:
 
 	inline Buffer& getVertexBuffer() { return m_VertexBuffer; }
 
-private:
+protected:
 	Buffer m_VertexBuffer;
 	bool m_FirstUpdate;
 };

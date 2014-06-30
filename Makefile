@@ -46,6 +46,9 @@ all:
 	xxd -i Resources/Shaders/Primitives/grid.vert > Pack/Shaders/Primitives/grid.vert
 	xxd -i Resources/Shaders/Primitives/grid.frag > Pack/Shaders/Primitives/grid.frag
 
+	xxd -i Resources/Shaders/Primitives/wideline.vert > Pack/Shaders/Primitives/wideline.vert
+	xxd -i Resources/Shaders/Primitives/wideline.frag > Pack/Shaders/Primitives/wideline.frag
+
 	mkdir -p Pack/Shaders/Widgets
 
 	xxd -i Resources/Shaders/Widgets/widget.vert > Pack/Shaders/Widgets/widget.vert
