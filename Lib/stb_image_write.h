@@ -3,7 +3,7 @@
                             no warranty implied; use at your own risk
 
 
-Before including,
+Before #including,
 
     #define STB_IMAGE_WRITE_IMPLEMENTATION
 
@@ -29,24 +29,27 @@ USAGE:
      int stbi_write_tga(char const *filename, int w, int h, int comp, const void *data);
 
    Each function returns 0 on failure and non-0 on success.
-
+   
    The functions create an image file defined by the parameters. The image
    is a rectangle of pixels stored from left-to-right, top-to-bottom.
    Each pixel contains 'comp' channels of data stored interleaved with 8-bits
-   per channel, in the following order: 1=Y, 2=YA, 3=RGB, 4=RGBA. (Y is
-   monochrome color.) The rectangle is 'w' pixels wide and 'h' pixels tall.
-   The *data pointer points to the first byte of the top-left-most pixel.
-   For PNG, "stride_in_bytes" is the distance in bytes from the first byte of
-   a row of pixels to the first byte of the next row of pixels.
+   per channel, in the following order: 1=L, 2=LA, 3=RGB, 4=RGBA. (L is
+   luminance, i.e. monochrome "color", i.e. grey value.) The rectangle is
+   'w' pixels wide and 'h' pixels tall. The *data pointer points to the
+   first byte of the top-left-most pixel. For PNG, "stride_in_bytes" is
+   the distance in bytes from the first byte of a row of pixels to the
+   first byte of the next row of pixels. Other file formats assume the
+   first byte of the each row of pixels begins immediately after the last
+   byte of the previous row.
 
    PNG creates output files with the same number of components as the input.
    The BMP and TGA formats expand Y to RGB in the file format. BMP does not
    output alpha.
-
+   
    PNG supports writing rectangles of data even when the bytes storing rows of
    data are not consecutive in memory (e.g. sub-rectangles of a larger image),
    by supplying the stride between the beginning of adjacent rows. The other
-   formats do not. (Thus you cannot write a native-format BMP through the BMP
+   formats do not. (Thus you cannot write an in-memory BMP through the BMP
    writer, both because it is in BGR order and because it may have padding
    at the end of the line.)
 */
@@ -115,7 +118,7 @@ static void write_pixels(FILE *f, int rgb_dir, int vdir, int x, int y, int comp,
    if (y <= 0)
       return;
 
-   if (vdir < 0)
+   if (vdir < 0) 
       j_end = -1, j = y-1;
    else
       j_end =  y, j = 0;
@@ -283,7 +286,7 @@ unsigned char * stbi_zlib_compress(unsigned char *data, int data_len, int *out_l
 
    i=0;
    while (i < data_len-3) {
-      // hash next 3 bytes of data to be compressed
+      // hash next 3 bytes of data to be compressed 
       int h = stbi__zhash(data+i)&(stbi__ZHASH-1), best=3;
       unsigned char *bestloc = 0;
       unsigned char **hlist = hash_table[h];
@@ -455,7 +458,7 @@ unsigned char *stbi_write_png_to_mem(unsigned char *pixels, int stride_bytes, in
    if (!zlib) return 0;
 
    // each tag requires 12 bytes of overhead
-   out = (unsigned char *) malloc(8 + 12+13 + 12+zlen + 12);
+   out = (unsigned char *) malloc(8 + 12+13 + 12+zlen + 12); 
    if (!out) return 0;
    *out_len = 8 + 12+13 + 12+zlen + 12;
 

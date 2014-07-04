@@ -69,17 +69,17 @@ public:
 
 		if (yaw != 0.0f)
 		{
-			rotation = glm::angleAxis(yaw, glm::vec3(0, 1, 0));
+			rotation = glm::angleAxis(glm::radians(yaw), glm::vec3(0, 1, 0));
 			m_Orientation = rotation * m_Orientation;
 		}
 		if (pitch != 0.0f)
 		{
-			rotation = glm::angleAxis(pitch, glm::vec3(1, 0, 0));
+			rotation = glm::angleAxis(glm::radians(pitch), glm::vec3(1, 0, 0));
 			m_Orientation = rotation * m_Orientation;
 		}
 		if (roll != 0.0f)
 		{
-			rotation = glm::angleAxis(roll, glm::vec3(0, 0, 1));
+			rotation = glm::angleAxis(glm::radians(roll), glm::vec3(0, 0, 1));
 			m_Orientation = rotation * m_Orientation;
 		}
 
@@ -105,9 +105,10 @@ public:
 
 	inline const glm::mat4& getProjectionMatrix() const { return m_Projection; }
 
-	inline glm::mat4 getViewProjectionMatrix() const { return m_Projection * m_View; }
+	inline const glm::mat4 getViewProjectionMatrix() const { return m_Projection * m_View; }
 
-	inline glm::vec3& getPosition() { return m_Position; }
+	inline const glm::vec3& getPosition() const { return m_Position; }
+	inline glm::vec3* getPositionPtr() { return &m_Position; }
 
 	inline void setPerspectiveProjection(float fovy, float aspect, float near, float far)
 	{
@@ -116,7 +117,7 @@ public:
 		m_Aspect = aspect;
 		m_Near = near;
 		m_Far = far;
-		m_Projection = glm::perspective(fovy, aspect, near, far);
+		m_Projection = glm::perspective(glm::radians(fovy), aspect, near, far);
 	}
 
 	inline void setOrthographicProjection(float left, float right, float bottom, float top, float near, float far)
@@ -142,7 +143,7 @@ public:
 		float sx = 2 * ((float)screenX / (float)m_Width) - 1;
 		float sy = 2 * (1 - (float)screenY / (float)m_Height) - 1;
 
-		float f = tan((m_FovY * M_PI / 180.0) / 2);
+		float f = tan(glm::radians(m_FovY) / 2);
 
 		// Origin = lower left
 		glm::vec3 pos = middle + sx * m_Ratio * f * right() + sy * f * up();
@@ -169,12 +170,12 @@ public:
 		};
 	}
 
-	glm::vec3 front() { return -m_AxisZ; }
-	glm::vec3 back()  { return  m_AxisZ; }
-	glm::vec3 left()  { return -m_AxisX; }
-	glm::vec3 right() { return  m_AxisX; }
-	glm::vec3 up()    { return  m_AxisY; }
-	glm::vec3 down()  { return -m_AxisY; }
+	glm::vec3 front() const { return -m_AxisZ; }
+	glm::vec3 back() const { return  m_AxisZ; }
+	glm::vec3 left() const { return -m_AxisX; }
+	glm::vec3 right() const { return  m_AxisX; }
+	glm::vec3 up() const { return  m_AxisY; }
+	glm::vec3 down() const { return -m_AxisY; }
 
 	inline ProjectionMode mode() const { return m_ProjectionMode; }
 

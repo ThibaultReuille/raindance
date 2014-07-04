@@ -204,7 +204,7 @@ public:
 	}
 	void sequence(glm::vec3 newTarget, float newRadius, unsigned int time)
 	{
-	    m_Context->sequencer().track("animation")->insert(new VertexSequence(&m_Camera->getPosition(), newTarget - newRadius * m_Camera->front(), time), Track::Event::START);
+	    m_Context->sequencer().track("animation")->insert(new VertexSequence(m_Camera->getPositionPtr(), newTarget - newRadius * m_Camera->front(), time), Track::Event::START);
 	}
 
 protected:

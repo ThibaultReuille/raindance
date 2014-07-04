@@ -136,14 +136,23 @@ public:
 				LOG("[SHADER] Uniform type differs !\n");
 			glUniformMatrix4fv(m_Location, 1, GL_FALSE, glm::value_ptr(m));
 		}
-		void set(const Texture& texture) const
-		{
-			if (m_Type != GL_SAMPLER_2D)
-				LOG("[SHADER] Uniform type differs !\n");
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, texture.id());
-			glUniform1i(m_Location, /* GL_TEXTURE */ 0);
-		}
+        void set(const Texture& texture) const
+        {
+            if (m_Type != GL_SAMPLER_2D)
+                LOG("[SHADER] Uniform type differs !\n");
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, texture.id());
+            glUniform1i(m_Location, /* GL_TEXTURE */ 0);
+        }
+        void set(const Texture* texture) const
+        {
+            if (texture == NULL)
+            {
+                LOG("[SHADER] Uniform texture is NULL!\n");
+                return;
+            }
+            set(*texture);
+        }
 	};
 
 	class Program : public IResource

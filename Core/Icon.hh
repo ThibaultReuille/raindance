@@ -82,6 +82,8 @@ public:
 	    return true;
 	}
 
+	inline const Texture* getTexture(unsigned int id) const { return m_Textures[id]; }
+
 private:
 	Buffer m_Buffer;
 	std::vector<Texture*> m_Textures;

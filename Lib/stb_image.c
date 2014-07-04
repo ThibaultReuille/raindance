@@ -7,7 +7,7 @@
           avoid problematic images and only need the trivial interface
 
       JPEG baseline (no JPEG progressive)
-      PNG 8-bit-per-channel only
+      PNG 8-bit only
 
       TGA (not sure what subset, if a subset)
       BMP non-1bpp, non-RLE
@@ -27,10 +27,6 @@
       1.31 (2011-06-19) a few more leak fixes, bug in PNG handling (SpartanJ)
       1.30 (2011-06-11) added ability to load files via io callbacks (Ben Wenger)
       1.29 (2010-08-16) various warning fixes from Aurelien Pocheville 
-      1.28 (2010-08-01) fix bug in GIF palette transparency (SpartanJ)
-      1.27 (2010-08-01) cast-to-uint8 to fix warnings (Laurent Gomila)
-                        allow trailing 0s at end of image data (Laurent Gomila)
-      1.26 (2010-07-24) fix bug in file buffering for PNG reported by SpartanJ
 
    See end of file for full revision history.
 
@@ -1733,7 +1729,7 @@ static uint8 *resample_row_generic(uint8 *out, uint8 *in_near, uint8 *in_far, in
 {
    // resample with nearest-neighbor
    int i,j;
-   (void) in_far; // in_far = in_far;
+   STBI_NOTUSED(in_far);
    for (i=0; i < w; ++i)
       for (j=0; j < hs; ++j)
          out[i*hs+j] = in_near[i];
@@ -4173,7 +4169,7 @@ static uint8 *stbi_gif_load_next(stbi *s, stbi_gif *g, int *comp, int req_comp)
 static stbi_uc *stbi_gif_load(stbi *s, int *x, int *y, int *comp, int req_comp)
 {
    uint8 *u = 0;
-   stbi_gif g = {0};
+   stbi_gif g={0};
 
    u = stbi_gif_load_next(s, &g, comp, req_comp);
    if (u == (void *) 1) u = 0;  // end of animated gif marker
@@ -4587,6 +4583,8 @@ int stbi_info_from_callbacks(stbi_io_callbacks const *c, void *user, int *x, int
 
 /*
    revision history:
+      1.34
+             use STBI_NOTUSED in resample_row_generic()
       1.33 (2011-07-14)
              make stbi_is_hdr work in STBI_NO_HDR (as specified), minor compiler-friendly improvements
       1.32 (2011-07-13)

@@ -1,33 +1,46 @@
-attribute vec3 a_Position;
+attribute vec2 a_Position;
 attribute vec4 a_Color;
-attribute int a_Number;
 
 uniform mat4 u_ModelViewProjection;
+
+uniform float u_Mode;
 uniform vec3 u_StartPosition;
 uniform vec3 u_EndPosition;
+uniform vec3 u_ExtrudeDirection;
+
 uniform vec4 u_Tint;
-uniform float u_Width;
 
 varying vec4 v_Color;
+varying vec2 v_Texcoord;
+varying float v_Mode;
 
 void main(void)
 {
-    v_Color = a_Color * u_Tint;
+    vec3 point;
 
-    vec4 start = u_ModelViewProjection * vec4(u_StartPosition, 1.0);
-    vec4 end = u_ModelViewProjection * vec4(u_EndPosition, 1.0);
-
-    vec4 point = u_ModelViewProjection * vec4(a_Position, 1.0);
-
-    vec2 slope = normalize(end.xy - start.xy);
-    slope = vec(slope.y, -slope.x);
-
-    if (a_Number == 0 || a_Number == 2)
+    if (u_Mode < 0.5)
     {
-        gl_Position = vec4(point.xy + slope.xy * start.w, start.zw); 
+        if (sign(a_Position.x) < 0.0)
+            gl_Position = u_ModelViewProjection * vec4(u_StartPosition, 1.0);
+        else
+            gl_Position = u_ModelViewProjection * vec4(u_EndPosition, 1.0);
     }
     else
-    {
-        gl_Position = vec4(point.xy + slope.xy * end.w, end.zw);         
+    {   
+        if (sign(a_Position.x) < 0.0)
+        {
+            point = u_StartPosition + sign(a_Position.y) * u_ExtrudeDirection;
+        }
+        else
+        {
+            point = u_EndPosition + sign(a_Position.y) * u_ExtrudeDirection;
+        }
+
+        gl_Position = u_ModelViewProjection * vec4(point, 1.0);
+
+        v_Texcoord = vec2(0.0, 0.5 * a_Position.y + 0.5);
     }
+
+    v_Mode = u_Mode;
+    v_Color = a_Color * u_Tint;
 }

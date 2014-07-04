@@ -195,7 +195,7 @@ public:
         {
                 CL_CONTEXT_PLATFORM,
                 (cl_context_properties) device.Platform,
-                NULL
+                0
         };
 
         cl_context object = clCreateContext(properties, 1, &device.ID, NULL, NULL, &error);

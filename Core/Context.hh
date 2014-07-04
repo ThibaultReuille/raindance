@@ -6,12 +6,13 @@
 #include "Core/Geometry.hh"
 #include "Core/Log.hh"
 #include "Core/View.hh"
+#include "Core/Camera/Camera.hh"
 
 class Context
 {
 public:
 	Context()
-	: m_Pass(0)
+	: m_Camera(NULL)
 	{
 	}
 
@@ -20,8 +21,8 @@ public:
 	inline Sequencer& sequencer() { return m_Sequencer; }
 	inline Geometry& geometry() { return m_Geometry; }
 
-	inline void setPass(unsigned int pass) { m_Pass = pass; }
-	inline unsigned int getPass() { return m_Pass; }
+	inline void setCamera(Camera* camera) { m_Camera = camera; }
+	inline Camera* getCamera() { return m_Camera; }
 
 private:
 	Clock m_Clock;
@@ -29,8 +30,8 @@ private:
 	Sequencer m_Sequencer;
 	Geometry m_Geometry;
 
-	unsigned int m_Pass;
-
 	std::vector<View*> m_Views;
+
+	Camera* m_Camera;
 };
 

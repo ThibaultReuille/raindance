@@ -55,7 +55,7 @@ public:
 
 	inline void rotate(GLfloat angle, const glm::vec3& v)
 	{
-		m_Stack[m_Stack.size() - 1] = glm::rotate(m_Stack[m_Stack.size() - 1], angle, v);
+		m_Stack[m_Stack.size() - 1] = glm::rotate(m_Stack[m_Stack.size() - 1], glm::radians(angle), v);
 	}
 
 	inline void rotate(const glm::quat& rotation)

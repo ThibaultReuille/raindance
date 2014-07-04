@@ -88,9 +88,7 @@ public:
 	{
 		while(m_Messages.size() > 0)
 		{
-			LOG("[SCHEDULER] %zu\n", m_Messages.size());
-
-			IMessage* message = m_Messages.front();
+		    IMessage* message = m_Messages.front();
 
 			std::list<IListener*>::iterator it;
 			for (it = m_Listeners.begin(); it != m_Listeners.end(); ++it)

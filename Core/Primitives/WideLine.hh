@@ -1,42 +1,26 @@
 #pragma once
 
-#include "Core/Scene.hh"
+#include "Core/Headers.hh"
+#include "Core/Camera/Camera.hh"
 
 class WideLine
 {
 public:
     struct Vertex
     {
-        Vertex()
-            : Position(glm::vec3(0, 0, 0)),
-              Color(glm::vec4(1, 1, 1, 1)),
-              Number(-1)
-        {
-        }
-
-        Vertex(const glm::vec3& position, const glm::vec4& color)
+        Vertex(const glm::vec2& position, const glm::vec4& color)
             : Position(position),
-              Color(color),
-              Number(-1)
+              Color(color)
         {
         }
 
-        Vertex(const glm::vec3& position, const glm::vec4& color, int number)
-            : Position(position),
-              Color(color),
-              Number(number)
-        {
-        }
-
-        glm::vec3 Position;
+        glm::vec2 Position;
         glm::vec4 Color;
-        int Number;
     };
 
     WideLine()
-        : m_FirstUpdate(true)
+        : m_FirstUpdate(true), m_Width(1.0)
     {
-        m_FirstUpdate = true;
         update();
     }
 
@@ -48,29 +32,36 @@ public:
     {
         Vertex v[4] =
         {
-                Vertex(m_Positions[0], m_Colors[0], 0),
-                Vertex(m_Positions[0], m_Colors[0], 1),
-                Vertex(m_Positions[1], m_Colors[1], 2),
-                Vertex(m_Positions[1], m_Colors[1], 3)
+                Vertex(glm::vec2(-1.0, -1.0), m_Colors[0]),
+                Vertex(glm::vec2( 1.0, -1.0), m_Colors[1]),
+                Vertex(glm::vec2(-1.0,  1.0), m_Colors[0]),
+                Vertex(glm::vec2( 1.0,  1.0), m_Colors[1])
         };
 
         m_VertexBuffer.clear();
-        for (int i = 0; i < 4; i++)
-            m_VertexBuffer.push(&v, sizeof(Vertex));
+        m_VertexBuffer.push(v, 4 * sizeof(Vertex));
 
         if (!m_FirstUpdate)
             m_VertexBuffer.update();
 
-        m_VertexBuffer.describe("a_Position", 3, GL_FLOAT, sizeof(Vertex), 0);
-        m_VertexBuffer.describe("a_Color",    4, GL_FLOAT, sizeof(Vertex), sizeof(glm::vec3));
-        m_VertexBuffer.describe("a_Number",   1, GL_BYTE,  sizeof(Vertex), sizeof(glm::vec3) + sizeof(glm::vec4));
+        m_VertexBuffer.describe("a_Position", 2, GL_FLOAT, sizeof(Vertex), 0);
+        m_VertexBuffer.describe("a_Color",    4, GL_FLOAT, sizeof(Vertex), sizeof(glm::vec2));
 
         if (m_FirstUpdate)
-        {
             m_VertexBuffer.generate(Buffer::DYNAMIC);
-            m_FirstUpdate = false;
-        }
+        m_FirstUpdate = false;
     }
+
+    const glm::vec3 calculateExtrudeDirection(const Camera& camera) const
+    {
+        glm::vec3 lineDirection = m_Positions[1] - m_Positions[0];
+        glm::vec3 lineMidpoint = 0.5f * (m_Positions[0] + m_Positions[1]);
+        glm::vec3 quadNormal = camera.getPosition() - lineMidpoint;
+        return (m_Width / 2.0f) * glm::normalize(glm::cross(lineDirection, quadNormal));
+    }
+
+    inline void setWidth(float width) { m_Width = width; }
+    inline float getWidth() { return m_Width; }
 
     inline void setPosition(unsigned int i, const glm::vec3& p) { m_Positions[i] = p; }
     inline const glm::vec3& getPosition(unsigned int i) const { return m_Positions[i]; }
@@ -81,8 +72,11 @@ public:
     inline Buffer& getVertexBuffer() { return m_VertexBuffer; }
 
 protected:
+    bool m_FirstUpdate;
+
     glm::vec3 m_Positions[2];
     glm::vec4 m_Colors[2];
+    float m_Width;
+
     Buffer m_VertexBuffer;
-    bool m_FirstUpdate;
 };
