@@ -17,6 +17,7 @@ varying float v_Mode;
 void main(void)
 {
     vec3 point;
+    float u;
 
     if (u_Mode < 0.5)
     {
@@ -30,15 +31,17 @@ void main(void)
         if (sign(a_Position.x) < 0.0)
         {
             point = u_StartPosition + sign(a_Position.y) * u_ExtrudeDirection;
+            u = 0.0;
         }
         else
         {
             point = u_EndPosition + sign(a_Position.y) * u_ExtrudeDirection;
+            u = length(u_EndPosition - u_StartPosition) / (2.0 * length(u_ExtrudeDirection));
         }
 
         gl_Position = u_ModelViewProjection * vec4(point, 1.0);
 
-        v_Texcoord = vec2(0.0, 0.5 * a_Position.y + 0.5);
+        v_Texcoord = vec2(u, 0.5 * a_Position.y + 0.5);
     }
 
     v_Mode = u_Mode;
