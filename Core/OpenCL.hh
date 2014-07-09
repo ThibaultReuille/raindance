@@ -530,12 +530,25 @@ public:
         }
     }
 
+    inline const std::vector<Platform*>& platforms() { return m_Platforms; }
     inline const Platform* platform(unsigned int id) { return m_Platforms[id]; }
+
+    inline const std::vector<Device*>& devices() { return m_Devices; }
     inline const Device* device(unsigned int id) { return m_Devices[id]; }
+
+    inline const std::vector<Context*>& contexts() { return m_Contexts; }
     inline const Context* context(unsigned int id) { return m_Contexts[id]; }
+
+    inline const std::vector<CommandQueue*>& queues() { return m_Queues; }
     inline const CommandQueue* queue(unsigned int id) { return m_Queues[id]; }
+
+    inline const std::vector<Program*>& programs() { return m_Programs; }
     inline const Program* program(unsigned int id) { return m_Programs[id]; }
+
+    inline const std::vector<Kernel*>& kernels() { return m_Kernels; }
     inline const Kernel* kernel(unsigned int id) { return m_Kernels[id]; }
+
+    inline const std::vector<Memory*>& buffers() { return m_Buffers; }
     inline const Memory* buffer(unsigned int id) { return m_Buffers[id]; }
 
 private:
