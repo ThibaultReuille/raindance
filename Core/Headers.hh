@@ -39,6 +39,7 @@
 #include <set>
 #include <fstream>
 #include <sstream>
+#include <exception>
 
 #include "Lib/stb_image.c"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
