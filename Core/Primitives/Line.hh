@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Scene.hh"
+#include "Core/Headers.hh"
 
 class Line
 {

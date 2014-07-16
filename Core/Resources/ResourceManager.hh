@@ -60,7 +60,7 @@ private:
 	ResourceItem* addResource(IResource* resource)
 	{
 		ResourceItem item;
-		item.m_RefCount = 0;
+		item.m_RefCount = 1;
 		item.m_Resource = resource;
 		m_Resources.push_back(item);
 		return &m_Resources.back();
@@ -76,7 +76,8 @@ public:
 			item = addResource(texture);
 			LOG("[RESOURCE] loadTexture('%s', %p, %i)\n", name, data, size);
 		}
-		item->m_RefCount++;
+		else
+		    item->m_RefCount++;
 
 		return item->m_Texture;
 	}
@@ -90,7 +91,8 @@ public:
 			item = addResource(texture);
 			LOG("[RESOURCE] loadTexture('%s', %p, %i, %i, %i)\n", name, data, width, height, components);
 		}
-		item->m_RefCount++;
+		else
+		    item->m_RefCount++;
 
 		return item->m_Texture;
 	}
@@ -104,7 +106,8 @@ public:
 			item = addResource(texture);
 			LOG("[RESOURCE] loadTexture('%s', %i, %i, %i)\n", name, width, height, components);
 		}
-		item->m_RefCount++;
+		else
+		    item->m_RefCount++;
 
 		return item->m_Texture;
 	}
@@ -119,7 +122,8 @@ public:
 			item = addResource(shader);
 			LOG("[RESOURCE] loadShader('%s', %p, %lu, %p, %lu)\n", name, vertex, vertexSize, fragment, fragmentSize);
 		}
-		item->m_RefCount++;
+		else
+		    item->m_RefCount++;
 
 		return item->m_Shader;
 	}

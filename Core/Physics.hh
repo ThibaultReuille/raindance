@@ -1,10 +1,9 @@
 #pragma once
 
-#include "Core/Scene.hh"
+#include "Core/Scene/NodeVector.hh"
 
 namespace Physics
 {
-
 	class IForce
 	{
 	public:
