@@ -158,26 +158,42 @@ public:
                 // Reinsert elements in newly created leaves.
                 for (auto e : current.Node->getElements())
                 {
+                    int count = 0;
                     for (auto c : current.Node->getChildren())
                     {
                         glm::vec3 cmax = c->getCenter() + c->getHalfDimension();
                         glm::vec3 cmin = c->getCenter() - c->getHalfDimension();
 
                         if (e->isOverlap(cmin, cmax))
+                        {
                             stack.push(StackElement(e, c, current.Depth + 1));
+                            count++;
+                        }
+                    }
+                    if (count == 0)
+                    {
+                        LOG("[DEBUG] Node lost in split !\n");
                     }
                 }
                 current.Node->getElements().clear();
             }
             else
             {
+                int count = 0;
                 for (auto c : current.Node->getChildren())
                 {
                     glm::vec3 cmax = c->getCenter() + c->getHalfDimension();
                     glm::vec3 cmin = c->getCenter() - c->getHalfDimension();
 
                     if (element->isOverlap(cmin, cmax))
+                    {
                         stack.push(StackElement(element, c, current.Depth + 1));
+                        count++;
+                    }
+                }
+                if (count == 0)
+                {
+                    LOG("[DEBUG] Node lost in recursion !\n");
                 }
             }
         }
