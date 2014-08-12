@@ -15,6 +15,8 @@ public:
         // m_Shader->dump();
         m_Texture = NULL;
 
+        m_Quad.getVertexBuffer().mute("a_Normal", true);
+
         update();
     }
 

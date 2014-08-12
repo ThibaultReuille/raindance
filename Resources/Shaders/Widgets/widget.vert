@@ -1,5 +1,4 @@
 attribute vec3 a_Position;
-attribute vec3 a_Normal;
 attribute vec2 a_Texcoord;
 
 uniform mat4 u_ModelViewProjection;
@@ -9,8 +8,6 @@ varying vec4 v_Color;
 
 void main(void)
 {
-    float noop = a_Normal.x + a_Texcoord.x;
-        	
     if (u_Mode == 0) // Pane
     {
         v_Color = vec4(0.0, 0.0, 0.5, 0.5);
