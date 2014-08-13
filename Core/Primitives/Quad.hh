@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core/Headers.hh"
-#include "Core/Buffer.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Buffer.hh>
 
 class Quad
 {

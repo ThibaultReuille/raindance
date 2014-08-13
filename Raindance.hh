@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Core/Headers.hh"
-#include "Core/Context.hh"
-#include "Core/View.hh"
-#include "Core/GLUT.hh"
-#include "Core/Window.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Context.hh>
+#include <raindance/Core/View.hh>
+#include <raindance/Core/GLUT.hh>
+#include <raindance/Core/Window.hh>
 
 class RainDance : public GLUT::IContext
 {

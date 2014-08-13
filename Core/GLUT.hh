@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Core/Debug.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Debug.hh>
 
 namespace GLUT
 {

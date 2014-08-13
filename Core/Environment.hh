@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Core/Primitives/Sphere.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Primitives/Sphere.hh>
 
 class EnvironmentSphere
 {

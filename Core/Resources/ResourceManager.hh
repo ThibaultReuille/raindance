@@ -1,10 +1,9 @@
 #pragma once
 
-#include "Core/Resources/Resource.hh"
-
-#include "Core/Headers.hh"
-#include "Core/Resources/Texture.hh"
-#include "Core/Resources/Shader.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Resources/Resource.hh>
+#include <raindance/Core/Resources/Texture.hh>
+#include <raindance/Core/Resources/Shader.hh>
 
 class ResourceManager
 {

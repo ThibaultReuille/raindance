@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Core/Headers.hh"
-#include "Core/Buffer.hh"
-#include "Core/Resources/Shader.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Buffer.hh>
+#include <raindance/Core/Resources/Shader.hh>
 
 class Geometry
 {

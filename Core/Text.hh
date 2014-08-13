@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Core/Headers.hh"
-#include "Core/Geometry.hh"
-#include "Core/Resources/Texture.hh"
-#include "Core/Resources/Shader.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Geometry.hh>
+#include <raindance/Core/Resources/Texture.hh>
+#include <raindance/Core/Resources/Shader.hh>
 
-#include "Lib/stb_fonts/usascii/courier_bold/stb_font_courier_bold_18_usascii.inl"
+#include <raindance/Lib/stb_fonts/usascii/courier_bold/stb_font_courier_bold_18_usascii.inl>
 
 class Font
 {

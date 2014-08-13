@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core/Headers.hh"
-#include "Core/Resources/Resource.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Resources/Resource.hh>
 
 class Texture : public IResource
 {

@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Core/HUD/Widgets/Widget.hh"
-#include "Core/Icon.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/HUD/Widgets/Widget.hh>
+#include <raindance/Core/Icon.hh>
 
 class TimelineWidget : public IWidget
 {

@@ -2,7 +2,7 @@
 
 #include <sys/time.h>
 
-#include "Core/Headers.hh"
+#include <raindance/Core/Headers.hh>
 
 typedef unsigned long Timecode;
 
@@ -21,7 +21,7 @@ public:
         pause();
         reset();
 		start();
-        LOG("[CLOCK] Clock created at (%ld s, %d us).\n", m_ZeroTime.tv_sec, m_ZeroTime.tv_usec);
+        LOG("[CLOCK] Clock created at (%lu s, %lu us).\n", static_cast<unsigned long int>(m_ZeroTime.tv_sec), static_cast<unsigned long int>(m_ZeroTime.tv_usec));
 	}
 
 	void reset()

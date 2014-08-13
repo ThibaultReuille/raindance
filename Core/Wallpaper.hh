@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Core/Transformation.hh"
-#include "Core/Primitives/Quad.hh"
-#include "Core/Resources/Texture.hh"
-#include "Core/Resources/Shader.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Transformation.hh>
+#include <raindance/Core/Primitives/Quad.hh>
+#include <raindance/Core/Resources/Texture.hh>
+#include <raindance/Core/Resources/Shader.hh>
 
 class Wallpaper
 {

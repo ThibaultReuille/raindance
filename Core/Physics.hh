@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Core/Scene/NodeVector.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Scene/NodeVector.hh>
 
 namespace Physics
 {

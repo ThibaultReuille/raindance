@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core/Headers.hh"
-#include "Core/Scene/Node.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Scene/Node.hh>
 
 namespace Scene
 {

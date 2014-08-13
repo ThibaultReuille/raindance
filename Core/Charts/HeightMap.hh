@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Core/Headers.hh"
-#include "Core/Buffer.hh"
-#include "Core/Icon.hh"
-#include "Core/Text.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Buffer.hh>
+#include <raindance/Core/Icon.hh>
+#include <raindance/Core/Text.hh>
 
 class HeightMap
 {

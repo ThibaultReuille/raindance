@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Core/Buffer.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Buffer.hh>
 
 class Mesh
 {

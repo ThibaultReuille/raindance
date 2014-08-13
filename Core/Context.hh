@@ -1,12 +1,13 @@
 #pragma once
 
-#include "Core/Clock.hh"
-#include "Core/Scheduler.hh"
-#include "Core/Sequencer/Sequencer.hh"
-#include "Core/Geometry.hh"
-#include "Core/Log.hh"
-#include "Core/View.hh"
-#include "Core/Camera/Camera.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Clock.hh>
+#include <raindance/Core/Scheduler.hh>
+#include <raindance/Core/Sequencer/Sequencer.hh>
+#include <raindance/Core/Geometry.hh>
+#include <raindance/Core/Log.hh>
+#include <raindance/Core/View.hh>
+#include <raindance/Core/Camera/Camera.hh>
 
 class Context
 {

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Core/Headers.hh"
-#include "Core/Transformation.hh"
-#include "Core/Octree.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Transformation.hh>
+#include <raindance/Core/Octree.hh>
 
 namespace Scene
 {

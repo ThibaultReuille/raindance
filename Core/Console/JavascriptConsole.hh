@@ -2,7 +2,8 @@
 
 #if EMSCRIPTEN
 
-#include "Core/Console/Console.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Console/Console.hh>
 
 class JavascriptConsole : public Console
 {

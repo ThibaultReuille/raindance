@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core/Headers.hh"
-#include "Core/Primitives/Plane.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Primitives/Plane.hh>
 
 class Frustrum
 {

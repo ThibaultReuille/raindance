@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Core/Headers.hh"
-#include "Core/Intersection.hh"
-#include "Core/Controller.hh"
-#include "Core/Camera/Frustrum.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Intersection.hh>
+#include <raindance/Core/Controller.hh>
+#include <raindance/Core/Camera/Frustrum.hh>
 
 class Camera
 {

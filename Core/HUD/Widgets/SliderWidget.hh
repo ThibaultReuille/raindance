@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Core/HUD/Widgets/Widget.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/HUD/Widgets/Widget.hh>
 
 class SliderWidget : public IWidget
 {

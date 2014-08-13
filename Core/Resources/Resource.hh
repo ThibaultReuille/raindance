@@ -1,5 +1,7 @@
 #pragma once
 
+#include <raindance/Core/Headers.hh>
+
 class IResource
 {
 public:

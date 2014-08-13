@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core/Headers.hh"
-#include "Core/HUD/Widgets/Widget.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/HUD/Widgets/Widget.hh>
 
 class ScriptWidget : public IWidget
 {

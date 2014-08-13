@@ -1,6 +1,7 @@
 #pragma once
 
-// TODO : #include "OpenCL/cl.hpp"
+#include <raindance/Core/Headers.hh>
+// TODO : #include <raindance/OpenCL/cl.hpp>
 
 class OpenCL
 {

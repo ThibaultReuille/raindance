@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Core/Primitives/Box.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Primitives/Box.hh>
 
 class PointCloud
 {

@@ -2,8 +2,10 @@
 
 #ifdef Py_PYTHON_H
 
+#include <raindance/Core/Headers.hh>
+
 #include <Python.h>
-#include "Core/Console/Console.hh"
+#include <raindance/Core/Console/Console.hh>
 
 class PythonConsole : public Console
 {

@@ -2,8 +2,8 @@
 
 #include <list>
 
-#include "Core/Headers.hh"
-#include "Core/Log.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Log.hh>
 
 class IMessage
 {

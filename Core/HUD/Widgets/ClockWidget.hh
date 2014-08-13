@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Core/Headers.hh"
-#include "Core/HUD/Widgets/Widget.hh"
-#include "Core/Text.hh"
-#include "Core/Transformation.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/HUD/Widgets/Widget.hh>
+#include <raindance/Core/Text.hh>
+#include <raindance/Core/Transformation.hh>
 
 class ClockWidget : public IWidget
 {

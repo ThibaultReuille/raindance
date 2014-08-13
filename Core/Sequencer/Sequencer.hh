@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Core/Headers.hh"
+#include <raindance/Core/Headers.hh>
 
-#include "Core/Clock.hh"
-#include "Core/Sequencer/Sequence.hh"
-#include "Core/Sequencer/Track.hh"
+#include <raindance/Core/Clock.hh>
+#include <raindance/Core/Sequencer/Sequence.hh>
+#include <raindance/Core/Sequencer/Track.hh>
 
 class Sequencer
 {

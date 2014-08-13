@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Core/Headers.hh"
-#include "Core/Geometry.hh"
-#include "Core/Primitives/Ray.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Geometry.hh>
+#include <raindance/Core/Primitives/Ray.hh>
 
 class Intersection
 {

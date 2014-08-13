@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core/Headers.hh"
-#include "Core/Scheduler.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Scheduler.hh>
 
 class Track
 {

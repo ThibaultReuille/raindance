@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Core/Camera/Camera.hh"
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Camera/Camera.hh>
 
 class CameraTargetSequence : public Sequence
 {
