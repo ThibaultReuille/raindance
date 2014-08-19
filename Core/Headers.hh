@@ -79,6 +79,7 @@ const glm::vec3 COFFEE_BROWN =    glm::vec3(0.43, 0.30, 0.21);
 // ----- Packed Resources -----
 
 #include <raindance/Pack.hh>
+#include <raindance/Resources/Fonts/Fonts.hh>
 
 // ----- Others -----
 

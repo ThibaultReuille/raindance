@@ -32,6 +32,10 @@ else
 
 	echo "Packing font resources into C++ header ..."
 	rm -rf Fonts.hh
+	echo "#pragma once" >> Fonts.hh
+	echo "/*" >> Fonts.hh
+	echo " * ----- Packed Fonts -----" >> Fonts.hh
+	echo " */" >> Fonts.hh
 	for f in $FONTS; do
 		xxd -i $f.png >> Fonts.hh
 		xxd -i $f.json >> Fonts.hh
