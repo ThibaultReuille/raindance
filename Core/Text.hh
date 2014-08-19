@@ -23,13 +23,13 @@ public:
 		// m_Shader->dump();
 	}
 
-	~Font()
+	virtual ~Font()
 	{
 		ResourceManager::getInstance().unload(m_Shader);
 		ResourceManager::getInstance().unload(m_Texture);
 	}
 
-	void build(const char* str, Buffer& buffer)
+	virtual void build(const char* str, Buffer& buffer)
 	{
 		buffer.clear();
 
@@ -75,7 +75,7 @@ public:
 		return *m_Shader;
 	}
 
-private:
+protected:
 	Texture* m_Texture;
 	Shader::Program* m_Shader;
 	std::vector<stb_fontchar> m_Characters;
@@ -103,7 +103,7 @@ public:
 		m_Font->build(str, m_Buffer);
 	}
 
-	void draw(Context* context, glm::mat4 mvp)
+	virtual void draw(Context& context, const glm::mat4& mvp)
 	{
 		if (m_Font == NULL)
 		{
@@ -116,14 +116,18 @@ public:
 		m_Font->shader().uniform("u_Font").set(m_Font->texture());
 		m_Font->shader().uniform("u_Color").set(m_Color);
 
-		context->geometry().bind(m_Buffer, m_Font->shader());
-		context->geometry().drawArrays(GL_TRIANGLES, 0, m_Buffer.size() / (4 * sizeof(GLfloat)));
-		context->geometry().unbind(m_Buffer);
+		context.geometry().bind(m_Buffer, m_Font->shader());
+		context.geometry().drawArrays(GL_TRIANGLES, 0, m_Buffer.size() / (4 * sizeof(GLfloat)));
+		context.geometry().unbind(m_Buffer);
 	}
+
+	inline void draw(Context* context, const glm::mat4& mvp) { draw(*context, mvp); }
 
 	inline void setColor(const glm::vec4& c) { m_Color = c; }
 
 	inline const std::string& getCaption() { return m_Text; }
+
+	inline Font* getFont() { return m_Font; }
 
 private:
 	Font* m_Font;
