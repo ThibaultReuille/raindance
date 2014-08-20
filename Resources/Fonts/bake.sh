@@ -2,7 +2,7 @@
 
 MAKEGLFONT_DIR=../../Tools/makeglfont
 
-FONTS="Robotica Existence-Light"
+FONTS="America_Sans Cuprum-Regular Existence-Light Kimberley_bl Robotica Sansation_Regular"
 
 RGB_PROFILE="/System/Library/ColorSync/Profiles/Generic RGB Profile.icc"
 LOG_FILE="Fonts.log"
@@ -36,3 +36,4 @@ for f in $FONTS; do
 	xxd -i $f.json >> Fonts.hh
 done
 echo "Done."
+

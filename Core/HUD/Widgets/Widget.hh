@@ -13,9 +13,13 @@ public:
 		m_Dimension = dimension;
 		m_Visible = true;
 
-		m_Shader = ResourceManager::getInstance().loadShader("widget", Resources_Shaders_Widgets_widget_vert, sizeof(Resources_Shaders_Widgets_widget_vert),
-		                                                               Resources_Shaders_Widgets_widget_frag, sizeof(Resources_Shaders_Widgets_widget_frag));
+		m_Shader = ResourceManager::getInstance().loadShader("shaders/widget",
+		        Resources_Shaders_Widgets_widget_vert, sizeof(Resources_Shaders_Widgets_widget_vert),
+		        Resources_Shaders_Widgets_widget_frag, sizeof(Resources_Shaders_Widgets_widget_frag));
 		// m_Shader->dump();
+
+		m_Quad.getVertexBuffer().mute("a_Normal", true);
+		m_Quad.getVertexBuffer().mute("a_Texcoord", true);
 	}
 
 	virtual ~IWidget()
@@ -52,6 +56,9 @@ public:
 	inline const std::string& name() { return m_Name; }
 	inline const glm::vec2 dimension() { return m_Dimension; }
 	inline const glm::vec3 position() { return m_Position; }
+
+    inline void setPosition(const glm::vec3& position) { m_Position = position; }
+    inline void setDimension(const glm::vec2& dimension) { m_Dimension = dimension; }
 
 	inline bool visible() { return m_Visible; }
 	inline void visible(const bool v) { m_Visible = v; }
@@ -138,7 +145,7 @@ public:
 				{
 					transformation.translate(this->position() + it->Widget->position());
 					it->Widget->draw(context, transformation.state(), view, projection);
-				    //it->Widget->drawQuad(context, transformation.state(), view, projection);
+				    // it->Widget->drawQuad(context, transformation.state(), view, projection);
 				}
 				transformation.pop();
 			}

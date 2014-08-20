@@ -36,6 +36,7 @@
 #include <algorithm>
 #include <sstream>
 #include <iostream>
+#include <strstream>
 #include <iomanip>
 #include <unordered_map>
 #include <set>
@@ -46,6 +47,8 @@
 #include <raindance/Lib/stb_image.c>
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <raindance/Lib/stb_image_write.h>
+
+#include <raindance/Lib/picojson.h>
 
 // ----- Macros / Constants Definitions ----
 

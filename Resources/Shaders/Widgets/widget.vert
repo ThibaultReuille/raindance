@@ -1,5 +1,4 @@
 attribute vec3 a_Position;
-attribute vec2 a_Texcoord;
 
 uniform mat4 u_ModelViewProjection;
 uniform int u_Mode;

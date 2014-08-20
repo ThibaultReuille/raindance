@@ -24,11 +24,13 @@ public:
 		m_WidgetFont = new Font();
 		m_WidgetDimension = glm::vec2(16, 16);
 		m_WidgetSpacing = 10;
-		m_WidgetFontWidth = 9;
 
 		m_ScriptWidgetGroup = NULL;
 
 		m_ShowMenu = true;
+
+		m_WidgetPick = NULL;
+		m_Context = NULL;
 	}
 
 	~HUD()
@@ -56,6 +58,8 @@ public:
 
 		m_ScriptWidgetGroup = new WidgetGroup("Scripts", WidgetGroup::TOP_RIGHT);
 
+		float fontRatio = m_WidgetDimension.y / (m_WidgetFont->getSize() * m_WidgetFont->getAscender());
+
 		std::vector<IScript*>::iterator its;
 		unsigned int count = 0;
 		for (its = console->scripts_begin(); its != console->scripts_end(); ++its)
@@ -70,11 +74,12 @@ public:
 
 			ScriptWidget* scriptWidget = new ScriptWidget(caption.c_str(), NULL, tl, m_WidgetDimension, caption);
 			m_ScriptWidgetGroup->add(scriptWidget);
-			tl.x -= m_WidgetSpacing + (caption.size() + 1) * m_WidgetFontWidth;
 
-			TextWidget* textWidget = new TextWidget(caption.c_str(), NULL, tl, glm::vec2(1.0, 1.0));
-			m_ScriptWidgetGroup->add(textWidget);
+			TextWidget* textWidget = new TextWidget(caption.c_str(), NULL, glm::vec3(0, 0, 0), m_WidgetDimension);
 			textWidget->text().set(caption.c_str(), m_WidgetFont);
+			tl.x -= m_WidgetSpacing + fontRatio * textWidget->text().getWidth();
+			textWidget->setPosition(tl);
+			m_ScriptWidgetGroup->add(textWidget);
 
 			count++;
 		}
@@ -185,7 +190,6 @@ private:
 
 	WidgetGroup* m_ScriptWidgetGroup;
 	Font* m_WidgetFont;
-	float m_WidgetFontWidth;
 	glm::vec2 m_WidgetDimension;
 	float m_WidgetSpacing;
 

@@ -1,6 +1,6 @@
 
 all:
-	@echo "--- Packing raindance resources ---"
+	@echo "--- Packing Raindance resources ---"
 	./pack.sh
 
 clean:

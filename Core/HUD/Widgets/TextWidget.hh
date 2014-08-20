@@ -20,12 +20,15 @@ public:
 
     virtual void draw(Context* context, glm::mat4 model, glm::mat4 view, glm::mat4 projection)
     {
-        (void) context;
+        float fontRatio = m_Size * m_Dimension.y / (m_Text->getFont()->getSize() * m_Text->getFont()->getAscender());
 
-        // TODO : Find the font value
-        // float fontHeight = 18.0f;
+        Transformation transformation;
 
-        m_Text->draw(context, projection * view * glm::scale(model, glm::vec3(m_Size, m_Size, 1.0)));
+        transformation.set(model);
+        transformation.translate(glm::vec3(0.0, -m_Dimension.y, 0.0));
+        transformation.scale(glm::vec3(fontRatio, fontRatio, 1.0));
+
+        m_Text->draw(context, projection * view * transformation.state());
     }
 
     virtual void onMouseClick(MessageQueue& messages, int x, int y)
@@ -35,11 +38,7 @@ public:
         (void) y;
     }
 
-    inline Text& text()
-    {
-        return *m_Text;
-    }
-
+    inline Text& text() { return *m_Text; }
     inline void setSize(float size) { m_Size = size; }
 
 private:
