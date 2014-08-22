@@ -6,7 +6,7 @@ echo " * --- Packed Resources ---" >> Pack.hh
 echo " */" >> Pack.hh
 echo "#pragma once" >> Pack.hh
 
-echo "--- Packing Shaders"
+echo "- Packing Shaders"
 
 xxd -i Resources/Shaders/logo.vert >> Pack.hh
 xxd -i Resources/Shaders/logo.frag >> Pack.hh
@@ -35,7 +35,7 @@ xxd -i Resources/Shaders/environment.frag >> Pack.hh
 xxd -i Resources/Shaders/isovolume.vert >> Pack.hh
 xxd -i Resources/Shaders/isovolume.frag >> Pack.hh
 
-echo "--- Packing Shaders/Primitives"
+echo "- Packing Shaders/Primitives"
 
 xxd -i Resources/Shaders/Primitives/axis.vert >> Pack.hh
 xxd -i Resources/Shaders/Primitives/axis.frag >> Pack.hh
@@ -49,7 +49,7 @@ xxd -i Resources/Shaders/Primitives/grid.frag >> Pack.hh
 xxd -i Resources/Shaders/Primitives/wideline.vert >> Pack.hh
 xxd -i Resources/Shaders/Primitives/wideline.frag >> Pack.hh
 
-echo "--- Packing Shaders/Widgets"
+echo "- Packing Shaders/Widgets"
 
 xxd -i Resources/Shaders/Widgets/widget.vert >> Pack.hh
 xxd -i Resources/Shaders/Widgets/widget.frag >> Pack.hh
@@ -63,7 +63,7 @@ xxd -i Resources/Shaders/Widgets/checkbox.frag >> Pack.hh
 xxd -i Resources/Shaders/Widgets/timeline.vert >> Pack.hh
 xxd -i Resources/Shaders/Widgets/timeline.frag >> Pack.hh
 
-echo "--- Packing Shaders/Charts"
+echo "- Packing Shaders/Charts"
 
 xxd -i Resources/Shaders/Charts/LineChartBackground.vert >> Pack.hh
 xxd -i Resources/Shaders/Charts/LineChartBackground.frag >> Pack.hh
@@ -73,7 +73,7 @@ xxd -i Resources/Shaders/Charts/LineChartGraph.frag >> Pack.hh
 xxd -i Resources/Shaders/Charts/HeightMap.vert >> Pack.hh
 xxd -i Resources/Shaders/Charts/HeightMap.frag >> Pack.hh
 
-echo "--- Packing Textures"
+echo "- Packing Textures"
 
 xxd -i Resources/Textures/umbrella-logo.png >> Pack.hh
 xxd -i Resources/Textures/script.png >> Pack.hh
@@ -81,7 +81,7 @@ xxd -i Resources/Textures/mark.png >> Pack.hh
 xxd -i Resources/Textures/chart-disk.png >> Pack.hh
 xxd -i Resources/Textures/clock.png >> Pack.hh
 
-echo "--- Packing Textures/Shapes"
+echo "- Packing Textures/Shapes"
 
 xxd -i Resources/Textures/Shapes/cloud.png >> Pack.hh
 xxd -i Resources/Textures/Shapes/cross.png >> Pack.hh

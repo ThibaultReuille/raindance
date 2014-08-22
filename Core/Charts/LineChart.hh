@@ -158,8 +158,10 @@ public:
         glEnable(GL_LINE_SMOOTH);
         glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
 #endif
-        glLineWidth(1.5);
+        // glLineWidth(1.5);
         glDisable(GL_DEPTH_TEST);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
         if (m_ShowBackground)
         {

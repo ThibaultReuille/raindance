@@ -94,7 +94,7 @@ private:
 			tv->tv_usec = static_cast<int>(tb.millitm) * 1000;
 			return 0;
 		#else
-			return gettimeofday(tv, tz)
+			return gettimeofday(tv, tz);
 		#endif
 	}
 	
