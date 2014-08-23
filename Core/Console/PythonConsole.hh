@@ -23,10 +23,14 @@ public:
 
 	void initialize()
 	{
-		FILE* fp = fopen("Scripts/start.py", "r");
-		if (fp != NULL)
-			PyRun_SimpleFile(fp, "__main__");
-		fclose(fp);
+		#if defined(_MSC_VER)
+			// TODO : make it generic
+			char* start = "E:/VS2013/Release/Scripts/start.py";
+		#else
+			char* start = "./Scripts/start.py";
+		#endif
+
+		PyRun_SimpleFile(PyFile_AsFile(PyFile_FromString(start, "r")), start);
 	}
 
 	bool execute(IScript* script)

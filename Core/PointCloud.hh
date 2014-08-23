@@ -26,8 +26,8 @@ public:
 	{
 		POINTS,
 		ICONS
-	};
-
+	}
+;
 	Filter m_FilterZ;
 
 	PointCloud()
@@ -217,7 +217,7 @@ public:
 	ID getNearestPoint(const glm::vec3& v)
 	{
 		float minDistance = std::numeric_limits<float>::max();
-		ID result;
+		ID result = 0;
 
 		PointVertex point;
 		for (unsigned long i = 0; i < m_VertexBuffer.size() / sizeof(PointVertex); i++)

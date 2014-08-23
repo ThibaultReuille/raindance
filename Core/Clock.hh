@@ -1,7 +1,5 @@
 #pragma once
 
-#include <sys/time.h>
-
 #include <raindance/Core/Headers.hh>
 
 typedef unsigned long Timecode;
@@ -17,11 +15,11 @@ public:
 
 	Clock()
 	{
-	    gettimeofday(&m_ZeroTime, NULL);
+		getTimeOfDay(&m_ZeroTime, NULL);
         pause();
         reset();
 		start();
-        LOG("[CLOCK] Clock created at (%lu s, %lu us).\n", static_cast<unsigned long int>(m_ZeroTime.tv_sec), static_cast<unsigned long int>(m_ZeroTime.tv_usec));
+        LOG("[CLOCK] Clock created at (%ld s, %ld us).\n", m_ZeroTime.tv_sec, m_ZeroTime.tv_usec);
 	}
 
 	void reset()
@@ -36,7 +34,7 @@ public:
 	        return;
 
 	    m_State = STARTED;
-	    gettimeofday(&m_LastTime, NULL);
+		getTimeOfDay(&m_LastTime, NULL);
 	}
 
 	void pause()
@@ -51,7 +49,7 @@ public:
         if (m_State == STARTED)
         {
             timeval t;
-            gettimeofday(&t, NULL);
+			getTimeOfDay(&t, NULL);
 
             m_ElapsedTime.tv_sec += t.tv_sec - m_LastTime.tv_sec;
             m_ElapsedTime.tv_usec += t.tv_usec - m_LastTime.tv_usec;
@@ -86,6 +84,20 @@ public:
 	inline State state() { return m_State; }
 
 private:
+
+	int getTimeOfDay(struct timeval *tv, struct timezone *tz)
+	{
+		#ifdef _WIN32
+			struct _timeb tb;
+			_ftime_s(&tb);
+			tv->tv_sec = static_cast<long>(tb.time);
+			tv->tv_usec = static_cast<int>(tb.millitm) * 1000;
+			return 0;
+		#else
+			return gettimeofday(tv, tz)
+		#endif
+	}
+	
 	timeval m_ZeroTime;
 	timeval m_ElapsedTime;
     timeval m_LastTime;

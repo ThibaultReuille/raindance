@@ -15,6 +15,14 @@ public:
         glutInitWindowSize(m_Width, m_Height);
         glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
         glutCreateWindow(m_Title.c_str());
+
+		GLenum err = glewInit();
+		if (GLEW_OK != err)
+		{
+			/* Problem: glewInit failed, something is seriously wrong. */
+			fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+		}
+		LOG("[WINDOW] Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 	}
 
 	void fullscreen()

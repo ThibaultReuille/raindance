@@ -46,7 +46,7 @@ public:
         EXTERNAL
     };
 
-    typedef typename std::multiset<Event>::iterator EventIterator;
+    typedef std::multiset<Event>::iterator EventIterator;
 
     Track(const char* name)
     {

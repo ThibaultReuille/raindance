@@ -62,9 +62,9 @@ public:
         {
             glm::vec3 center = m_Center;
 
-            center.x += (i & 4 ? 1.0 : -1.0) * m_HalfDimension.x / 2;
-            center.y += (i & 2 ? 1.0 : -1.0) * m_HalfDimension.y / 2;
-            center.z += (i & 1 ? 1.0 : -1.0) * m_HalfDimension.z / 2;
+            center.x += (i & 4 ? 1.0f : -1.0f) * m_HalfDimension.x / 2;
+            center.y += (i & 2 ? 1.0f : -1.0f) * m_HalfDimension.y / 2;
+            center.z += (i & 1 ? 1.0f : -1.0f) * m_HalfDimension.z / 2;
 
             m_Children[i] = new OctreeNode(center, 0.5f * m_HalfDimension);
         }

@@ -53,7 +53,7 @@ public:
         {
             Dimension = glm::vec2(glyph.get("bbox_width").get<double>(), glyph.get("bbox_height").get<double>());
             Bearing = glm::vec2(glyph.get("bearing_x").get<double>(), glyph.get("bearing_y").get<double>());
-            AdvanceX = glyph.get("advance_x").get<double>();
+            AdvanceX = static_cast<float>(glyph.get("advance_x").get<double>());
             Texcoord[0] = glm::vec2(glyph.get("s0").get<double>(), 1.0 - glyph.get("t0").get<double>());
             Texcoord[1] = glm::vec2(glyph.get("s1").get<double>(), 1.0 - glyph.get("t1").get<double>());
 
@@ -148,9 +148,9 @@ public:
 
         m_Size = m_JsonData.get("size").get<double>();
         m_Height = m_JsonData.get("height").get<double>();
-        m_SpaceAdvance = m_JsonData.get("space_advance").get<double>();
-        m_Ascender = m_JsonData.get("ascender").get<double>();
-        m_Descender = m_JsonData.get("descender").get<double>();
+		m_SpaceAdvance = m_JsonData.get("space_advance").get<double>();
+		m_Ascender = m_JsonData.get("ascender").get<double>();
+		m_Descender = m_JsonData.get("descender").get<double>();
 
         // dump(m_JsonData);
     }

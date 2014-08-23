@@ -115,6 +115,8 @@ public:
                     mode = 2;
                     break;
                 default:
+                    LOG("[TIMELINE] Unknown event type!\n");
+                    continue;
                     break;
                 }
 

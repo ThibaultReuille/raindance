@@ -14,8 +14,8 @@ public:
 
 	SphereMesh(float radius, unsigned int rings, unsigned int sectors)
 	{
-		float R = 1. / (float)(rings - 1);
-		float S = 1. / (float)(sectors - 1);
+		float R = 1.0f / (float)(rings - 1);
+		float S = 1.0f / (float)(sectors - 1);
 
 		for(unsigned int r = 0; r < rings; r++)
 			for(unsigned int s = 0; s < sectors; s++)

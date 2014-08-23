@@ -183,7 +183,7 @@ public:
 
         delete[] platformIDs;
 
-        LOG("[OpenCL] %lu platform(s) and %lu device(s) detected.\n", m_Platforms.size(), m_Devices.size());
+        LOG("[OpenCL] %i platform(s) and %i device(s) detected.\n", static_cast<int>(m_Platforms.size()), static_cast<int>(m_Devices.size()));
     }
 
     Context* createContext(const Device& device)
