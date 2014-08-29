@@ -18,13 +18,13 @@ public:
 		glm::vec2 Texcoord;
 	};
 
-	Quad()
+	Quad(glm::vec3 step = glm::vec3(0, 0, 0))
 	{
-		//                Position                       Normal             Texcoord
-		m_VertexBuffer << glm::vec3(0.0, 0.0, 0.0) << glm::vec3(0, 0, 1) << glm::vec2(0, 1);
-		m_VertexBuffer << glm::vec3(1.0, 0.0, 0.0) << glm::vec3(0, 0, 1) << glm::vec2(1, 1);
-		m_VertexBuffer << glm::vec3(1.0, 1.0, 0.0) << glm::vec3(0, 0, 1) << glm::vec2(1, 0);
-		m_VertexBuffer << glm::vec3(0.0, 1.0, 0.0) << glm::vec3(0, 0, 1) << glm::vec2(0, 0);
+		//                Position                           Normal                Texcoord
+		m_VertexBuffer << glm::vec3(0.0, 0.0, 0.0) + step << glm::vec3(0, 0, 1) << glm::vec2(0, 1);
+		m_VertexBuffer << glm::vec3(1.0, 0.0, 0.0) + step << glm::vec3(0, 0, 1) << glm::vec2(1, 1);
+		m_VertexBuffer << glm::vec3(1.0, 1.0, 0.0) + step << glm::vec3(0, 0, 1) << glm::vec2(1, 0);
+		m_VertexBuffer << glm::vec3(0.0, 1.0, 0.0) + step << glm::vec3(0, 0, 1) << glm::vec2(0, 0);
 
 		unsigned char lines_indices[] = { 0, 1, 1, 2, 2, 3, 3, 0 };
 		m_LineBuffer.push(lines_indices, sizeof(lines_indices));
