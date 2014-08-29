@@ -23,14 +23,15 @@ public:
 
 	void initialize()
 	{
+ 		// TODO : make it generic
 		#if defined(_MSC_VER)
-			// TODO : make it generic
-			char* start = "E:/VS2013/Release/Scripts/start.py";
+			char start[] = "E:/VS2013/Release/Scripts/start.py";
 		#else
-			char* start = "./Scripts/start.py";
+			char start[] = "./Scripts/start.py";
 		#endif
+		char mode[] = "r";
 
-		PyRun_SimpleFile(PyFile_AsFile(PyFile_FromString(start, "r")), start);
+		PyRun_SimpleFile(PyFile_AsFile(PyFile_FromString(start, mode)), start);
 	}
 
 	bool execute(IScript* script)
