@@ -8,9 +8,7 @@
 # include <OpenGL/gl.h>
 # include <OpenGL/glu.h>
 # include <Glut/glut.h>
-# ifndef EMSCRIPTEN
-#  include <OpenCL/opencl.h>
-# endif
+# include <OpenCL/opencl.h>
 #endif
 
 #ifdef __linux__
@@ -19,19 +17,18 @@
 # include <GL/gl.h>
 # include <GL/glu.h>
 # include <GL/glut.h>
-# ifndef EMSCRIPTEN
-#  include <CL/cl.h>
-# endif
+# include <CL/cl.h>
+#endif
+
+#ifdef EMSCRIPTEN
+# define GL_GLEXT_PROTOTYPES
+# define EGL_EGLEXT_PROTOTYPES
+# include <GL/gl.h>
+# include <GL/glut.h>
 #endif
 
 #if defined(_MSC_VER)
 
-/*
-# undef NEAR
-# undef near
-# undef FAR
-# undef far
-*/
 # define M_E        2.71828182845904523536   // e
 # define M_LOG2E    1.44269504088896340736   // log2(e)
 # define M_LOG10E   0.434294481903251827651  // log10(e)
@@ -52,9 +49,8 @@
 
 # include <GL/glew.h>
 # include <GL/glut.h>
-# ifndef EMSCRIPTEN
-#  include <CL/cl.h>
-# endif
+# include <CL/cl.h>
+
 #endif
 
 #define GLM_SWIZZLE
