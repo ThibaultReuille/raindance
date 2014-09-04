@@ -9,8 +9,6 @@ namespace Physics
 	{
 	public:
 		virtual ~IForce() = 0;
-
-		virtual void apply(Scene::NodeVector& nodes) = 0;
 	};
 
 	IForce::~IForce()

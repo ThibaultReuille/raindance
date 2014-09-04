@@ -10,7 +10,7 @@ namespace Scene
     {
     public:
         Node()
-            : m_Mark(0), m_PositionLock(false)
+            : m_Mark(0), m_LOD(1.0), m_PositionLock(false)
         {
             setPosition(glm::vec3(0, 0, 0));
             setOrientation(glm::quat());
@@ -21,16 +21,6 @@ namespace Scene
         virtual ~Node()
         {
         }
-
-        /*
-        void draw(Context* context, const glm::mat4& projection, const glm::mat4& view, const glm::mat4& model)
-        {
-            if (m_DirtyModelMatrix)
-                updateModelMatrix();
-
-            m_Drawable->draw(context, projection, view, model * m_ModelMatrix);
-        }
-        */
 
         virtual void draw(Context* context, const glm::mat4& projection, const glm::mat4& view, const glm::mat4& model) = 0;
 
@@ -48,6 +38,9 @@ namespace Scene
 
         inline void setMark(int mark) { m_Mark = mark; }
         inline int getMark() { return m_Mark; }
+
+        inline void setLOD(float lod) { m_LOD = lod; }
+        inline float getLOD() { return m_LOD; }
 
         inline void normalizeDirection()
         {
@@ -90,6 +83,7 @@ private:
         glm::vec3 m_Direction;
 
         int m_Mark;
+        float m_LOD;
 
         bool m_PositionLock;
     };
