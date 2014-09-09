@@ -1,78 +1,104 @@
 #pragma once
 
 #include <raindance/Core/Headers.hh>
+#include <raindance/Core/Transformation.hh>
+#include <raindance/Core/Primitives/Quad.hh>
 
 class Grid
 {
 public:
-    Grid(unsigned long width, unsigned long height)
-	{
-        m_Width = width;
-        m_Height = height;
-        m_Color = glm::vec4(1.0, 1.0, 1.0, 1.0);
+    struct Parameters
+    {
+        glm::vec2 Dimension;
+        glm::vec2 Scale;
+        glm::vec2 Step;
+        glm::vec2 Division;
+        glm::vec2 Origin;
+        glm::vec2 Shift;
 
-        float x;
-        float y;
-        GLushort index = 0;
+        glm::vec4 Color;
+        glm::vec4 BackgroundColor;
+    };
 
-        y = static_cast<float>(height);
-        for (unsigned int i = 0; i <= width; i++)
-        {
-            x = static_cast<float>(i);
-            m_VertexBuffer << glm::vec3(x, 0, 0) << glm::vec3(x, y, 0);
-            m_LineBuffer << index++;
-            m_LineBuffer << index++;
-        }
+    Grid(const Parameters& parameters)
+    {
+        m_Parameters = parameters;
 
-        x = static_cast<float>(width);
-        for (unsigned int j = 0; j <= height; j++)
-        {
-            y = static_cast<float>(j);
-            m_VertexBuffer << glm::vec3(0, y, 0) << glm::vec3(x, y, 0);
-            m_LineBuffer << index++;
-            m_LineBuffer << index++;
-        }
-
-        m_VertexBuffer.describe("a_Position", 3, GL_FLOAT, 3 * sizeof(GLfloat), 0);
-        m_VertexBuffer.generate(Buffer::STATIC);
+        update();
 
         m_Shader = ResourceManager::getInstance().loadShader("Primitives/grid",
                 Resources_Shaders_Primitives_grid_vert, sizeof(Resources_Shaders_Primitives_grid_vert),
                 Resources_Shaders_Primitives_grid_frag, sizeof(Resources_Shaders_Primitives_grid_frag));
-        // m_Shader->dump();
-	}
 
-	virtual ~Grid()
-	{
-	    ResourceManager::getInstance().unload(m_Shader);
-	}
+        m_Shader->dump();
+    }
 
-	void draw(Context& context, const glm::mat4& model, const glm::mat4& view, const glm::mat4& projection)
-	{
-	    m_Shader->use();
-        m_Shader->uniform("u_ModelViewProjection").set(projection * view * model);
-        m_Shader->uniform("u_Color").set(m_Color);
+    virtual ~Grid()
+    {
+        ResourceManager::getInstance().unload(m_Shader);   
+    }
+
+    void update()
+    {
+        m_VertexBuffer.clear();
+        m_LineBuffer.clear();
+        m_TriangleBuffer.clear();
+
+        //                Position
+        m_VertexBuffer << glm::vec2(0.0,                      0.0);
+        m_VertexBuffer << glm::vec2(m_Parameters.Dimension.x, 0.0);
+        m_VertexBuffer << glm::vec2(m_Parameters.Dimension.x, m_Parameters.Dimension.y);
+        m_VertexBuffer << glm::vec2(0.0,                      m_Parameters.Dimension.y);
+
+        unsigned char triangles_indices[] = { 0, 1, 3, 2 };
+        m_TriangleBuffer.push(triangles_indices, sizeof(triangles_indices));
+
+        m_FirstUpdate = true;
+
+        if (!m_FirstUpdate)
+            m_VertexBuffer.update();
+
+        m_VertexBuffer.describe("a_Position", 2, GL_FLOAT, 2 * sizeof(GLfloat), 0);
+
+        if (m_FirstUpdate)
+            m_VertexBuffer.generate(Buffer::STATIC);
+
+        m_FirstUpdate = false;
+    }
+
+    void draw(Context& context, const Camera& camera)
+    {
+        Transformation transformation;
+
+        transformation.translate(glm::vec3(m_Parameters.Origin, 0.0));
+
+        m_Shader->use();
+
+        // m_Shader->uniform("u_Scale").set(m_Parameters.Scale);
+        m_Shader->uniform("u_Step").set(m_Parameters.Step);
+        m_Shader->uniform("u_Division").set(m_Parameters.Division);
+        m_Shader->uniform("u_Shift").set(m_Parameters.Shift);
+
+        m_Shader->uniform("u_Color").set(m_Parameters.Color);
+        m_Shader->uniform("u_BackgroundColor").set(m_Parameters.BackgroundColor);
+
+        m_Shader->uniform("u_ModelViewProjection").set(camera.getViewProjectionMatrix() * transformation.state());
+
         context.geometry().bind(m_VertexBuffer, *m_Shader);
-        context.geometry().drawElements(GL_LINES, m_LineBuffer.size() / sizeof(unsigned short int), GL_UNSIGNED_SHORT, m_LineBuffer.ptr());
+        context.geometry().drawElements(GL_TRIANGLE_STRIP, m_TriangleBuffer.size() / sizeof(unsigned char), GL_UNSIGNED_BYTE, m_TriangleBuffer.ptr());
         context.geometry().unbind(m_VertexBuffer);
-	}
+    }
 
-	inline void setColor(const glm::vec4& color) { m_Color = color; }
-
-	inline Buffer& getVertexBuffer() { return m_VertexBuffer; }
-	inline Buffer& getLineBuffer() { return m_LineBuffer; }
-
-	inline unsigned long width() { return m_Width; }
-	inline unsigned long height() { return m_Height; }
+    inline Parameters& parameters() { return m_Parameters; }
 
 private:
-	unsigned long m_Width;
-	unsigned long m_Height;
+    Buffer m_VertexBuffer;
+    Buffer m_LineBuffer;
+    Buffer m_TriangleBuffer;
+    bool m_FirstUpdate;
 
-	glm::vec4 m_Color;
+    Parameters m_Parameters;
 
-	Buffer m_VertexBuffer;
-	Buffer m_LineBuffer;
-
-	Shader::Program* m_Shader;
+    Shader::Program* m_Shader;
 };
+

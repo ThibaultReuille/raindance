@@ -112,6 +112,12 @@ public:
 			// TODO : Type check
 			glUniform1fv(m_Location, n, v);
 		}
+		void set(const glm::vec2& v) const
+		{
+			if (m_Type != GL_FLOAT_VEC2)
+				LOG("[SHADER] Uniform type differs !\n");
+			glUniform2fv(m_Location, 1, glm::value_ptr(v));
+		}
 		void set(const glm::vec3& v) const
 		{
 			if (m_Type != GL_FLOAT_VEC3)
