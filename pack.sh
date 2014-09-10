@@ -49,6 +49,9 @@ xxd -i Resources/Shaders/Primitives/grid.frag >> Pack.hh
 xxd -i Resources/Shaders/Primitives/wideline.vert >> Pack.hh
 xxd -i Resources/Shaders/Primitives/wideline.frag >> Pack.hh
 
+xxd -i Resources/Shaders/Primitives/polyline.vert >> Pack.hh
+xxd -i Resources/Shaders/Primitives/polyline.frag >> Pack.hh
+
 echo "- Packing Shaders/Widgets"
 
 xxd -i Resources/Shaders/Widgets/widget.vert >> Pack.hh

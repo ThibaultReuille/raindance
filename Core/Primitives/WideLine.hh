@@ -60,6 +60,14 @@ public:
         return (m_Width / 2.0f) * glm::normalize(glm::cross(lineDirection, quadNormal));
     }
 
+    const glm::vec3 calculateExtrudeDirection(const Camera& camera, const glm::vec3& start, const glm::vec3& stop) const
+    {
+        glm::vec3 lineDirection = stop - start;
+        glm::vec3 lineMidpoint = 0.5f * (start + stop);
+        glm::vec3 quadNormal = camera.getPosition() - lineMidpoint;
+        return (m_Width / 2.0f) * glm::normalize(glm::cross(lineDirection, quadNormal));
+    }
+
     inline void setWidth(float width) { m_Width = width; }
     inline float getWidth() { return m_Width; }
 
