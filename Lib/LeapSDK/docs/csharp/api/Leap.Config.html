@@ -1,0 +1,827 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Config &mdash; Leap Motion C# and Unity SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion C# and Unity SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="Leap_Classes.html" />
+    <link rel="next" title="Controller" href="Leap.Controller.html" />
+    <link rel="prev" title="CircleGesture" href="Leap.CircleGesture.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'csharp';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.javascript = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../csharp/api/Leap.Config.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/api/Leap.Config.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/api/Leap.Config.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/api/Leap.Config.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/api/Leap.Config.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/api/Leap.Config.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/api/Leap.Config.html";
+            } else {
+                    redirectedLocation ="Leap_Classes.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../csharp/api/Leap.Config.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Leap.CircleGesture.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("Leap.Controller.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="../../javascript/api/Leap.Config.html" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      C# and Unity
+    
+  </li>
+  <li>
+      <a href="../../cpp/api/Leap.Config.html" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      <a href="../../java/api/Leap.Config.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="../../python/api/Leap.Config.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      <a href="../../objc/api/Leap.Config.html" onclick="localStorage['currentAPI'] = 'objc'">Objective-C</a>
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Classes.html" accesskey="U">API Reference</a>&raquo;
+  Config
+</span> -->
+        
+  <div class="section" id="id2">
+<h1>Config<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
+<style>.members {
+     -webkit-column-count:2; /* Chrome, Safari, Opera */
+     -moz-column-count:2; /* Firefox */
+     column-count:2;
+     }
+     strong {color:gray;}
+</style><p><strong>Methods:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#csharpclass_leap_1_1_config_1a539a941e29cde8d13e413c515d9801cd">Config()</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_config_1aa82c864d8812e9daac23134bb19aa416">GetBool(string key)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_config_1aec259d4b0cb33186b3440d3067fed061">GetFloat(string key)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_config_1a7bcb98b30e076ba673653cb53051a7a9">GetInt32(string key)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_config_1adbe992dd246d4883b617f61938730b74">GetString(string key)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_config_1af68aceebcb2ff554c143f85d26942dad">Save()</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_config_1a68fb1a5a7dcad8bf122b93804828ff6d">SetBool(string key, bool value)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_config_1a52878fc9d559546191cb10a89b81eb88">SetFloat(string key, float value)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_config_1a1f5b4bb6007a9d16da55e69b7a238f42">SetInt32(string key, int value)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_config_1ade132d4f9df5771e83267cc13ca0a671">SetString(string key, string value)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_config_1a9717d7a18d8bf405cd6aa811ce7d87ab">Type(string key)</a></li>
+</ul>
+</div>
+<div class="line-block" id="csharpclass_leap_1_1_config">
+<div class="line"><em>class</em> <strong>Leap::Config</strong></div>
+</div>
+<blockquote>
+<div><p>The <a class="reference internal" href="#csharpclass_leap_1_1_config"><em>Config</em></a> class provides access to Leap Motion system configuration information. </p>
+<p><p>You can get and set gesture configuration parameters using the <a class="reference internal" href="#csharpclass_leap_1_1_config"><em>Config</em></a> object obtained from a connected <a class="reference internal" href="Leap.Controller.html#csharpclass_leap_1_1_controller"><em>Controller</em></a> object. The key strings required to identify a configuration parameter include:</p>
+<p><table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="15%" />
+<col width="20%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key string</th>
+<th class="head">Value type</th>
+<th class="head">Default value</th>
+<th class="head">Units</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Gesture.Circle.MinRadius</td>
+<td>float</td>
+<td>5.0</td>
+<td>mm</td>
+</tr>
+<tr class="row-odd"><td>Gesture.Circle.MinArc</td>
+<td>float</td>
+<td>1.5 * pi</td>
+<td>radians</td>
+</tr>
+<tr class="row-even"><td>Gesture.Swipe.MinLength</td>
+<td>float</td>
+<td>150</td>
+<td>mm</td>
+</tr>
+<tr class="row-odd"><td>Gesture.Swipe.MinVelocity</td>
+<td>float</td>
+<td>1000</td>
+<td>mm/s</td>
+</tr>
+<tr class="row-even"><td>Gesture.KeyTap.MinDownVelocity</td>
+<td>float</td>
+<td>50</td>
+<td>mm/s</td>
+</tr>
+<tr class="row-odd"><td>Gesture.KeyTap.HistorySeconds</td>
+<td>float</td>
+<td>0.1</td>
+<td>s</td>
+</tr>
+<tr class="row-even"><td>Gesture.KeyTap.MinDistance</td>
+<td>float</td>
+<td>3.0</td>
+<td>mm</td>
+</tr>
+<tr class="row-odd"><td>Gesture.ScreenTap.MinForwardVelocity</td>
+<td>float</td>
+<td>50</td>
+<td>mm/s</td>
+</tr>
+<tr class="row-even"><td>Gesture.ScreenTap.HistorySeconds</td>
+<td>float</td>
+<td>0.1</td>
+<td>s</td>
+</tr>
+<tr class="row-odd"><td>Gesture.ScreenTap.MinDistance</td>
+<td>float</td>
+<td>5.0</td>
+<td>mm</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>After setting a configuration value, you must call the Config::save() method to commit the changes. You can save after the <a class="reference internal" href="Leap.Controller.html#csharpclass_leap_1_1_controller"><em>Controller</em></a> has connected to the Leap Motion service/daemon. In other words, after the <a class="reference internal" href="Leap.Controller.html#csharpclass_leap_1_1_controller"><em>Controller</em></a> has dispatched the serviceConnected or connected events or Controller::isConnected is true. The configuration value changes are not persistent; your application needs to set the values every time it runs.</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><p class="first"><a class="reference internal" href="Leap.CircleGesture.html#csharpclass_leap_1_1_circle_gesture"><em>CircleGesture</em></a> </p>
+<p><a class="reference internal" href="Leap.KeyTapGesture.html#csharpclass_leap_1_1_key_tap_gesture"><em>KeyTapGesture</em></a> </p>
+<p><a class="reference internal" href="Leap.ScreenTapGesture.html#csharpclass_leap_1_1_screen_tap_gesture"><em>ScreenTapGesture</em></a> </p>
+<p class="last"><a class="reference internal" href="Leap.SwipeGesture.html#csharpclass_leap_1_1_swipe_gesture"><em>SwipeGesture</em></a> </p>
+</dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+<em>Public Type</em><blockquote>
+<div><p><span class="target" id="csharpclass_leap_1_1_config_1ad9971b6ef33e02ba2c75d19c1d2518a1"></span><strong>ValueType enum</strong></p>
+<blockquote>
+<div><p>Enumerates the possible data types for configuration values. </p>
+<p>The Config::type() function returns an item from the ValueType enumeration. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">TYPE_UNKNOWN</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">0</span></tt> - <p>The data type is unknown. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd><p class="first last"><p>1.0 </p>
+</p>
+</dd>
+</dl>
+</p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">TYPE_BOOLEAN</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">1</span></tt> - <p>A boolean value. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd><p class="first last"><p>1.0 </p>
+</p>
+</dd>
+</dl>
+</p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">TYPE_INT32</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">2</span></tt> - <p>A 32-bit integer. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd><p class="first last"><p>1.0 </p>
+</p>
+</dd>
+</dl>
+</p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">TYPE_FLOAT</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">6</span></tt> - <p>A floating-point number. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd><p class="first last"><p>1.0 </p>
+</p>
+</dd>
+</dl>
+</p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">TYPE_STRING</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">8</span></tt> - <p>A string of characters. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd><p class="first last"><p>1.0 </p>
+</p>
+</dd>
+</dl>
+</p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">TYPEUNKNOWN</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">TYPE_UNKNOWN</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">TYPEBOOLEAN</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">TYPE_BOOLEAN</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">TYPEINT32</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">TYPE_INT32</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">TYPEFLOAT</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">TYPE_FLOAT</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">TYPESTRING</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">TYPE_STRING</span></tt> - </li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<em>Public Functions</em><blockquote>
+<div><p><span class="target" id="csharpclass_leap_1_1_config_1a539a941e29cde8d13e413c515d9801cd"></span><div class="line-block">
+<div class="line"> <strong>Config</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a <a class="reference internal" href="#csharpclass_leap_1_1_config"><em>Config</em></a> object. </p>
+<p><p>Do not create your own <a class="reference internal" href="#csharpclass_leap_1_1_config"><em>Config</em></a> objects. Get a <a class="reference internal" href="#csharpclass_leap_1_1_config"><em>Config</em></a> object using the Controller::config() function.</p>
+<p><pre class="literal-block">
+<a class="reference internal" href="#csharpclass_leap_1_1_config_1a539a941e29cde8d13e413c515d9801cd"><em>Config</em></a> config = controller.Config;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_config_1aa82c864d8812e9daac23134bb19aa416"></span><div class="line-block">
+<div class="line">bool <strong>GetBool</strong>(string key)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Gets the boolean representation for the specified key. </p>
+<p><p><pre class="literal-block">
+Boolean booleanValue = controller.Config.GetBool(&quot;head_mounted_display_mode&quot;);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_config_1aec259d4b0cb33186b3440d3067fed061"></span><div class="line-block">
+<div class="line">float <strong>GetFloat</strong>(string key)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Gets the floating point representation for the specified key. </p>
+<p><p><pre class="literal-block">
+float floatValue = controller.Config.GetFloat(&quot;Gesture.Swipe.MinDistance&quot;);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_config_1a7bcb98b30e076ba673653cb53051a7a9"></span><div class="line-block">
+<div class="line">int <strong>GetInt32</strong>(string key)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Gets the 32-bit integer representation for the specified key. </p>
+<p><p><pre class="literal-block">
+int intValue = controller.Config.GetInt32(&quot;Key.For.Integer.Setting&quot;);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_config_1adbe992dd246d4883b617f61938730b74"></span><div class="line-block">
+<div class="line">string <strong>GetString</strong>(string key)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Gets the string representation for the specified key. </p>
+<p><p><pre class="literal-block">
+String stringValue = controller.Config.GetString(&quot;Key.For.String.Setting&quot;);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_config_1af68aceebcb2ff554c143f85d26942dad"></span><div class="line-block">
+<div class="line">bool <strong>Save</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Saves the current state of the config. </p>
+<p><p>Call <tt class="docutils literal"><span class="pre">save()</span></tt> after making a set of configuration changes. The <tt class="docutils literal"><span class="pre">save()</span></tt> function transfers the configuration changes to the Leap Motion service. You can save after the <a class="reference internal" href="Leap.Controller.html#csharpclass_leap_1_1_controller"><em>Controller</em></a> has connected to the Leap Motion service/daemon. In other words, after the <a class="reference internal" href="Leap.Controller.html#csharpclass_leap_1_1_controller"><em>Controller</em></a> has dispatched the serviceConnected or connected events or Controller::isConnected is true. The configuration value changes are not persistent; your application must set the values every time it runs.</p>
+<p><pre class="literal-block">
+controller.Config.SetFloat(&quot;Gesture.Circle.MinRadius&quot;, 15);
+controller.Config.SetFloat(&quot;Gesture.Circle.MinArc&quot;, 1.7f);
+Boolean success = controller.Config.Save();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true on success, false on failure. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_config_1a68fb1a5a7dcad8bf122b93804828ff6d"></span><div class="line-block">
+<div class="line">bool <strong>SetBool</strong>(string key, bool value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Sets the boolean representation for the specified key. </p>
+<p><p><pre class="literal-block">
+controller.Config.SetBool(&quot;head_mounted_display_mode&quot;, true);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true on success, false on failure. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_config_1a52878fc9d559546191cb10a89b81eb88"></span><div class="line-block">
+<div class="line">bool <strong>SetFloat</strong>(string key, float value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Sets the floating point representation for the specified key. </p>
+<p><p><pre class="literal-block">
+controller.Config.SetFloat(&quot;Gesture.Circle.MinRadius&quot;, 15);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true on success, false on failure. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_config_1a1f5b4bb6007a9d16da55e69b7a238f42"></span><div class="line-block">
+<div class="line">bool <strong>SetInt32</strong>(string key, int value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Sets the 32-bit integer representation for the specified key. </p>
+<p><p><pre class="literal-block">
+controller.Config.SetInt32(&quot;Key.For.Integer.Setting&quot;, 12);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true on success, false on failure. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_config_1ade132d4f9df5771e83267cc13ca0a671"></span><div class="line-block">
+<div class="line">bool <strong>SetString</strong>(string key, string value)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Sets the string representation for the specified key. </p>
+<p><p><pre class="literal-block">
+controller.Config.SetString(&quot;Key.For.String.Setting&quot;, &quot;A String&quot;);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true on success, false on failure. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_config_1a9717d7a18d8bf405cd6aa811ce7d87ab"></span><div class="line-block">
+<div class="line">Config.ValueType <strong>Type</strong>(string key)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Reports the natural data type for the value related to the specified key. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="#csharpclass_leap_1_1_config_1a539a941e29cde8d13e413c515d9801cd"><em>Config</em></a>.ValueType dataType = controller.Config.Type(&quot;Gesture.KeyTap.MinDistance&quot;);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The native data type of the value, that is, the type that does not require a data conversion. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">key</span></tt> - <p>The key for the looking up the value in the configuration dictionary. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<div class="section" id="id5">
+<h2>Value Type<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p><span class="target" id="csharpclass_leap_1_1_config_1ad9971b6ef33e02ba2c75d19c1d2518a1"></span><strong>ValueType enum</strong></p>
+<blockquote>
+<div><p>Enumerates the possible data types for configuration values. </p>
+<p>The Config::type() function returns an item from the ValueType enumeration. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">TYPE_UNKNOWN</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">0</span></tt> - <p>The data type is unknown. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd><p class="first last"><p>1.0 </p>
+</p>
+</dd>
+</dl>
+</p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">TYPE_BOOLEAN</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">1</span></tt> - <p>A boolean value. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd><p class="first last"><p>1.0 </p>
+</p>
+</dd>
+</dl>
+</p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">TYPE_INT32</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">2</span></tt> - <p>A 32-bit integer. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd><p class="first last"><p>1.0 </p>
+</p>
+</dd>
+</dl>
+</p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">TYPE_FLOAT</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">6</span></tt> - <p>A floating-point number. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd><p class="first last"><p>1.0 </p>
+</p>
+</dd>
+</dl>
+</p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">TYPE_STRING</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">8</span></tt> - <p>A string of characters. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd><p class="first last"><p>1.0 </p>
+</p>
+</dd>
+</dl>
+</p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">TYPEUNKNOWN</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">TYPE_UNKNOWN</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">TYPEBOOLEAN</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">TYPE_BOOLEAN</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">TYPEINT32</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">TYPE_INT32</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">TYPEFLOAT</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">TYPE_FLOAT</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">TYPESTRING</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">TYPE_STRING</span></tt> - </li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">C# and Unity Docs (v2.1)</a></li>
+          </ul><ul>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Classes.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Arm.html#id3">Arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Bone.html#id3">Bone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.CircleGesture.html#id3">CircleGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Config</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Value Type</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Controller.html#id2">Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Device.html">Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.DeviceList.html">DeviceList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Finger.html#id3">Finger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.FingerList.html">FingerList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Frame.html">Frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Gesture.html#id2">Gesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.GestureList.html">GestureList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Hand.html">Hand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.HandList.html">HandList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ImageList.html">ImageList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.InteractionBox.html">InteractionBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.KeyTapGesture.html">KeyTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Listener.html">Listener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Matrix.html">Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Pointable.html#id2">Pointable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.PointableList.html">PointableList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ScreenTapGesture.html">ScreenTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.SwipeGesture.html">SwipeGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Tool.html">Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ToolList.html">ToolList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Vector.html">Vector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>C# and Unity</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

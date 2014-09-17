@@ -1,0 +1,680 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>CircleGesture &mdash; Leap Motion JavaScript SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion JavaScript SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="Leap_Classes.html" />
+    <link rel="next" title="Controller" href="Leap.Controller.html" />
+    <link rel="prev" title="Bone" href="Leap.Bone.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'javascript';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.javascript = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../javascript/api/Leap.CircleGesture.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/api/Leap.CircleGesture.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/api/Leap.CircleGesture.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/api/Leap.CircleGesture.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/api/Leap.CircleGesture.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/api/Leap.CircleGesture.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/api/Leap.CircleGesture.html";
+            } else {
+                    redirectedLocation ="Leap_Classes.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../javascript/api/Leap.CircleGesture.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Leap.Bone.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("Leap.Controller.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      JavaScript
+    
+  </li>
+  <li>
+      <a href="../../csharp/api/Leap.CircleGesture.html" onclick="localStorage['currentAPI'] = 'csharp'">C# and Unity</a>
+    
+  </li>
+  <li>
+      <a href="../../cpp/api/Leap.CircleGesture.html" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      <a href="../../java/api/Leap.CircleGesture.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="../../python/api/Leap.CircleGesture.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      <a href="../../objc/api/Leap.CircleGesture.html" onclick="localStorage['currentAPI'] = 'objc'">Objective-C</a>
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Classes.html" accesskey="U">API Reference</a>&raquo;
+  CircleGesture
+</span> -->
+        
+  <div class="section" id="id44">
+<h1>CircleGesture<a class="headerlink" href="#id44" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="CircleGesture">
+<em class="property">class </em><tt class="descname">CircleGesture</tt><big>(</big><big>)</big><a class="headerlink" href="#CircleGesture" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>The CircleGesture classes represents a circular finger movement.</p>
+<p>A circle movement is recognized when the tip of a finger draws a circle
+within the Leap field of view.</p>
+<p><img alt="CircleGestureImage" src="api/../../../images/Leap_Gesture_Circle.png" /></p>
+<p>Circle gestures are continuous. The CircleGesture objects for the
+gesture have three possible states:</p>
+<ul class="simple">
+<li>start &#8211; The circle gesture has just started. The movement has
+progressed far enough for the recognizer to classify it as a circle.</li>
+<li>update &#8211; The circle gesture is continuing.</li>
+<li>stop &#8211; The circle gesture is finished.</li>
+</ul>
+<p>An uninitialized CircleGesture object is considered invalid. Get valid
+instances of the CircleGesture class from a Frame object or a gesture event listener.</p>
+<p>The following example illustrates how to get gesture objects from a frame of
+tracking data:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">controller</span> <span class="o">=</span> <span class="nx">Leap</span><span class="p">.</span><span class="nx">loop</span><span class="p">({</span><span class="nx">enableGestures</span><span class="o">:</span> <span class="kc">true</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">frame</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">frame</span><span class="p">.</span><span class="nx">valid</span> <span class="o">&amp;&amp;</span> <span class="nx">frame</span><span class="p">.</span><span class="nx">gestures</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+    <span class="nx">frame</span><span class="p">.</span><span class="nx">gestures</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">gesture</span><span class="p">){</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="nx">gesture</span><span class="p">.</span><span class="nx">type</span><span class="p">){</span>
+          <span class="k">case</span> <span class="s2">&quot;circle&quot;</span><span class="o">:</span>
+              <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Circle Gesture&quot;</span><span class="p">);</span>
+              <span class="k">break</span><span class="p">;</span>
+          <span class="k">case</span> <span class="s2">&quot;keyTap&quot;</span><span class="o">:</span>
+              <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Key Tap Gesture&quot;</span><span class="p">);</span>
+              <span class="k">break</span><span class="p">;</span>
+          <span class="k">case</span> <span class="s2">&quot;screenTap&quot;</span><span class="o">:</span>
+              <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Screen Tap Gesture&quot;</span><span class="p">);</span>
+              <span class="k">break</span><span class="p">;</span>
+          <span class="k">case</span> <span class="s2">&quot;swipe&quot;</span><span class="o">:</span>
+              <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Swipe Gesture&quot;</span><span class="p">);</span>
+              <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>You can also add a listener callback to a Controller object. Your callback is called for
+each gesture object in each device frame:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">controller</span> <span class="o">=</span> <span class="nx">Leap</span><span class="p">.</span><span class="nx">loop</span><span class="p">({</span><span class="nx">enableGestures</span><span class="o">:</span> <span class="kc">true</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">frame</span><span class="p">){</span>
+  <span class="c1">//... handle frame data</span>
+<span class="p">});</span>
+
+<span class="nx">controller</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;gesture&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gesture</span><span class="p">){</span>
+  <span class="c1">//... handle gesture object</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p><em>Extends</em>  <a class="reference internal" href="Leap.Gesture.html#Gesture" title="Gesture"><tt class="xref js js-class docutils literal"><span class="pre">Gesture()</span></tt></a></p>
+</div></blockquote>
+<div class="attributes container">
+<dl class="attribute">
+<dt>
+<tt class="descname">center</tt></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">number[] &#8211; a 3-element array representing a point in space.</td>
+</tr>
+</tbody>
+</table>
+<p>The center point of the circle within the Leap frame of reference.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">if</span><span class="p">(</span><span class="nx">gesture</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="s2">&quot;circle&quot;</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">circleCenter</span> <span class="o">=</span> <span class="nx">gesture</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="version">Leap Motion 1.0 and LeapJS 0.2.0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">duration</tt></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">number</td>
+</tr>
+</tbody>
+</table>
+<p>The elapsed duration of the recognized movement up to the frame
+containing this Gesture object, in microseconds.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">duration</span> <span class="o">=</span> <span class="nx">gesture</span><span class="p">.</span><span class="nx">duration</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The duration reported for the first Gesture in the sequence (with the
+start state) will typically be a small positive number since the
+movement must progress far enough for the Leap to recognize it as an
+intentional gesture.</p>
+<p class="version">Leap Motion 1.0 and LeapJS 0.2.0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="handIds">
+<tt class="descname">handIds</tt><a class="headerlink" href="#handIds" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>The list of hands associated with this Gesture, if any.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">controller</span> <span class="o">=</span> <span class="nx">Leap</span><span class="p">.</span><span class="nx">loop</span><span class="p">({</span><span class="nx">enableGestures</span><span class="o">:</span> <span class="kc">true</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">frame</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">frame</span><span class="p">.</span><span class="nx">valid</span> <span class="o">&amp;&amp;</span> <span class="nx">frame</span><span class="p">.</span><span class="nx">gestures</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+    <span class="nx">frame</span><span class="p">.</span><span class="nx">gestures</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">gesture</span><span class="p">){</span>
+        <span class="kd">var</span> <span class="nx">handIds</span> <span class="o">=</span> <span class="nx">gesture</span><span class="p">.</span><span class="nx">handIds</span><span class="p">;</span>
+        <span class="nx">handIds</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">handId</span><span class="p">){</span>
+          <span class="kd">var</span> <span class="nx">hand</span> <span class="o">=</span> <span class="nx">frame</span><span class="p">.</span><span class="nx">hand</span><span class="p">(</span><span class="nx">handId</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>If no hands are related to this gesture, the list is empty.</p>
+<p class="version">Leap Motion 1.0 and LeapJS 0.3.0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">id</tt></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">number</td>
+</tr>
+</tbody>
+</table>
+<p>The gesture ID.</p>
+<p>All Gesture objects belonging to the same recognized movement share the
+same ID value.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">gestureIdOfInterest</span> <span class="o">=</span> <span class="nx">gesture</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+</pre></div>
+</div>
+<p class="version">Leap Motion 1.0 and LeapJS 0.3.0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">normal</tt></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">number[] &#8211; a 3-element array representing a unit direction vector.</td>
+</tr>
+</tbody>
+</table>
+<p>The normal vector for the circle being traced.</p>
+<p>If you draw the circle clockwise, the normal vector points in the same
+general direction as the pointable object drawing the circle. If you
+draw the circle counterclockwise, the normal points back toward the
+pointable. If the angle between the normal and the pointable object
+drawing the circle is less than 90 degrees, then the circle is
+clockwise. You can use the sign of the dot product of the two vectors
+to determine whether the direction and normal are pointing in the same
+general direction, or not:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">clockwise</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">pointableID</span> <span class="o">=</span> <span class="nx">gesture</span><span class="p">.</span><span class="nx">pointableIds</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">frame</span><span class="p">.</span><span class="nx">pointable</span><span class="p">(</span><span class="nx">pointableID</span><span class="p">).</span><span class="nx">direction</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">dotProduct</span> <span class="o">=</span> <span class="nx">Leap</span><span class="p">.</span><span class="nx">vec3</span><span class="p">.</span><span class="nx">dot</span><span class="p">(</span><span class="nx">direction</span><span class="p">,</span> <span class="nx">gesture</span><span class="p">.</span><span class="nx">normal</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">dotProduct</span>  <span class="o">&gt;</span>  <span class="mi">0</span><span class="p">)</span> <span class="nx">clockwise</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</pre></div>
+</div>
+<p class="version">Leap Motion 1.0 and LeapJS 0.3.0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="pointableIds">
+<tt class="descname">pointableIds</tt><a class="headerlink" href="#pointableIds" title="Permalink to this definition">¶</a></dt>
+<dd><p>The list of fingers and tools associated with this Gesture, if any.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">controller</span> <span class="o">=</span> <span class="nx">Leap</span><span class="p">.</span><span class="nx">loop</span><span class="p">({</span><span class="nx">enableGestures</span><span class="o">:</span> <span class="kc">true</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">frame</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">frame</span><span class="p">.</span><span class="nx">valid</span> <span class="o">&amp;&amp;</span> <span class="nx">frame</span><span class="p">.</span><span class="nx">pointables</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+    <span class="nx">frame</span><span class="p">.</span><span class="nx">gestures</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">gesture</span><span class="p">){</span>
+        <span class="kd">var</span> <span class="nx">pointableIds</span> <span class="o">=</span> <span class="nx">gesture</span><span class="p">.</span><span class="nx">pointableIds</span><span class="p">;</span>
+        <span class="nx">pointableIds</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">pointableId</span><span class="p">){</span>
+          <span class="kd">var</span> <span class="nx">pointable</span> <span class="o">=</span> <span class="nx">frame</span><span class="p">.</span><span class="nx">pointable</span><span class="p">(</span><span class="nx">pointableId</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>If no Pointable objects are related to this gesture, the list is empty.</p>
+<p><em>Type:</em> Array</p>
+<p class="version">Leap Motion 1.0 and LeapJS 0.3.0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">progress</tt></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">number</td>
+</tr>
+</tbody>
+</table>
+<p>The number of times the finger tip has traversed the circle.</p>
+<p>Progress is reported as a positive number of the number. For example, a
+progress value of .5 indicates that the finger has gone halfway around,
+while a value of 3 indicates that the finger has gone around the the
+circle three times.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">if</span><span class="p">(</span><span class="nx">gesture</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="s2">&quot;circle&quot;</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">circleProgress</span> <span class="o">=</span> <span class="nx">gesture</span><span class="p">.</span><span class="nx">progress</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">completeCircles</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">circleProgress</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Progress starts where the circle gesture began. Since the circle must be
+partially formed before the Leap can recognize it, progress will be
+greater than zero when a circle gesture first appears in the frame.</p>
+<p class="version">Leap Motion 1.0 and LeapJS 0.3.0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">radius</tt></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">number</td>
+</tr>
+</tbody>
+</table>
+<p>The radius of the circle in mm.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">if</span><span class="p">(</span><span class="nx">gesture</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="s2">&quot;circle&quot;</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">circleRadius</span> <span class="o">=</span> <span class="nx">gesture</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p class="version">Leap Motion 1.0 and LeapJS 0.3.0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">state</tt></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string &#8211; one of: &#8220;start&#8221;, &#8220;update&#8221;, or &#8220;stop&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>The gesture state.</p>
+<p>Recognized movements occur over time and have a beginning, a middle, and
+an end. The &#8216;state&#8217; attribute reports where in that sequence this
+Gesture object falls.</p>
+<p>Possible values for the state field are:</p>
+<ul class="simple">
+<li>&#8220;start&#8221;</li>
+<li>&#8220;update&#8221;</li>
+<li>&#8220;stop&#8221;</li>
+</ul>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">gesture</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+</pre></div>
+</div>
+<p class="version">Leap Motion 1.0 and LeapJS 0.3.0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<tt class="descname">type</tt></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>The gesture type; in this case, &#8220;circle&#8221;.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">controller</span> <span class="o">=</span> <span class="nx">Leap</span><span class="p">.</span><span class="nx">loop</span><span class="p">({</span><span class="nx">enableGestures</span><span class="o">:</span> <span class="kc">true</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">frame</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">frame</span><span class="p">.</span><span class="nx">valid</span> <span class="o">&amp;&amp;</span> <span class="nx">frame</span><span class="p">.</span><span class="nx">gestures</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+    <span class="nx">frame</span><span class="p">.</span><span class="nx">gestures</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">gesture</span><span class="p">){</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="nx">gesture</span><span class="p">.</span><span class="nx">type</span><span class="p">){</span>
+          <span class="k">case</span> <span class="s2">&quot;circle&quot;</span><span class="o">:</span>
+              <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Circle Gesture&quot;</span><span class="p">);</span>
+              <span class="k">break</span><span class="p">;</span>
+          <span class="k">case</span> <span class="s2">&quot;keyTap&quot;</span><span class="o">:</span>
+              <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Key Tap Gesture&quot;</span><span class="p">);</span>
+              <span class="k">break</span><span class="p">;</span>
+          <span class="k">case</span> <span class="s2">&quot;screenTap&quot;</span><span class="o">:</span>
+              <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Screen Tap Gesture&quot;</span><span class="p">);</span>
+              <span class="k">break</span><span class="p">;</span>
+          <span class="k">case</span> <span class="s2">&quot;swipe&quot;</span><span class="o">:</span>
+              <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Swipe Gesture&quot;</span><span class="p">);</span>
+              <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p class="version">Leap Motion 1.0 and LeapJS 0.3.0</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">JavaScript Docs (v2.1)</a></li>
+          </ul><ul>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developer.leapmotion.com/downloads/javascript#plugins">LeapJS Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Classes.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Leap_Classes.html#leap-namespace">Leap namespace</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Leap.Bone.html#id32">Bone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id44">CircleGesture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Leap.Controller.html#id30">Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Leap.Finger.html#id49">Finger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Leap.Frame.html">Frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Leap.Gesture.html#id10">Gesture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Leap.Hand.html">Hand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Leap.InteractionBox.html">InteractionBox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Leap.KeyTapGesture.html">KeyTapGesture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Leap.Pointable.html#id15">Pointable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Leap.ScreenTapGesture.html">ScreenTapGesture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Leap.SwipeGesture.html">SwipeGesture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Leap.Matrix.html">Matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Leap.Vector.html">Vector</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>JavaScript</p>
+</div>
+ -->
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,1218 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Hand &mdash; Leap Motion C# and Unity SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion C# and Unity SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="Leap_Classes.html" />
+    <link rel="next" title="HandList" href="Leap.HandList.html" />
+    <link rel="prev" title="GestureList" href="Leap.GestureList.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'csharp';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.javascript = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../csharp/api/Leap.Hand.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/api/Leap.Hand.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/api/Leap.Hand.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/api/Leap.Hand.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/api/Leap.Hand.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/api/Leap.Hand.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/api/Leap.Hand.html";
+            } else {
+                    redirectedLocation ="Leap_Classes.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../csharp/api/Leap.Hand.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Leap.GestureList.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("Leap.HandList.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="../../javascript/api/Leap.Hand.html" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      C# and Unity
+    
+  </li>
+  <li>
+      <a href="../../cpp/api/Leap.Hand.html" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      <a href="../../java/api/Leap.Hand.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="../../python/api/Leap.Hand.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      <a href="../../objc/api/Leap.Hand.html" onclick="localStorage['currentAPI'] = 'objc'">Objective-C</a>
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Classes.html" accesskey="U">API Reference</a>&raquo;
+  Hand
+</span> -->
+        
+  <div class="section" id="hand">
+<h1>Hand<a class="headerlink" href="#hand" title="Permalink to this headline">¶</a></h1>
+</div>
+<style>.members {
+     -webkit-column-count:2; /* Chrome, Safari, Opera */
+     -moz-column-count:2; /* Firefox */
+     column-count:2;
+     }
+     strong {color:gray;}
+</style><p><strong>Properties:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1ad092f82659c43f73200ec31469dce1f8">Arm</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1ae6e994fa39239cd3c745266694cdc0f3">Basis</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1ac3efb8806553d3caa8aa82c4051450b4">Confidence</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a3760f0d03c577bd8a45779cf3f9a46a8">Direction</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a34356976500331d2a1998cb6ad857dae">Fingers</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a7965d86d89abc02cd0e7054c1c82342b">Frame</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1ae3b86d4d13139d772be092b6838ee9b5">GrabStrength</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1afe0b47b3c92f2f69ea3da50cb72553eb">Id</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1aa41dd474d0893a533b92b65c5c95f6c6">Invalid</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1ab13b3d1c6fe78fe87437dcba630fa3b8">IsLeft</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a8b5ee4774fb086f34c3df3d8a5d67284">IsRight</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a62885a2911b2c21274564c3d9e407c2c">IsValid</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1aef5d40d014a9385fd434bb3b67013967">PalmNormal</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a78b4d8f8df965c03f22912aafb402233">PalmPosition</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a3bb66268b69a2cfc8f71335273a20ed1">PalmVelocity</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a22b8bcd85cf40910d0f8a48784c46785">PalmWidth</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a4f9804d2f39667d1b23fc6f08e38bba6">PinchStrength</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a41e38c17fc49dcb15fb9818bebc67cae">Pointables</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1abf614e294104be115e4bbd3613dd78bd">SphereCenter</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a2a8976f4593f1f6a6c3e4ed892018fe3">SphereRadius</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1ae56463bc973143cbabf50523fce9a123">StabilizedPalmPosition</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a0be30ced256bcdf3882d4f0d6929e283">TimeVisible</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a0af19d365ba5005d81fea92d39f15efc">Tools</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a3defab1a8415c6c1acc9de2a80ce2738">WristPosition</a></li>
+</ul>
+</div>
+<p><strong>Methods:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a349fdc1a6a03b2b7b34f08821fb58087">Equals(Hand arg0)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1ade75b05bd14c678e8557d4d0de5fc14c">Finger(int id)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a4ec880bd78819e39e4c90ff013ed3829">Hand()</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1accbb59062422cce30a7b19d06a5af5ae">Pointable(int id)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a0b549094d2829c58464ce8712d42e608">RotationAngle(Frame sinceFrame)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1ac0567d988ca70682a340ff3ac8872d57">RotationAngle(Frame sinceFrame, Vector axis)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1af89beeea4eb6ec61e29ff1da59da6c0d">RotationAxis(Frame sinceFrame)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a7e49917335a5071f5e631ffa6f1be3cf">RotationMatrix(Frame sinceFrame)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a7b1dcc09af6fc5fb05884b0708863bd6">RotationProbability(Frame sinceFrame)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1aa025013ca11172c27232debcf519029a">ScaleFactor(Frame sinceFrame)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a97cc5aafb594e214faa649acfb3bf98e">ScaleProbability(Frame sinceFrame)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1aa73e7c4dd1df5fd5fbf81c7764ee1533">ToString()</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1af6fff2efb2534af2471ffdc8b0ae0758">Tool(int id)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1a05109ea1b86674d1ce0c17a95695d584">Translation(Frame sinceFrame)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_hand_1aa68e89e200762d274fd60526783ceeef">TranslationProbability(Frame sinceFrame)</a></li>
+</ul>
+</div>
+<div class="line-block" id="csharpclass_leap_1_1_hand">
+<div class="line"><em>class</em> <strong>Leap::Hand</strong></div>
+</div>
+<blockquote>
+<div><p>The <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> class reports the physical characteristics of a detected hand. </p>
+<p><p><a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> tracking data includes a palm position and velocity; vectors for the palm normal and direction to the fingers; properties of a sphere fit to the hand; and lists of the attached fingers.</p>
+<p>Get <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> objects from a <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> object:</p>
+<p><pre class="literal-block">
+<a class="reference internal" href="#csharpclass_leap_1_1_hand_1a7965d86d89abc02cd0e7054c1c82342b"><em>Frame</em></a> frame = controller.Frame(); // controller is a Controller object
+HandList hands = frame.Hands;
+<a class="reference internal" href="#csharpclass_leap_1_1_hand_1a4ec880bd78819e39e4c90ff013ed3829"><em>Hand</em></a> firstHand = hands[0];
+</pre>
+</p>
+<p>Note that <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> objects can be invalid, which means that they do not contain valid tracking data and do not correspond to a physical entity. Invalid <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> objects can be the result of asking for a <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object using an ID from an earlier frame when no <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> objects with that ID exist in the current frame. A <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object created from the <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> constructor is also invalid. Test for validity with the Hand::isValid() function. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+<em>Public Functions</em><blockquote>
+<div><p><span class="target" id="csharpclass_leap_1_1_hand_1a349fdc1a6a03b2b7b34f08821fb58087"></span><div class="line-block">
+<div class="line">bool <strong>Equals</strong>(<a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> arg0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Compare <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object equality. </p>
+<p><p><pre class="literal-block">
+Boolean handIsEqual = thisHand == thatHand;
+</pre>
+</p>
+<p>Two <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> objects are equal if and only if both <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> objects represent the exact same physical hand in the same frame and both <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> objects are valid. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1ade75b05bd14c678e8557d4d0de5fc14c"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Finger.html#csharpclass_leap_1_1_finger"><em>Finger</em></a> <strong>Finger</strong>(int id)</div>
+</div>
+</p>
+<blockquote>
+<div><p>The <a class="reference internal" href="Leap.Finger.html#csharpclass_leap_1_1_finger"><em>Finger</em></a> object with the specified ID attached to this hand. </p>
+<p><p>Use the Hand::finger() function to retrieve a <a class="reference internal" href="Leap.Finger.html#csharpclass_leap_1_1_finger"><em>Finger</em></a> object attached to this hand using an ID value obtained from a previous frame. This function always returns a <a class="reference internal" href="Leap.Finger.html#csharpclass_leap_1_1_finger"><em>Finger</em></a> object, but if no finger with the specified ID is present, an invalid <a class="reference internal" href="Leap.Finger.html#csharpclass_leap_1_1_finger"><em>Finger</em></a> object is returned.</p>
+<p><pre class="literal-block">
+<a class="reference internal" href="#csharpclass_leap_1_1_hand_1ade75b05bd14c678e8557d4d0de5fc14c"><em>Finger</em></a> fingerOnHandByID = hand.Finger(fingerID);
+</pre>
+</p>
+<p>Note that ID values persist across frames, but only until tracking of a particular object is lost. If tracking of a finger is lost and subsequently regained, the new <a class="reference internal" href="Leap.Finger.html#csharpclass_leap_1_1_finger"><em>Finger</em></a> object representing that finger may have a different ID than that representing the finger in an earlier frame.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The <a class="reference internal" href="Leap.Finger.html#csharpclass_leap_1_1_finger"><em>Finger</em></a> object with the matching ID if one exists for this hand in this frame; otherwise, an invalid <a class="reference internal" href="Leap.Finger.html#csharpclass_leap_1_1_finger"><em>Finger</em></a> object is returned. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">id</span></tt> - <p>The ID value of a <a class="reference internal" href="Leap.Finger.html#csharpclass_leap_1_1_finger"><em>Finger</em></a> object from a previous frame. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a4ec880bd78819e39e4c90ff013ed3829"></span><div class="line-block">
+<div class="line"> <strong>Hand</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object. </p>
+<p><p>An uninitialized hand is considered invalid. Get valid <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> objects from a <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> object.</p>
+<p><pre class="literal-block">
+<a class="reference internal" href="#csharpclass_leap_1_1_hand_1a4ec880bd78819e39e4c90ff013ed3829"><em>Hand</em></a> leftmostHand = frame.Hands.Leftmost;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1accbb59062422cce30a7b19d06a5af5ae"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> <strong>Pointable</strong>(int id)</div>
+</div>
+</p>
+<blockquote>
+<div><p>The <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object with the specified ID associated with this hand. </p>
+<p><p>Use the Hand::pointable() function to retrieve a <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object associated with this hand using an ID value obtained from a previous frame. This function always returns a <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object, but if no finger with the specified ID is present, an invalid <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object is returned.</p>
+<p><pre class="literal-block">
+<a class="reference internal" href="#csharpclass_leap_1_1_hand_1accbb59062422cce30a7b19d06a5af5ae"><em>Pointable</em></a> knownPointable = hand.Pointable(pointableID);
+</pre>
+</p>
+<p>Note that the ID values assigned to fingers are based on the hand ID. <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> IDs persist across frames, but only until tracking of that hand is lost. If tracking of the hand is lost and subsequently regained, the new <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object and its child <a class="reference internal" href="Leap.Finger.html#csharpclass_leap_1_1_finger"><em>Finger</em></a> objects will have a different ID than in an earlier frame.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object with the matching ID if one exists for this hand in this frame; otherwise, an invalid <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object is returned. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">id</span></tt> - <p>The ID value of a <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object from a previous frame. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a0b549094d2829c58464ce8712d42e608"></span><div class="line-block">
+<div class="line">float <strong>RotationAngle</strong>(<a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> sinceFrame)</div>
+</div>
+</p>
+<blockquote>
+<div><p>The angle of rotation around the rotation axis derived from the change in orientation of this hand, and any associated fingers, between the current frame and the specified frame. </p>
+<p><p><pre class="literal-block">
+float rotationOfHand = hand.RotationAngle(startFrame);
+</pre>
+</p>
+<p>The returned angle is expressed in radians measured clockwise around the rotation axis (using the right-hand rule) between the start and end frames. The value is always between 0 and pi radians (0 and 180 degrees).</p>
+<p>If a corresponding <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object is not found in sinceFrame, or if either this frame or sinceFrame are invalid <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> objects, then the angle of rotation is zero.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A positive value representing the heuristically determined rotational change of the hand between the current frame and that specified in the sinceFrame parameter. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sinceFrame</span></tt> - <p>The starting frame for computing the relative rotation. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1ac0567d988ca70682a340ff3ac8872d57"></span><div class="line-block">
+<div class="line">float <strong>RotationAngle</strong>(<a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> sinceFrame, <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> axis)</div>
+</div>
+</p>
+<blockquote>
+<div><p>The angle of rotation around the specified axis derived from the change in orientation of this hand, and any associated fingers, between the current frame and the specified frame. </p>
+<p><p><pre class="literal-block">
+float rotationAroundYAxis = hand.RotationAngle(startFrame, Vector.YAxis);
+</pre>
+</p>
+<p>The returned angle is expressed in radians measured clockwise around the rotation axis (using the right-hand rule) between the start and end frames. The value is always between -pi and pi radians (-180 and 180 degrees).</p>
+<p>If a corresponding <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object is not found in sinceFrame, or if either this frame or sinceFrame are invalid <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> objects, then the angle of rotation is zero.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A value representing the heuristically determined rotational change of the hand between the current frame and that specified in the sinceFrame parameter around the specified axis. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sinceFrame</span></tt> - <p>The starting frame for computing the relative rotation. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">axis</span></tt> - <p>The axis to measure rotation around. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1af89beeea4eb6ec61e29ff1da59da6c0d"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>RotationAxis</strong>(<a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> sinceFrame)</div>
+</div>
+</p>
+<blockquote>
+<div><p>The axis of rotation derived from the change in orientation of this hand, and any associated fingers, between the current frame and the specified frame. </p>
+<p><p><pre class="literal-block">
+Vector axisOfHandRotation = hand.RotationAxis(startFrame);
+</pre>
+</p>
+<p>The returned direction vector is normalized.</p>
+<p>If a corresponding <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object is not found in sinceFrame, or if either this frame or sinceFrame are invalid <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> objects, then this method returns a zero vector.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A normalized direction <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> representing the heuristically determined axis of rotational change of the hand between the current frame and that specified in the sinceFrame parameter. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sinceFrame</span></tt> - <p>The starting frame for computing the relative rotation. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a7e49917335a5071f5e631ffa6f1be3cf"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Matrix.html#csharpclass_leap_1_1_matrix"><em>Matrix</em></a> <strong>RotationMatrix</strong>(<a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> sinceFrame)</div>
+</div>
+</p>
+<blockquote>
+<div><p>The transform matrix expressing the rotation derived from the change in orientation of this hand, and any associated fingers, between the current frame and the specified frame. </p>
+<p><p><pre class="literal-block">
+Matrix handRotationTransform = hand.RotationMatrix(startFrame);
+</pre>
+</p>
+<p>If a corresponding <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object is not found in sinceFrame, or if either this frame or sinceFrame are invalid <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> objects, then this method returns an identity matrix.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A transformation <a class="reference internal" href="Leap.Matrix.html#csharpclass_leap_1_1_matrix"><em>Matrix</em></a> representing the heuristically determined rotational change of the hand between the current frame and that specified in the sinceFrame parameter. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sinceFrame</span></tt> - <p>The starting frame for computing the relative rotation. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a7b1dcc09af6fc5fb05884b0708863bd6"></span><div class="line-block">
+<div class="line">float <strong>RotationProbability</strong>(<a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> sinceFrame)</div>
+</div>
+</p>
+<blockquote>
+<div><p>The estimated probability that the hand motion between the current frame and the specified frame is intended to be a rotating motion. </p>
+<p><p><pre class="literal-block">
+float rotationIntentFactor = hand.RotationProbability(startFrame);
+</pre>
+</p>
+<p>If a corresponding <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object is not found in sinceFrame, or if either this frame or sinceFrame are invalid <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> objects, then this method returns zero.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A value between 0 and 1 representing the estimated probability that the hand motion between the current frame and the specified frame is intended to be a rotating motion. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sinceFrame</span></tt> - <p>The starting frame for computing the relative rotation. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1aa025013ca11172c27232debcf519029a"></span><div class="line-block">
+<div class="line">float <strong>ScaleFactor</strong>(<a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> sinceFrame)</div>
+</div>
+</p>
+<blockquote>
+<div><p>The scale factor derived from this hand&#8217;s motion between the current frame and the specified frame. </p>
+<p><p>The scale factor is always positive. A value of 1.0 indicates no scaling took place. Values between 0.0 and 1.0 indicate contraction and values greater than 1.0 indicate expansion.</p>
+<p><pre class="literal-block">
+float handScaleMotion = hand.ScaleFactor(startFrame);
+</pre>
+</p>
+<p>The Leap Motion software derives scaling from the relative inward or outward motion of a hand and its associated fingers (independent of translation and rotation).</p>
+<p>If a corresponding <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object is not found in sinceFrame, or if either this frame or sinceFrame are invalid <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> objects, then this method returns 1.0.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A positive value representing the heuristically determined scaling change ratio of the hand between the current frame and that specified in the sinceFrame parameter. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sinceFrame</span></tt> - <p>The starting frame for computing the relative scaling. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a97cc5aafb594e214faa649acfb3bf98e"></span><div class="line-block">
+<div class="line">float <strong>ScaleProbability</strong>(<a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> sinceFrame)</div>
+</div>
+</p>
+<blockquote>
+<div><p>The estimated probability that the hand motion between the current frame and the specified frame is intended to be a scaling motion. </p>
+<p><p><pre class="literal-block">
+float scaleIntentFactor = hand.ScaleProbability(startFrame);
+</pre>
+</p>
+<p>If a corresponding <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object is not found in sinceFrame, or if either this frame or sinceFrame are invalid <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> objects, then this method returns zero.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A value between 0 and 1 representing the estimated probability that the hand motion between the current frame and the specified frame is intended to be a scaling motion. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sinceFrame</span></tt> - <p>The starting frame for computing the relative scaling. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1af6fff2efb2534af2471ffdc8b0ae0758"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Tool.html#csharpclass_leap_1_1_tool"><em>Tool</em></a> <strong>Tool</strong>(int id)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Tools are not associated with hands in version 2+. </p>
+<p><p>This function always returns an invalid <a class="reference internal" href="Leap.Tool.html#csharpclass_leap_1_1_tool"><em>Tool</em></a> object.</p>
+<p></p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1aa73e7c4dd1df5fd5fbf81c7764ee1533"></span><div class="line-block">
+<div class="line">override string <strong>ToString</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>A string containing a brief, human readable description of the <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A description of the <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> as a string. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a05109ea1b86674d1ce0c17a95695d584"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>Translation</strong>(<a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> sinceFrame)</div>
+</div>
+</p>
+<blockquote>
+<div><p>The change of position of this hand between the current frame and the specified frame. </p>
+<p><p>The returned translation vector provides the magnitude and direction of the movement in millimeters.</p>
+<p><pre class="literal-block">
+Vector linearHandMovement = hand.Translation(startFrame);
+</pre>
+</p>
+<p>If a corresponding <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object is not found in sinceFrame, or if either this frame or sinceFrame are invalid <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> objects, then this method returns a zero vector.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> representing the heuristically determined change in hand position between the current frame and that specified in the sinceFrame parameter. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sinceFrame</span></tt> - <p>The starting frame for computing the translation. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1aa68e89e200762d274fd60526783ceeef"></span><div class="line-block">
+<div class="line">float <strong>TranslationProbability</strong>(<a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> sinceFrame)</div>
+</div>
+</p>
+<blockquote>
+<div><p>The estimated probability that the hand motion between the current frame and the specified frame is intended to be a translating motion. </p>
+<p><p><pre class="literal-block">
+float translationIntentFactor = hand.TranslationProbability(startFrame);
+</pre>
+</p>
+<p>If a corresponding <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object is not found in sinceFrame, or if either this frame or sinceFrame are invalid <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> objects, then this method returns zero.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A value between 0 and 1 representing the estimated probability that the hand motion between the current frame and the specified frame is intended to be a translating motion. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">sinceFrame</span></tt> - <p>The starting frame for computing the translation. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Property</em><blockquote>
+<div><p><span class="target" id="csharpclass_leap_1_1_hand_1ad092f82659c43f73200ec31469dce1f8"></span><a class="reference internal" href="Leap.Arm.html#csharpclass_leap_1_1_arm"><em>Arm</em></a> <strong>Arm</strong></p>
+<blockquote>
+<div><p>The arm to which this hand is attached. </p>
+<p><p>If the arm is not completely in view, <a class="reference internal" href="Leap.Arm.html#csharpclass_leap_1_1_arm"><em>Arm</em></a> attributes are estimated based on the attributes of entities that are in view combined with typical human anatomy.</p>
+<p><pre class="literal-block">
+<a class="reference internal" href="#csharpclass_leap_1_1_hand_1a4ec880bd78819e39e4c90ff013ed3829"><em>Hand</em></a> hand = frame.Hands.Frontmost;
+<a class="reference internal" href="#csharpclass_leap_1_1_hand_1ad092f82659c43f73200ec31469dce1f8"><em>Arm</em></a> arm = hand.Arm;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The <a class="reference internal" href="Leap.Arm.html#csharpclass_leap_1_1_arm"><em>Arm</em></a> object for this hand. </dd>
+<dt><strong>Since</strong></dt>
+<dd>2.0.3 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1ae6e994fa39239cd3c745266694cdc0f3"></span><a class="reference internal" href="Leap.Matrix.html#csharpclass_leap_1_1_matrix"><em>Matrix</em></a> <strong>Basis</strong></p>
+<blockquote>
+<div><p>The orientation of the hand as a basis matrix. </p>
+<p><p>The basis is defined as follows:</p>
+<p></p>
+<p>Note: Since the left hand is a mirror of the right hand, the basis matrix will be left-handed for left hands.</p>
+<p><pre class="literal-block">
+Matrix basis = hand.Basis;
+Vector xBasis = basis.xBasis;
+Vector yBasis = basis.yBasis;
+Vector zBasis = basis.zBasis;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The basis of the hand as a matrix. </dd>
+<dt><strong>Since</strong></dt>
+<dd>2.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1ac3efb8806553d3caa8aa82c4051450b4"></span>float <strong>Confidence</strong></p>
+<blockquote>
+<div><p>How confident we are with a given hand pose. </p>
+<p><p>The confidence level ranges between 0.0 and 1.0 inclusive.</p>
+<p><pre class="literal-block">
+float confidence = hand.Confidence;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a3760f0d03c577bd8a45779cf3f9a46a8"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>Direction</strong></p>
+<blockquote>
+<div><p>The direction from the palm position toward the fingers. </p>
+<p><p>The direction is expressed as a unit vector pointing in the same direction as the directed line from the palm position to the fingers.</p>
+<p>You can use the palm direction vector to compute the pitch and yaw angles of the palm with respect to the horizontal plane:</p>
+<p><pre class="literal-block">
+float pitch = hand.Direction.Pitch;
+float yaw = hand.Direction.Yaw;
+float roll = hand.PalmNormal.Roll;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> pointing from the palm position toward the fingers. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a34356976500331d2a1998cb6ad857dae"></span><a class="reference internal" href="Leap.FingerList.html#csharpclass_leap_1_1_finger_list"><em>FingerList</em></a> <strong>Fingers</strong></p>
+<blockquote>
+<div><p>The list of <a class="reference internal" href="Leap.Finger.html#csharpclass_leap_1_1_finger"><em>Finger</em></a> objects detected in this frame that are attached to this hand, given in order from thumb to pinky. </p>
+<p><p>The list cannot be empty.</p>
+<p>Use PointableList::extended() to remove non-extended fingers from the list.</p>
+<p><pre class="literal-block">
+// hand is a Hand object
+PointableList pointables = hand.Pointables;
+FingerList fingers = hand.Fingers;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The <a class="reference internal" href="Leap.FingerList.html#csharpclass_leap_1_1_finger_list"><em>FingerList</em></a> containing all <a class="reference internal" href="Leap.Finger.html#csharpclass_leap_1_1_finger"><em>Finger</em></a> objects attached to this hand. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a7965d86d89abc02cd0e7054c1c82342b"></span><a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> <strong>Frame</strong></p>
+<blockquote>
+<div><p>The <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> associated with this <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a>. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="#csharpclass_leap_1_1_hand_1a7965d86d89abc02cd0e7054c1c82342b"><em>Frame</em></a> frameForHand = hand.Frame;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The associated <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> object, if available; otherwise, an invalid <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> object is returned. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1ae3b86d4d13139d772be092b6838ee9b5"></span>float <strong>GrabStrength</strong></p>
+<blockquote>
+<div><p>The strength of a grab hand pose. </p>
+<p><p>The strength is zero for an open hand, and blends to 1.0 when a grabbing hand pose is recognized.</p>
+<p><pre class="literal-block">
+float strength = hand.GrabStrength;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A float value in the [0..1] range representing the holding strength of the pose. </dd>
+<dt><strong>Since</strong></dt>
+<dd>2.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1afe0b47b3c92f2f69ea3da50cb72553eb"></span>int <strong>Id</strong></p>
+<blockquote>
+<div><p>A unique ID assigned to this <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object, whose value remains the same across consecutive frames while the tracked hand remains visible. </p>
+<p><p>If tracking is lost (for example, when a hand is occluded by another hand or when it is withdrawn from or reaches the edge of the Leap Motion <a class="reference internal" href="Leap.Controller.html#csharpclass_leap_1_1_controller"><em>Controller</em></a> field of view), the Leap Motion software may assign a new ID when it detects the hand in a future frame.</p>
+<p>Use the ID value with the Frame::hand() function to find this <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object in future frames:</p>
+<p><pre class="literal-block">
+<a class="reference internal" href="#csharpclass_leap_1_1_hand_1a4ec880bd78819e39e4c90ff013ed3829"><em>Hand</em></a> knownHand = frame.Hand(handID);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The ID of this hand. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1aa41dd474d0893a533b92b65c5c95f6c6"></span><a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> <strong>Invalid</strong></p>
+<blockquote>
+<div><p>Returns an invalid <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object. </p>
+<p><p><pre class="literal-block">
+if (hand != <a class="reference internal" href="#csharpclass_leap_1_1_hand_1a4ec880bd78819e39e4c90ff013ed3829"><em>Hand</em></a>.Invalid) {
+    //Process hand data...
+}
+</pre>
+</p>
+<p>You can use the instance returned by this function in comparisons testing whether a given <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> instance is valid or invalid. (You can also use the Hand::isValid() function.)</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The invalid <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> instance. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1ab13b3d1c6fe78fe87437dcba630fa3b8"></span>bool <strong>IsLeft</strong></p>
+<blockquote>
+<div><p>Identifies whether this <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> is a left hand. </p>
+<p><p><pre class="literal-block">
+string handName = hand.IsLeft ? &quot;Left hand&quot; : &quot;Right hand&quot;;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>True if the hand is identified as a left hand. </dd>
+<dt><strong>Since</strong></dt>
+<dd>2.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a8b5ee4774fb086f34c3df3d8a5d67284"></span>bool <strong>IsRight</strong></p>
+<blockquote>
+<div><p>Identifies whether this <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> is a right hand. </p>
+<p><p><pre class="literal-block">
+if(hand.IsRight){
+    // .. Do right handed stuff
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>True if the hand is identified as a right hand. </dd>
+<dt><strong>Since</strong></dt>
+<dd>2.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a62885a2911b2c21274564c3d9e407c2c"></span>bool <strong>IsValid</strong></p>
+<blockquote>
+<div><p>Reports whether this is a valid <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object. </p>
+<p><p><pre class="literal-block">
+if (hand.IsValid) {
+    //Process hand data...
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>True, if this <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object contains valid tracking data. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1aef5d40d014a9385fd434bb3b67013967"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>PalmNormal</strong></p>
+<blockquote>
+<div><p>The normal vector to the palm. </p>
+<p><p>If your hand is flat, this vector will point downward, or &#8220;out&#8221; of the front surface of your palm.</p>
+<p><img alt="api/../../../images/Leap_Palm_Vectors.png" src="api/../../../images/Leap_Palm_Vectors.png" /></p>
+<p>The direction is expressed as a unit vector pointing in the same direction as the palm normal (that is, a vector orthogonal to the palm).</p>
+<p>You can use the palm normal vector to compute the roll angle of the palm with respect to the horizontal plane:</p>
+<p><pre class="literal-block">
+float pitch = hand.Direction.Pitch;
+float yaw = hand.Direction.Yaw;
+float roll = hand.PalmNormal.Roll;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> normal to the plane formed by the palm. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a78b4d8f8df965c03f22912aafb402233"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>PalmPosition</strong></p>
+<blockquote>
+<div><p>The center position of the palm in millimeters from the Leap Motion <a class="reference internal" href="Leap.Controller.html#csharpclass_leap_1_1_controller"><em>Controller</em></a> origin. </p>
+<p><p><pre class="literal-block">
+Vector handCenter = hand.PalmPosition;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> representing the coordinates of the palm position. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a3bb66268b69a2cfc8f71335273a20ed1"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>PalmVelocity</strong></p>
+<blockquote>
+<div><p>The rate of change of the palm position in millimeters/second. </p>
+<p><p><pre class="literal-block">
+Vector handSpeed = hand.PalmVelocity;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> representing the coordinates of the palm velocity. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a22b8bcd85cf40910d0f8a48784c46785"></span>float <strong>PalmWidth</strong></p>
+<blockquote>
+<div><p>The estimated width of the palm when the hand is in a flat position. </p>
+<p><p><pre class="literal-block">
+float handWidth = hand.PalmWidth;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The width of the palm in millimeters </dd>
+<dt><strong>Since</strong></dt>
+<dd>2.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a4f9804d2f39667d1b23fc6f08e38bba6"></span>float <strong>PinchStrength</strong></p>
+<blockquote>
+<div><p>The holding strength of a pinch hand pose. </p>
+<p><p>The strength is zero for an open hand, and blends to 1.0 when a pinching hand pose is recognized. Pinching can be done between the thumb and any other finger of the same hand.</p>
+<p><pre class="literal-block">
+float pinch = hand.PinchStrength;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A float value in the [0..1] range representing the holding strength of the pinch pose. </dd>
+<dt><strong>Since</strong></dt>
+<dd>2.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a41e38c17fc49dcb15fb9818bebc67cae"></span><a class="reference internal" href="Leap.PointableList.html#csharpclass_leap_1_1_pointable_list"><em>PointableList</em></a> <strong>Pointables</strong></p>
+<blockquote>
+<div><p>The list of <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> objects detected in this frame that are associated with this hand, given in arbitrary order. </p>
+<p><p>The list will always contain 5 fingers.</p>
+<p>Use PointableList::extended() to remove non-extended fingers from the list.</p>
+<p><pre class="literal-block">
+// hand is a Hand object
+PointableList pointables = hand.Pointables;
+FingerList fingers = hand.Fingers;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The <a class="reference internal" href="Leap.PointableList.html#csharpclass_leap_1_1_pointable_list"><em>PointableList</em></a> containing all <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> objects associated with this hand. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1abf614e294104be115e4bbd3613dd78bd"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>SphereCenter</strong></p>
+<blockquote>
+<div><p>The center of a sphere fit to the curvature of this hand. </p>
+<p><p><pre class="literal-block">
+Vector sphereCenter = hand.SphereCenter;
+</pre>
+</p>
+<p>This sphere is placed roughly as if the hand were holding a ball.</p>
+<p><img alt="api/../../../images/Leap_Hand_Ball.png" src="api/../../../images/Leap_Hand_Ball.png" /></p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> representing the center position of the sphere. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a2a8976f4593f1f6a6c3e4ed892018fe3"></span>float <strong>SphereRadius</strong></p>
+<blockquote>
+<div><p>The radius of a sphere fit to the curvature of this hand. </p>
+<p><p>This sphere is placed roughly as if the hand were holding a ball. Thus the size of the sphere decreases as the fingers are curled into a fist.</p>
+<p><pre class="literal-block">
+float sphereDiameter = 2 * hand.SphereRadius;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The radius of the sphere in millimeters. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1ae56463bc973143cbabf50523fce9a123"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>StabilizedPalmPosition</strong></p>
+<blockquote>
+<div><p>The stabilized palm position of this <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a>. </p>
+<p><p>Smoothing and stabilization is performed in order to make this value more suitable for interaction with 2D content. The stabilized position lags behind the palm position by a variable amount, depending primarily on the speed of movement.</p>
+<p><pre class="literal-block">
+Vector filteredHandPosition = hand.StabilizedPalmPosition;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A modified palm position of this <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> object with some additional smoothing and stabilization applied. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a0be30ced256bcdf3882d4f0d6929e283"></span>float <strong>TimeVisible</strong></p>
+<blockquote>
+<div><p>The duration of time this <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> has been visible to the Leap Motion <a class="reference internal" href="Leap.Controller.html#csharpclass_leap_1_1_controller"><em>Controller</em></a>. </p>
+<p><p><pre class="literal-block">
+float lifetimeOfThisHandObject = hand.TimeVisible;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The duration (in seconds) that this <a class="reference internal" href="#csharpclass_leap_1_1_hand"><em>Hand</em></a> has been tracked. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a0af19d365ba5005d81fea92d39f15efc"></span><a class="reference internal" href="Leap.ToolList.html#csharpclass_leap_1_1_tool_list"><em>ToolList</em></a> <strong>Tools</strong></p>
+<blockquote>
+<div><p>Tools are not associated with hands in version 2+. </p>
+<p><p>This list is always empty.</p>
+<p></p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_hand_1a3defab1a8415c6c1acc9de2a80ce2738"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>WristPosition</strong></p>
+<blockquote>
+<div><p>The position of the wrist of this hand. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A vector containing the coordinates of the wrist position in millimeters. </dd>
+<dt><strong>Since</strong></dt>
+<dd>2.0.3 </dd>
+</dl>
+</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">C# and Unity Docs (v2.1)</a></li>
+          </ul><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Leap_Classes.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Leap.Arm.html#id3">Arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Bone.html#id3">Bone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.CircleGesture.html#id3">CircleGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Config.html#id2">Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Controller.html#id2">Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Device.html">Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.DeviceList.html">DeviceList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Finger.html#id3">Finger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.FingerList.html">FingerList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Frame.html">Frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Gesture.html#id2">Gesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.GestureList.html">GestureList</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Hand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.HandList.html">HandList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ImageList.html">ImageList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.InteractionBox.html">InteractionBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.KeyTapGesture.html">KeyTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Listener.html">Listener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Matrix.html">Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Pointable.html#id2">Pointable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.PointableList.html">PointableList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ScreenTapGesture.html">ScreenTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.SwipeGesture.html">SwipeGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Tool.html">Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ToolList.html">ToolList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Vector.html">Vector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>C# and Unity</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,1118 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Vector &mdash; Leap Motion Objective-C SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion Objective-C SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="Leap_Classes.html" />
+    <link rel="next" title="Appendices" href="../supplements/Leap_Supplements.html" />
+    <link rel="prev" title="Tool" href="Leap.Tool.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'objc';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.javascript = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../objc/api/Leap.Vector.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/api/Leap.Vector.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/api/Leap.Vector.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/api/Leap.Vector.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/api/Leap.Vector.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/api/Leap.Vector.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/api/Leap.Vector.html";
+            } else {
+                    redirectedLocation ="Leap_Classes.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../objc/api/Leap.Vector.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Leap.Tool.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("../supplements/Leap_Supplements.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="../../javascript/api/Leap.Vector.html" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      <a href="../../csharp/api/Leap.Vector.html" onclick="localStorage['currentAPI'] = 'csharp'">C# and Unity</a>
+    
+  </li>
+  <li>
+      <a href="../../cpp/api/Leap.Vector.html" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      <a href="../../java/api/Leap.Vector.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="../../python/api/Leap.Vector.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      Objective-C
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Classes.html" accesskey="U">API Reference</a>&raquo;
+  Vector
+</span> -->
+        
+  <div class="section" id="leapvector">
+<h1>LeapVector<a class="headerlink" href="#leapvector" title="Permalink to this headline">¶</a></h1>
+</div>
+<style>.members {
+     -webkit-column-count:2; /* Chrome, Safari, Opera */
+     -moz-column-count:2; /* Firefox */
+     column-count:2;
+     }
+     strong {color:gray;}
+</style><p><strong>Properties:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#objcinterface_leap_vector_1ad0da36b2558901e21e7a30f6c227a45e">x</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1aa4f0d3eebc3c443f9be81bf48561a217">y</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1af73583b1e980b0aa03f9884812e9fd4d">z</a></li>
+</ul>
+</div>
+<p><strong>Methods:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#objcinterface_leap_vector_1a3e3d4b24dcea0016acb0a75c6b5e8c21">angleTo:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1aeb6b0cc33c18aad296f1d0ae9137bcd9">backward</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1afd5e86a36f08d4404265590fdc02ef05">cross:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a262fd0724d586c7624c771f286078360">distanceTo:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a54092845eac92205f13f82d176a1b049">divide:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a0db862e5be2e1bd573f37ee9ee143a5e">dot:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1acb557118cc263b8c533a3a46a99f3086">down</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1aa4136eb552793660a595cc8c13ccfba4">equals:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1ac9cf02f46238c9efea8a2f02797f26c5">forward</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a5807cf4714577e4f79eeab749896738d">initWithVector:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1aa98455ff3346a110086631de1055e397">initWithX:y:z:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a37f8f43bf98b73a77c471fd10113ab6c">left</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a9d8a8375ec7a44b0b893822c876e6b6a">magnitude</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a44a7879791964fb1522d9412edfc5d44">magnitudeSquared</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a981906b92caf838ee6df23e27cabb7a2">minus:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a4e61d0f3fd4eece055f4cfbe2bb53ca3">negate</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1ade718011f5aa85758689715779fd0baa">normalized</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1ab314f041e4b1e838181629715418725a">pitch</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a1e8fdd0826ec308a3d63ce27808f604b">plus:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a84fa047103429d222ce04f954dc97a62">right</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a4f12c6baba5d6f0bf8bc919f9800104b">roll</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a995dedd1960cb7c593eeb1fced90010c">times:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1ac28b14e82648752a4843d433ca96bc74">toFloatPointer</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1ac4d8a3aaf890473a70efbc5190e48c71">toNSArray</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a9830589eebbc19011cde15adfc9bfc83">up</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a727725cf5f2b94f6c621bade11d4eaf2">xAxis</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a5885d2029c91830c654b165629c81c36">yAxis</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a1b55893c916866d03fb7150ff3cb8a58">yaw</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1abe7441dedfa7323e15a4d2b6a100ccc4">zAxis</a></li>
+<li><a class="reference external" href="#objcinterface_leap_vector_1a243c8902a3151917721e16e474d038d4">zero</a></li>
+</ul>
+</div>
+<div class="line-block" id="objcinterface_leap_vector">
+<div class="line"><em>class</em> <strong>LeapVector</strong></div>
+</div>
+<blockquote>
+<div><p>The <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> class represents a three-component mathematical vector or point such as a direction or position in three-dimensional space. </p>
+<p><p>The Leap software employs a right-handed Cartesian coordinate system. Values given are in units of real-world millimeters. The origin is centered at the center of the Leap device. The x- and z-axes lie in the horizontal plane, with the x-axis running parallel to the long edge of the device. The y-axis is vertical, with positive values increasing upwards (in contrast to the downward orientation of most computer graphics coordinate systems). The z-axis has positive values increasing away from the computer screen.</p>
+<p><img alt="api/../../../images/Leap_Axes.png" src="api/../../../images/Leap_Axes.png" /></p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+<em>Public Functions</em><blockquote>
+<div><p><span class="target" id="objcinterface_leap_vector_1a3e3d4b24dcea0016acb0a75c6b5e8c21"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (float) <strong>angleTo</strong>:(const  <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *) vector </div>
+</div>
+</p>
+<blockquote>
+<div><p>The angle between this vector and the specified vector in radians. </p>
+<p><p><pre class="literal-block">
+    float angleInRadians = [[<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> <a class="reference internal" href="#objcinterface_leap_vector_1a727725cf5f2b94f6c621bade11d4eaf2"><em>xAxis</em></a>] angleTo:[<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> <a class="reference internal" href="#objcinterface_leap_vector_1a5885d2029c91830c654b165629c81c36"><em>yAxis</em></a>]];
+    // angleInRadians = PI/2 (90 degrees)
+</pre>
+</p>
+<p>The angle is measured in the plane formed by the two vectors. The angle returned is always the smaller of the two conjugate angles. Thus <tt class="docutils literal"><span class="pre">[A</span> <span class="pre">angleTo:B]</span> <span class="pre">==</span> <span class="pre">[B</span> <span class="pre">angleTo:A]</span></tt> and is always a positive value less than or equal to pi radians (180 degrees).</p>
+<p>If either vector has zero length, then this function returns zero.</p>
+<p><img alt="api/../../../images/Math_AngleTo.png" src="api/../../../images/Math_AngleTo.png" /></p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The angle between this vector and the specified vector in radians. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">vector</span></tt> - <p>A <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1afd5e86a36f08d4404265590fdc02ef05"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *) <strong>cross</strong>:(const  <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *) vector </div>
+</div>
+</p>
+<blockquote>
+<div><p>The cross product of this vector and the specified vector. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *crossProduct = [thisVector cross:thatVector];
+</pre>
+</p>
+<p>The cross product is a vector orthogonal to both original vectors. It has a magnitude equal to the area of a parallelogram having the two vectors as sides. The direction of the returned vector is determined by the right-hand rule. Thus <tt class="docutils literal"><span class="pre">[A</span> <span class="pre">cross:B]</span> <span class="pre">==</span> <span class="pre">[[B</span> <span class="pre">negate]</span> <span class="pre">cross:A]</span></tt>.</p>
+<p><img alt="api/../../../images/Math_Cross.png" src="api/../../../images/Math_Cross.png" /></p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The cross product of this vector and the specified vector. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">vector</span></tt> - <p>A <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a262fd0724d586c7624c771f286078360"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (float) <strong>distanceTo</strong>:(const  <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *) vector </div>
+</div>
+</p>
+<blockquote>
+<div><p>The distance between the point represented by this <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> object and a point represented by the specified <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> object. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *aPoint = [[<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> alloc] initWithX:10 <a class="reference internal" href="#objcinterface_leap_vector_1aa4f0d3eebc3c443f9be81bf48561a217"><em>y</em></a>:0 <a class="reference internal" href="#objcinterface_leap_vector_1af73583b1e980b0aa03f9884812e9fd4d"><em>z</em></a>:0];
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *origin = [<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> <a class="reference internal" href="#objcinterface_leap_vector_1a243c8902a3151917721e16e474d038d4"><em>zero</em></a>];
+    float distance = [origin distanceTo:aPoint]; // distance = 10
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The distance from this point to the specified point. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">vector</span></tt> - <p>A <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a54092845eac92205f13f82d176a1b049"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *) <strong>divide</strong>:(float) scalar </div>
+</div>
+</p>
+<blockquote>
+<div><p>Divide this vector by a number. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *quotient = [thisVector divide:2.5];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The dividend of this <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> divided by a scalar. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">scalar</span></tt> - <p>The scalar divisor; </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a0db862e5be2e1bd573f37ee9ee143a5e"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (float) <strong>dot</strong>:(const  <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *) vector </div>
+</div>
+</p>
+<blockquote>
+<div><p>The dot product of this vector with another vector. </p>
+<p><p><pre class="literal-block">
+    float dotProduct = [thisVector dot:thatVector];
+</pre>
+</p>
+<p>The dot product is the magnitude of the projection of this vector onto the specified vector.</p>
+<p><img alt="api/../../../images/Math_Dot.png" src="api/../../../images/Math_Dot.png" /></p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The dot product of this vector and the specified vector. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">vector</span></tt> - <p>A <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1aa4136eb552793660a595cc8c13ccfba4"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (BOOL) <strong>equals</strong>:(const  <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *) vector </div>
+</div>
+</p>
+<blockquote>
+<div><p>Checks <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> equality. </p>
+<p><p><pre class="literal-block">
+    bool vectorsAreEqual = [thisVector equals:thatVector];
+</pre>
+</p>
+<p>Vectors are equal if each corresponding component is equal. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>YES, if the LeapVectors are equal. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">vector</span></tt> - <p>The <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> to compare. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a5807cf4714577e4f79eeab749896738d"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (id) <strong>initWithVector</strong>:(const  <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *) vector </div>
+</div>
+</p>
+<blockquote>
+<div><p>Copies the specified <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *copiedVector = [[<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> alloc] initWithVector:otherVector];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">vector</span></tt> - <p>The <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> to copy. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1aa98455ff3346a110086631de1055e397"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (id) <strong>initWithX</strong>:(float) x <strong>y</strong>:(float) y <strong>z</strong>:(float) z </div>
+</div>
+</p>
+<blockquote>
+<div><p>Creates a new <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> with the specified component values. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *newVector = [[<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> alloc] initWithX:0.5 <a class="reference internal" href="#objcinterface_leap_vector_1aa4f0d3eebc3c443f9be81bf48561a217"><em>y</em></a>:200.3 <a class="reference internal" href="#objcinterface_leap_vector_1af73583b1e980b0aa03f9884812e9fd4d"><em>z</em></a>:67];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">x</span></tt> - <p>The horizontal component. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">y</span></tt> - <p>The vertical component. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">z</span></tt> - <p>The depth component. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a9d8a8375ec7a44b0b893822c876e6b6a"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (float)  <strong>magnitude</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The magnitude, or length, of this vector. </p>
+<p><p><pre class="literal-block">
+    float length = thisVector.magnitude;
+</pre>
+</p>
+<p>The magnitude is the L2 norm, or Euclidean distance between the origin and the point represented by the (x, y, z) components of this <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> object.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The length of this vector. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a44a7879791964fb1522d9412edfc5d44"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (float)  <strong>magnitudeSquared</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The square of the magnitude, or length, of this vector. </p>
+<p><p><pre class="literal-block">
+    float lengthSquared = thisVector.magnitudeSquared;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The square of the length of this vector. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a981906b92caf838ee6df23e27cabb7a2"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *) <strong>minus</strong>:(const  <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *) vector </div>
+</div>
+</p>
+<blockquote>
+<div><p>Subtract a vector from this vector. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *difference = [thisVector minus:thatVector];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>the difference between the two LeapVectors. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">vector</span></tt> - <p>the <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> subtrahend. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a4e61d0f3fd4eece055f4cfbe2bb53ca3"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>negate</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>Negate this vector. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *negation = thisVector.<a class="reference internal" href="#objcinterface_leap_vector_1a4e61d0f3fd4eece055f4cfbe2bb53ca3"><em>negate</em></a>;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The negation of this <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1ade718011f5aa85758689715779fd0baa"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>normalized</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>A normalized copy of this vector. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *normalizedVector = otherVector.normalized;
+</pre>
+</p>
+<p>A normalized vector has the same direction as the original vector, but with a length of one.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> object with a length of one, pointing in the same direction as this Vector object. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1ab314f041e4b1e838181629715418725a"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (float)  <strong>pitch</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The pitch angle in radians. </p>
+<p><p><pre class="literal-block">
+    float pitchInRadians = thisVector.pitch;
+</pre>
+</p>
+<p>Pitch is the angle between the negative z-axis and the projection of the vector onto the y-z plane. In other words, pitch represents rotation around the x-axis. If the vector points upward, the returned angle is between 0 and pi radians (180 degrees); if it points downward, the angle is between 0 and -pi radians.</p>
+<p><img alt="api/../../../images/Math_Pitch_Angle.png" src="api/../../../images/Math_Pitch_Angle.png" /></p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The angle of this vector above or below the horizon (x-z plane). </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a1e8fdd0826ec308a3d63ce27808f604b"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *) <strong>plus</strong>:(const  <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *) vector </div>
+</div>
+</p>
+<blockquote>
+<div><p>Adds two vectors. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *sum = [thisVector plus:thatVector];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The sum of the two LeapVectors. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">vector</span></tt> - <p>The <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> addend. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a4f12c6baba5d6f0bf8bc919f9800104b"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (float)  <strong>roll</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The roll angle in radians. </p>
+<p><p><pre class="literal-block">
+    float rollInRadians = thatVector.roll;
+</pre>
+</p>
+<p>Roll is the angle between the y-axis and the projection of the vector onto the x-y plane. In other words, roll represents rotation around the z-axis. If the vector points to the left of the y-axis, then the returned angle is between 0 and pi radians (180 degrees); if it points to the right, the angle is between 0 and -pi radians.</p>
+<p><img alt="api/../../../images/Math_Roll_Angle.png" src="api/../../../images/Math_Roll_Angle.png" /></p>
+<p>Use this function to get roll angle of the plane to which this vector is a normal. For example, if this vector represents the normal to the palm, then this function returns the tilt or roll of the palm plane compared to the horizontal (x-z) plane.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The angle of this vector to the right or left of the y-axis. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a995dedd1960cb7c593eeb1fced90010c"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *) <strong>times</strong>:(float) scalar </div>
+</div>
+</p>
+<blockquote>
+<div><p>Multiply this vector by a number. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *product = [thisVector times:5.0];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The product of this <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> and a scalar. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">scalar</span></tt> - <p>The scalar factor. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1ac28b14e82648752a4843d433ca96bc74"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (NSMutableData *)  <strong>toFloatPointer</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>Returns an NSMutableData object containing the vector components as consecutive floating point values. </p>
+<p> <pre class="literal-block">
+    NSData *vectorData = thisVector.toFloatPointer;
+    float <a class="reference internal" href="#objcinterface_leap_vector_1ad0da36b2558901e21e7a30f6c227a45e"><em>x</em></a>, <a class="reference internal" href="#objcinterface_leap_vector_1aa4f0d3eebc3c443f9be81bf48561a217"><em>y</em></a>, <a class="reference internal" href="#objcinterface_leap_vector_1af73583b1e980b0aa03f9884812e9fd4d"><em>z</em></a>;
+    [vectorData getBytes:&amp;x length:sizeof(float)];
+    [vectorData getBytes:&amp;y length:sizeof(float)];
+    [vectorData getBytes:&amp;z length:sizeof(float)];
+    //Or access as an array of float:
+    float array[3];
+    [vectorData getBytes:&amp;array length:sizeof(float) * 3];
+    x = array[0];
+    y = array[1];
+    z = array[2];
+</pre>
+<dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1ac4d8a3aaf890473a70efbc5190e48c71"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (NSArray *)  <strong>toNSArray</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>Returns an NSArray object containing the vector components in the order: x, y, z. </p>
+<p><p><pre class="literal-block">
+    NSArray *vectorArray = thisVector.toNSArray;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a1b55893c916866d03fb7150ff3cb8a58"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (float)  <strong>yaw</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The yaw angle in radians. </p>
+<p><p><pre class="literal-block">
+    float yawInRadians = thisVector.yaw;
+</pre>
+</p>
+<p>Yaw is the angle between the negative z-axis and the projection of the vector onto the x-z plane. In other words, yaw represents rotation around the y-axis. If the vector points to the right of the negative z-axis, then the returned angle is between 0 and pi radians (180 degrees); if it points to the left, the angle is between 0 and -pi radians.</p>
+<p><img alt="api/../../../images/Math_Yaw_Angle.png" src="api/../../../images/Math_Yaw_Angle.png" /></p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The angle of this vector to the right or left of the negative z-axis. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Property</em><blockquote>
+<div><p><span class="target" id="objcinterface_leap_vector_1ad0da36b2558901e21e7a30f6c227a45e"></span><div class="line"><div class="line"><br /></div>
+- (float)  <strong>x</strong></div>
+ <strong>x</strong></p>
+<blockquote>
+<div><p>The horizontal component. </p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1aa4f0d3eebc3c443f9be81bf48561a217"></span><div class="line"><div class="line"><br /></div>
+- (float)  <strong>y</strong></div>
+ <strong>y</strong></p>
+<blockquote>
+<div><p>The vertical component. </p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1af73583b1e980b0aa03f9884812e9fd4d"></span><div class="line"><div class="line"><br /></div>
+- (float)  <strong>z</strong></div>
+ <strong>z</strong></p>
+<blockquote>
+<div><p>The depth component. </p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Public Static Functions</em><blockquote>
+<div><p><span class="target" id="objcinterface_leap_vector_1aeb6b0cc33c18aad296f1d0ae9137bcd9"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
++ (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>backward</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The unit vector pointing backward along the positive z-axis: (0, 0, 1). </p>
+<p> <pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *backwardVector = [<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> <a class="reference internal" href="#objcinterface_leap_vector_1aeb6b0cc33c18aad296f1d0ae9137bcd9"><em>backward</em></a>];
+</pre>
+<dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1acb557118cc263b8c533a3a46a99f3086"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
++ (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>down</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The unit vector pointing down along the negative y-axis: (0, -1, 0). </p>
+<p> <pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *downVector = [<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> <a class="reference internal" href="#objcinterface_leap_vector_1acb557118cc263b8c533a3a46a99f3086"><em>down</em></a>];
+</pre>
+<dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1ac9cf02f46238c9efea8a2f02797f26c5"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
++ (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>forward</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The unit vector pointing forward along the negative z-axis: (0, 0, -1). </p>
+<p> <pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *forwardVector = [<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> <a class="reference internal" href="#objcinterface_leap_vector_1ac9cf02f46238c9efea8a2f02797f26c5"><em>forward</em></a>];
+</pre>
+<dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a37f8f43bf98b73a77c471fd10113ab6c"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
++ (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>left</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The unit vector pointing left along the negative x-axis: (-1, 0, 0). </p>
+<p> <pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *leftVector = [<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> <a class="reference internal" href="#objcinterface_leap_vector_1a37f8f43bf98b73a77c471fd10113ab6c"><em>left</em></a>];
+</pre>
+<dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a84fa047103429d222ce04f954dc97a62"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
++ (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>right</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The unit vector pointing right along the positive x-axis: (1, 0, 0). </p>
+<p> <pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *rightVector = [<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> <a class="reference internal" href="#objcinterface_leap_vector_1a84fa047103429d222ce04f954dc97a62"><em>right</em></a>];
+</pre>
+<dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a9830589eebbc19011cde15adfc9bfc83"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
++ (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>up</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The unit vector pointing up along the positive y-axis: (0, 1, 0). </p>
+<p> <pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *upVector = [<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> <a class="reference internal" href="#objcinterface_leap_vector_1a9830589eebbc19011cde15adfc9bfc83"><em>up</em></a>];
+</pre>
+<dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a727725cf5f2b94f6c621bade11d4eaf2"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
++ (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>xAxis</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The x-axis unit vector: (1, 0, 0). </p>
+<p> <pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *xAxisVector = [<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> <a class="reference internal" href="#objcinterface_leap_vector_1a727725cf5f2b94f6c621bade11d4eaf2"><em>xAxis</em></a>];
+</pre>
+<dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a5885d2029c91830c654b165629c81c36"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
++ (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>yAxis</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The y-axis unit vector: (0, 1, 0). </p>
+<p> <pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *yAxisVector = [<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> <a class="reference internal" href="#objcinterface_leap_vector_1a5885d2029c91830c654b165629c81c36"><em>yAxis</em></a>];
+</pre>
+<dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1abe7441dedfa7323e15a4d2b6a100ccc4"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
++ (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>zAxis</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The z-axis unit vector: (0, 0, 1). </p>
+<p> <pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *zAxisVector = [<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> <a class="reference internal" href="#objcinterface_leap_vector_1abe7441dedfa7323e15a4d2b6a100ccc4"><em>zAxis</em></a>];
+</pre>
+<dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_vector_1a243c8902a3151917721e16e474d038d4"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
++ (<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>zero</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The zero vector: (0, 0, 0) </p>
+<p> <pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> *zeroVector = [<a class="reference internal" href="#objcinterface_leap_vector"><em>LeapVector</em></a> <a class="reference internal" href="#objcinterface_leap_vector_1a243c8902a3151917721e16e474d038d4"><em>zero</em></a>];
+</pre>
+<dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">Objective-C Docs (v2.1)</a></li>
+          </ul><ul>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Classes.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Bone.html#leapbone">LeapBone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.CircleGesture.html#leapcirclegesture">LeapCircleGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Config.html#leapconfig">LeapConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Controller.html#leapcontroller">LeapController</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Delegate.html">LeapDelegate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Device.html#leapdevice">LeapDevice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Finger.html#leapfinger">LeapFinger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Frame.html#leapframe">LeapFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Gesture.html#leapgesture">LeapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Hand.html#leaphand">LeapHand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.InteractionBox.html#leapinteractionbox">LeapInteractionBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.KeyTapGesture.html#leapkeytapgesture">LeapKeyTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Listener.html#leaplistener-protocol">LeapListener Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Matrix.html#leapmatrix">LeapMatrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Pointable.html#leappointable">LeapPointable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.PointableList.html#leappointableorhandlist-category">LeapPointableOrHandList Category</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ScreenTapGesture.html#leapscreentapgesture">LeapScreenTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.SwipeGesture.html#leapswipegesture">LeapSwipeGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Tool.html#leaptool">LeapTool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#leapvector">LeapVector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>Objective-C</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

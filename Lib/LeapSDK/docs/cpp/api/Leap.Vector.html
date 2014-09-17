@@ -1,0 +1,1153 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Vector &mdash; Leap Motion C++ SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion C++ SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="Leap_Classes.html" />
+    <link rel="next" title="Appendices" href="../supplements/Leap_Supplements.html" />
+    <link rel="prev" title="ToolList" href="Leap.ToolList.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'cpp';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.javascript = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../cpp/api/Leap.Vector.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/api/Leap.Vector.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/api/Leap.Vector.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/api/Leap.Vector.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/api/Leap.Vector.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/api/Leap.Vector.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/api/Leap.Vector.html";
+            } else {
+                    redirectedLocation ="Leap_Classes.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../cpp/api/Leap.Vector.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Leap.ToolList.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("../supplements/Leap_Supplements.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="../../javascript/api/Leap.Vector.html" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      <a href="../../csharp/api/Leap.Vector.html" onclick="localStorage['currentAPI'] = 'csharp'">C# and Unity</a>
+    
+  </li>
+  <li>
+      C++
+    
+  </li>
+  <li>
+      <a href="../../java/api/Leap.Vector.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="../../python/api/Leap.Vector.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      <a href="../../objc/api/Leap.Vector.html" onclick="localStorage['currentAPI'] = 'objc'">Objective-C</a>
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Classes.html" accesskey="U">API Reference</a>&raquo;
+  Vector
+</span> -->
+        
+  <div class="section" id="vector">
+<h1>Vector<a class="headerlink" href="#vector" title="Permalink to this headline">¶</a></h1>
+</div>
+<style>.members {
+     -webkit-column-count:2; /* Chrome, Safari, Opera */
+     -moz-column-count:2; /* Firefox */
+     column-count:2;
+     }
+     strong {color:gray;}
+</style><p><strong>Properties:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1ad0da36b2558901e21e7a30f6c227a45e">x</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1aa4f0d3eebc3c443f9be81bf48561a217">y</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1af73583b1e980b0aa03f9884812e9fd4d">z</a></li>
+</ul>
+</div>
+<p><strong>Methods:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4">Vector()</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a781d0ab346c40cb3b3c6ee550b933acd">Vector(float _x, float _y, float _z)</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1adf9375f5308b51ded585cae747683c7c">Vector(const Vector &amp;vector)</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a3366e3f5f75fcfea031480906d2ebb71">angleTo(const Vector &amp;other) const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1ae084ec9cf179e9e8d01f6297e66c768f">backward()</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a599efb080a246fcba4c92c5220b19213">cross(const Vector &amp;other) const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1ac3de6a1bd7d39d48ab8ab3a339d876ea">distanceTo(const Vector &amp;other) const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a6f0ad288a495233876e3b303756b6cfc">dot(const Vector &amp;other) const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a32069cc97b17596ab906f89843aef61f">down()</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a5533572841b9877bea508bb7e105392f">forward()</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1aac1b70a2ed67ead038c4d3f5ac4d8a81">isValid() const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1ac962f49157c628c75a99ed7d8e2be6cd">left()</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a0ac34716ef012faaabb24c1c8537d0b7">magnitude() const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a6503a78d2f98caa161185e18ecb7c232">magnitudeSquared() const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a3539481e3dc2d2ace49885ff466cb5f4">normalized() const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a16a9b1bc166dc07b235fcb54bba5e5cb">operator!=(const Vector &amp;other) const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1ad7912c64f544b15a50238c3e2572ae37">operator*(float scalar) const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a80142bfae707296d9e3c29f7f95dc682">operator*=(float scalar)</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1ae1cf015d856ef3399812497351d5f15b">operator+(const Vector &amp;other) const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a550d943a94093148ac72f536c7d64f2f">operator+=(const Vector &amp;other)</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a729f1353c878b3c9ba3887e396f3d0a5">operator-() const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a218c71e8a631ac0216c1e51f47f8dbe6">operator-(const Vector &amp;other) const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a21ed20f2ed0990b2575589608c196396">operator-=(const Vector &amp;other)</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a5fefa4a33b87e5afe845007dc0539b25">operator/(float scalar) const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1aa50cf0ce7595612a5c02d166a995e847">operator/=(float scalar)</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a7245886525537077899b47c783e692d8">operator==(const Vector &amp;other) const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1ac505a1750ebc32460056b780c20b0e08">operator[](unsigned int index) const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a4363cf3fd3813ebd5f143073e7019c39">pitch() const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a45aeb3eada5ad062300bc9381abbc06d">right()</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1ad8fa97753489849034ed0f6b55c92681">roll() const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1ab70f267fb314be5a2f0f203e6845157d">toFloatPointer() const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a3f23c97b6c9f2a88e1121d1c633ccafa">toString() const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a3080765fd4b21d1a53b782b0d5cf99bf">toVector3() const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a3b1381a73f3c8445bea23a744fd0161d">toVector4(float w=0.0f) const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a62f07045c80d08733035217e015138fe">up()</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1acae644750c6bca9dd9949fe8dfab2838">xAxis()</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a72392cdfddd5dcf24ebd0fc737fb709e">yAxis()</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a1e0f2058889f54c4ff25abcb5b1832e7">yaw() const</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a1d8fd8445341e510e049c1355d4f6691">zAxis()</a></li>
+<li><a class="reference external" href="#cppstruct_leap_1_1_vector_1a595532e58e7dd474661546d46cc69bfa">zero()</a></li>
+</ul>
+</div>
+<div class="line-block" id="cppstruct_leap_1_1_vector">
+<div class="line"><em>struct</em> <strong>Leap::Vector</strong></div>
+</div>
+<blockquote>
+<div><p>The <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> struct represents a three-component mathematical vector or point such as a direction or position in three-dimensional space. </p>
+<p><p>The Leap Motion software employs a right-handed Cartesian coordinate system. Values given are in units of real-world millimeters. The origin is centered at the center of the Leap Motion <a class="reference internal" href="Leap.Controller.html#cppclass_leap_1_1_controller"><em>Controller</em></a>. The x- and z-axes lie in the horizontal plane, with the x-axis running parallel to the long edge of the device. The y-axis is vertical, with positive values increasing upwards (in contrast to the downward orientation of most computer graphics coordinate systems). The z-axis has positive values increasing away from the computer screen.</p>
+<p><img alt="api/../../../images/Leap_Axes.png" src="api/../../../images/Leap_Axes.png" /><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+<em>Public Functions</em><blockquote>
+<div><p><span class="target" id="cppstruct_leap_1_1_vector_1a3366e3f5f75fcfea031480906d2ebb71"></span><div class="line-block">
+<div class="line">float <strong>angleTo</strong>(const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; other)</div>
+</div>
+</p>
+<blockquote>
+<div><p>The angle between this vector and the specified vector in radians. </p>
+<p><p>The angle is measured in the plane formed by the two vectors. The angle returned is always the smaller of the two conjugate angles. Thus <tt class="docutils literal"><span class="pre">A.angleTo(B)</span> <span class="pre">==</span> <span class="pre">B.angleTo(A)</span></tt> and is always a positive value less than or equal to pi radians (180 degrees).</p>
+<p>If either vector has zero length, then this function returns zero.</p>
+<p><img alt="api/../../../images/Math_AngleTo.png" src="api/../../../images/Math_AngleTo.png" /></p>
+<p><pre class="literal-block">
+float angleInRadians = <a class="reference internal" href="#cppstruct_leap_1_1_vector_1acae644750c6bca9dd9949fe8dfab2838"><em>Vector::xAxis</em></a>().<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a3366e3f5f75fcfea031480906d2ebb71"><em>angleTo</em></a>(<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a72392cdfddd5dcf24ebd0fc737fb709e"><em>Vector::yAxis</em></a>());
+// angleInRadians = PI/2 (90 degrees)
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The angle between this vector and the specified vector in radians. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">other</span></tt> - <p>A <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a599efb080a246fcba4c92c5220b19213"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> <strong>cross</strong>(const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; other)</div>
+</div>
+</p>
+<blockquote>
+<div><p>The cross product of this vector and the specified vector. </p>
+<p><p>The cross product is a vector orthogonal to both original vectors. It has a magnitude equal to the area of a parallelogram having the two vectors as sides. The direction of the returned vector is determined by the right-hand rule. Thus <tt class="docutils literal"><span class="pre">A.cross(B)</span> <span class="pre">==</span> <span class="pre">-B.cross(A).</span></tt></p>
+<p><img alt="api/../../../images/Math_Cross.png" src="api/../../../images/Math_Cross.png" /></p>
+<p><pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> crossProduct = thisVector.cross(thatVector);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The cross product of this vector and the specified vector. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">other</span></tt> - <p>A <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1ac3de6a1bd7d39d48ab8ab3a339d876ea"></span><div class="line-block">
+<div class="line">float <strong>distanceTo</strong>(const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; other)</div>
+</div>
+</p>
+<blockquote>
+<div><p>The distance between the point represented by this <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> object and a point represented by the specified <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> object. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> aPoint = <a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a>(10, 0, 0);
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> origin = <a class="reference internal" href="#cppstruct_leap_1_1_vector_1a595532e58e7dd474661546d46cc69bfa"><em>Vector::zero</em></a>();
+float distance = origin.distanceTo(aPoint); // distance = 10
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The distance from this point to the specified point. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">other</span></tt> - <p>A <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a6f0ad288a495233876e3b303756b6cfc"></span><div class="line-block">
+<div class="line">float <strong>dot</strong>(const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; other)</div>
+</div>
+</p>
+<blockquote>
+<div><p>The dot product of this vector with another vector. </p>
+<p><p>The dot product is the magnitude of the projection of this vector onto the specified vector.</p>
+<p><img alt="api/../../../images/Math_Dot.png" src="api/../../../images/Math_Dot.png" /></p>
+<p><pre class="literal-block">
+float dotProduct = thisVector.dot(thatVector);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The dot product of this vector and the specified vector. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">other</span></tt> - <p>A <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1aac1b70a2ed67ead038c4d3f5ac4d8a81"></span><div class="line-block">
+<div class="line">bool <strong>isValid</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Returns true if all of the vector&#8217;s components are finite. </p>
+<p><p>If any component is NaN or infinite, then this returns false.</p>
+<p> <pre class="literal-block">
+bool vectorsIsValid = thisVector.isValid();
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a0ac34716ef012faaabb24c1c8537d0b7"></span><div class="line-block">
+<div class="line">float <strong>magnitude</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The magnitude, or length, of this vector. </p>
+<p><p>The magnitude is the L2 norm, or Euclidean distance between the origin and the point represented by the (x, y, z) components of this <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> object.</p>
+<p><pre class="literal-block">
+float length = thisVector.magnitude();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The length of this vector. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a6503a78d2f98caa161185e18ecb7c232"></span><div class="line-block">
+<div class="line">float <strong>magnitudeSquared</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The square of the magnitude, or length, of this vector. </p>
+<p><p><pre class="literal-block">
+float lengthSquared = thisVector.magnitudeSquared();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The square of the length of this vector. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a3539481e3dc2d2ace49885ff466cb5f4"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> <strong>normalized</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>A normalized copy of this vector. </p>
+<p><p>A normalized vector has the same direction as the original vector, but with a length of one.</p>
+<p><pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> normalizedVector = otherVector.normalized();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> object with a length of one, pointing in the same direction as this <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> object. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a16a9b1bc166dc07b235fcb54bba5e5cb"></span><div class="line-block">
+<div class="line">bool <strong>operator!=</strong>(const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; other)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Compare <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> inequality component-wise. </p>
+<p> <pre class="literal-block">
+bool vectorsNotEqual = thisVector != thatVector;
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1ad7912c64f544b15a50238c3e2572ae37"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> <strong>operator*</strong>(float scalar)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Multiply vector by a scalar. </p>
+<p> <pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> product = thisVector * 5.0;
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a80142bfae707296d9e3c29f7f95dc682"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; <strong>operator*=</strong>(float scalar)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Multiply vector by a scalar and assign the product. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1ae1cf015d856ef3399812497351d5f15b"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> <strong>operator+</strong>(const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; other)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Add vectors component-wise. </p>
+<p> <pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> sum = thisVector + thatVector;
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a550d943a94093148ac72f536c7d64f2f"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; <strong>operator+=</strong>(const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; other)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Add vectors component-wise and assign the sum. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a729f1353c878b3c9ba3887e396f3d0a5"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> <strong>operator-</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>A copy of this vector pointing in the opposite direction. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> negation = -thisVector;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> object with all components negated. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a218c71e8a631ac0216c1e51f47f8dbe6"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> <strong>operator-</strong>(const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; other)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Subtract vectors component-wise. </p>
+<p> <pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> difference = thisVector - thatVector;
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a21ed20f2ed0990b2575589608c196396"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; <strong>operator-=</strong>(const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; other)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Subtract vectors component-wise and assign the difference. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a5fefa4a33b87e5afe845007dc0539b25"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> <strong>operator/</strong>(float scalar)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Divide vector by a scalar. </p>
+<p> <pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> quotient = thisVector/2.5;
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1aa50cf0ce7595612a5c02d166a995e847"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; <strong>operator/=</strong>(float scalar)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Divide vector by a scalar and assign the quotient. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a7245886525537077899b47c783e692d8"></span><div class="line-block">
+<div class="line">bool <strong>operator==</strong>(const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; other)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Compare <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> equality component-wise. </p>
+<p> <pre class="literal-block">
+bool vectorsAreEqual = thisVector == thatVector;
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1ac505a1750ebc32460056b780c20b0e08"></span><div class="line-block">
+<div class="line">float <strong>operator[]</strong>(unsigned int index)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Index vector components numerically. </p>
+<p>Index 0 is x, index 1 is y, and index 2 is z.  <pre class="literal-block">
+float <a class="reference internal" href="#cppstruct_leap_1_1_vector_1ad0da36b2558901e21e7a30f6c227a45e"><em>x</em></a> = thisVector[0];
+float <a class="reference internal" href="#cppstruct_leap_1_1_vector_1aa4f0d3eebc3c443f9be81bf48561a217"><em>y</em></a> = thisVector[1];
+float <a class="reference internal" href="#cppstruct_leap_1_1_vector_1af73583b1e980b0aa03f9884812e9fd4d"><em>z</em></a> = thisVector[2];
+</pre>
+<dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The x, y, or z component of this <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>, if the specified index value is at least 0 and at most 2; otherwise, returns zero.</dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a4363cf3fd3813ebd5f143073e7019c39"></span><div class="line-block">
+<div class="line">float <strong>pitch</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The pitch angle in radians. </p>
+<p><p>Pitch is the angle between the negative z-axis and the projection of the vector onto the y-z plane. In other words, pitch represents rotation around the x-axis. If the vector points upward, the returned angle is between 0 and pi radians (180 degrees); if it points downward, the angle is between 0 and -pi radians.</p>
+<p><img alt="api/../../../images/Math_Pitch_Angle.png" src="api/../../../images/Math_Pitch_Angle.png" /></p>
+<p><pre class="literal-block">
+float pitchInRadians = thisVector.pitch();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The angle of this vector above or below the horizon (x-z plane). </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1ad8fa97753489849034ed0f6b55c92681"></span><div class="line-block">
+<div class="line">float <strong>roll</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The roll angle in radians. </p>
+<p><p>Roll is the angle between the y-axis and the projection of the vector onto the x-y plane. In other words, roll represents rotation around the z-axis. If the vector points to the left of the y-axis, then the returned angle is between 0 and pi radians (180 degrees); if it points to the right, the angle is between 0 and -pi radians.</p>
+<p><img alt="api/../../../images/Math_Roll_Angle.png" src="api/../../../images/Math_Roll_Angle.png" /></p>
+<p>Use this function to get roll angle of the plane to which this vector is a normal. For example, if this vector represents the normal to the palm, then this function returns the tilt or roll of the palm plane compared to the horizontal (x-z) plane.</p>
+<p><pre class="literal-block">
+float rollInRadians = thatVector.roll();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The angle of this vector to the right or left of the y-axis. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1ab70f267fb314be5a2f0f203e6845157d"></span><div class="line-block">
+<div class="line">const float * <strong>toFloatPointer</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Cast the vector to a float array. </p>
+<p> <pre class="literal-block">
+const float *vectorData = thisVector.toFloatPointer();
+float x = *vectorData;
+float y = *(vectorData + sizeof(float));
+float z = *(vectorData + sizeof(float) * 2);
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a3f23c97b6c9f2a88e1121d1c633ccafa"></span><div class="line-block">
+<div class="line">std::string <strong>toString</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Returns a string containing this vector in a human readable format: (x, y, z). </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a3080765fd4b21d1a53b782b0d5cf99bf"></span><div class="line-block">
+<div class="line">template &lt; typename Vector3Type &gt;</div>
+<div class="line">const Vector3Type <strong>toVector3</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Convert a <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Leap::Vector</em></a> to another 3-component <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> type. </p>
+<p>The specified type must define a constructor that takes the x, y, and z components as separate parameters. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a3b1381a73f3c8445bea23a744fd0161d"></span><div class="line-block">
+<div class="line">template &lt; typename Vector4Type &gt;</div>
+<div class="line">const Vector4Type <strong>toVector4</strong>(float w = 0.0f)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Convert a <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Leap::Vector</em></a> to another 4-component <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> type. </p>
+<p>The specified type must define a constructor that takes the x, y, z, and w components as separate parameters. (The homogeneous coordinate, w, is set to zero by default, but you should typically set it to one for vectors representing a position.) <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"></span><div class="line-block">
+<div class="line"> <strong>Vector</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Creates a new <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> with all components set to zero. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a781d0ab346c40cb3b3c6ee550b933acd"></span><div class="line-block">
+<div class="line"> <strong>Vector</strong>(float _x, float _y, float _z)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Creates a new <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a> with the specified component values. </p>
+<p> <pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> newVector = <a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a>(0.5, 200.3, 67);
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1adf9375f5308b51ded585cae747683c7c"></span><div class="line-block">
+<div class="line"> <strong>Vector</strong>(const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; vector)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Copies the specified <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>. </p>
+<p> <pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> copiedVector = <a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a>(otherVector);
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a1e0f2058889f54c4ff25abcb5b1832e7"></span><div class="line-block">
+<div class="line">float <strong>yaw</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The yaw angle in radians. </p>
+<p><p>Yaw is the angle between the negative z-axis and the projection of the vector onto the x-z plane. In other words, yaw represents rotation around the y-axis. If the vector points to the right of the negative z-axis, then the returned angle is between 0 and pi radians (180 degrees); if it points to the left, the angle is between 0 and -pi radians.</p>
+<p><img alt="api/../../../images/Math_Yaw_Angle.png" src="api/../../../images/Math_Yaw_Angle.png" /></p>
+<p><pre class="literal-block">
+float yawInRadians = thisVector.yaw();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The angle of this vector to the right or left of the negative z-axis. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Public Members</em><blockquote>
+<div><p><span class="target" id="cppstruct_leap_1_1_vector_1ad0da36b2558901e21e7a30f6c227a45e"></span>float <strong>x</strong></p>
+<blockquote>
+<div><p>The horizontal component. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1aa4f0d3eebc3c443f9be81bf48561a217"></span>float <strong>y</strong></p>
+<blockquote>
+<div><p>The vertical component. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1af73583b1e980b0aa03f9884812e9fd4d"></span>float <strong>z</strong></p>
+<blockquote>
+<div><p>The depth component. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Public Static Functions</em><blockquote>
+<div><p><span class="target" id="cppstruct_leap_1_1_vector_1ae084ec9cf179e9e8d01f6297e66c768f"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; <strong>backward</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The unit vector pointing backward along the positive z-axis: (0, 0, 1) </p>
+<p> <pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> backwardVector = <a class="reference internal" href="#cppstruct_leap_1_1_vector_1ae084ec9cf179e9e8d01f6297e66c768f"><em>Vector::backward</em></a>();
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a32069cc97b17596ab906f89843aef61f"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; <strong>down</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The unit vector pointing down along the negative y-axis: (0, -1, 0) </p>
+<p> <pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> downVector = <a class="reference internal" href="#cppstruct_leap_1_1_vector_1a32069cc97b17596ab906f89843aef61f"><em>Vector::down</em></a>();
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a5533572841b9877bea508bb7e105392f"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; <strong>forward</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The unit vector pointing forward along the negative z-axis: (0, 0, -1) </p>
+<p> <pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> forwardVector = <a class="reference internal" href="#cppstruct_leap_1_1_vector_1a5533572841b9877bea508bb7e105392f"><em>Vector::forward</em></a>();
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1ac962f49157c628c75a99ed7d8e2be6cd"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; <strong>left</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The unit vector pointing left along the negative x-axis: (-1, 0, 0) </p>
+<p> <pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> leftVector = <a class="reference internal" href="#cppstruct_leap_1_1_vector_1ac962f49157c628c75a99ed7d8e2be6cd"><em>Vector::left</em></a>();
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a45aeb3eada5ad062300bc9381abbc06d"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; <strong>right</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The unit vector pointing right along the positive x-axis: (1, 0, 0) </p>
+<p> <pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> rightVector = <a class="reference internal" href="#cppstruct_leap_1_1_vector_1a45aeb3eada5ad062300bc9381abbc06d"><em>Vector::right</em></a>();
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a62f07045c80d08733035217e015138fe"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; <strong>up</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The unit vector pointing up along the positive y-axis: (0, 1, 0) </p>
+<p> <pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> upVector = <a class="reference internal" href="#cppstruct_leap_1_1_vector_1a62f07045c80d08733035217e015138fe"><em>Vector::up</em></a>();
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1acae644750c6bca9dd9949fe8dfab2838"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; <strong>xAxis</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The x-axis unit vector: (1, 0, 0) </p>
+<p> <pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> xAxisVector = <a class="reference internal" href="#cppstruct_leap_1_1_vector_1acae644750c6bca9dd9949fe8dfab2838"><em>Vector::xAxis</em></a>();
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a72392cdfddd5dcf24ebd0fc737fb709e"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; <strong>yAxis</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The y-axis unit vector: (0, 1, 0) </p>
+<p> <pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> yAxisVector = <a class="reference internal" href="#cppstruct_leap_1_1_vector_1a72392cdfddd5dcf24ebd0fc737fb709e"><em>Vector::yAxis</em></a>();
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a1d8fd8445341e510e049c1355d4f6691"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; <strong>zAxis</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The z-axis unit vector: (0, 0, 1) </p>
+<p> <pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> zAxisVector = <a class="reference internal" href="#cppstruct_leap_1_1_vector_1a1d8fd8445341e510e049c1355d4f6691"><em>Vector::zAxis</em></a>();
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppstruct_leap_1_1_vector_1a595532e58e7dd474661546d46cc69bfa"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; <strong>zero</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The zero vector: (0, 0, 0) </p>
+<p> <pre class="literal-block">
+<a class="reference internal" href="#cppstruct_leap_1_1_vector_1a4df026156780bc0ca651c342b7d6daa4"><em>Vector</em></a> zeroVector = <a class="reference internal" href="#cppstruct_leap_1_1_vector_1a595532e58e7dd474661546d46cc69bfa"><em>Vector::zero</em></a>();
+</pre>
+<dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">C++ Docs (v2.1)</a></li>
+          </ul><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Leap_Classes.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Leap.Arm.html">Arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Bone.html">Bone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.CircleGesture.html">CircleGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Config.html">Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Controller.html">Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Device.html">Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.DeviceList.html">DeviceList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Finger.html">Finger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.FingerList.html">FingerList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Frame.html">Frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Gesture.html">Gesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.GestureList.html">GestureList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Hand.html">Hand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.HandList.html">HandList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ImageList.html">ImageList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.InteractionBox.html">InteractionBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.KeyTapGesture.html">KeyTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Listener.html">Listener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Matrix.html">Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Pointable.html">Pointable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.PointableList.html">PointableList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ScreenTapGesture.html">ScreenTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.SwipeGesture.html">SwipeGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Tool.html">Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ToolList.html">ToolList</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Vector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>C++</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

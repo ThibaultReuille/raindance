@@ -1,0 +1,580 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Hello World &mdash; Leap Motion Objective-C SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion Objective-C SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="Application Development" href="Leap_Guides.html" />
+    <link rel="next" title="Setting Up a Project" href="Project_Setup.html" />
+    <link rel="prev" title="SDK Libraries" href="Leap_SDK_Overview.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'objc';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../objc/devguide/Sample_Tutorial.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/devguide/Sample_Tutorial.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/devguide/Sample_Tutorial.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/devguide/Sample_Tutorial.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/devguide/Sample_Tutorial.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/devguide/Sample_Tutorial.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/devguide/Sample_Tutorial.html";
+            } else {
+                    redirectedLocation ="Leap_Guides.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../objc/devguide/Sample_Tutorial.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Leap_SDK_Overview.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("Project_Setup.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="Leap_Guides.html?proglang=current" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      <a href="../../csharp/devguide/Sample_Tutorial.html" onclick="localStorage['currentAPI'] = 'csharp'">C# and Unity</a>
+    
+  </li>
+  <li>
+      <a href="../../cpp/devguide/Sample_Tutorial.html" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      <a href="../../java/devguide/Sample_Tutorial.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="../../python/devguide/Sample_Tutorial.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      Objective-C
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Guides.html" accesskey="U">Application Development</a>&raquo;
+  Hello World
+</span> -->
+        
+  <div class="section" id="id22">
+<h1>Hello World<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h1>
+<p>This article discusses the Objective-C sample application included with the Leap SDK. After reading this article, you should be ready to access Leap hand tracking data from your own Objective-C applications.</p>
+<p>In the Leap SDK folder, you can find the following files used for this article:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">LeapSDK/samples/SampleObjectiveC.xcodeproj</span></tt> — Xcode project file.</li>
+<li><tt class="docutils literal"><span class="pre">LeapSDK/samples/ObjectiveC/Sample.h</span></tt> — Header file for the sample code which interacts with the Leap library.</li>
+<li><tt class="docutils literal"><span class="pre">LeapSDK/samples/ObjectiveC/Sample.m</span></tt> — Sample code that interacts with the Leap library to print out tracking data.</li>
+<li><tt class="docutils literal"><span class="pre">LeapSDK/samples/ObjectiveC/*</span></tt> — Miscellaneous standard OS X application files.</li>
+<li><tt class="docutils literal"><span class="pre">LeapSDK/include/LeapObjectiveC.h</span></tt> — Header file for the Leap Objective C++ wrapper.</li>
+<li><tt class="docutils literal"><span class="pre">LeapSDK/include/LeapObjectiveC.mm</span></tt> — Objective C++ wrapper for the Leap library.</li>
+<li><tt class="docutils literal"><span class="pre">LeapSDK/include/Leap.h</span></tt> — Leap C++ API class and struct definitions.</li>
+<li><tt class="docutils literal"><span class="pre">LeapSDK/include/LeapMath.h</span></tt> — Leap C++ API Vector and Matrix class and struct definitions.</li>
+<li><tt class="docutils literal"><span class="pre">LeapSDK/lib/libLeap.dylib</span></tt> — Leap library for Mac.</li>
+</ul>
+<p>All the files needed for the sample application are already referenced in the SampleObjectiveC Xcode project file.</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>In a nutshell, the Leap motion tracking device detects and tracks hands and fingers placed within its field of view. The Leap captures this data one <em>frame</em> at a time. Your applications can use the Leap API to access this data.</p>
+<p>The sample application demonstrates how to use the Leap API to listen for frame events dispatched by the Leap and how to access the hand and finger data in each frame. The application is a small  program that prints information about detected hands and fingers to standard output.</p>
+<p>The sample application uses most of the key classes in the Leap API, including:</p>
+<ul class="simple">
+<li><a class="reference external" href="../api/Leap.Controller.html">LeapController</a> — the interface between the Leap and your application</li>
+<li><a class="reference external" href="../api/Leap.Frame.html">LeapFrame</a> — contains a set of hand and finger tracking data</li>
+<li><a class="reference external" href="../api/Leap.Hand.html">LeapHand</a> — contains tracking data for a detected hand</li>
+<li><a class="reference external" href="../api/Leap.Finger.html">LeapFinger</a> — contains tracking data for a detected finger</li>
+<li><a class="reference external" href="../api/Leap.Vector.html">LeapVector</a> — represents a 3D position or directional vector</li>
+<li><a class="reference external" href="../api/Leap.Gesture.html">LeapGesture</a> — represents a recognized gesture.</li>
+</ul>
+<p>For more detailed information about these classes, pleases refer to the Leap API reference documentation.</p>
+</div>
+<div class="section" id="using-the-leap-objective-c-wrapper">
+<h2>Using the Leap Objective-C Wrapper<a class="headerlink" href="#using-the-leap-objective-c-wrapper" title="Permalink to this headline">¶</a></h2>
+<p>The Objective-C wrapper translates the classes in the standard Leap C++ API into classes that can be used directly from Objective-C.</p>
+<p>The main difference between the Objective-C API and the Leap C++ API is the Listener callback mechanism. In Objective-C, you can use either an NSNotification-based listener or the LeapDelegate protocol to observe Leap events dispatched by a LeapController object. Another difference in the two APIs is that the class names of the Objective-C wrapper use the prefix <tt class="docutils literal"><span class="pre">Leap</span></tt>. Thus, the C++ <tt class="docutils literal"><span class="pre">Controller</span></tt> class is named <tt class="docutils literal"><span class="pre">LeapController</span></tt> in Objective-C.</p>
+</div>
+<div class="section" id="creating-a-leapcontroller-object">
+<h2>Creating a LeapController object<a class="headerlink" href="#creating-a-leapcontroller-object" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="../api/Leap.Controller.html">LeapController</a>. class provides the main interface between the Leap and your application. When you create a LeapController object, it connects to the Leap Motion software running on the computer and makes hand tracking data available through <a class="reference external" href="../api/Leap.Frame.html">LeapFrame</a> objects. You can access these LeapFrame objects by instantiating a LeapController object and calling the object&#8217;s <tt class="docutils literal"><span class="pre">frame:history</span></tt> method.</p>
+<p>If your application has a natural update loop or frame rate, then you can call the LeapController <tt class="docutils literal"><span class="pre">frame:history</span></tt> method as part of this update. Otherwise, you can either receive NSNotifications when a new LeapFrame of data is ready or add a delegate to the controller object.</p>
+<p>The sample application creates a LeapController object in the <tt class="docutils literal"><span class="pre">run</span></tt> method of the Sample class. The Sample class adopts the <a class="reference external" href="../api/Leap.Listener.html">LeapListener</a> protocol and adds itself to the LeapController object so that it can receive the Leap Motion events:</p>
+<div class="code objc highlight-python"><div class="highlight"><pre>- (void)run
+{
+    controller = [[LeapController alloc] init];
+    [controller addListener:self];
+    NSLog(@&quot;running&quot;);
+}
+</pre></div>
+</div>
+<p>The LeapController class&#8217; <tt class="docutils literal"><span class="pre">addlistener:listener</span></tt> method automatically subscribes the listener object to receive NSNotifications for the members of the LeapListener protocol which it implements.</p>
+<p>Note that the Leap library is multi-threaded. Using the NSNotification-based listener avoids most threading issues since all of the Leap Motion callback functions are invoked on the main thread. If you use a delegate instead, be aware that the delegate functions are invoked from threads created by the Leap Motion library, not the main, UI thread.</p>
+</div>
+<div class="section" id="adopting-the-leaplistener-protocol">
+<h2>Adopting the LeapListener protocol<a class="headerlink" href="#adopting-the-leaplistener-protocol" title="Permalink to this headline">¶</a></h2>
+<p>To add a listener object to a controller, create an object adopting the <a class="reference external" href="../api/Leap.Listener.html">LeapListener</a> protocol. All the protocol methods are optional. The Sample class implements the methods in the <a class="reference external" href="../api/Leap.Listener.html">LeapListener</a> protocol to handle notifications dispatched by the Leap Motion. The methods include:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">onInit:notification</span></tt> — dispatched once, when the controller to which the delegate is registered is initialized.</li>
+<li><tt class="docutils literal"><span class="pre">onConnect:notification</span></tt> — dispatched when the controller connects to the Leap and is ready to begin sending frames of motion tracking data.</li>
+<li><tt class="docutils literal"><span class="pre">onDisconnect:notification</span></tt> — dispatched if the controller disconnects from the Leap Motion controller (for example, if you unplug the device or shut down the Leap Motion software).</li>
+<li><tt class="docutils literal"><span class="pre">onExit:notification</span></tt> — Not implemented for notifications; will never be dispatched.</li>
+<li><tt class="docutils literal"><span class="pre">onFrame:notification</span></tt> — dispatched when a new frame of motion tracking data is available.</li>
+</ul>
+<p>In the lifecycle notification handlers, <tt class="docutils literal"><span class="pre">onInit</span></tt>, <tt class="docutils literal"><span class="pre">onConnect</span></tt>, and <tt class="docutils literal"><span class="pre">onDisconnect</span></tt>, the sample application simply prints a message to the NSLog output. For the <tt class="docutils literal"><span class="pre">onFrame</span></tt> notification, the handler implementation does a bit more work. When the controller dispatches the <tt class="docutils literal"><span class="pre">onFrame:notification</span></tt>, the method gets the latest frame of motion tracking data and prints information about the detected objects to the NSLog output.</p>
+<p>You must add a listener to the <a class="reference external" href="../api/Leap.Controller.html">LeapController</a> to use NSNotifications. While any object can subscribe to the Leap Motion notifications, the controller does not dispatch notifications unless there is at least one listener explicitly assigned.</p>
+<div class="section" id="adopting-the-leapdelgate-protocol">
+<h3>Adopting the LeapDelgate Protocol<a class="headerlink" href="#adopting-the-leapdelgate-protocol" title="Permalink to this headline">¶</a></h3>
+<p>If you prefer to use a delegate rather than NSNotifications, you can create an object adopting the <a href="#id384"><span class="problematic" id="id385">|LeapDelegate|_</span></a> protocol. The methods of the LeapDelegate protocol are the same as the LeapListener protocol except that they take a LeapController object as a parameter instead of an NSNotification object. The controller object invokes the methods defined in your LeapDelegate implementation whenever a new frame of tracking data is available (and also for a few other Leap events).</p>
+<p>You can assign either a LeapListener object or a LeapDelegate object to a controller, but not both.</p>
+</div>
+</div>
+<div class="section" id="getting-a-frame-of-data">
+<h2>Getting a Frame of data<a class="headerlink" href="#getting-a-frame-of-data" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="../api/Leap.Controller.html">LeapController</a> object dispatches an NSNotification object when the Leap Motion generates a new frame of motion tracking data. The notification object includes a reference to the controller. You can access the new frame of data by calling the controller object&#8217;s <tt class="docutils literal"><span class="pre">frame:history</span></tt> method. The <a class="reference external" href="../api/Leap.Frame.html">LeapFrame</a> object returned by <tt class="docutils literal"><span class="pre">frame:history</span></tt> is the top level of the Leap Motion model hierarchy and provides such information as a frame ID, a timestamp, and lists containing the hands, fingers, and tools in view.</p>
+<p>The following code defined in the Sample class&#8217;s implementation of the <tt class="docutils literal"><span class="pre">onFrame:notification</span></tt> method gets the most recent <a class="reference external" href="../api/Leap.Frame.html">LeapFrame</a> object from the controller, retrieves the list of hands from the LeapFrame and then logs the frame ID, timestamp, and the number of hands, fingers, and tools detected in the frame:</p>
+<div class="code objc highlight-python"><div class="highlight"><pre>- (void)onFrame:(NSNotification *)notification;
+{
+    LeapController *aController = (LeapController *)[notification object];
+
+    // Get the most recent frame and report some basic information
+    LeapFrame *frame = [aController frame:0];
+    NSLog(@&quot;Frame id: %lld, timestamp: %lld, hands: %ld, fingers: %ld, tools: %ld&quot;,
+          [frame id], [frame timestamp], [[frame hands] count],
+          [[frame fingers] count], [[frame tools] count]);
+</pre></div>
+</div>
+<p>The method goes on to examine the first hand in the list of hands:</p>
+<div class="code objc highlight-python"><div class="highlight"><pre>if ([[frame hands] count] != 0) {
+    // Get the first hand
+    LeapHand *hand = [[frame hands] objectAtIndex:0];
+</pre></div>
+</div>
+<p>A <a class="reference external" href="../api/Leap.Hand.html">LeapHand</a> object contains an ID, properties representing the hand&#8217;s physical characteristics, and a list of <a class="reference external" href="../api/Leap.Finger.html">LeapFinger</a> objects. Each LeapFinger object contains an ID and properties representing the characteristic of the finger.</p>
+<p>Once it has retrieved a hand, the method checks it for fingers and then averages the finger tip positions, printing the result with the number of fingers:</p>
+<div class="code objc highlight-python"><div class="highlight"><pre>// Check if the hand has any fingers
+NSArray *fingers = [hand fingers];
+if ([fingers count] != 0) {
+    // Calculate the hand&#39;s average finger tip position
+    LeapVector *avgPos = [[LeapVector alloc] init];
+    for (int i = 0; i &lt; [fingers count]; i++) {
+        LeapFinger *finger = [fingers objectAtIndex:i];
+        avgPos = [avgPos plus:[finger tipPosition]];
+    }
+    avgPos = [avgPos divide:[fingers count]];
+    NSLog(@&quot;Hand has %ld fingers, average finger tip position %@&quot;,
+          [fingers count], avgPos);
+}
+</pre></div>
+</div>
+<p>Next, the method prints the radius of a sphere fit to the hand&#8217;s curvature, along with the hand&#8217;s palm position:</p>
+<div class="code objc highlight-python"><div class="highlight"><pre>// Get the hand&#39;s sphere radius and palm position
+NSLog(@&quot;Hand sphere radius: %f mm, palm position: %@&quot;,
+      [hand sphereRadius], [hand palmPosition]);
+</pre></div>
+</div>
+<p>Finally, the <tt class="docutils literal"><span class="pre">onFrame:notification</span></tt> method uses <a class="reference external" href="../api/Leap.Vector.html">LeapVector</a> class methods to get the hand&#8217;s pitch, roll, and yaw angles from the hand&#8217;s normal vector and the direction vectors. The angles are converted from radians to degrees:</p>
+<div class="code objc highlight-python"><div class="highlight"><pre>// Get the hand&#39;s normal vector and direction
+const LeapVector *normal = [hand palmNormal];
+const LeapVector *direction = [hand direction];
+
+// Calculate the hand&#39;s pitch, roll, and yaw angles
+NSLog(@&quot;Hand pitch: %f degrees, roll: %f degrees, yaw: %f degrees\n&quot;,
+      [direction pitch] * LEAP_RAD_TO_DEG,
+      [normal roll] * LEAP_RAD_TO_DEG,
+      [direction yaw] * LEAP_RAD_TO_DEG);
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-gestures">
+<h2>Getting Gestures<a class="headerlink" href="#getting-gestures" title="Permalink to this headline">¶</a></h2>
+<p>To receive gestures from the Leap, you first have to enable recognition for each type of gesture you are interested in. You can enable gesture recognition any time after the controller connects to the Leap Motion controller. In the sample program, all gestures are enabled in the <tt class="docutils literal"><span class="pre">onConnect:notification</span></tt> handler using the <tt class="docutils literal"><span class="pre">enableGesture:type:enable</span></tt> methods defined in the <a class="reference external" href="../api/Leap.Controller.html">LeapController</a> class:</p>
+<div class="code objc highlight-python"><div class="highlight"><pre>- (void)onConnect:(NSNotification *)notification;
+{
+    NSLog(@&quot;Connected&quot;);
+    LeapController *aController = (LeapController *)[notification object];
+    [aController enableGesture:LEAP_GESTURE_TYPE_CIRCLE enable:YES];
+    [aController enableGesture:LEAP_GESTURE_TYPE_KEY_TAP enable:YES];
+    [aController enableGesture:LEAP_GESTURE_TYPE_SCREEN_TAP enable:YES];
+    [aController enableGesture:LEAP_GESTURE_TYPE_SWIPE enable:YES];
+}
+</pre></div>
+</div>
+<p>The Leap Motion controller adds <a class="reference external" href="../api/Leap.Gesture.html">LeapGesture</a> objects representing each recognized movement pattern to the gestures list in the <a class="reference external" href="../api/Leap.Frame.html">LeapFrame</a> object. In the <tt class="docutils literal"><span class="pre">onFrame:notification</span></tt> handler, the sample application loops through the gesture list and prints information about each one to the standard output. This operation is performed with a standard for-loop and switch statement.</p>
+<p>It is sometimes useful to compare the properties of a gesture in the current frame to those from an earlier frame. For example, the circle gesture has a <tt class="docutils literal"><span class="pre">progress</span></tt> attribute that describes how many times the finger has traversed the circle. This is the total progress, however; if you want the progress between frames, you must subtract the progress value of the gesture in the previous frame. You can do this by looking up the gesture in the previous frame using the gesture ID. The following code calculates the progress since the previous frame to derive the angle in radians:</p>
+<div class="code objc highlight-python"><div class="highlight"><pre>// Calculate the angle swept since the last frame
+float sweptAngle = 0;
+if(gesture.state != LEAP_GESTURE_STATE_START) {
+    LeapGesture *previousUpdate = [[aController frame:1] gesture:gesture.id];
+    sweptAngle = (gesture.progress - previousUpdate.progress) * 2 * LEAP_PI;
+}
+</pre></div>
+</div>
+<p>The full code for the gesture loop is:</p>
+<div class="code objc highlight-python"><div class="highlight"><pre>NSArray *gestures = [frame gestures:nil];
+for (int g = 0; g &lt; [gestures count]; g++) {
+    LeapGesture *gesture = [gestures objectAtIndex:g];
+    switch (gesture.type) {
+        case LEAP_GESTURE_TYPE_CIRCLE: {
+            LeapCircleGesture *circleGesture = (LeapCircleGesture *)gesture;
+            // Calculate the angle swept since the last frame
+            float sweptAngle = 0;
+            if(circleGesture.state != LEAP_GESTURE_STATE_START) {
+                LeapCircleGesture *previousUpdate = (LeapCircleGesture *)[[aController frame:1] gesture:gesture.id];
+                sweptAngle = (circleGesture.progress - previousUpdate.progress) * 2 * LEAP_PI;
+            }
+
+            NSLog(@&quot;Circle id: %d, %@, progress: %f, radius %f, angle: %f degrees&quot;,
+                  circleGesture.id, [Sample stringForState:gesture.state],
+                  circleGesture.progress, circleGesture.radius, sweptAngle * LEAP_RAD_TO_DEG);
+            break;
+        }
+        case LEAP_GESTURE_TYPE_SWIPE: {
+            LeapSwipeGesture *swipeGesture = (LeapSwipeGesture *)gesture;
+            NSLog(@&quot;Swipe id: %d, %@, position: %@, direction: %@, speed: %f&quot;,
+                  swipeGesture.id, [Sample stringForState:swipeGesture.state],
+                  swipeGesture.position, swipeGesture.direction, swipeGesture.speed);
+            break;
+        }
+        case LEAP_GESTURE_TYPE_KEY_TAP: {
+            LeapKeyTapGesture *keyTapGesture = (LeapKeyTapGesture *)gesture;
+            NSLog(@&quot;Key Tap id: %d, %@, position: %@, direction: %@&quot;,
+                  keyTapGesture.id, [Sample stringForState:keyTapGesture.state],
+                  keyTapGesture.position, keyTapGesture.direction);
+            break;
+        }
+        case LEAP_GESTURE_TYPE_SCREEN_TAP: {
+            LeapScreenTapGesture *screenTapGesture = (LeapScreenTapGesture *)gesture;
+            NSLog(@&quot;Screen Tap id: %d, %@, position: %@, direction: %@&quot;,
+                  screenTapGesture.id, [Sample stringForState:screenTapGesture.state],
+                  screenTapGesture.position, screenTapGesture.direction);
+            break;
+        }
+        default:
+            NSLog(@&quot;Unknown gesture type&quot;);
+            break;
+    }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="id23">
+<h2>Running the sample<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h2>
+<p>To run the sample application:</p>
+<ol class="arabic">
+<li><p class="first">Plug the Leap Motion device into a USB port and place it in front of you.</p>
+</li>
+<li><p class="first">If you haven&#8217;t already, install the Leap Motion software.</p>
+</li>
+<li><p class="first">The Leap Motion software should start automatically.</p>
+<p>The Leap Motion control panel icon appears in the notification area of the task bar (on Windows) or finder bar (on Mac) and turns green when ready. A service or daemon runs in the background and provides data to client applications through the Leap Motion API. You can use the <a class="reference internal" href="../supplements/Leap_Visualizer.html"><em>diagnostic visualizer</em></a> to check whether the software is set up and running correctly.</p>
+</li>
+<li><p class="first">Open the SampleObjectiveC project file in Xcode.</p>
+</li>
+<li><p class="first">Press the Xcode <em>Run</em> button.</p>
+</li>
+</ol>
+<p>You should see the messages &#8220;Initialized&#8221; and &#8220;Connected&#8221; printed to Debug Output area in Xcode when the application initializes and connects to the Leap Motion controller. You should then see frame information printed to the Debug Output area each time the controller dispatches the <tt class="docutils literal"><span class="pre">onFrame</span></tt> event. When you place a hand above the Leap Motion device, you should also see finger and palm position information printed. Note that the application window is intentionally left blank. All output appears in the Xcode Debug Output area.</p>
+<p>Now that you have seen how to access motion tracking data with the Leap Motion API, you can begin developing your own Objective-C applications that integrate the Leap Motion controller.</p>
+</div>
+</div>
+<blockquote>
+<div></div></blockquote>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">Objective-C Docs (v2.1)</a></li>
+          </ul><ul>
+<li class="toctree-l1"><a class="reference internal" href="Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Guides.html">Application Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Leap_SDK_Overview.html">SDK Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id22">Hello World</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-leap-objective-c-wrapper">Using the Leap Objective-C Wrapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-leapcontroller-object">Creating a LeapController object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adopting-the-leaplistener-protocol">Adopting the LeapListener protocol</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#adopting-the-leapdelgate-protocol">Adopting the LeapDelgate Protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-a-frame-of-data">Getting a Frame of data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-gestures">Getting Gestures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">Running the sample</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Project_Setup.html#id1">Setting Up a Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap_Architecture.html">System Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/Leap_Classes.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>Objective-C</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

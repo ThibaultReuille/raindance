@@ -1,0 +1,836 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>SwipeGesture &mdash; Leap Motion C# and Unity SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion C# and Unity SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="Leap_Classes.html" />
+    <link rel="next" title="Tool" href="Leap.Tool.html" />
+    <link rel="prev" title="ScreenTapGesture" href="Leap.ScreenTapGesture.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'csharp';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.javascript = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../csharp/api/Leap.SwipeGesture.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/api/Leap.SwipeGesture.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/api/Leap.SwipeGesture.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/api/Leap.SwipeGesture.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/api/Leap.SwipeGesture.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/api/Leap.SwipeGesture.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/api/Leap.SwipeGesture.html";
+            } else {
+                    redirectedLocation ="Leap_Classes.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../csharp/api/Leap.SwipeGesture.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Leap.ScreenTapGesture.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("Leap.Tool.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="../../javascript/api/Leap.SwipeGesture.html" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      C# and Unity
+    
+  </li>
+  <li>
+      <a href="../../cpp/api/Leap.SwipeGesture.html" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      <a href="../../java/api/Leap.SwipeGesture.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="../../python/api/Leap.SwipeGesture.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      <a href="../../objc/api/Leap.SwipeGesture.html" onclick="localStorage['currentAPI'] = 'objc'">Objective-C</a>
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Classes.html" accesskey="U">API Reference</a>&raquo;
+  SwipeGesture
+</span> -->
+        
+  <div class="section" id="swipegesture">
+<h1>SwipeGesture<a class="headerlink" href="#swipegesture" title="Permalink to this headline">¶</a></h1>
+</div>
+<style>.members {
+     -webkit-column-count:2; /* Chrome, Safari, Opera */
+     -moz-column-count:2; /* Firefox */
+     column-count:2;
+     }
+     strong {color:gray;}
+</style><p><strong>Properties:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#csharpclass_leap_1_1_swipe_gesture_1a3760f0d03c577bd8a45779cf3f9a46a8">Direction</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_swipe_gesture_1ad672b543e9e5b52d5b8fa70936c02db0">Pointable</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_swipe_gesture_1a6c031a0f0071c72b344465823fc0e5a5">Position</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_swipe_gesture_1a61efabcca15cccefe7d85ea6da6af5e3">Speed</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_swipe_gesture_1a939160fcb00686c4b1cdaadcf99ff49f">StartPosition</a></li>
+</ul>
+</div>
+<p><strong>Methods:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#csharpclass_leap_1_1_swipe_gesture_1a195c9d584fc36d092bd0b7390ac0d323">ClassType()</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_swipe_gesture_1a38c2785194bd75d43794620df1d239ab">SwipeGesture(Gesture rhs)</a></li>
+</ul>
+</div>
+<div class="line-block" id="csharpclass_leap_1_1_swipe_gesture">
+<div class="line"><em>class</em> <strong>Leap::SwipeGesture</strong></div>
+</div>
+<blockquote>
+<div><p>The <a class="reference internal" href="#csharpclass_leap_1_1_swipe_gesture"><em>SwipeGesture</em></a> class represents a swiping motion a finger or tool. </p>
+<p><p><img alt="api/../../../images/Leap_Gesture_Swipe.png" src="api/../../../images/Leap_Gesture_Swipe.png" /></p>
+<p><a class="reference internal" href="#csharpclass_leap_1_1_swipe_gesture"><em>SwipeGesture</em></a> objects are generated for each visible finger or tool. Swipe gestures are continuous; a gesture object with the same ID value will appear in each frame while the gesture continues.</p>
+<p><strong>Important:</strong> To use swipe gestures in your application, you must enable recognition of the swipe gesture. You can enable recognition with:</p>
+<p><pre class="literal-block">
+controller.EnableGesture(<a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a>.GestureType.TYPE_SWIPE);
+</pre>
+</p>
+<p>You can set the minimum length and velocity required for a movement to be recognized as a swipe using the config attribute of a connected <a class="reference internal" href="Leap.Controller.html#csharpclass_leap_1_1_controller"><em>Controller</em></a> object. Use the following keys to configure swipe recognition:</p>
+<p><table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="15%" />
+<col width="20%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key string</th>
+<th class="head">Value type</th>
+<th class="head">Default value</th>
+<th class="head">Units</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Gesture.Swipe.MinLength</td>
+<td>float</td>
+<td>150</td>
+<td>mm</td>
+</tr>
+<tr class="row-odd"><td>Gesture.Swipe.MinVelocity</td>
+<td>float</td>
+<td>1000</td>
+<td>mm/s</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>The following example demonstrates how to set the swipe configuration parameters:</p>
+<p><pre class="literal-block">
+controller.Config.SetFloat(&quot;Gesture.Swipe.MinLength&quot;, 200.0f);
+controller.Config.SetFloat(&quot;Gesture.Swipe.MinVelocity&quot;, 750f);
+controller.Config.Save();
+</pre>
+</p>
+<p>The <a class="reference internal" href="Leap.Controller.html#csharpclass_leap_1_1_controller"><em>Controller</em></a> object must be connected to the Leap Motion service/daemon before setting the configuration parameters.</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+<em>Public Functions</em><blockquote>
+<div><p><span class="target" id="csharpclass_leap_1_1_gesture_1ad263bd636f3d9b957d141ecbf920cadb"></span><div class="line-block">
+<div class="line">bool <strong>Equals</strong>(<a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Compare <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> object equality. </p>
+<p><p><pre class="literal-block">
+Boolean gestureIsEqual = thisGesture == thatGesture;
+</pre>
+</p>
+<p>Two Gestures are equal if they represent the same snapshot of the same recognized movement. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_swipe_gesture_1a38c2785194bd75d43794620df1d239ab"></span><div class="line-block">
+<div class="line"> <strong>SwipeGesture</strong>(<a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a <a class="reference internal" href="#csharpclass_leap_1_1_swipe_gesture"><em>SwipeGesture</em></a> object from an instance of the <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> class. </p>
+<p><p><pre class="literal-block">
+if(gesture.Type == <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a>.GestureType.TYPE_SWIPE) {
+    SwipeGesture swipeGesture = new SwipeGesture(gesture);
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">rhs</span></tt> - <p>The <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> instance to specialize. This <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> instance must be a <a class="reference internal" href="#csharpclass_leap_1_1_swipe_gesture"><em>SwipeGesture</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_gesture_1aa73e7c4dd1df5fd5fbf81c7764ee1533"></span><div class="line-block">
+<div class="line">override string <strong>ToString</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>A string containing a brief, human-readable description of this <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a>. </p>
+<p><p><pre class="literal-block">
+for(int g = 0; g &lt; frame.Gestures().Count; g++){
+    Console.WriteLine(frame.Gestures()[g].ToString());
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Property</em><blockquote>
+<div><p><span class="target" id="csharpclass_leap_1_1_swipe_gesture_1a3760f0d03c577bd8a45779cf3f9a46a8"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>Direction</strong></p>
+<blockquote>
+<div><p>The unit direction vector parallel to the swipe motion. </p>
+<p><p><pre class="literal-block">
+Vector swipeDirection = swipe.Direction;
+</pre>
+</p>
+<p>You can compare the components of the vector to classify the swipe as appropriate for your application. For example, if you are using swipes for two dimensional scrolling, you can compare the x and y values to determine if the swipe is primarily horizontal or vertical.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> The unit direction vector representing the swipe motion. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_gesture_1ab5d905c8388713e768219ba0fc4f2613"></span>long <strong>Duration</strong></p>
+<blockquote>
+<div><p>The elapsed duration of the recognized movement up to the frame containing this <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> object, in microseconds. </p>
+<p><p><pre class="literal-block">
+float microseconds = gesture.Duration;
+</pre>
+</p>
+<p>The duration reported for the first <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> in the sequence (with the STATE_START state) will typically be a small positive number since the movement must progress far enough for the Leap Motion software to recognize it as an intentional gesture.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>int64_t the elapsed duration in microseconds. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_gesture_1a1d05bdbecceb043f18942ed25a439abf"></span>float <strong>DurationSeconds</strong></p>
+<blockquote>
+<div><p>The elapsed duration in seconds. </p>
+<p><p><pre class="literal-block">
+float seconds = gesture.DurationSeconds;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>duration() </dd>
+<dt><strong>Return</strong></dt>
+<dd>float the elapsed duration in seconds. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_gesture_1a7965d86d89abc02cd0e7054c1c82342b"></span><a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> <strong>Frame</strong></p>
+<blockquote>
+<div><p>The <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> containing this <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> instance. </p>
+<p> _ <pre class="literal-block">
+<a class="reference internal" href="#csharpclass_leap_1_1_gesture_1a7965d86d89abc02cd0e7054c1c82342b"><em>Frame</em></a> frameOfGesture = gesture.Frame;
+</pre>
+<dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> The parent <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> object. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_gesture_1accdfdf07e2a97bfe545bcb8c925e428e"></span><a class="reference internal" href="Leap.HandList.html#csharpclass_leap_1_1_hand_list"><em>HandList</em></a> <strong>Hands</strong></p>
+<blockquote>
+<div><p>The list of hands associated with this <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a>, if any. </p>
+<p><p><pre class="literal-block">
+HandList handsForGesture = gesture.Hands;
+</pre>
+</p>
+<p>If no hands are related to this gesture, the list is empty.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="Leap.HandList.html#csharpclass_leap_1_1_hand_list"><em>HandList</em></a> the list of related <a class="reference internal" href="Leap.Hand.html#csharpclass_leap_1_1_hand"><em>Hand</em></a> objects. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_gesture_1afe0b47b3c92f2f69ea3da50cb72553eb"></span>int <strong>Id</strong></p>
+<blockquote>
+<div><p>The gesture ID. </p>
+<p><p>All <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> objects belonging to the same recognized movement share the same ID value. Use the ID value with the Frame::gesture() method to find updates related to this <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> object in subsequent frames.</p>
+<p><pre class="literal-block">
+    int gestureToFind = gesture.Id;
+    GestureList manyGestures = frame.Gestures(olderFrame);
+    for(int g = 0; g &lt; manyGestures.Count; g++)
+    {
+        if (manyGestures[g].<a class="reference internal" href="#csharpclass_leap_1_1_gesture_1afe0b47b3c92f2f69ea3da50cb72553eb"><em>Id</em></a> == gestureToFind) {
+            //Process it...
+        }
+    }
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>int32_t the ID of this <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a>. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_gesture_1a4bf139b41497a574a2bd0a59e154b885"></span><a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> <strong>Invalid</strong></p>
+<blockquote>
+<div><p>Returns an invalid <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> object. </p>
+<p><p>You can use the instance returned by this function in comparisons testing whether a given <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> instance is valid or invalid. (You can also use the Gesture::isValid() function.)</p>
+<p><pre class="literal-block">
+<a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a> trackedGesture = frame.Gesture(gestureID);
+if (trackedGesture != <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a>.Invalid) {
+    //Process it...
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The invalid <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> instance. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_gesture_1a62885a2911b2c21274564c3d9e407c2c"></span>bool <strong>IsValid</strong></p>
+<blockquote>
+<div><p>Reports whether this <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> instance represents a valid <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a>. </p>
+<p><p>An invalid <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> object does not represent a snapshot of a recognized movement. Invalid <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> objects are returned when a valid object cannot be provided. For example, when you get an gesture by ID using Frame::gesture(), and there is no gesture with that ID in the current frame, then gesture() returns an Invalid <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> object (rather than a null value). Always check object validity in situations where an gesture might be invalid.</p>
+<p><pre class="literal-block">
+if (gesture.IsValid) {
+    // Process it...
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>bool True, if this is a valid <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> instance; false, otherwise. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_swipe_gesture_1ad672b543e9e5b52d5b8fa70936c02db0"></span><a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> <strong>Pointable</strong></p>
+<blockquote>
+<div><p>The finger performing the swipe gesture. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="#csharpclass_leap_1_1_swipe_gesture_1ad672b543e9e5b52d5b8fa70936c02db0"><em>Pointable</em></a> swiper = swipe.Pointable;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> A <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object representing the swiping finger. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_gesture_1a41e38c17fc49dcb15fb9818bebc67cae"></span><a class="reference internal" href="Leap.PointableList.html#csharpclass_leap_1_1_pointable_list"><em>PointableList</em></a> <strong>Pointables</strong></p>
+<blockquote>
+<div><p>The list of fingers and tools associated with this <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a>, if any. </p>
+<p><p>If no <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> objects are related to this gesture, the list is empty.</p>
+<p><pre class="literal-block">
+PointableList pointablesForGesture = gesture.Pointables;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="Leap.PointableList.html#csharpclass_leap_1_1_pointable_list"><em>PointableList</em></a> the list of related <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> objects. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_swipe_gesture_1a6c031a0f0071c72b344465823fc0e5a5"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>Position</strong></p>
+<blockquote>
+<div><p>The current position of the swipe. </p>
+<p><p><pre class="literal-block">
+Vector currentSwipePosition = swipe.Position;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> The current swipe position within the Leap Motion frame of reference, in mm. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_swipe_gesture_1a61efabcca15cccefe7d85ea6da6af5e3"></span>float <strong>Speed</strong></p>
+<blockquote>
+<div><p>The swipe speed in mm/second. </p>
+<p><p><pre class="literal-block">
+float currentSwipeSpeed = swipe.Speed;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>float The speed of the finger performing the swipe gesture in millimeters per second. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_swipe_gesture_1a939160fcb00686c4b1cdaadcf99ff49f"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>StartPosition</strong></p>
+<blockquote>
+<div><p>The position where the swipe began. </p>
+<p><p><pre class="literal-block">
+Vector swipeStart = swipe.StartPosition;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> The starting position within the Leap Motion frame of reference, in mm. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_gesture_1a0e94c10c6ea32ba5280d9f52e70e40f3"></span><a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture_1a50af89fcbe8ccc22f6b6ea5f476cfdc9"><em>Gesture.GestureState</em></a> <strong>State</strong></p>
+<blockquote>
+<div><p>The gesture state. </p>
+<p><p>Recognized movements occur over time and have a beginning, a middle, and an end. The &#8216;state()&#8217; attribute reports where in that sequence this <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture"><em>Gesture</em></a> object falls.</p>
+<p><pre class="literal-block">
+for(int g = 0; g &lt; frame.Gestures().Count; g++)
+{
+    switch (frame.Gestures()[g].State) {
+        case <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a>.GestureState.STATE_START:
+        //Handle starting gestures
+        break;
+    case <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a>.GestureState.STATE_UPDATE:
+        //Handle continuing gestures
+        break;
+    case <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a>.GestureState.STATE_STOP:
+        //Handle ending gestures
+        break;
+        default:
+        //Handle unrecognized states
+        break;
+    }
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="#csharpclass_leap_1_1_gesture_1a0e94c10c6ea32ba5280d9f52e70e40f3"><em>Gesture::State</em></a> A value from the <a class="reference internal" href="#csharpclass_leap_1_1_gesture_1a0e94c10c6ea32ba5280d9f52e70e40f3"><em>Gesture::State</em></a> enumeration. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_gesture_1a09cb1e73d0c9af1311e40dfe3eb8503c"></span><a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture_1a2a0c37051efa1205aa5aade68616c947"><em>Gesture.GestureType</em></a> <strong>Type</strong></p>
+<blockquote>
+<div><p>The gesture type. </p>
+<p><p><pre class="literal-block">
+for(int g = 0; g &lt; frame.Gestures().Count; g++)
+{
+    switch (frame.Gestures()[g].Type) {
+    case <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a>.GestureType.TYPE_CIRCLE:
+        //Handle circle gestures
+        break;
+    case <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a>.GestureType.TYPE_KEY_TAP:
+        //Handle key tap gestures
+        break;
+    case <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a>.GestureType.TYPE_SCREEN_TAP:
+        //Handle screen tap gestures
+        break;
+    case <a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a>.GestureType.TYPE_SWIPE:
+        //Handle swipe gestures
+        break;
+        default:
+        //Handle unrecognized gestures
+        break;
+    }
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="#csharpclass_leap_1_1_gesture_1a09cb1e73d0c9af1311e40dfe3eb8503c"><em>Gesture::Type</em></a> A value from the <a class="reference internal" href="#csharpclass_leap_1_1_gesture_1a09cb1e73d0c9af1311e40dfe3eb8503c"><em>Gesture::Type</em></a> enumeration. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Public Static Functions</em><blockquote>
+<div><p><span class="target" id="csharpclass_leap_1_1_swipe_gesture_1a195c9d584fc36d092bd0b7390ac0d323"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Gesture.html#csharpclass_leap_1_1_gesture_1a2a0c37051efa1205aa5aade68616c947"><em>Gesture.GestureType</em></a> <strong>ClassType</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The swipe gesture type. </p>
+<p><p><pre class="literal-block">
+if(gesture.Type == SwipeGesture.ClassType()) {
+    SwipeGesture swipeGesture = new SwipeGesture(gesture);
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Type The type value designating a swipe gesture. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">C# and Unity Docs (v2.1)</a></li>
+          </ul><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Leap_Classes.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Leap.Arm.html#id3">Arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Bone.html#id3">Bone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.CircleGesture.html#id3">CircleGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Config.html#id2">Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Controller.html#id2">Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Device.html">Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.DeviceList.html">DeviceList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Finger.html#id3">Finger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.FingerList.html">FingerList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Frame.html">Frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Gesture.html#id2">Gesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.GestureList.html">GestureList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Hand.html">Hand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.HandList.html">HandList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ImageList.html">ImageList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.InteractionBox.html">InteractionBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.KeyTapGesture.html">KeyTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Listener.html">Listener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Matrix.html">Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Pointable.html#id2">Pointable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.PointableList.html">PointableList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ScreenTapGesture.html">ScreenTapGesture</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">SwipeGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Tool.html">Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ToolList.html">ToolList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Vector.html">Vector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>C# and Unity</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

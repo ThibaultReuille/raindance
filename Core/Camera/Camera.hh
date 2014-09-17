@@ -107,6 +107,7 @@
  
  	inline const glm::mat4 getViewProjectionMatrix() const { return m_Projection * m_View; }
  
+ 	inline void setPosition(const glm::vec3& position) { m_Position = position; }
  	inline const glm::vec3& getPosition() const { return m_Position; }
  	inline glm::vec3* getPositionPtr() { return &m_Position; }
  

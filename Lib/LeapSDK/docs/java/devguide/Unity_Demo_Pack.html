@@ -1,0 +1,710 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Unity Demo Pack &mdash; Leap Motion Java SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion Java SDK v2.1 documentation" href="../index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'java';
+    var hasAPI = {};
+    hasAPI.csharp = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../java/devguide/Unity_Demo_Pack.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/devguide/Unity_Demo_Pack.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/devguide/Unity_Demo_Pack.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/devguide/Unity_Demo_Pack.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/devguide/Unity_Demo_Pack.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/devguide/Unity_Demo_Pack.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/devguide/Unity_Demo_Pack.html";
+            } else {
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../java/devguide/Unity_Demo_Pack.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){    }
+    else if( character == "K" & e.altKey){
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="../../javascript/index.html" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      <a href="../../csharp/devguide/Unity_Demo_Pack.html" onclick="localStorage['currentAPI'] = 'csharp'">C# and Unity</a>
+    
+  </li>
+  <li>
+      <a href="../../cpp/index.html" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      Java
+    
+  </li>
+  <li>
+      <a href="../../python/index.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      <a href="../../objc/index.html" onclick="localStorage['currentAPI'] = 'objc'">Objective-C</a>
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+  Unity Demo Pack
+</span> -->
+        
+  <div class="section" id="unity-demo-pack">
+<h1>Unity Demo Pack<a class="headerlink" href="#unity-demo-pack" title="Permalink to this headline">¶</a></h1>
+<p><strong>Note:</strong> The Unity Demo Pack uses version 1.0 of the Leap Motion SDK. You can use the asset as is, but updating it to use the new version 2 libraries has not been tested.</p>
+<p>To download assets designed for version 2, go to <a class="reference external" href="https://www.assetstore.unity3d.com/en/#!/content/17770">Leap Motion Skeletal Assets</a>.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RA7a6foNlHo?rel=0" frameborder="0" allowfullscreen=""></iframe><div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The &#8220;Leap Motion Demo Pack&#8221; is a helpful addition for developers using the Leap Motion Controller. This demo pack provides contextual examples that can act as both a starting point and a set of inspirational resources to envisage how Leap Motion interaction might be incorporated in your game. The scripts are written to be flexible to maximize functionality while creating a basic framework for how hands will interact with game objects.</p>
+<p><a class="reference external" href="https://www.assetstore.unity3d.com/#/content/12639">Download the Leap Motion Demo Pack from the Unity Asset Store.</a></p>
+<p>Six example scenes are included. Each demonstrates the core input functionality of the Leap Motion and how to utilize it within the Unity development environment.</p>
+<p><strong>Scenes included with the kit</strong></p>
+<ol class="arabic simple">
+<li><strong>Weapons</strong> guns, grenades, and sword swiping! Throw a grenade, fire a machine gun, slice blocks with your sword!</li>
+<li><strong>Flying</strong> example with immersive cityscape environment. Fly with both hands.</li>
+<li><strong>Bowling</strong> physics simulation with rotational force based on your hand&#8217;s spin. Strike!</li>
+<li><strong>Driving</strong> simulation using Unity wheel physics. Your hands control the rotation of the car&#8217;s steering wheel &amp; throttle lever.</li>
+<li><strong>Boxing</strong> punching bag setup with virtual gloves!</li>
+<li><strong>ATV Driving</strong> grab onto the handles, accelerate, and brake. Toggle between first and third person camera’s.</li>
+</ol>
+<p><a href="#id1"><span class="problematic" id="id2">*</span></a>Requires the latest Leap Motion SDK to run.</p>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>First, set up the Leap Motion SDK to work within the Unity editor. See: <a class="reference internal" href="Project_Setup.html"><em>Setting Up a Project</em></a>.</p>
+</div>
+<div class="section" id="terminology">
+<h2>Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Hand Controller - Assigns Leap hands to Unity Hands. Also holds Hand Settings for the Unity Hands.</li>
+<li>Unity Hand - Virtual hand game object that is either left or right hand. Holds the assigned Leap Motion SDK hand. This is the absolute position/rotation of hand and fingers in the Unity world. Detects fingers and uses finger detection to identify and assign fingers to finger game objects, these fingers are then parented to the Unity Hand.</li>
+<li>Hand Type - Responsible for handling displaying of the hands and hand collisions. Also responsible for holding and updating the current Leap Hand State. The Hand Type uses the Unity Hand to update its position/rotation but does not need to be at the same location as the Unity Hand.</li>
+<li>Rigged Hand - Uses Unity Hand finger information to rotate joints of a rigged hand model.</li>
+<li>Leap Game Object - Game objects that can be interacted with by Hand Type.</li>
+<li>Leap Hand State - The Leap input control state. Updates any currently held Leap Game Objects.</li>
+<li>Leap God Hand State - Default state that the Hand Type starts in. This state allows hands to appear in the world and to interact with Leap Game Objects.</li>
+</ul>
+</div>
+<div class="section" id="definitions">
+<h2>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hand-controller">
+<h3>Hand Controller<a class="headerlink" href="#hand-controller" title="Permalink to this headline">¶</a></h3>
+<p>The back-end controller is used to keep track of the Leap SDK Hands introduced into the view of the Leap Motion. It keeps track of and assigns the Leap Hands to the appropriate Unity Hands. The Hand Controller will determine whether a Leap Hand is a left or a right hand, then assign it to the corresponding Unity Hand. Also responsible for holding the settings for the Unity Hands.</p>
+</div>
+<div class="section" id="properties">
+<h3>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">Unity Hands - Holds the left and right Unity Hand game objects.</p>
+</li>
+<li><p class="first">Hand Settings</p>
+<blockquote>
+<div><ul class="simple">
+<li>Highlight Objects -  Defines whether hovered Leap Game Objects will be highlighted.</li>
+<li>Finger Distance Multiplier - Defines the distance of the fingers from the palm of the hand.</li>
+<li>Leap Position Multiplier - Multiplies the distance that the Unity Hands will be displaced from the Leap in the unity game world. Increase the value in X, Y, or Z World Space if the hands are not traveling far enough.</li>
+<li>Throwing Strength - Force multiplier for thrown objects.</li>
+<li>Angular Strength - Multiplier for angular momentum of thrown objects.</li>
+<li>Max Throwing Velocity - Maximum throwing velocity.</li>
+<li>Max Angular Throwing Velocity - Maximum Angular Throwing Velocity.</li>
+<li>Leap Position Offset - This holds the transform data for where the Leap should be in the game world so that the hands know where they should offset from (Should be the Leap Controller  game object that is the parent to the Unity Hands).</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Leap Position Offset</strong></p>
+<p>This is the transform that defines the location of each Unity Hand. Think of the Leap Position Offset as the actual Leap Motion device in the game world. The Unity Hands will offset according to the position and rotation from this transform offset.</p>
+<p><strong>Adjusting Leap Position</strong></p>
+<p>To adjust the Leap Position (mainly useful to lower/raise where hands are in the scene), simply adjust the Leap Position Offset object in the game world. Changing the position of the Unity Hands in the scene is irrelevant since the hands will be repositioned to wherever the Leap Position Offset object is in the scene.</p>
+<p><strong>Unity Hands</strong></p>
+<p>Absolute positioning of Leap hand and fingers translated into the Unity world. Uses finger detection to assign fingers to the corresponding finger game objects. The Leap SDK Hand object is stored in the Unity Hand. When a hand is introduced into the view of the Leap Motion, the hand will be assigned to a Unity Hand depending on whether it is a left or right hand. If the hand is undetermined to be a left or right hand, it&#8217;s isHandDetermined public variable will be false. Responsible for updating Hand Type.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li>Initial Leap Object - The Leap Game Object that starts in the hand when the scene starts.</li>
+<li>Hand Type - Specify the Hand Type prefab that is associated with the Unity Hand. When the scene starts, the Hand Type will be instantiated and assigned to the corresponding Unity Hand.</li>
+<li>Is Right Hand - Check this if this hand should be the right hand.</li>
+</ul>
+<p><strong>Accessing Finger Information</strong></p>
+<p>The Unity Hand holds the game objects of the fingers in the game world, this information can be accessed to do specific things with the fingers. This information is stored in the list of Game Objects called ‘unityFingers’. For an example of this in use, refer to the LeapShootableObject script which uses the index finger to aim.</p>
+<p><strong>Hand Types</strong></p>
+<p>The Hand Types are game objects that are a bridge between the Unity Hand and the Leap Game Objects that are interacted with. It handles collisions with Leap Game Objects as well as displaying of the hand model. The Hand Type uses the Unity Hand to update its own position/rotation. The Hand Type is also used to store the current state of the hands as well as update the state and its associated Leap Game Objects. There are three default Unity Hand Types used for displaying the hand model in the world; HandTypeBasic, HandTypeMultiple, and HandTypeRigged. A hand type is attached to a Unity Hand and is instantiated when the scene starts.</p>
+<p><strong>Hand Type Basic</strong></p>
+<p>A hand type that has two game objects that represent the hand model; a hand/palm model and a finger model. The finger distance from the palm of the hand can be adjusted by adjusting the Finger Distance Multiplier value in the Leap Hand Controller.</p>
+<p><strong>Hand Type Multiple</strong></p>
+<p>A hand type that has multiple game objects to represent the different hand states the hand can be in. By default, there are three hand states; unknown, open, and closed.</p>
+<p><strong>Hand Type Rigged</strong></p>
+<p>A hand type that uses a rigged hand to display the hand. A rigged hand prefab needs to attach the Rigged Hand Transforms script and attach the joints of each finger to that script.</p>
+<p><strong>Leap Game Object</strong></p>
+<p>Base class for all game objects that can be interacted with by the Unity Hand Type. When a Leap Game Object is picked up, it switches the corresponding Hand Types’ Leap Hand State to be that of which is defined by the Leap Game Object. All objects that you can interact with using the Leap should be inherited from the Leap Game Object. The Leap Game Object is a way of indicating that the game object can be picked up when the Unity Hands Type is in the God Hand state. For example, when a Leap Game Object has a state of type LeapShootableState and is picked up, the Unity Hand Type that picks it up will change to the corresponding LeapShootableState in the Leap Hand States folder. Now when you make a shooting gesture with your fingers, bullets will be fired.</p>
+<p><strong>Properties</strong></p>
+<ul class="simple">
+<li>Grab Center Offset - This is the transform data of a game object that specifies the position and orientation offset of the Leap Game Object.</li>
+<li>Is State Persistent - Specify whether corresponding Unity Hand Type can be exited from its current Leap Hand State.</li>
+<li>Drop On Lost - When hand is lost, determine whether object is released.</li>
+<li>Can Release - Specifies whether the held object can be dropped when in God Hand state.</li>
+<li>Can Go Through Geometry – If checked, when the Unity Hand Type interacts with the object, the object can go through geometry.</li>
+<li>Can Highlight - When Unity Hand Type collides with object, it is highlighted.</li>
+<li>Hand Is Visible – When Unity Hand interacts with object, determines whether hand is visible or not.</li>
+<li>Can Use Both Hands – If checked, object can be interacted with multiple hands.</li>
+<li>Highlight - Material used to highlight Leap Game Object.</li>
+</ul>
+<p><strong>Leap Basic Object</strong></p>
+<p>A basic object that can be picked up and dropped.</p>
+<p><strong>Leap Inactive Object</strong></p>
+<p>An object that cannot be picked up. Useful if you need an object that can be highlighted by the Unity Hand Type. This is used for the hand brake in the ATVDriving scene.</p>
+<p><strong>Leap Throwable Object</strong></p>
+<p>A Leap Basic Object that can be thrown rather than just dropped.</p>
+<p><strong>Leap Shootable Object</strong></p>
+<p>A Leap Game Object that can shoot projectiles when thumb is pressed to index finger. Use index finger to aim.</p>
+<p><strong>Leap Swingable Object</strong></p>
+<p>A Leap Game Object that collides with objects and creates a slashing effect when it moves fast enough.</p>
+<p><strong>Leap Hand State</strong></p>
+<p>Defines the controls and the way the Unity Hand Type interacts with Leap Game Objects in the world. The default Leap Hand State is the God Hand state.</p>
+<p><strong>Leap State</strong></p>
+<p>Base class for all Leap States.</p>
+<p><strong>God Hand State</strong></p>
+<p>The default Leap Hand state in which the Unity Hand Type interacts with Leap Game Objects by doing a grabbing motion with your hands above the Leap Motion. When you grab a Leap Game Object, the Unity Hand Type will switch states accordingly to the Leap Game Object’s defined Leap Hand State.</p>
+<p><strong>Leap No Hand State</strong></p>
+<p>A state that the hands go to when the hand leaves the view of the Leap Motion.</p>
+</div>
+</div>
+<div class="section" id="step-by-step-tutorials">
+<h2>Step By Step Tutorials<a class="headerlink" href="#step-by-step-tutorials" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="setting-up-a-scene">
+<h3>Setting Up a Scene<a class="headerlink" href="#setting-up-a-scene" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Start a new scene.</li>
+<li>In the “Prefabs/Leap Controller” folder place the “Leap Controller Multiple” prefab into the scene. Zero out the position and rotation transforms.</li>
+<li>Position the camera to be at the position: (0, 6, -10).</li>
+<li>Play scene. Unity Hand Types should move to the position of your hands above the Leap Motion.</li>
+</ol>
+</div>
+<div class="section" id="adding-a-leap-game-object">
+<h3>Adding a Leap Game Object<a class="headerlink" href="#adding-a-leap-game-object" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Add a cube under the Unity Hands at: Position: (0, 2, 0), Scale: (25, 1, 25)</li>
+<li>Rename the cube to “Floor”.</li>
+<li>Add a point light at position: (0, 5, 0).</li>
+<li>Add a cube at position: (0, 3.5, 0).</li>
+<li>Rename the cube to “Grabbable Cube”.</li>
+<li>Under the “Scripts/Leap Starter Kit/Leap Objects” folder, attach the LeapThrowableObject script to the Grabbable Cube.</li>
+<li>Play the scene. Move your hand over the cube and notice the cube changes colors. With the hands open over the Leap Motion, do a grabbing motion to grab the Grabbable Cube. Move the cube around and throw it by opening your hand back up so that the Leap Motion can see your fingers again.</li>
+<li>Congratulations! You should now have virtual hands interacting with object in Unity using the Leap Motion!</li>
+</ol>
+</div>
+<div class="section" id="making-unity-hands-move-with-the-camera">
+<h3>Making Unity Hands Move with the Camera<a class="headerlink" href="#making-unity-hands-move-with-the-camera" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Make the Leap Controller prefab in your scene a child of the Main Camera by dragging the Leap Controller prefab onto the Main Camera in the Hierarchy tab. Now when you move or rotate the camera, the hands will always stay in the same place locked to the camera.</li>
+<li>Play the scene. In the Scene view, move the camera around and notice the hands stay in place in regards to the camera.</li>
+</ol>
+</div>
+<div class="section" id="changing-unity-hand-types">
+<h3>Changing Unity Hand Types<a class="headerlink" href="#changing-unity-hand-types" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>There are three default hand types; Basic, Multiple, and Rigged. In the “Prefabs/Leap Controller” folder, you can drag and drop one of the three types into your scene.</li>
+<li>To replace the Hand Type, in the “Prefabs/Hand Types” folder, find the Model Type you want.  In the scene, under the Leap Controller, locate the left/right game objects and attach the preferred Model Type prefab to the Hand Type field in the Unity Hand script. This way, Hand Types can be easily switched without much effort.</li>
+</ol>
+</div>
+<div class="section" id="creating-a-rigged-hand-type">
+<h3>Creating a Rigged Hand Type<a class="headerlink" href="#creating-a-rigged-hand-type" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Instead of adding the “LeapControllerMultiple” prefab to a scene, add a “LeapControllerRigged” prefab.</li>
+<li>The default rigged hands will appear by default. To Replace the rigged hand with your own rigged hand, you will need to create a new Rigged Model Type.</li>
+<li>To create a new Rigged Model Type, first you will need to take your rigged hand model and attach the script ‘Rigged Hand Transforms’ to the parent object.</li>
+<li>In the Inspector, make the Joints size 5 and attach the transform of the base of rotation for each finger to each element in the list. The first finger in the list should be the left most finger for each hand (ex. Left hand is pinky and right hand is thumb). Save this as a prefab.</li>
+<li>You must then create a new game object with the ‘Hand Type Rigged’ script attached, in the ‘Rigged Hand Model’ field on the script, attach the newly created rigged hand prefab. Save this as a prefab.</li>
+<li>Once the Hand Type Rigged prefab is created, attach this prefab to the associated Unity Hand in the scene.</li>
+</ol>
+<p>Note: When creating the rigged hand in a 3D modeling program, make sure the base of each finger is rotated so that each finger is pointing forward from the center of the world so that all its rotations are zero.</p>
+</div>
+<div class="section" id="adding-a-new-leap-hand-state-involves-scripting">
+<h3>Adding a new Leap Hand State (Involves Scripting)<a class="headerlink" href="#adding-a-new-leap-hand-state-involves-scripting" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">In the folder “Scripts/Leap Starter Kit/Leap Hand States”, create a new script and call it  “LeapPointableState”.</p>
+</li>
+<li><p class="first">Rename the class to LeapPointableState and have it inherit from LeapState.</p>
+</li>
+<li><p class="first">Add the following code to the top of the class definition:</p>
+<div class="highlight-python"><div class="highlight"><pre>public LeapPointableState() { }
+   public LeapPointableState(LeapGameObject obj)
+   {
+       activeObj = obj;
+   }
+
+   public override void Enter(HandTypeBase o)
+   {
+       handController = o;
+       if (activeObj)
+           handController.SetActiveObject(activeObj);
+   }
+
+   public override void Execute()
+   {
+       if (handController.unityHand == null)
+           return;
+
+       if (handController.activeObj)
+       {
+           // Update active object
+           activeObj.UpdateTransform(handController);
+
+           CheckEscape();
+       }
+   }
+</pre></div>
+</div>
+</li>
+<li><p class="first">Now our state is defined so that we can enter the state and leave the state when the user presses Escape.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="adding-a-new-leap-game-object-involves-scripting">
+<h3>Adding a new Leap Game Object (Involves Scripting)<a class="headerlink" href="#adding-a-new-leap-game-object-involves-scripting" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">In the folder “Scripts/Leap Starter Kit/Leap Objects” create a new script and call it “LeapPointableObject”.</p>
+</li>
+<li><p class="first">Rename the class to “LeapPointableObject” and have it inherit from “LeapBasicObject”.</p>
+</li>
+<li><p class="first">At the top of the script, add the “using Leap;” statement since we will use the Leap extensions to reposition our Leap Game Object.</p>
+</li>
+<li><p class="first">Add the following code to start the object in the LeapPointableState and to reposition the held object to point towards the index finger when held:</p>
+<div class="highlight-python"><div class="highlight"><pre>    public override LeapState Activate(HandTypeBase h)
+    {
+        base.Activate(h);
+        return new LeapPointableState(this);
+    }
+
+    public override void UpdateTransform (HandTypeBase t)
+    {
+        base.UpdateTransform (t);
+        UpdatePointTransform(t);
+    }
+
+    void UpdatePointTransform(HandTypeBase t)
+    {
+        Collider o = collider;
+
+        Vector3 handOffset = new Vector3();
+        Vector3 grabOffsetPos = new Vector3();
+        bool fingerFound = false;
+
+        // Uses Index Finger to aim
+        if (owner.unityHand.unityFingers.ContainsKey(FINGERS.INDEX))
+        {
+            fingerFound = true;
+        }
+
+        o.transform.position = owner.transform.position + handOffset - grabOffsetPos;
+
+        Vector3 tipPosition;
+
+        if (fingerFound)
+        {
+            tipPosition =
+            owner.unityHand.unityFingers[FINGERS.INDEX].transform.position;
+        }
+        else
+        {
+            tipPosition =
+            owner.unityHand.hand.Fingers.Frontmost.TipPosition.ToUnityTranslated();
+        }
+
+        //Look at Finger
+        o.transform.LookAt(tipPosition, owner.unityHand.transform.up); // Add finger rotation
+    }
+&lt;/pre&gt;
+</pre></div>
+</div>
+</li>
+<li><p class="first">Attach the LeapPointableObject script to a game object. Now, when the object is picked up, it’s orientation should change depending on where you are pointing with your index finger.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="getting-gestures-to-work-and-accessing-leap-sdk-involves-scripting">
+<h3>Getting Gestures to work and Accessing Leap SDK (Involves Scripting)<a class="headerlink" href="#getting-gestures-to-work-and-accessing-leap-sdk-involves-scripting" title="Permalink to this headline">¶</a></h3>
+<p>To get gestures to work you need to access the controller in the script, this is done through the LeapInputEX class. The following code checks to see if a Circular gesture was made in the last frame:</p>
+<div class="highlight-python"><div class="highlight"><pre>foreach (Gesture g in LeapInputEx.Controller.Frame().Gestures())
+        {
+            if (g.Type == Gesture.GestureType.TYPE_CIRCLE)
+            {
+                // Do Something
+            }
+        }
+</pre></div>
+</div>
+</div>
+<div class="section" id="starting-a-unity-hand-type-in-a-leap-hand-state">
+<h3>Starting a Unity Hand Type in a Leap Hand State<a class="headerlink" href="#starting-a-unity-hand-type-in-a-leap-hand-state" title="Permalink to this headline">¶</a></h3>
+<p>When a scene is started, the Unity Hand Type will default to the God Hand state. Sometimes you want to start the Unity Hand Type in a certain Leap Hand State when a scene is loaded. In order to do this, attach a Leap Game Object that has the Leap Hand State that you want to a Unity Hand in the public field in the Inspector labeled ‘Initial Leap Object’. Now when the scene is started the Unity Hand Type will start with the attached Leap Game Object and in the corresponding objects Leap Hand State.</p>
+</div>
+<div class="section" id="creating-a-persistent-leap-hand-state">
+<h3>Creating a Persistent Leap Hand State<a class="headerlink" href="#creating-a-persistent-leap-hand-state" title="Permalink to this headline">¶</a></h3>
+<p>Simply check the ‘Is State Persistent’ field in the inspector for the attached Leap Game Object. This is useful if you want to make a scene where the Unity Hand Type starts in a certain state and cannot leave that state. For instance, in the Boxing Scene, there are Unity Hands that start with a corresponding attached LeapGameObject that are boxing gloves and have the ‘Is State Persistent’ checked and the ‘Drop On Lost’ field unchecked, this quickly and easily creates a simple boxing game where the gloves are always attached to the hands.</p>
+</div>
+</div>
+<div class="section" id="scene-breakdown">
+<h2>Scene Breakdown<a class="headerlink" href="#scene-breakdown" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="bowling-scene-throwing-the-bowling-ball">
+<h3>Bowling Scene:  Throwing the Bowling Ball<a class="headerlink" href="#bowling-scene-throwing-the-bowling-ball" title="Permalink to this headline">¶</a></h3>
+<img alt="devguide/../../../images/bowling.jpg" src="devguide/../../../images/bowling.jpg" />
+<ol class="arabic simple">
+<li>Grab the bowling ball with your right hand.</li>
+<li>Line up your hand with the pins and throw / open your hand up while moving your hand forwards towards the pins. When releasing , make sure your palm is facing down towards the Leap Motion. Note: Make sure to open your hand when throwing so the Leap Motion can see your fingers.  The Leap Motion needs to know that your hand is now open.</li>
+<li>To reset the scene, use your left hand and hover over the big red button.  Push the button down with your hand.</li>
+</ol>
+</div>
+<div class="section" id="boxing-scene">
+<h3>Boxing Scene<a class="headerlink" href="#boxing-scene" title="Permalink to this headline">¶</a></h3>
+<img alt="devguide/../../../images/boxing.jpg" src="devguide/../../../images/boxing.jpg" />
+<ul class="simple">
+<li>Have your hands either open or closed and make a forward punching motion with your hands at the punching bag.</li>
+</ul>
+<p><a href="#id3"><span class="problematic" id="id4">**</span></a>Note: Be careful not to punch any real world objects while immersed in the scene.</p>
+</div>
+<div class="section" id="flying-scene-learning-to-fly">
+<h3>Flying Scene:  Learning to fly<a class="headerlink" href="#flying-scene-learning-to-fly" title="Permalink to this headline">¶</a></h3>
+<img alt="devguide/../../../images/flying.jpg" src="devguide/../../../images/flying.jpg" />
+<ol class="arabic simple">
+<li>With both hands in the view of the Leap Motion and fingers extended, tilt your hands up and down to fly up/down.</li>
+<li>Move left hand back/forward and right hand forward/back to steer left/right.</li>
+<li>Move left hand down/up and right hand up/down to bank left/right.</li>
+<li>To reverse, put fingers together so that the Leap Motion no longer sees your fingers.</li>
+</ol>
+</div>
+<div class="section" id="objects-and-weapons-scene-pick-up-and-throw-grenade">
+<h3>Objects and Weapons Scene:  Pick up and throw Grenade<a class="headerlink" href="#objects-and-weapons-scene-pick-up-and-throw-grenade" title="Permalink to this headline">¶</a></h3>
+<img alt="devguide/../../../images/shooting.jpg" src="devguide/../../../images/shooting.jpg" />
+<ol class="arabic simple">
+<li>Hover your hand over the grenade, when your hand is colliding with the grenade, do a grabbing motion with your hand, the grenade should now move with your hand.</li>
+<li>After picking up the grenade, you have three seconds to throw it. Throw the grenade by moving your hand forward and opening your hand so that the Leap Motion can see your fingers again.</li>
+</ol>
+<p>Objects and Weapons Scene:  Pick up and Aim Flashlight</p>
+<img alt="devguide/../../../images/weapons01.jpg" src="devguide/../../../images/weapons01.jpg" />
+<ol class="arabic simple">
+<li>Hover your hand over the object and pick it with a grabbing motion.</li>
+<li>To aim with the flashlight, open your hand up with the fingers extended. The object will not drop. The object will rotate with your hands rotation in the direction of your palms forward direction.</li>
+<li>To drop the flashlight, either have your hand leave the view of the Leap Motion, or press Escape to return to GodHand mode.</li>
+</ol>
+</div>
+<div class="section" id="objects-and-weapons-scene-pick-up-aim-and-fire-guns">
+<h3>Objects and Weapons Scene:  Pick up, Aim and Fire Guns<a class="headerlink" href="#objects-and-weapons-scene-pick-up-aim-and-fire-guns" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Hover your hand over the weapon and pick it up by making a grabbing motion.</li>
+<li>To aim, have only your thumb and index finger exposed to the Leap Motion.</li>
+<li>Move your index finger and hand to aim.</li>
+<li>While aiming, move your thumb to touch your hand so that the Leap Motion no longer detects your thumb. Projectiles will now be shot as long as only the index finger is detected by the Leap Motion.</li>
+<li>To stop shooting, move the thumb away from the hand so it is no longer touching the hand and can be seen by the Leap Motion.</li>
+<li>To drop the held object, either have your hand leave the view of the Leap Motion, or press Escape to return to GodHand mode.</li>
+</ol>
+</div>
+<div class="section" id="objects-and-weapons-scene-pick-up-and-aim-swingable-weapons">
+<h3>Objects and Weapons Scene:  Pick up and Aim Swingable Weapons<a class="headerlink" href="#objects-and-weapons-scene-pick-up-and-aim-swingable-weapons" title="Permalink to this headline">¶</a></h3>
+<img alt="devguide/../../../images/sword.jpg" src="devguide/../../../images/sword.jpg" />
+<ol class="arabic simple">
+<li>Hover your hand over the weapon and pick it up by doing a grabbing motion.</li>
+<li>To move, have your hand open and move it around as if your hand is a sword.</li>
+<li>To do a sword swipe, move your hand quickly from one point to another as if doing a sword swipe with your hand.</li>
+<li>To drop the held object, either have your hand leave the view of the Leap Motion, or press Escape to return to GodHand mode.</li>
+</ol>
+</div>
+<div class="section" id="driving-scene-driving-and-accelerating">
+<h3>Driving Scene: Driving and Accelerating<a class="headerlink" href="#driving-scene-driving-and-accelerating" title="Permalink to this headline">¶</a></h3>
+<img alt="devguide/../../../images/driving.jpg" src="devguide/../../../images/driving.jpg" />
+<ol class="arabic simple">
+<li>Use your left hand to grab the throttle to accelerate/decelerate.</li>
+<li>Use left or right hand (or both) to grab onto the steering wheel to steer the car while the car is moving.</li>
+</ol>
+</div>
+<div class="section" id="atv-driving">
+<h3>ATV Driving<a class="headerlink" href="#atv-driving" title="Permalink to this headline">¶</a></h3>
+<img alt="devguide/../../../images/ATV.jpg" src="devguide/../../../images/ATV.jpg" />
+<ol class="arabic simple">
+<li>The main controls of accelerating and braking is controlled by grabbing onto the right handle of the vehicle. The left handle only controls steering direction.</li>
+<li>To accelerate, while grabbing the right handle, rotate your wrist up. Note: Make sure you are not holding onto the break.</li>
+<li>To slow down, rotate your wrist down as if you are controlling a real ATV.</li>
+<li>To brake, open your right hand, while the hand is still on the handle, make sure the hand is colliding with the brake (if it is colliding, it should highlight). With the brake selected, make a grabbing motion and the brake should be grabbed. To release the brake, open your hand and grab onto the handle without grabbing the brake.</li>
+<li>Press ‘C’ to toggle between first and third person camera.</li>
+</ol>
+<p>We hope you find this information helpful and look forward to seeing your Unity apps in the Leap Motion app store!</p>
+</div>
+</div>
+</div>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">Java Docs (v2.1)</a></li>
+          </ul><ul>
+<li class="toctree-l1"><a class="reference internal" href="Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/Leap_Classes.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>Java</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

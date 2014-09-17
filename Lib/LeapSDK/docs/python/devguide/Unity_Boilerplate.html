@@ -1,0 +1,478 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Unity Boilerplate Asset &mdash; Leap Motion Python SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion Python SDK v2.1 documentation" href="../index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'python';
+    var hasAPI = {};
+    hasAPI.csharp = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../python/devguide/Unity_Boilerplate.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/devguide/Unity_Boilerplate.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/devguide/Unity_Boilerplate.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/devguide/Unity_Boilerplate.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/devguide/Unity_Boilerplate.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/devguide/Unity_Boilerplate.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/devguide/Unity_Boilerplate.html";
+            } else {
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../python/devguide/Unity_Boilerplate.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){    }
+    else if( character == "K" & e.altKey){
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="../../javascript/index.html" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      <a href="../../csharp/devguide/Unity_Boilerplate.html" onclick="localStorage['currentAPI'] = 'csharp'">C# and Unity</a>
+    
+  </li>
+  <li>
+      <a href="../../cpp/index.html" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      <a href="../../java/index.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      Python
+    
+  </li>
+  <li>
+      <a href="../../objc/index.html" onclick="localStorage['currentAPI'] = 'objc'">Objective-C</a>
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+  Unity Boilerplate Asset
+</span> -->
+        
+  <div class="section" id="unity-boilerplate-asset">
+<h1>Unity Boilerplate Asset<a class="headerlink" href="#unity-boilerplate-asset" title="Permalink to this headline">¶</a></h1>
+<p><strong>Note:</strong> The Unity Boilerplate Asset uses version 1.0 of the Leap Motion SDK. You can use the asset as is, but updating it to use the new version 2 libraries has not been tested.</p>
+<p>To download assets designed for version 2, go to <a class="reference external" href="https://www.assetstore.unity3d.com/en/#!/content/17770">Leap Motion Skeletal Assets</a>.</p>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ol class="arabic simple">
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#dependencies-and-installation">Dependencies and Installation</a></li>
+<li><a class="reference internal" href="#package-contents">Package Contents</a></li>
+<li><a class="reference internal" href="#general-usage">General Usage</a></li>
+<li><a class="reference internal" href="#leapmanager-cs-class-reference">LeapManager.cs Class Reference</a></li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The Leap Motion Unity Boilerplate Asset is a core part of getting Leap Motion functionality into your Unity project. The LeapManager Prefab collects Leap data and provides a set of helper functions to convert between Leap device coordinates and Unity World coordinates. To get started simply drag the LeapManager prefab into your project. We&#8217;ve included a few simple example scenes to show some basic uses of the object, including physical interaction and mapping 3D coordinates to screen space for handling pointers.</p>
+<p>This asset grew out of our own experience when working with Leap Motion and Unity as well as working with developers of all skills levels at hackathons around the country. We&#8217;re always looking for ways to make this simpler and more useful for developers so please let us know in our <a class="reference external" href="https://community.leapmotion.com/category/dev">forums</a> or by tweeting at us &#64;leapmotiondev.</p>
+<p><a class="reference external" href="https://www.assetstore.unity3d.com/#/content/15677">Download the Leap Motion Boilerplate Asset from the Unity Asset Store.</a></p>
+</div>
+<div class="section" id="dependencies-and-installation">
+<h2>Dependencies and Installation<a class="headerlink" href="#dependencies-and-installation" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Import this package into your Unity project.</li>
+<li>Drag the LeapManager prefab into your scene.</li>
+<li>Go make a cool game.</li>
+<li>When your cool game is done (or before!) show it to us via &#64;LeapMotion on twitter.</li>
+</ol>
+</div>
+<div class="section" id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Permalink to this headline">¶</a></h2>
+<p>The folders and files you must import for the helper to work have been marked here with &#8220;**&#8221; before the name.
+All other folders are example resources to help get you up to speed quickly.</p>
+<ul class="simple">
+<li>** <strong>\Leap_Boilerplate\</strong> # The root folder for the helper.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><strong>\example_scenes\</strong> # Scenes showing example implementations of basic concepts.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">Pointer_Movers.unity</span></tt> - Two game objects following a pointing finger in screen and world space</li>
+<li><tt class="docutils literal"><span class="pre">Revolving_Camera.Unity</span></tt> - A camera controlled by your hand position moving around the earth</li>
+<li><tt class="docutils literal"><span class="pre">Single_Hand.unity</span></tt> - Maps game objects to palm and fingers. Displays some stats about the hand</li>
+<li><tt class="docutils literal"><span class="pre">Finger_Physics.unity</span></tt> - Adds some rigid bodies to your fingers so you can move some cubes</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>** <strong>\prefabs\</strong> # prefab for the helper object.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>** <tt class="docutils literal"><span class="pre">LeapManager</span></tt> - The LeapManager GameObject containing resources to get your project (and the examples) going!</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><strong>\resources_for_example_scenes\</strong> - A bunch of resources and assets for the example scenes. Best to ignore this.</li>
+<li>** <strong>\scripts\</strong> # scripts for the helper object.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>** <tt class="docutils literal"><span class="pre">LeapExtensions.cs</span></tt> - Extensions to the Leap Vector class for Leap to Unity unit conversions.</li>
+<li>** <tt class="docutils literal"><span class="pre">LeapManager.cs</span></tt> - Centralizes LeapMotion data access and provides a wide variety of helper functions.</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><strong>\scripts_for_example_scenes\</strong></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">FingerCountChecker.cs</span></tt> - When attached to a text mesh, that mesh will say how many finger&#8217;s you&#8217;re holding up.</li>
+<li><tt class="docutils literal"><span class="pre">HandController.cs</span></tt> - When attached to a palm and linked to fingers, will model a hand&#8217;s movement.</li>
+<li><tt class="docutils literal"><span class="pre">HandOpenChecker.cs</span></tt> - When attached to a text mesh, that mesh will say if your hand is open or not.</li>
+<li><tt class="docutils literal"><span class="pre">RevolvingCamera.cs</span></tt> - When attached to a camera and linked to a target, will rotate the camera around the target based on your hand position.</li>
+<li><tt class="docutils literal"><span class="pre">ScreenMover.cs</span></tt> - When attached to a GameObject will move that object in screen space based on your pointing finger.</li>
+<li><tt class="docutils literal"><span class="pre">WorldMover.cs</span></tt> - When attached to a GameObject will move that object in world space based on your pointing finger.</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="general-usage">
+<h2>General Usage<a class="headerlink" href="#general-usage" title="Permalink to this headline">¶</a></h2>
+<p>This package is meant to act as a set of boilerplate functions and architecture to get your Leap enabled
+project up and running rapidly.</p>
+<p>It solves the following problems:</p>
+<ul>
+<li><p class="first">Providing a central point of access to the LeapMotion Controller data.</p>
+</li>
+<li><p class="first">Converting Leap data into Unity&#8217;s units and Vector3 objects.</p>
+<blockquote>
+<div><p>This is accomplished via three extension methods which return Unity Vector3 objects:</p>
+<ol class="arabic simple">
+<li><tt class="docutils literal"><span class="pre">myVectorInstance.ToUnity()</span></tt> - For things like direction vectors which are normalized.</li>
+<li><tt class="docutils literal"><span class="pre">myVectorInstance.ToUnityScales()</span></tt> - For things like Acceleration/Velocity where units must be converted, but position is not a factor.</li>
+<li><tt class="docutils literal"><span class="pre">myVectorInstance.ToUnityTranslated()</span></tt> - For things like positions where units must be scaled AND we want to offset the coordinates into our game&#8217;s coordinate space.</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p class="first">Providing easy access to common data like pointing fingers and hand/finger locations in Unity screen or world coordinates.</p>
+</li>
+<li><p class="first">Providing helper methods for common concepts like &#8220;is this hand open?&#8221;, or &#8220;how many fingers am I holding up?&#8221;</p>
+</li>
+</ul>
+<p>To use the LeapManager in your scene, simply drag the LeapManager prefab from the &#8220;prefabs&#8221; folder in the root into your scene. It&#8217;s just an empty game object with the script attached.</p>
+<p>A few of the class functions are static and can simply be accessed with a call to:</p>
+<p><tt class="docutils literal"><span class="pre">LeapManager.staticMethodName()</span></tt></p>
+<p>...but most require a reference to an instance. As you can see in the example
+scenes, grabbing this instance is as &#8220;simple&#8221; as:</p>
+<p><tt class="docutils literal"><span class="pre">LeapManager</span> <span class="pre">myLeapManagerInstance</span> <span class="pre">=</span> <span class="pre">(GameObject.Find(&quot;LeapManager&quot;)</span> <span class="pre">as</span> <span class="pre">GameObject).GetComponent(typeof(LeapManager))</span> <span class="pre">as</span> <span class="pre">LeapManager;</span></tt></p>
+<p>Remember that <tt class="docutils literal"><span class="pre">GameObject.Find()</span></tt> is really slow so you probably only want to do this one in your MonoBehavior&#8217;s <tt class="docutils literal"><span class="pre">Start()</span></tt> function and store the reference for later. Again, see any of the example scenes for a full implementation.</p>
+<p>For a listing of all the data and helper functions in the LeapManager use the next section, &#8216;<tt class="docutils literal"><span class="pre">LeapManager.cs</span></tt> Class Reference&#8217;.</p>
+</div>
+<div class="section" id="leapmanager-cs-class-reference">
+<h2>LeapManager.cs Class Reference<a class="headerlink" href="#leapmanager-cs-class-reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="public-properties">
+<h3>Public Properties<a class="headerlink" href="#public-properties" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">Leap.Controller</span></tt> | <tt class="docutils literal"><span class="pre">leapController</span></tt> - A direct reference to the Controller for accessing the LeapMotion data yourself rather than going through the helper.</li>
+<li><tt class="docutils literal"><span class="pre">Leap.Frame</span></tt> | <tt class="docutils literal"><span class="pre">currentFrame</span></tt> - The most recent frame of data from the LeapMotion controller.</li>
+<li><tt class="docutils literal"><span class="pre">bool</span></tt> | <tt class="docutils literal"><span class="pre">pointerAvailible</span></tt> - Is there a pointing finger currently tracked in the scene.</li>
+<li><tt class="docutils literal"><span class="pre">Vector2</span></tt> | <tt class="docutils literal"><span class="pre">pointerPositionScreen</span></tt> - The currently tracked (if any) pointing finger in screen space.</li>
+<li><tt class="docutils literal"><span class="pre">Vector3</span></tt> | <tt class="docutils literal"><span class="pre">pointerPositionWorld</span></tt> - The currently tracked (if any) pointing finger in world space.</li>
+<li><tt class="docutils literal"><span class="pre">Vector3</span></tt> | <tt class="docutils literal"><span class="pre">pointerPositionScreenToWorld</span></tt> - The screen position of the currently tracked (if any) pointing finger projected into world space at a distance of [<tt class="docutils literal"><span class="pre">screenToWorldDistance</span></tt>].</li>
+<li><tt class="docutils literal"><span class="pre">Vector3</span></tt> | <tt class="docutils literal"><span class="pre">screenToWorldDistance</span></tt> - The projection distance for the <tt class="docutils literal"><span class="pre">pointerPositionScreenToWorld</span></tt> calculation. Default Value is 10.0f.``</li>
+<li><tt class="docutils literal"><span class="pre">Camera</span></tt> | <tt class="docutils literal"><span class="pre">_mainCam</span></tt> - Can be set to any camera you want. Used for screen position calculations. Defaults to &#8220;MainCamera&#8221;</li>
+</ul>
+</div>
+<div class="section" id="public-methods">
+<h3>Public Methods<a class="headerlink" href="#public-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">static</span>&nbsp; <span class="pre">Leap.Finger</span></tt> | <tt class="docutils literal"><span class="pre">pointingFinger(Hand</span> <span class="pre">hand)</span></tt> - Returns the most likely finger to be pointing on the given hand. Returns <tt class="docutils literal"><span class="pre">Finger.Invalid</span></tt> if no such finger exists.</li>
+<li><tt class="docutils literal"><span class="pre">static</span>&nbsp; <span class="pre">ArrayList</span></tt>  | <tt class="docutils literal"><span class="pre">forwardFacingFingers(Hand</span> <span class="pre">hand)</span></tt> - Returns a list of fingers whose position is in front of the hand (relative to the hand direction). This is most useful in trying to lower the chances of detecting a thumb (though not a perfect method).</li>
+<li><tt class="docutils literal"><span class="pre">static</span>&nbsp; <span class="pre">bool</span></tt>  | <tt class="docutils literal"><span class="pre">isHandOpen(Hand</span> <span class="pre">hand)</span></tt> - Returns whether or not the given hand is open.</li>
+<li><tt class="docutils literal"><span class="pre">void</span></tt>  | <tt class="docutils literal"><span class="pre">Start()</span></tt> - If the _mainCam isn&#8217;t overridden, find the camera with the &#8220;MainCamera&#8221; tag.</li>
+<li><tt class="docutils literal"><span class="pre">void</span></tt>  | <tt class="docutils literal"><span class="pre">Update()</span></tt> - Set the pointer world and screen positions each frame.</li>
+<li><tt class="docutils literal"><span class="pre">Vector2[]</span></tt> | <tt class="docutils literal"><span class="pre">getScreenFingerPositions(Hand</span> <span class="pre">hand)</span></tt> - Get the screen coordinates of all the tracked fingers on the given hand.</li>
+<li><tt class="docutils literal"><span class="pre">Vector3[]</span></tt> | <tt class="docutils literal"><span class="pre">getWorldFingerPositions(Hand</span> <span class="pre">hand)</span></tt> - Get the world coordinates of all the tracked fingers on the given hand.</li>
+<li><tt class="docutils literal"><span class="pre">Vector2</span></tt> | <tt class="docutils literal"><span class="pre">leapPositionToScreen(Vector</span> <span class="pre">leapVector)</span></tt> - Take a Leap.Vector and convert it to Screen coordinates. Example: <tt class="docutils literal"><span class="pre">Vector3</span> <span class="pre">handScreenPosition</span> <span class="pre">=</span> <span class="pre">_leapManager.leapPositionToScreen(frame.Hands[0].palmPosition);</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">Leap.Hand</span></tt>  | <tt class="docutils literal"><span class="pre">frontmostHand()</span></tt> - Get the frontmost detected hand in the scene. Returns Leap.Hand.Invalid if no hands are being tracked.</li>
+</ul>
+<p>Author: Daniel Plemmons - LeapMotion Developer Experience Engineer
+Twitter: &#64;RandomOutput</p>
+</div>
+</div>
+</div>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">Python Docs (v2.1)</a></li>
+          </ul><ul>
+<li class="toctree-l1"><a class="reference internal" href="Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/Leap_Classes.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>Python</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

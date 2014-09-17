@@ -1,0 +1,789 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Matrix &mdash; Leap Motion Objective-C SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion Objective-C SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="Leap_Classes.html" />
+    <link rel="next" title="Pointable" href="Leap.Pointable.html" />
+    <link rel="prev" title="Listener" href="Leap.Listener.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'objc';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.javascript = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../objc/api/Leap.Matrix.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/api/Leap.Matrix.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/api/Leap.Matrix.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/api/Leap.Matrix.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/api/Leap.Matrix.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/api/Leap.Matrix.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/api/Leap.Matrix.html";
+            } else {
+                    redirectedLocation ="Leap_Classes.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../objc/api/Leap.Matrix.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Leap.Listener.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("Leap.Pointable.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="../../javascript/api/Leap.Matrix.html" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      <a href="../../csharp/api/Leap.Matrix.html" onclick="localStorage['currentAPI'] = 'csharp'">C# and Unity</a>
+    
+  </li>
+  <li>
+      <a href="../../cpp/api/Leap.Matrix.html" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      <a href="../../java/api/Leap.Matrix.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="../../python/api/Leap.Matrix.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      Objective-C
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Classes.html" accesskey="U">API Reference</a>&raquo;
+  Matrix
+</span> -->
+        
+  <div class="section" id="leapmatrix">
+<h1>LeapMatrix<a class="headerlink" href="#leapmatrix" title="Permalink to this headline">¶</a></h1>
+</div>
+<style>.members {
+     -webkit-column-count:2; /* Chrome, Safari, Opera */
+     -moz-column-count:2; /* Firefox */
+     column-count:2;
+     }
+     strong {color:gray;}
+</style><p><strong>Properties:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#objcinterface_leap_matrix_1a4e23e7f501e2a6a746193705c2aead13">origin</a></li>
+<li><a class="reference external" href="#objcinterface_leap_matrix_1ac1f19734bd25803a5973439880325736">xBasis</a></li>
+<li><a class="reference external" href="#objcinterface_leap_matrix_1a302d5f49b7e9129d17020181bae303f1">yBasis</a></li>
+<li><a class="reference external" href="#objcinterface_leap_matrix_1a93024c9827eba382ab3527c62e9b431f">zBasis</a></li>
+</ul>
+</div>
+<p><strong>Methods:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#objcinterface_leap_matrix_1a28a329853fe6293e08cb2d20cc5059bb">equals:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_matrix_1a3919e247107ca3ea67e2808b3b898e06">identity</a></li>
+<li><a class="reference external" href="#objcinterface_leap_matrix_1aad14da6c2af51480881a9d1205e02a1c">initWithAxis:angleRadians:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_matrix_1a7170682a249b62b7d0b790827691a234">initWithAxis:angleRadians:translation:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_matrix_1a42d08a07fb2dbdb912513ac4c484c40f">initWithMatrix:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_matrix_1a0e5ca6b0c421d5df0d09509fda66e3a2">initWithXBasis:yBasis:zBasis:origin:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_matrix_1aa1e6a05f91ad6e62a433748c71dad646">rigidInverse</a></li>
+<li><a class="reference external" href="#objcinterface_leap_matrix_1ad113b35b45944a3aedadd5a04ca54b53">times:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_matrix_1a33b8c8a295be033cb82eec12cadfe3f6">toNSArray3x3</a></li>
+<li><a class="reference external" href="#objcinterface_leap_matrix_1ad7c1719bd58457d339b6a43d1488fda6">toNSArray4x4</a></li>
+<li><a class="reference external" href="#objcinterface_leap_matrix_1ad5c9b9b9b203951c81f6db9e202d2fa5">transformDirection:</a></li>
+<li><a class="reference external" href="#objcinterface_leap_matrix_1a9a8bd8b9de1ed3195577768b51bcb254">transformPoint:</a></li>
+</ul>
+</div>
+<div class="line-block" id="objcinterface_leap_matrix">
+<div class="line"><em>class</em> <strong>LeapMatrix</strong></div>
+</div>
+<blockquote>
+<div><p>The <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> class represents a transformation matrix. </p>
+<p><p>To use this class to transform a <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>, construct a matrix containing the desired transformation and then use the [<a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> transformPoint:] or [<a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> transformDirection:] functions to apply the transform.</p>
+<p>Transforms can be combined by multiplying two or more transform matrices using the [<a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> times:] function. <dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+<em>Public Functions</em><blockquote>
+<div><p><span class="target" id="objcinterface_leap_matrix_1a28a329853fe6293e08cb2d20cc5059bb"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (BOOL) <strong>equals</strong>:(const  <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a>  *) other </div>
+</div>
+</p>
+<blockquote>
+<div><p>Compare <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> equality component-wise. </p>
+<p><p><pre class="literal-block">
+    bool matricesAreEqual = [thisMatrix equals:thatMatrix];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>YES, if the corresponding elements in the two matrices are equal. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">other</span></tt> - <p>The <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> object to compare. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_matrix_1aad14da6c2af51480881a9d1205e02a1c"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (id) <strong>initWithAxis</strong>:(const  <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *) axis <strong>angleRadians</strong>:(float) angleRadians </div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a transformation matrix specifying a rotation around the specified vector. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> *rotation = [[<a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> alloc] initWithAxis:[<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> up]
+                                             angleRadians:LEAP_PI/3];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">axis</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> specifying the axis of rotation. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">angleRadians</span></tt> - <p>The amount of rotation in radians. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_matrix_1a7170682a249b62b7d0b790827691a234"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (id) <strong>initWithAxis</strong>:(const  <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *) axis <strong>angleRadians</strong>:(float) angleRadians <strong>translation</strong>:(const  <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *) translation </div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a transformation matrix specifying a rotation around the specified vector and a translation by the specified vector. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> *transform = [[<a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> alloc] initWithAxis:[<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> zAxis]
+                                                angleRadians:LEAP_PI
+                                                 translation:[[<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> alloc]
+                                                              initWithX:5
+                                                              y:3
+                                                              z:1]];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">axis</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> specifying the axis of rotation. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">angleRadians</span></tt> - <p>The angle of rotation in radians. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">translation</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> representing the translation part of the transform. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_matrix_1a42d08a07fb2dbdb912513ac4c484c40f"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (id) <strong>initWithMatrix</strong>:(<a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a>  *) matrix </div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a copy of the specified Matrix object. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> *copyMatrix = [[<a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> alloc] initWithMatrix:otherMatrix];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">matrix</span></tt> - <p>the <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> to copy. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_matrix_1a0e5ca6b0c421d5df0d09509fda66e3a2"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (id) <strong>initWithXBasis</strong>:(const  <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *) xBasis <strong>yBasis</strong>:(const  <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *) yBasis <strong>zBasis</strong>:(const  <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *) zBasis <strong>origin</strong>:(const  <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *) origin </div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a transformation matrix from the specified basis and translation vectors. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> *newMatrix = [[<a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> alloc] initWithXBasis:[<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> xAxis]
+                                                        yBasis:[<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> yAxis]
+                                                        zBasis:[<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> zAxis]
+                                                        origin:[<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> zero]];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">xBasis</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> specifying rotation and scale factors for the x-axis. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">yBasis</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> specifying rotation and scale factors for the y-axis. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">zBasis</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> specifying rotation and scale factors for the z-axis. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">origin</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> specifying translation factors on all three axes. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_matrix_1aa1e6a05f91ad6e62a433748c71dad646"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a>  *)  <strong>rigidInverse</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>Performs a matrix inverse if the matrix consists entirely of rigid transformations (translations and rotations). </p>
+<p><p>If the matrix is not rigid, this operation will not represent an inverse.</p>
+<p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> *<a class="reference internal" href="#objcinterface_leap_matrix_1aa1e6a05f91ad6e62a433748c71dad646"><em>rigidInverse</em></a> = [matrix <a class="reference internal" href="#objcinterface_leap_matrix_1aa1e6a05f91ad6e62a433748c71dad646"><em>rigidInverse</em></a>];
+</pre>
+</p>
+<p>Note that all matricies that are directly returned by the API are rigid.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The rigid inverse of the matrix. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_matrix_1ad113b35b45944a3aedadd5a04ca54b53"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a>  *) <strong>times</strong>:(const  <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a>  *) other </div>
+</div>
+</p>
+<blockquote>
+<div><p>Multiply transform matrices. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> *product = [thisMatrix times:thatMatrix];
+</pre>
+</p>
+<p>Combines two transformations into a single equivalent transformation.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A new <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> representing the transformation equivalent to applying the other transformation followed by this transformation. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">other</span></tt> - <p>A <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> to multiply on the right hand side. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_matrix_1a33b8c8a295be033cb82eec12cadfe3f6"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (NSMutableArray *)  <strong>toNSArray3x3</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>Converts a <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> object to a 9-element NSArray object. </p>
+<p><p>The elements of the matrix are inserted into the array in row-major order.</p>
+<p><pre class="literal-block">
+    NSArray *matrix3x3Array = thisMatrix.toNSArray3x3;
+    float R2C1 = [[matrix3x3Array objectAtIndex:4] floatValue];
+</pre>
+</p>
+<p>Translation factors are discarded. <dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_matrix_1ad7c1719bd58457d339b6a43d1488fda6"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (NSMutableArray *)  <strong>toNSArray4x4</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>Converts a <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> object to a 16-element NSArray object. </p>
+<p><p>The elements of the matrix are inserted into the array in row-major order.</p>
+<p><pre class="literal-block">
+    NSArray *matrix4x4Array = thisMatrix.toNSArray4x4;
+    float R4C3 = [[matrix4x4Array objectAtIndex:15] floatValue];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_matrix_1ad5c9b9b9b203951c81f6db9e202d2fa5"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *) <strong>transformDirection</strong>:(const  <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *) direction </div>
+</div>
+</p>
+<blockquote>
+<div><p>Transforms a vector with this matrix by transforming its rotation and scale only. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> *direction = [[<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> alloc] initWithX:-13 y:87 z:42];
+    <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> *transformedDirection = [thisMatrix transformPoint:point];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A new <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> representing the transformed original. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">direction</span></tt> - <p>The <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> to transform. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_matrix_1a9a8bd8b9de1ed3195577768b51bcb254"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *) <strong>transformPoint</strong>:(const  <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *) point </div>
+</div>
+</p>
+<blockquote>
+<div><p>Transforms a vector with this matrix by transforming its rotation, scale, and translation. </p>
+<p><p>Translation is applied after rotation and scale.</p>
+<p><pre class="literal-block">
+    <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> *point = [[<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> alloc] initWithX:10 y:100 z:-30];
+    <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> *transformedPoint = [thisMatrix transformPoint:point];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A new <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> representing the transformed original. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">point</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> representing the 3D position to transform. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Property</em><blockquote>
+<div><p><span class="target" id="objcinterface_leap_matrix_1a4e23e7f501e2a6a746193705c2aead13"></span><div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>origin</strong></div>
+ <strong>origin</strong></p>
+<blockquote>
+<div><p>The translation factors for all three axes. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> *origin = matrix.<a class="reference internal" href="#objcinterface_leap_matrix_1a4e23e7f501e2a6a746193705c2aead13"><em>origin</em></a>;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_matrix_1ac1f19734bd25803a5973439880325736"></span><div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>xBasis</strong></div>
+ <strong>xBasis</strong></p>
+<blockquote>
+<div><p>The rotation and scale factors for the x-axis. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> *xBasis = matrix.<a class="reference internal" href="#objcinterface_leap_matrix_1ac1f19734bd25803a5973439880325736"><em>xBasis</em></a>;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_matrix_1a302d5f49b7e9129d17020181bae303f1"></span><div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>yBasis</strong></div>
+ <strong>yBasis</strong></p>
+<blockquote>
+<div><p>The rotation and scale factors for the y-axis. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> *yBasis = matrix.<a class="reference internal" href="#objcinterface_leap_matrix_1a302d5f49b7e9129d17020181bae303f1"><em>yBasis</em></a>;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_matrix_1a93024c9827eba382ab3527c62e9b431f"></span><div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>zBasis</strong></div>
+ <strong>zBasis</strong></p>
+<blockquote>
+<div><p>The rotation and scale factors for the z-axis. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> *zBasis = matrix.<a class="reference internal" href="#objcinterface_leap_matrix_1a93024c9827eba382ab3527c62e9b431f"><em>zBasis</em></a>;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Public Static Functions</em><blockquote>
+<div><p><span class="target" id="objcinterface_leap_matrix_1a3919e247107ca3ea67e2808b3b898e06"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
++ (<a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a>  *)  <strong>identity</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>Returns the identity matrix specifying no translation, rotation, and scale. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> *<a class="reference internal" href="#objcinterface_leap_matrix_1a3919e247107ca3ea67e2808b3b898e06"><em>identity</em></a> = [<a class="reference internal" href="#objcinterface_leap_matrix"><em>LeapMatrix</em></a> <a class="reference internal" href="#objcinterface_leap_matrix_1a3919e247107ca3ea67e2808b3b898e06"><em>identity</em></a>];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The identity matrix. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">Objective-C Docs (v2.1)</a></li>
+          </ul><ul>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Classes.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Bone.html#leapbone">LeapBone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.CircleGesture.html#leapcirclegesture">LeapCircleGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Config.html#leapconfig">LeapConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Controller.html#leapcontroller">LeapController</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Delegate.html">LeapDelegate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Device.html#leapdevice">LeapDevice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Finger.html#leapfinger">LeapFinger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Frame.html#leapframe">LeapFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Gesture.html#leapgesture">LeapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Hand.html#leaphand">LeapHand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.InteractionBox.html#leapinteractionbox">LeapInteractionBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.KeyTapGesture.html#leapkeytapgesture">LeapKeyTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Listener.html#leaplistener-protocol">LeapListener Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#leapmatrix">LeapMatrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Pointable.html#leappointable">LeapPointable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.PointableList.html#leappointableorhandlist-category">LeapPointableOrHandList Category</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ScreenTapGesture.html#leapscreentapgesture">LeapScreenTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.SwipeGesture.html#leapswipegesture">LeapSwipeGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Tool.html#leaptool">LeapTool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Vector.html#leapvector">LeapVector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>Objective-C</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

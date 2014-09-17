@@ -1,0 +1,473 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>FingerList &mdash; Leap Motion Objective-C SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion Objective-C SDK v2.1 documentation" href="../index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'objc';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../objc/api/Leap.FingerList.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/api/Leap.FingerList.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/api/Leap.FingerList.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/api/Leap.FingerList.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/api/Leap.FingerList.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/api/Leap.FingerList.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/api/Leap.FingerList.html";
+            } else {
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../objc/api/Leap.FingerList.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){    }
+    else if( character == "K" & e.altKey){
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="../../javascript/index.html" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      <a href="../../csharp/api/Leap.FingerList.html" onclick="localStorage['currentAPI'] = 'csharp'">C# and Unity</a>
+    
+  </li>
+  <li>
+      <a href="../../cpp/api/Leap.FingerList.html" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      <a href="../../java/api/Leap.FingerList.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="../../python/api/Leap.FingerList.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      Objective-C
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+  FingerList
+</span> -->
+        
+  <div class="section" id="leappointableorhandlist-category">
+<h1>LeapPointableOrHandList Category<a class="headerlink" href="#leappointableorhandlist-category" title="Permalink to this headline">¶</a></h1>
+</div>
+<style>.members {
+     -webkit-column-count:2; /* Chrome, Safari, Opera */
+     -moz-column-count:2; /* Firefox */
+     column-count:2;
+     }
+     strong {color:gray;}
+</style><p><strong>Methods:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#objccategory_n_s_array_07_leap_pointable_or_hand_list_08_1a088d1fdf712f44b3d5bc7544a6b74257">extended</a></li>
+<li><a class="reference external" href="#objccategory_n_s_array_07_leap_pointable_or_hand_list_08_1a9360cc4ca18661964fe0af72f468ff2d">fingerType:</a></li>
+<li><a class="reference external" href="#objccategory_n_s_array_07_leap_pointable_or_hand_list_08_1a474f00cdccae8d8a98e375fac0165f87">frontmost</a></li>
+<li><a class="reference external" href="#objccategory_n_s_array_07_leap_pointable_or_hand_list_08_1a4118ecac6bfefaf4c7a40d4fcb1dca90">leftmost</a></li>
+<li><a class="reference external" href="#objccategory_n_s_array_07_leap_pointable_or_hand_list_08_1a8a1abca4ffb64654b4fa71d55f293013">rightmost</a></li>
+</ul>
+</div>
+<div class="line-block" id="objccategory_n_s_array_07_leap_pointable_or_hand_list_08">
+<div class="line"><em>category</em> <strong>NSArray(LeapPointableOrHandList)</strong></div>
+</div>
+<blockquote>
+<div><p>The LeapPointableOrHandList category provides methods for getting objects from an NSArray containing <a class="reference internal" href="Leap.Pointable.html#objcinterface_leap_pointable"><em>LeapPointable</em></a>, <a class="reference internal" href="Leap.Finger.html#objcinterface_leap_finger"><em>LeapFinger</em></a>, <a class="reference internal" href="Leap.Tool.html#objcinterface_leap_tool"><em>LeapTool</em></a>, or <a class="reference internal" href="Leap.Hand.html#objcinterface_leap_hand"><em>LeapHand</em></a> objects based on their physical position within the Leap coordinate system. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="Leap.Finger.html#objcinterface_leap_finger"><em>LeapFinger</em></a> *farLeft = frame.<a class="reference internal" href="Leap.Frame.html#objcinterface_leap_frame_1a070739131dde3afb2aee1cdc4701923c"><em>fingers</em></a>.leftmost;
+<a class="reference internal" href="Leap.Finger.html#objcinterface_leap_finger"><em>LeapFinger</em></a> *mostForwardOnHand = ((<a class="reference internal" href="Leap.Hand.html#objcinterface_leap_hand"><em>LeapHand</em></a>*)[frame.<a class="reference internal" href="Leap.Frame.html#objcinterface_leap_frame_1ab10cfe66220133b37fce6730521fc31b"><em>hands</em></a> objectAtIndex:0]).fingers.frontmost;
+<a class="reference internal" href="Leap.Tool.html#objcinterface_leap_tool"><em>LeapTool</em></a> *rightTool = frame.<a class="reference internal" href="Leap.Frame.html#objcinterface_leap_frame_1a99da7d381da07d45a1f24fb429229a8d"><em>tools</em></a>.rightmost;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+<em>Public Functions</em><blockquote>
+<div><p><span class="target" id="objccategory_n_s_array_07_leap_pointable_or_hand_list_08_1a088d1fdf712f44b3d5bc7544a6b74257"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (NSArray *)  <strong>extended</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>Returns a new list containing those members of the current list that are extended. </p>
+<p><p>This includes all tools and any fingers whose [<a class="reference internal" href="Leap.Pointable.html#objcinterface_leap_pointable"><em>LeapPointable</em></a> isExtended] function is true. Unlike its C++ counterpart, this method does not modify the original NSArray.</p>
+<p><pre class="literal-block">
+NSArray *fingerList = frame.<a class="reference internal" href="Leap.Frame.html#objcinterface_leap_frame_1a070739131dde3afb2aee1cdc4701923c"><em>fingers</em></a>;
+NSArray *extendedFingers = [fingerList <a class="reference internal" href="Leap.ToolList.html#objccategory_n_s_array_07_leap_pointable_or_hand_list_08_1a088d1fdf712f44b3d5bc7544a6b74257"><em>extended</em></a>];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The list of tools and extended fingers from the current list. </dd>
+<dt><strong>Since 2.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objccategory_n_s_array_07_leap_pointable_or_hand_list_08_1a9360cc4ca18661964fe0af72f468ff2d"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (NSArray *) <strong>fingerType</strong>:(LeapFingerType) type </div>
+</div>
+</p>
+<blockquote>
+<div><p>Returns a new list containing those Pointable objects in the current list that are of the specified finger type. </p>
+<p><p><pre class="literal-block">
+NSArray *allFingers = frame.<a class="reference internal" href="Leap.Frame.html#objcinterface_leap_frame_1a070739131dde3afb2aee1cdc4701923c"><em>fingers</em></a>;
+NSArray *indexFingers = [allFingers fingerType:LEAP_FINGER_TYPE_INDEX];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The list of matching fingers from the current list. </dd>
+<dt><strong>Since 2.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objccategory_n_s_array_07_leap_pointable_or_hand_list_08_1a474f00cdccae8d8a98e375fac0165f87"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (id)  <strong>frontmost</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The member of the list that is farthest to the front within the standard Leap frame of reference (i.e has the smallest Z coordinate). </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="Leap.Hand.html#objcinterface_leap_hand"><em>LeapHand</em></a> *frontmostHand = handList.frontmost;
+<a class="reference internal" href="Leap.Finger.html#objcinterface_leap_finger"><em>LeapFinger</em></a> *frontmostFinger = frontmostHand.fingers.frontmost;
+</pre>
+</p>
+<p>Returns nil if the NSArray is empty. <dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objccategory_n_s_array_07_leap_pointable_or_hand_list_08_1a4118ecac6bfefaf4c7a40d4fcb1dca90"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (id)  <strong>leftmost</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The member of the list that is farthest to the left within the standard Leap frame of reference (i.e has the smallest X coordinate). </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="Leap.Hand.html#objcinterface_leap_hand"><em>LeapHand</em></a> *leftmostHand = handList.leftmost;
+<a class="reference internal" href="Leap.Finger.html#objcinterface_leap_finger"><em>LeapFinger</em></a> *leftmostFinger = leftmostHand.fingers.leftmost;
+</pre>
+</p>
+<p>Returns nil if the NSArray is empty. <dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objccategory_n_s_array_07_leap_pointable_or_hand_list_08_1a8a1abca4ffb64654b4fa71d55f293013"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (id)  <strong>rightmost</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The member of the list that is farthest to the right within the standard Leap frame of reference (i.e has the largest X coordinate). </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="Leap.Hand.html#objcinterface_leap_hand"><em>LeapHand</em></a> *rightmostHand = handList.rightmost;
+<a class="reference internal" href="Leap.Finger.html#objcinterface_leap_finger"><em>LeapFinger</em></a> *rightmostFinger = rightmostHand.fingers.rightmost;
+</pre>
+</p>
+<p>Returns nil if the NSArray is empty. <dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">Objective-C Docs (v2.1)</a></li>
+          </ul><ul>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Classes.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>Objective-C</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

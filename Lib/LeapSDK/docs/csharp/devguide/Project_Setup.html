@@ -1,0 +1,552 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Setting Up a Project &mdash; Leap Motion C# and Unity SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion C# and Unity SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="Application Development" href="Leap_Guides.html" />
+    <link rel="next" title="Setting Up a Windows Forms or WPF Project" href="Project_Setup_WinForms.html" />
+    <link rel="prev" title="Hello World" href="Sample_Tutorial.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'csharp';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../csharp/devguide/Project_Setup.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/devguide/Project_Setup.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/devguide/Project_Setup.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/devguide/Project_Setup.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/devguide/Project_Setup.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/devguide/Project_Setup.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/devguide/Project_Setup.html";
+            } else {
+                    redirectedLocation ="Leap_Guides.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../csharp/devguide/Project_Setup.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Sample_Tutorial.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("Project_Setup_WinForms.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="Leap_Guides.html?proglang=current" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      C# and Unity
+    
+  </li>
+  <li>
+      <a href="../../cpp/devguide/Project_Setup.html" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      <a href="../../java/devguide/Project_Setup.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="../../python/devguide/Project_Setup.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      <a href="../../objc/devguide/Project_Setup.html" onclick="localStorage['currentAPI'] = 'objc'">Objective-C</a>
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Guides.html" accesskey="U">Application Development</a>&raquo;
+  Setting Up a Project
+</span> -->
+        
+  <div class="section" id="setting-up-a-project-in-unity-3d">
+<h1>Setting up a project in Unity 3D<a class="headerlink" href="#setting-up-a-project-in-unity-3d" title="Permalink to this headline">¶</a></h1>
+<p>You can use the Leap Motion SDK as a Unity plug-in to access Leap Motion tracking data in a Unity application. This article describes both how to use the plug-in mechanism supported by the <em>Pro</em> version of Unity and how to manually copy the libraries to use the free, standard version of Unity, which does not support native library plug-ins.</p>
+<p>For a getting started boilerplate, get the <a class="reference external" href="https://www.assetstore.unity3d.com/en/#!/content/17770">Leap Motion V2 Skeletal Assets</a> from the Unity Asset Store.</p>
+<div class="section" id="leap-motion-c-libraries-for-unity">
+<h2>Leap Motion C# Libraries for Unity<a class="headerlink" href="#leap-motion-c-libraries-for-unity" title="Permalink to this headline">¶</a></h2>
+<p>The Leap Motion SDK includes several versions of the native libraries to match the platform and architecture of your application&#8217;s build targets.</p>
+<p>To use the Leap Motion SDK in the Unity editor, you must add the 32-bit libraries to your application&#8217;s project folder. On the Mac, both 32-bit and 64-bit libraries are included in one file. However, on Windows, only one architecture can be included in a library file, so you must be sure to use the correct files.</p>
+<p>Use the following libraries in Unity:</p>
+<ul>
+<li><p class="first">32-bit Windows:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">LeapSDK/lib/UnityAssets/Plugins/LeapCSharp.NET3.5.dll</span></tt> — Leap Motion C# library for .NET 3.5</li>
+<li><tt class="docutils literal"><span class="pre">LeapSDK/lib/UnityAssets/Plugins/LeapCSharp.dll</span></tt> — 32-bit Leap Motion C# library for Windows</li>
+<li><tt class="docutils literal"><span class="pre">LeapSDK/lib/UnityAssets/Plugins/Leap.dll</span></tt> — 32-bit Leap Motion library for Windows</li>
+</ul>
+</li>
+<li><p class="first">64-bit Windows:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">LeapSDK/lib/UnityAssets/Plugins/LeapCSharp.NET3.5.dll</span></tt> — Leap Motion C# library for .NET 3.5</li>
+<li><tt class="docutils literal"><span class="pre">LeapSDK/lib/x64/LeapCSharp.dll</span></tt> — 64-bit Leap Motion C# library for Windows</li>
+<li><tt class="docutils literal"><span class="pre">LeapSDK/lib/x64/Leap.dll</span></tt> — 64-bit Leap Motion library for Windows</li>
+</ul>
+<p><em>Note: Do not use the 64-bit libraries in the Unity editor on Windows.</em></p>
+</li>
+<li><p class="first">32- and 64-bit Mac OS:</p>
+<p><strong>Unity Pro</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">LeapSDK/lib/UnityAssets/Plugins/LeapCSharp.NET3.5.dll</span></tt> — Leap Motion C# library for .NET 3.5 and Unity Pro</li>
+<li><tt class="docutils literal"><span class="pre">LeapSDK/lib/UnityAssets/Plugins/LeapCSharp.bundle</span></tt> — Leap Motion C# bundle for Unity Pro</li>
+</ul>
+<p><strong>Unity Standard (free license)</strong></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">LeapSDK/lib/LeapCSharp.NET3.5.dll</span></tt> &#8211; Leap Motion C# library for .NET 3.5 and Unity Standard</li>
+<li><tt class="docutils literal"><span class="pre">LeapSDK/lib/libLeapCSharp.dylib</span></tt> &#8211; Leap Motion C# library for OS X and Unity Standard</li>
+<li><tt class="docutils literal"><span class="pre">LeapSDK/lib/libLeap.dylib</span></tt> &#8211; Leap Motion library for OS X and Unity Standard</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="create-a-project">
+<h2>Create a project<a class="headerlink" href="#create-a-project" title="Permalink to this headline">¶</a></h2>
+<p>First, create a new Unity project in the usual way, i.e.:</p>
+<ol class="arabic simple">
+<li>Open the Unity editor.</li>
+<li>Select <em>File &gt; New Project...</em></li>
+<li>Choose a name and save location.</li>
+<li>Click <em>Create Project</em>.</li>
+</ol>
+<p>Then, add the Leap Motion libraries to the project.</p>
+<p><strong>For Unity Pro:</strong></p>
+<ol class="arabic simple">
+<li>Navigate to the Assets folder inside your Unity project directory.</li>
+<li>Copy the entire <tt class="docutils literal"><span class="pre">Plugins</span></tt> folder from the Leap Motion SDK <tt class="docutils literal"><span class="pre">lib/UnityAssets</span></tt> folder into your Unity project <tt class="docutils literal"><span class="pre">Assets</span></tt> folder.</li>
+</ol>
+<p>Note, you can place the libraries from both the Mac and the Windows SDK into your Plugins folder to enable cross-platform builds. However, see <a class="reference internal" href="#building-64-bit-windows-unity-applications">Building 64-bit Windows Unity applications</a> for considerations when building for the x86 versus the x64 Windows platforms.</p>
+<p><strong>For Unity Standard (free license):</strong></p>
+<ol class="arabic">
+<li><p class="first">Navigate to the root folder of your new project.</p>
+</li>
+<li><p class="first">Copy the following libraries to the root folder:</p>
+<p>On Windows:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">x86/LeapCSharp.dll</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">x86/Leap.dll</span></tt></li>
+</ul>
+<p>On Mac:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">libLeapCSharp.dylib</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">libLeap.dylib</span></tt></li>
+</ul>
+</li>
+<li><p class="first">Open the project Assets folder.</p>
+</li>
+<li><p class="first">Copy <tt class="docutils literal"><span class="pre">LeapCSharp.NET.3.5.dll</span></tt> to the root of your Assets folder (for both Mac and Windows).</p>
+</li>
+</ol>
+</div>
+<div class="section" id="accessing-the-leap-motion-api">
+<h2>Accessing the Leap Motion API<a class="headerlink" href="#accessing-the-leap-motion-api" title="Permalink to this headline">¶</a></h2>
+<p>With the Leap Motion libraries in the Plugins folder, you can add script assets that use the API. The Leap Motion classes are defined in the <tt class="docutils literal"><span class="pre">Leap</span></tt> namespace. A basic MonoBehavior class that accesses the Leap Motion API will look something like the following:</p>
+<div class="code csharp highlight-python"><div class="highlight"><pre>using UnityEngine;
+using System.Collections;
+using Leap;
+
+public class LeapBehavior : MonoBehaviour {
+    Controller controller;
+
+    void Start ()
+    {
+        controller = new Controller();
+    }
+
+    void Update ()
+    {
+        Frame frame = controller.Frame();
+        // do something with the tracking data in the frame...
+    }
+}
+</pre></div>
+</div>
+<p>Note that this example does not use a <tt class="docutils literal"><span class="pre">Leap.Listener</span></tt> subclass. Since a Unity application has a natural frame rate, the <tt class="docutils literal"><span class="pre">Update()</span></tt> function can get the current frame of data from the Leap Motion controller when the function is called by the Unity engine.</p>
+<p><em>Note: Using the Listener mechanism can cause the Unity editor and Unity applications to freeze on exit on Windows. This is due to a threading issue that can occur when using callbacks between managed and unmanaged code in Unity.</em></p>
+</div>
+<div class="section" id="exiting-cleanly-on-windows-with-unity3d-3-5">
+<h2>Exiting cleanly on Windows with Unity3D 3.5<a class="headerlink" href="#exiting-cleanly-on-windows-with-unity3d-3-5" title="Permalink to this headline">¶</a></h2>
+<p>Because of a problem with the way that Mono closes threads during application shutdown, the Unity3D editor and Leap-enabled applications can hang on exit. This issue affects Windows computers only and does not occur in Unity 4, which uses a different version of Mono. This issue also only occurs if you use the Leap Motion Listener method of handling Leap Motion events.</p>
+<p>To avoid hanging on exit, add the following code to your application:</p>
+<div class="code csharp highlight-python"><div class="highlight"><pre>#if UNITY_STANDALONE_WIN
+  [DllImport(&quot;mono&quot;, SetLastError=true)]
+  static extern void mono_thread_exit();
+#endif
+
+void OnApplicationQuit() {
+    controller.Dispose();
+    listener.Dispose();
+#if UNITY_STANDALONE_WIN &amp;&amp; !UNITY_EDITOR &amp;&amp; UNITY_3_5
+    mono_thread_exit ();
+#endif
+}
+</pre></div>
+</div>
+<p>When using this code snippet, <tt class="docutils literal"><span class="pre">controller</span></tt> must be a reference to your Leap.Controller object and &#8216;&#8217;listener`` must be a reference to your Leap.Listener subclass.</p>
+</div>
+<div class="section" id="building-64-bit-windows-unity-applications">
+<h2>Building 64-bit Windows Unity applications<a class="headerlink" href="#building-64-bit-windows-unity-applications" title="Permalink to this headline">¶</a></h2>
+<p>When you build a Leap-enabled application with Unity Pro, the Unity editor copies the Leap Motion libraries from your Plugins folders automatically. You can even put a set of both Windows x86 and Mac OS Leap Motion libraries in the Plugins folder to enable cross-platform builds from either platform. However, the Leap Motion x86 libraries cannot coexist with the Leap Motion x64 libraries in the Plugins folder.</p>
+<p>On Windows, the Unity Pro editor requires that the Plugins folder contains the 32-bit (x86 platform) libraries in order to run your application during development. If you make a build for the x64 platform, Unity copies these 32-bit libraries to the application&#8217;s output data folder. Before running or distributing your 64-bit application you must replace the 32-bit Leap Motion libraries with the 64-bit versions from the <tt class="docutils literal"><span class="pre">lib/x64</span></tt> folder of the Leap Motion SDK.</p>
+<p>On Mac, you can place either the 32-bit Windows Leap Motion libraries or the 64-bit Windows libraries in your Plugins folder, but not both. If you want to build for both Windows platforms on the Mac, you must make sure to use the correct version of the Leap Motion libraries. You can do this by copying the correct libraries into the application&#8217;s output data folder after building your application.</p>
+<p>When using Unity Standard, you must always manually copy the correct libraries to their proper locations within your application.</p>
+</div>
+<div class="section" id="exporting-leap-motion-apps-with-unity-standard-license">
+<h2>Exporting Leap Motion apps with Unity (standard license)<a class="headerlink" href="#exporting-leap-motion-apps-with-unity-standard-license" title="Permalink to this headline">¶</a></h2>
+<p>The standard-license, free version of Unity does not support plug-ins. Thanks to our community of Leap developers, we have determined that it is possible to use the Leap libraries with the free version of Unity. It does require some manual steps, however.</p>
+<p>To get a Unity project to work with the Leap libraries, you must put the libraries in a location where they can be found at runtime. This location is different depending on whether you are running the project within the Unity editor or running the exported executable. Since the standard version of Unity doesn&#8217;t support plug-ins, the key is to put the libraries in a place where the operating system&#8217;s dynamic library loader can find them.</p>
+<p>After you export your Unity project, you must copy the Leap Motion libraries and dependencies to the export folder along side the application.  For example, if you export your project to a folder called <em>UnicornSlamExport</em>, the final folder contents would look like this:</p>
+<p>Windows:</p>
+<div class="code highlight-python"><div class="highlight"><pre>UnicornSlamExport/
+    Leap.dll
+    LeapCSharp.dll
+    Unicorn_Slam_Data/
+    UnicornSlam.exe
+</pre></div>
+</div>
+<p>Make sure that you use the libraries in the x86 folder in the SDK for 32-bit Windows builds and the libraries in the x64 folder for 64-bit Windows builds.</p>
+<p>OS X:</p>
+<div class="code highlight-python"><div class="highlight"><pre>UnicornSlamExport/
+    libLeap.dylib
+    libLeapCSharp.dylib
+    UnicornSlam.app
+</pre></div>
+</div>
+<p>You can now make an installer to deploy your application in the same way that you would for a non-Leap enabled program.</p>
+</div>
+<div class="section" id="placing-the-leap-libraries-inside-the-application-package-on-mac">
+<h2>Placing the Leap libraries inside the application package on Mac<a class="headerlink" href="#placing-the-leap-libraries-inside-the-application-package-on-mac" title="Permalink to this headline">¶</a></h2>
+<p>It is often convenient to place all the dependencies within the application package on the Mac. To do so, you must identify the path where the libraries can be found. You can use the <tt class="docutils literal"><span class="pre">install_name_tool</span></tt> utility to add the path to your application binary and copy the libraries into the Frameworks folder within the application package. For example, the .app package for the hypothetical <em>UnicornSlam</em> application looks like the following after exporting from Unity:</p>
+<div class="code highlight-python"><div class="highlight"><pre>UnicornSlam.app/
+    Data/
+    Frameworks/
+        MonoEmbedRuntime/
+    Info.plist
+    MacOS/
+        UnicornSlam
+    PkgInfo
+    Resources/
+</pre></div>
+</div>
+<p>First, add a relative path to the application binary using <tt class="docutils literal"><span class="pre">install_name_tool</span></tt>. From the export folder, run the following command in a Terminal window:</p>
+<div class="code highlight-python"><div class="highlight"><pre>install_name_tool -add_rpath @executable_path/../Frameworks UnicornSlam.app/Contents/MacOS/UnicornSlam
+</pre></div>
+</div>
+<p>Next, copy libLeap.dylib and libLeapCSharp.dylib to the Frameworks folder inside the app package. When finished, the app package should look like the following:</p>
+<div class="code highlight-python"><div class="highlight"><pre>UnicornSlam.app/
+    Data/
+    Frameworks/
+        libLeap.dylib
+        libLeapCSharp.dylib
+        MonoEmbedRuntime/
+    Info.plist
+    MacOS/
+        UnicornSlam
+    PkgInfo
+    Resources/
+</pre></div>
+</div>
+</div>
+<div class="section" id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h2>
+<p>I would like to acknowledge and thank the many Leap community developers such as pixelplacement and BirnamWoodGames, who helped us discover the information provided in this article. In particular, Pierre Semaan wrote a tutorial for Windows, <a class="reference external" href="http://pierresemaan.com/getting-the-leap-to-work-with-unity-free-version-not-pro/">Getting the Leap to work with Unity</a>, that presented a more reasonable workflow for using the Leap with the standard version of Unity than we were previously aware of.</p>
+</div>
+</div>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">C# and Unity Docs (v2.1)</a></li>
+          </ul><ul>
+<li class="toctree-l1"><a class="reference internal" href="Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Guides.html">Application Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Leap_SDK_Overview.html">SDK Libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sample_Tutorial.html#id6">Hello World</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-a-project-in-unity-3d">Setting up a project in Unity 3D</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#leap-motion-c-libraries-for-unity">Leap Motion C# Libraries for Unity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-project">Create a project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-the-leap-motion-api">Accessing the Leap Motion API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exiting-cleanly-on-windows-with-unity3d-3-5">Exiting cleanly on Windows with Unity3D 3.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-64-bit-windows-unity-applications">Building 64-bit Windows Unity applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exporting-leap-motion-apps-with-unity-standard-license">Exporting Leap Motion apps with Unity (standard license)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#placing-the-leap-libraries-inside-the-application-package-on-mac">Placing the Leap libraries inside the application package on Mac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Project_Setup_WinForms.html">Setting Up a Windows Forms or WPF Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Unity_Boilerplate.html">Unity Boilerplate Asset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Unity_Demo_Pack.html">Unity Demo Pack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap_Architecture.html">System Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/Leap_Classes.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>C# and Unity</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,766 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ScreenTapGesture &mdash; Leap Motion Objective-C SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion Objective-C SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="Leap_Classes.html" />
+    <link rel="next" title="SwipeGesture" href="Leap.SwipeGesture.html" />
+    <link rel="prev" title="PointableList" href="Leap.PointableList.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'objc';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.javascript = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../objc/api/Leap.ScreenTapGesture.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/api/Leap.ScreenTapGesture.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/api/Leap.ScreenTapGesture.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/api/Leap.ScreenTapGesture.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/api/Leap.ScreenTapGesture.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/api/Leap.ScreenTapGesture.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/api/Leap.ScreenTapGesture.html";
+            } else {
+                    redirectedLocation ="Leap_Classes.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../objc/api/Leap.ScreenTapGesture.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Leap.PointableList.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("Leap.SwipeGesture.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="../../javascript/api/Leap.ScreenTapGesture.html" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      <a href="../../csharp/api/Leap.ScreenTapGesture.html" onclick="localStorage['currentAPI'] = 'csharp'">C# and Unity</a>
+    
+  </li>
+  <li>
+      <a href="../../cpp/api/Leap.ScreenTapGesture.html" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      <a href="../../java/api/Leap.ScreenTapGesture.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="../../python/api/Leap.ScreenTapGesture.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      Objective-C
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Classes.html" accesskey="U">API Reference</a>&raquo;
+  ScreenTapGesture
+</span> -->
+        
+  <div class="section" id="leapscreentapgesture">
+<h1>LeapScreenTapGesture<a class="headerlink" href="#leapscreentapgesture" title="Permalink to this headline">¶</a></h1>
+</div>
+<style>.members {
+     -webkit-column-count:2; /* Chrome, Safari, Opera */
+     -moz-column-count:2; /* Firefox */
+     column-count:2;
+     }
+     strong {color:gray;}
+</style><p><strong>Methods:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#objcinterface_leap_screen_tap_gesture_1a7b4919a71d4937fb97acabcd83bf254e">direction</a></li>
+<li><a class="reference external" href="#objcinterface_leap_screen_tap_gesture_1ac4a868046768469f24be6298bc4dffa6">pointable</a></li>
+<li><a class="reference external" href="#objcinterface_leap_screen_tap_gesture_1ac97d1bc8775d2f14aeaac67bfaa7d6fb">position</a></li>
+<li><a class="reference external" href="#objcinterface_leap_screen_tap_gesture_1a4f0aa3afbd6ac7dd9cb856b55e889141">progress</a></li>
+</ul>
+</div>
+<div class="line-block" id="objcinterface_leap_screen_tap_gesture">
+<div class="line"><em>class</em> <strong>LeapScreenTapGesture</strong></div>
+</div>
+<blockquote>
+<div><p>The <a class="reference internal" href="#objcinterface_leap_screen_tap_gesture"><em>LeapScreenTapGesture</em></a> class represents a tapping gesture by a finger or tool. </p>
+<p><p>A screen tap gesture is recognized when the tip of a finger pokes forward and then springs back to approximately the original postion, as if tapping a vertical screen. The tapping finger must pause briefly before beginning the tap.</p>
+<p><img alt="api/../../../images/Leap_Gesture_Tap2.png" src="api/../../../images/Leap_Gesture_Tap2.png" /></p>
+<p><strong>Important:</strong> To use screen tap gestures in your application, you must enable recognition of the screen tap gesture. You can enable recognition with:</p>
+<p><pre class="literal-block">
+[controller enableGesture:LEAP_GESTURE_TYPE_SCREEN_TAP enable:YES];
+</pre>
+</p>
+<p>LeapScreenTap gestures are discrete. The <a class="reference internal" href="#objcinterface_leap_screen_tap_gesture"><em>LeapScreenTapGesture</em></a> object representing a tap always has the state, LEAP_GESTURE_STATE_STOP. Only one <a class="reference internal" href="#objcinterface_leap_screen_tap_gesture"><em>LeapScreenTapGesture</em></a> object is created for each screen tap gesture recognized.</p>
+<p>You can set the minimum finger movement and velocity required for a movement to be recognized as a screen tap as well as adjust the detection window for evaluating the movement using the config attribute of a connected <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> object. Use the following keys to configure screen tap recognition:</p>
+<p><table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="15%" />
+<col width="20%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key string</th>
+<th class="head">Value type</th>
+<th class="head">Default value</th>
+<th class="head">Units</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Gesture.ScreenTap.MinForwardVelocity</td>
+<td>float</td>
+<td>50</td>
+<td>mm/s</td>
+</tr>
+<tr class="row-odd"><td>Gesture.ScreenTap.HistorySeconds</td>
+<td>float</td>
+<td>0.1</td>
+<td>s</td>
+</tr>
+<tr class="row-even"><td>Gesture.ScreenTap.MinDistance</td>
+<td>float</td>
+<td>5.0</td>
+<td>mm</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>The following example demonstrates how to set the screen tap configuration parameters:</p>
+<p><pre class="literal-block">
+[controller.config setFloat:&#64;&quot;Gesture.ScreenTap.MinForwardVelocity&quot; value:30.0];
+[controller.config setFloat:&#64;&quot;Gesture.ScreenTap.HistorySeconds&quot; value:.5];
+[controller.config setFloat:&#64;&quot;Gesture.ScreenTap.MinDistance&quot; value:1.0];
+[controller.config save];
+</pre>
+</p>
+<p>The <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> object must be connected to the Leap Motion service/daemon before setting the configuration parameters.</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+<em>Public Functions</em><blockquote>
+<div><p><span class="target" id="objcinterface_leap_screen_tap_gesture_1a7b4919a71d4937fb97acabcd83bf254e"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>direction</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The direction of finger tip motion. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> *tapDirection = screenTap.direction;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> A unit direction vector. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_gesture_1a486e72331e7c6655f25fa91af41a323d"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (int64_t)  <strong>duration</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The elapsed duration of the recognized movement up to the frame containing this <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> object, in microseconds. </p>
+<p><p><pre class="literal-block">
+int64_t microseconds = gesture.duration;
+</pre>
+</p>
+<p>The duration reported for the first <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> in the sequence (with the LEAP_GESTURE_STATE_START state) will typically be a small positive number since the movement must progress far enough for the Leap to recognize it as an intentional gesture.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>int64_t the elapsed duration in microseconds. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_gesture_1a01faab2d0a7e30ea6cac5748e76bf18d"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (float)  <strong>durationSeconds</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The elapsed duration in seconds. </p>
+<p><p><pre class="literal-block">
+float seconds = gesture.duration;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd>duration </dd>
+<dt><strong>Return</strong></dt>
+<dd>float the elapsed duration in seconds. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_gesture_1a0bac7ea2537a7b9ab29b77d757331df9"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (BOOL) <strong>equals</strong>:(const  <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a>  *) other </div>
+</div>
+</p>
+<blockquote>
+<div><p>Compare <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> object equality. </p>
+<p><p>Two LeapGestures are equal if they represent the same snapshot of the same recognized movement.</p>
+<p><pre class="literal-block">
+[thisGesture equals:thatGesture];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">other</span></tt> - <p>The <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> object to compare. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_gesture_1ac6dcf184ee44e021ffaf512eb614f251"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (int32_t)  <strong>id</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The gesture ID. </p>
+<p><p>All <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> objects belonging to the same recognized movement share the same ID value. Use the ID value with the [<a class="reference internal" href="Leap.Frame.html#objcinterface_leap_frame"><em>LeapFrame</em></a> gesture:] method to find updates related to this <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> object in subsequent frames.</p>
+<p><pre class="literal-block">
+int gestureID = gesture.id;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>int32_t the ID of this <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a>. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_gesture_1aa29c0e93357b1d83c72352cc03e84ca8"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (BOOL)  <strong>isValid</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>Reports whether this <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> instance represents a valid gesture. </p>
+<p><p>An invalid <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> object does not represent a snapshot of a recognized movement. Invalid <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> objects are returned when a valid object cannot be provided. For example, when you get an gesture by ID using [<a class="reference internal" href="Leap.Frame.html#objcinterface_leap_frame"><em>LeapFrame</em></a> gesture:], and there is no gesture with that ID in the current frame, then <tt class="docutils literal"><span class="pre">gesture:</span></tt> returns an Invalid <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> object (rather than a null value). Always check object validity in situations where an gesture might be invalid.</p>
+<p><pre class="literal-block">
+<a class="reference internal" href="Leap.Frame.html#objcinterface_leap_frame"><em>LeapFrame</em></a> *frame = [controller frame:0];
+<a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> *trackedGesture = [frame gesture:trackedGestureID];
+if(trackedGesture.isValid)
+{
+    //Use the data...
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>bool Yes, if this is a valid <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> instance; NO, otherwise. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_screen_tap_gesture_1ac4a868046768469f24be6298bc4dffa6"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="Leap.Pointable.html#objcinterface_leap_pointable"><em>LeapPointable</em></a>  *)  <strong>pointable</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The finger performing the screen tap gesture. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="Leap.Pointable.html#objcinterface_leap_pointable"><em>LeapPointable</em></a> * tapper = screenTap.pointable;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A <a class="reference internal" href="Leap.Pointable.html#objcinterface_leap_pointable"><em>LeapPointable</em></a> object representing the tapping finger. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_screen_tap_gesture_1ac97d1bc8775d2f14aeaac67bfaa7d6fb"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a>  *)  <strong>position</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The position where the screen tap is registered. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> *tapPosition = screenTap.position;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A <a class="reference internal" href="Leap.Vector.html#objcinterface_leap_vector"><em>LeapVector</em></a> containing the coordinates of screen tap location. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_screen_tap_gesture_1a4f0aa3afbd6ac7dd9cb856b55e889141"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (float)  <strong>progress</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The progess value is always 1.0 for a screen tap gesture. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>float The value 1.0. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_gesture_1a113f154bf1b112f703b6b6fec980ed77"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (LeapGestureState)  <strong>state</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The gesture state. </p>
+<p><p>Recognized movements occur over time and have a beginning, a middle, and an end. The &#8216;state&#8217; attribute reports where in that sequence this <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> object falls.</p>
+<p><pre class="literal-block">
+LeapGestureState state = gesture.state;
+</pre>
+</p>
+<p>The possible gesture states are defined by the LeapGestureState enumeration:</p>
+<p></p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>LeapGestureState A value from the LeapGestureState enumeration. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_gesture_1a90e104a8b83dff4f79d6b3b4694e6fba"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (LeapGestureType)  <strong>type</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>The gesture type. </p>
+<p><p><pre class="literal-block">
+LeapGestureType type = gesture.type;
+</pre>
+</p>
+<p>The supported types of gestures are defined by the LeapGestureType enumeration:</p>
+<p></p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>LeapGestureType A value from the LeapGestureType enumeration. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Property</em><blockquote>
+<div><p><span class="target" id="objcinterface_leap_gesture_1a713a7fb019622a3a2628a6ff9f8ce6dd"></span><div class="line"><div class="line"><br /></div>
+- (<a class="reference internal" href="Leap.Frame.html#objcinterface_leap_frame"><em>LeapFrame</em></a>  *)  <strong>frame</strong></div>
+ <strong>frame</strong></p>
+<blockquote>
+<div><p>The <a class="reference internal" href="Leap.Frame.html#objcinterface_leap_frame"><em>LeapFrame</em></a> containing this <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> instance. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="Leap.Frame.html#objcinterface_leap_frame"><em>LeapFrame</em></a> *owningFrame = gesture.frame;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The parent <a class="reference internal" href="Leap.Frame.html#objcinterface_leap_frame"><em>LeapFrame</em></a> object. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_gesture_1ab10cfe66220133b37fce6730521fc31b"></span><div class="line"><div class="line"><br /></div>
+- (NSArray *)  <strong>hands</strong></div>
+ <strong>hands</strong></p>
+<blockquote>
+<div><p>The list of hands associated with this <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a>, if any. </p>
+<p><p><pre class="literal-block">
+NSArray *handList = gesture.hands;
+//Only one hand for current gestures
+<a class="reference internal" href="Leap.Hand.html#objcinterface_leap_hand"><em>LeapHand</em></a> *gesturingHand = [handList objectAtIndex:0];
+</pre>
+</p>
+<p>If no hands are related to this gesture, the list is empty.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>NSArray the list of related <a class="reference internal" href="Leap.Hand.html#objcinterface_leap_hand"><em>LeapHand</em></a> objects. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcinterface_leap_gesture_1a6447dea63acf3a9cf7da5dc4e9b5663f"></span><div class="line"><div class="line"><br /></div>
+- (NSArray *)  <strong>pointables</strong></div>
+ <strong>pointables</strong></p>
+<blockquote>
+<div><p>The list of fingers and tools associated with this <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a>, if any. </p>
+<p><p><pre class="literal-block">
+NSArray *pointableList = gesture.pointables;
+//Only one pointable for current gestures
+<a class="reference internal" href="Leap.Hand.html#objcinterface_leap_hand"><em>LeapHand</em></a> *gesturingPointable = [pointableList objectAtIndex:0];
+</pre>
+</p>
+<p>If no <a class="reference internal" href="Leap.Pointable.html#objcinterface_leap_pointable"><em>LeapPointable</em></a> objects are related to this gesture, the list is empty.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>NSArray the list of related <a class="reference internal" href="Leap.Pointable.html#objcinterface_leap_pointable"><em>LeapPointable</em></a> objects. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Public Static Functions</em><blockquote>
+<div><p><span class="target" id="objcinterface_leap_gesture_1ac97daed95772c0e13e83de27d7d3ac97"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
++ (<a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a>  *)  <strong>invalid</strong></div>
+</div>
+</p>
+<blockquote>
+<div><p>Returns an invalid <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> object. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> *wrongGesture = <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a>.<a class="reference internal" href="Leap.SwipeGesture.html#objcinterface_leap_gesture_1ac97daed95772c0e13e83de27d7d3ac97"><em>invalid</em></a>;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The invalid <a class="reference internal" href="Leap.Gesture.html#objcinterface_leap_gesture"><em>LeapGesture</em></a> instance. </dd>
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">Objective-C Docs (v2.1)</a></li>
+          </ul><ul>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Classes.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Bone.html#leapbone">LeapBone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.CircleGesture.html#leapcirclegesture">LeapCircleGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Config.html#leapconfig">LeapConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Controller.html#leapcontroller">LeapController</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Delegate.html">LeapDelegate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Device.html#leapdevice">LeapDevice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Finger.html#leapfinger">LeapFinger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Frame.html#leapframe">LeapFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Gesture.html#leapgesture">LeapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Hand.html#leaphand">LeapHand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.InteractionBox.html#leapinteractionbox">LeapInteractionBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.KeyTapGesture.html#leapkeytapgesture">LeapKeyTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Listener.html#leaplistener-protocol">LeapListener Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Matrix.html#leapmatrix">LeapMatrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Pointable.html#leappointable">LeapPointable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.PointableList.html#leappointableorhandlist-category">LeapPointableOrHandList Category</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#leapscreentapgesture">LeapScreenTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.SwipeGesture.html#leapswipegesture">LeapSwipeGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Tool.html#leaptool">LeapTool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Vector.html#leapvector">LeapVector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>Objective-C</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

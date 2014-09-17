@@ -1,0 +1,843 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Matrix &mdash; Leap Motion C# and Unity SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion C# and Unity SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="Leap_Classes.html" />
+    <link rel="next" title="Pointable" href="Leap.Pointable.html" />
+    <link rel="prev" title="Listener" href="Leap.Listener.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'csharp';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.javascript = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../csharp/api/Leap.Matrix.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/api/Leap.Matrix.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/api/Leap.Matrix.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/api/Leap.Matrix.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/api/Leap.Matrix.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/api/Leap.Matrix.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/api/Leap.Matrix.html";
+            } else {
+                    redirectedLocation ="Leap_Classes.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../csharp/api/Leap.Matrix.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Leap.Listener.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("Leap.Pointable.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="../../javascript/api/Leap.Matrix.html" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      C# and Unity
+    
+  </li>
+  <li>
+      <a href="../../cpp/api/Leap.Matrix.html" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      <a href="../../java/api/Leap.Matrix.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="../../python/api/Leap.Matrix.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      <a href="../../objc/api/Leap.Matrix.html" onclick="localStorage['currentAPI'] = 'objc'">Objective-C</a>
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Classes.html" accesskey="U">API Reference</a>&raquo;
+  Matrix
+</span> -->
+        
+  <div class="section" id="matrix">
+<h1>Matrix<a class="headerlink" href="#matrix" title="Permalink to this headline">¶</a></h1>
+</div>
+<style>.members {
+     -webkit-column-count:2; /* Chrome, Safari, Opera */
+     -moz-column-count:2; /* Firefox */
+     column-count:2;
+     }
+     strong {color:gray;}
+</style><p><strong>Properties:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1aaec3443624f203ba8453df980d887f8d">Identity</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1aa86e83d6ba8522f64b07054ca66bbe75">origin</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1a521fe0389397e15dcf84417d616b27f5">xBasis</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1a060e37e3e8908f190a117ded7be96b26">yBasis</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1a9974130b93e5f0980b363ff22fae6b03">zBasis</a></li>
+</ul>
+</div>
+<p><strong>Methods:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1ad8a899a3006e87dd433c47710334a506">Equals(Matrix other)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1a3aede62f513da27e6f61ae7a972b4f96">Matrix()</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1ac0c83499364743f97cda397aec854ca7">Matrix(Matrix other)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1ace9e634f84b3bf8d7882ce89f0cc3278">Matrix(Vector _xBasis, Vector _yBasis, Vector _zBasis)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1ae7654442422aa32069cf9e321bfb082c">Matrix(Vector _xBasis, Vector _yBasis, Vector _zBasis, Vector _origin)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1a1e74ac63b87e8b9d962cc718c7ea2e85">Matrix(Vector axis, float angleRadians)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1aff4029e770f41b752a36169cb2d4a758">Matrix(Vector axis, float angleRadians, Vector translation)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1a8d255bc93834eeb1c96a9ff5057998b3">RigidInverse()</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1ac4f5e8f646feb063b464b6a4b4ddaaa3">SetRotation(Vector axis, float angleRadians)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1a98f5970a779499ea5a304fff3a3209e0">ToArray3x3(float[] output)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1ac1f1c371d282797f8e82d63fd58810e5">ToArray3x3(double[] output)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1a3c8445e87a33245f926ced7c4b55025e">ToArray3x3()</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1abecec44bea70f47b99e8b6f635d5dab0">ToArray4x4(float[] output)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1a973826ba8a3f3549e4b1389e107e46f6">ToArray4x4(double[] output)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1a6de231935a2325d889bef538ce7b26c4">ToArray4x4()</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1aa73e7c4dd1df5fd5fbf81c7764ee1533">ToString()</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1a873a5573a742e6d271aafc97315f8119">TransformDirection(Vector arg0)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1a7dbba25b0a6c5df1d1c0b70fccbaa20c">TransformPoint(Vector arg0)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_matrix_1ae9b4b20bc8d7029b21cc17560324464c">operator*(Matrix m1, Matrix m2)</a></li>
+</ul>
+</div>
+<div class="line-block" id="csharpclass_leap_1_1_matrix">
+<div class="line"><em>class</em> <strong>Leap::Matrix</strong></div>
+</div>
+<blockquote>
+<div><p>The <a class="reference internal" href="#csharpclass_leap_1_1_matrix"><em>Matrix</em></a> struct represents a transformation matrix. </p>
+<p><p>To use this struct to transform a <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a>, construct a matrix containing the desired transformation and then use the Matrix::transformPoint() or Matrix::transformDirection() functions to apply the transform.</p>
+<p>Transforms can be combined by multiplying two or more transform matrices using the * operator. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+<em>Public Functions</em><blockquote>
+<div><p><span class="target" id="csharpclass_leap_1_1_matrix_1ad8a899a3006e87dd433c47710334a506"></span><div class="line-block">
+<div class="line">bool <strong>Equals</strong>(<a class="reference internal" href="#csharpclass_leap_1_1_matrix"><em>Matrix</em></a> other)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Compare <a class="reference internal" href="#csharpclass_leap_1_1_matrix"><em>Matrix</em></a> equality component-wise. </p>
+<p><p><pre class="literal-block">
+thisMatrix == thatMatrix;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1a3aede62f513da27e6f61ae7a972b4f96"></span><div class="line-block">
+<div class="line"> <strong>Matrix</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs an identity transformation matrix. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="#csharpclass_leap_1_1_matrix_1a3aede62f513da27e6f61ae7a972b4f96"><em>Matrix</em></a> identityMatrix = new <a class="reference internal" href="#csharpclass_leap_1_1_matrix_1a3aede62f513da27e6f61ae7a972b4f96"><em>Matrix</em></a>();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1ac0c83499364743f97cda397aec854ca7"></span><div class="line-block">
+<div class="line"> <strong>Matrix</strong>(<a class="reference internal" href="#csharpclass_leap_1_1_matrix"><em>Matrix</em></a> other)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a copy of the specified <a class="reference internal" href="#csharpclass_leap_1_1_matrix"><em>Matrix</em></a> object. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="#csharpclass_leap_1_1_matrix_1a3aede62f513da27e6f61ae7a972b4f96"><em>Matrix</em></a> thisMatrix = new <a class="reference internal" href="#csharpclass_leap_1_1_matrix_1a3aede62f513da27e6f61ae7a972b4f96"><em>Matrix</em></a>(thatMatrix);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1ace9e634f84b3bf8d7882ce89f0cc3278"></span><div class="line-block">
+<div class="line"> <strong>Matrix</strong>(<a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> _xBasis, <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> _yBasis, <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> _zBasis)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a transformation matrix from the specified basis vectors. </p>
+<p><p><pre class="literal-block">
+Vector xBasis = new Vector(23, 0, 0);
+Vector yBasis = new Vector(0, 12, 0);
+Vector zBasis = new Vector(0, 0, 45);
+<a class="reference internal" href="#csharpclass_leap_1_1_matrix_1a3aede62f513da27e6f61ae7a972b4f96"><em>Matrix</em></a> transformMatrix = new <a class="reference internal" href="#csharpclass_leap_1_1_matrix_1a3aede62f513da27e6f61ae7a972b4f96"><em>Matrix</em></a>(xBasis, yBasis, zBasis);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">_xBasis</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> specifying rotation and scale factors for the x-axis. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">_yBasis</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> specifying rotation and scale factors for the y-axis. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">_zBasis</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> specifying rotation and scale factors for the z-axis. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1ae7654442422aa32069cf9e321bfb082c"></span><div class="line-block">
+<div class="line"> <strong>Matrix</strong>(<a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> _xBasis, <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> _yBasis, <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> _zBasis, <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> _origin)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a transformation matrix from the specified basis and translation vectors. </p>
+<p><p><pre class="literal-block">
+Hand leapHand = frame.Hand(handID);
+Vector handXBasis =  leapHand.PalmNormal.Cross(leapHand.Direction.Normalized);
+Vector handYBasis = -leapHand.PalmNormal;
+Vector handZBasis = -leapHand.Direction;
+Vector handOrigin =  leapHand.PalmPosition;
+<a class="reference internal" href="#csharpclass_leap_1_1_matrix_1a3aede62f513da27e6f61ae7a972b4f96"><em>Matrix</em></a> handTransform = new <a class="reference internal" href="#csharpclass_leap_1_1_matrix_1a3aede62f513da27e6f61ae7a972b4f96"><em>Matrix</em></a>(handXBasis, handYBasis, handZBasis, handOrigin);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">_xBasis</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> specifying rotation and scale factors for the x-axis. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">_yBasis</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> specifying rotation and scale factors for the y-axis. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">_zBasis</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> specifying rotation and scale factors for the z-axis. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">_origin</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> specifying translation factors on all three axes. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1a1e74ac63b87e8b9d962cc718c7ea2e85"></span><div class="line-block">
+<div class="line"> <strong>Matrix</strong>(<a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> axis, float angleRadians)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a transformation matrix specifying a rotation around the specified vector. </p>
+<p><p><pre class="literal-block">
+Vector axisOfRotation = leapHand.Direction;
+float angleOfRotation = 1.27f;
+<a class="reference internal" href="#csharpclass_leap_1_1_matrix_1a3aede62f513da27e6f61ae7a972b4f96"><em>Matrix</em></a> rotator = new <a class="reference internal" href="#csharpclass_leap_1_1_matrix_1a3aede62f513da27e6f61ae7a972b4f96"><em>Matrix</em></a>(axisOfRotation, angleOfRotation);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">axis</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> specifying the axis of rotation. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">angleRadians</span></tt> - <p>The amount of rotation in radians. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1aff4029e770f41b752a36169cb2d4a758"></span><div class="line-block">
+<div class="line"> <strong>Matrix</strong>(<a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> axis, float angleRadians, <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> translation)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a transformation matrix specifying a rotation around the specified vector and a translation by the specified vector. </p>
+<p><p><pre class="literal-block">
+Vector rotationAxis = Vector.YAxis;
+float angle = .733f;
+Vector translation = new Vector(10,220,103);
+<a class="reference internal" href="#csharpclass_leap_1_1_matrix_1a3aede62f513da27e6f61ae7a972b4f96"><em>Matrix</em></a> transform = new <a class="reference internal" href="#csharpclass_leap_1_1_matrix_1a3aede62f513da27e6f61ae7a972b4f96"><em>Matrix</em></a>(rotationAxis, angle, translation);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">axis</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> specifying the axis of rotation. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">angleRadians</span></tt> - <p>The angle of rotation in radians. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">translation</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> representing the translation part of the transform. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1a8d255bc93834eeb1c96a9ff5057998b3"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#csharpclass_leap_1_1_matrix"><em>Matrix</em></a> <strong>RigidInverse</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Performs a matrix inverse if the matrix consists entirely of rigid transformations (translations and rotations). </p>
+<p><p>If the matrix is not rigid, this operation will not represent an inverse.</p>
+<p><pre class="literal-block">
+thisMatrix = thatMatrix.RigidInverse();
+</pre>
+</p>
+<p>Note that all matrices that are directly returned by the API are rigid.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The rigid inverse of the matrix. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1ac4f5e8f646feb063b464b6a4b4ddaaa3"></span><div class="line-block">
+<div class="line">void <strong>SetRotation</strong>(<a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> axis, float angleRadians)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Sets this transformation matrix to represent a rotation around the specified vector. </p>
+<p><p><pre class="literal-block">
+thisMatrix.SetRotation(Vector.ZAxis, 1.46f);
+</pre>
+</p>
+<p>This function erases any previous rotation and scale transforms applied to this matrix, but does not affect translation.</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">axis</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> specifying the axis of rotation. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">angleRadians</span></tt> - <p>The amount of rotation in radians. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1a98f5970a779499ea5a304fff3a3209e0"></span><div class="line-block">
+<div class="line">float[] <strong>ToArray3x3</strong>(float[] output)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Copy this matrix to the specified array of 9 float values in row-major order. </p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1ac1f1c371d282797f8e82d63fd58810e5"></span><div class="line-block">
+<div class="line">double[] <strong>ToArray3x3</strong>(double[] output)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Copy this matrix to the specified array containing 9 double values in row-major order. </p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1a3c8445e87a33245f926ced7c4b55025e"></span><div class="line-block">
+<div class="line">float[] <strong>ToArray3x3</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Convert this matrix to an array containing 9 float values in row-major order. </p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1abecec44bea70f47b99e8b6f635d5dab0"></span><div class="line-block">
+<div class="line">float[] <strong>ToArray4x4</strong>(float[] output)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Copy this matrix to the specified array of 16 float values in row-major order. </p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1a973826ba8a3f3549e4b1389e107e46f6"></span><div class="line-block">
+<div class="line">double[] <strong>ToArray4x4</strong>(double[] output)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Copy this matrix to the specified array of 16 double values in row-major order. </p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1a6de231935a2325d889bef538ce7b26c4"></span><div class="line-block">
+<div class="line">float[] <strong>ToArray4x4</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Convert this matrix to an array containing 16 float values in row-major order. </p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1aa73e7c4dd1df5fd5fbf81c7764ee1533"></span><div class="line-block">
+<div class="line">override string <strong>ToString</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Write the matrix to a string in a human readable format. </p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1a873a5573a742e6d271aafc97315f8119"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>TransformDirection</strong>(<a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> arg0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Transforms a vector with this matrix by transforming its rotation and scale only. </p>
+<p><p><pre class="literal-block">
+Vector newDirection = thisMatrix.TransformDirection(oldDirection);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A new <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> representing the transformed original. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">in</span></tt> - <p>The <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> to transform. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1a7dbba25b0a6c5df1d1c0b70fccbaa20c"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>TransformPoint</strong>(<a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> arg0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Transforms a vector with this matrix by transforming its rotation, scale, and translation. </p>
+<p><p><pre class="literal-block">
+Vector newPosition = thisMatrix.TransformPoint(oldPosition);
+</pre>
+</p>
+<p>Translation is applied after rotation and scale.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A new <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> representing the transformed original. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">in</span></tt> - <p>The <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> to transform. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Property</em><blockquote>
+<div><p><span class="target" id="csharpclass_leap_1_1_matrix_1aaec3443624f203ba8453df980d887f8d"></span><a class="reference internal" href="#csharpclass_leap_1_1_matrix"><em>Matrix</em></a> <strong>Identity</strong></p>
+<blockquote>
+<div><p>Returns the identity matrix specifying no translation, rotation, and scale. </p>
+<p><p><pre class="literal-block">
+    <a class="reference internal" href="#csharpclass_leap_1_1_matrix_1a3aede62f513da27e6f61ae7a972b4f96"><em>Matrix</em></a> identity = <a class="reference internal" href="#csharpclass_leap_1_1_matrix_1a3aede62f513da27e6f61ae7a972b4f96"><em>Matrix</em></a>.Identity;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The identity matrix. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1aa86e83d6ba8522f64b07054ca66bbe75"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>origin</strong></p>
+<blockquote>
+<div><p>The translation factors for all three axes. </p>
+<p><p><pre class="literal-block">
+Vector thisTranslation = thisMatrix.origin;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1a521fe0389397e15dcf84417d616b27f5"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>xBasis</strong></p>
+<blockquote>
+<div><p>The basis vector for the x-axis. </p>
+<p><p><pre class="literal-block">
+Vector xTransform = thisMatrix.xBasis;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1a060e37e3e8908f190a117ded7be96b26"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>yBasis</strong></p>
+<blockquote>
+<div><p>The basis vector for the y-axis. </p>
+<p><p><pre class="literal-block">
+Vector yTransform = thisMatrix.yBasis;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_matrix_1a9974130b93e5f0980b363ff22fae6b03"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>zBasis</strong></p>
+<blockquote>
+<div><p>The basis vector for the z-axis. </p>
+<p><p><pre class="literal-block">
+Vector zTransform = thisMatrix.zBasis;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Public Static Functions</em><blockquote>
+<div><p><span class="target" id="csharpclass_leap_1_1_matrix_1ae9b4b20bc8d7029b21cc17560324464c"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#csharpclass_leap_1_1_matrix"><em>Matrix</em></a> <strong>operator*</strong>(<a class="reference internal" href="#csharpclass_leap_1_1_matrix"><em>Matrix</em></a> m1, <a class="reference internal" href="#csharpclass_leap_1_1_matrix"><em>Matrix</em></a> m2)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Multiply two matrices. </p>
+<p></p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">C# and Unity Docs (v2.1)</a></li>
+          </ul><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Leap_Classes.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Leap.Arm.html#id3">Arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Bone.html#id3">Bone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.CircleGesture.html#id3">CircleGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Config.html#id2">Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Controller.html#id2">Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Device.html">Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.DeviceList.html">DeviceList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Finger.html#id3">Finger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.FingerList.html">FingerList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Frame.html">Frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Gesture.html#id2">Gesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.GestureList.html">GestureList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Hand.html">Hand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.HandList.html">HandList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ImageList.html">ImageList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.InteractionBox.html">InteractionBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.KeyTapGesture.html">KeyTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Listener.html">Listener</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Pointable.html#id2">Pointable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.PointableList.html">PointableList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ScreenTapGesture.html">ScreenTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.SwipeGesture.html">SwipeGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Tool.html">Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ToolList.html">ToolList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Vector.html">Vector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>C# and Unity</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

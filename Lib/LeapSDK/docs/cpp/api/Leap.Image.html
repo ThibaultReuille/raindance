@@ -1,0 +1,791 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Image &mdash; Leap Motion C++ SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion C++ SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="Leap_Classes.html" />
+    <link rel="next" title="ImageList" href="Leap.ImageList.html" />
+    <link rel="prev" title="HandList" href="Leap.HandList.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'cpp';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../cpp/api/Leap.Image.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/api/Leap.Image.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/api/Leap.Image.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/api/Leap.Image.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/api/Leap.Image.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/api/Leap.Image.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/api/Leap.Image.html";
+            } else {
+                    redirectedLocation ="Leap_Classes.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../cpp/api/Leap.Image.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Leap.HandList.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("Leap.ImageList.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="Leap_Classes.html?proglang=current" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      <a href="../../csharp/api/Leap.Image.html" onclick="localStorage['currentAPI'] = 'csharp'">C# and Unity</a>
+    
+  </li>
+  <li>
+      C++
+    
+  </li>
+  <li>
+      <a href="../../java/api/Leap.Image.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="../../python/api/Leap.Image.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      <a href="../../objc/api/Leap.Image.html" onclick="localStorage['currentAPI'] = 'objc'">Objective-C</a>
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Classes.html" accesskey="U">API Reference</a>&raquo;
+  Image
+</span> -->
+        
+  <div class="section" id="image">
+<h1>Image<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h1>
+</div>
+<style>.members {
+     -webkit-column-count:2; /* Chrome, Safari, Opera */
+     -moz-column-count:2; /* Firefox */
+     column-count:2;
+     }
+     strong {color:gray;}
+</style><p><strong>Methods:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1a66d0d6da3b89580352c28d37b57df5bb">Image()</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1a100cb2126dc50863f75b555841dbcfa4">data() const</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1a4c6fa722eba7018e148b13677c7ce609">distortion() const</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1acc04d327051e1acaf9ff69e9e8be7068">distortionHeight() const</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1ad322752e1a1e4126873be710a19c35fe">distortionWidth() const</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1ae26bcfe2f33f5873dbdfb6948cf1f59f">height() const</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1a87daef5bdd8501be1f113684cfc61074">id() const</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1a31c91f325f76172aa3c158cc7856946a">invalid()</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1aac1b70a2ed67ead038c4d3f5ac4d8a81">isValid() const</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1ad11e7da4bc4290f22c3674030cd448d3">operator!=(const Image &amp;) const</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1adc4fafe2d524d11278e4923bac0c8e55">operator==(const Image &amp;) const</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1a362c8bbd9e27224f9c0d0eeb6962ccf5">rayOffsetX() const</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1a036e4b3cdd394e6ceb5d7ed002e88626">rayOffsetY() const</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1a7652cdb1289147a93c202edb808dd8dc">rayScaleX() const</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1a8eeaf33cfbac8082bd46848a2837ff50">rayScaleY() const</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1a21051ced11b3ffc3057027fb010bc4d7">rectify(const Vector &amp;uv) const</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1a3f23c97b6c9f2a88e1121d1c633ccafa">toString() const</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1a084e8bb0ebaf71c32fe1ff0f483f0165">warp(const Vector &amp;xy) const</a></li>
+<li><a class="reference external" href="#cppclass_leap_1_1_image_1a369399896761e31ae71db57fdd0ba431">width() const</a></li>
+</ul>
+</div>
+<div class="line-block" id="cppclass_leap_1_1_image">
+<div class="line"><em>class</em> <strong>Leap::Image</strong></div>
+</div>
+<blockquote>
+<div><p>The <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> class represents a single greyscale image from one of the the Leap Motion cameras. </p>
+<p><p>In addition to image data, the <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> object provides a distortion map for correcting lens distortion.</p>
+<p><pre class="literal-block">
+//Uses Cinder OpenGL wrapper
+Frame frame = controller.<a class="reference internal" href="Leap.Controller.html#cppclass_leap_1_1_controller_1a1a25f3894cf82667f423dad20d7d6b62"><em>frame</em></a>();
+
+ImageList images = frame.<a class="reference internal" href="Leap.Frame.html#cppclass_leap_1_1_frame_1a85588dbb02a8ff793cf2ced9067f8263"><em>images</em></a>();
+for(int i = 0; i &lt; 2; i++){
+    <a class="reference internal" href="#cppclass_leap_1_1_image_1a66d0d6da3b89580352c28d37b57df5bb"><em>Image</em></a> image = images[i];
+
+    const unsigned char* image_buffer = image.data();
+
+    //Draw the raw image data as a greyscale bitmap
+    Surface surface(image.width(), image.height(), image.width() * 4, SurfaceChannelOrder::RGBA);
+    int cursor = 0;
+    Surface::Iter iter = surface.getIter();
+    while( iter.line() ) {
+        while( iter.pixel() ) {
+            iter.r() = image_buffer[cursor];
+            iter.g() = iter.b() = iter.r();
+            iter.a() = 255;
+            cursor++;
+        }
+    }
+</pre>
+</p>
+<p>Note that <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> objects can be invalid, which means that they do not contain valid image data. Get valid <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> objects from Frame::frames(). Test for validity with the <a class="reference internal" href="#cppclass_leap_1_1_image_1aac1b70a2ed67ead038c4d3f5ac4d8a81"><em>Image::isValid()</em></a> function. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</p>
+<em>Public Functions</em><blockquote>
+<div><p><span class="target" id="cppclass_leap_1_1_image_1a100cb2126dc50863f75b555841dbcfa4"></span><div class="line-block">
+<div class="line">const unsigned char * <strong>data</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The image data. </p>
+<p><p>The image data is a set of 8-bit intensity values. The buffer is <tt class="docutils literal"><a class="reference internal" href="#cppclass_leap_1_1_image_1a369399896761e31ae71db57fdd0ba431"><em><span class="pre">Image::width()</span></em></a> <span class="pre">*</span> <a class="reference internal" href="#cppclass_leap_1_1_image_1ae26bcfe2f33f5873dbdfb6948cf1f59f"><em><span class="pre">Image::height()</span></em></a></tt> bytes long.</p>
+<p><pre class="literal-block">
+const unsigned char* image_buffer = image.data();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1a4c6fa722eba7018e148b13677c7ce609"></span><div class="line-block">
+<div class="line">const float * <strong>distortion</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The distortion calibration map for this image. </p>
+<p><p>The calibration map is a 64x64 grid of points. Each point is defined by a pair of 32-bit floating point values. Each point in the map represents a ray projected into the camera. The value of a grid point defines the pixel in the image data containing the brightness value produced by the light entering along the corresponding ray. By interpolating between grid data points, you can find the brightness value for any projected ray. Grid values that fall outside the range [0..1] do not correspond to a value in the image data and those points should be ignored.</p>
+<p><pre class="literal-block">
+const float* distortion_buffer = image.distortion();
+</pre>
+</p>
+<p>The calibration map can be used to render an undistorted image as well as to find the true angle from the camera to a feature in the raw image. The distortion map itself is designed to be used with GLSL shader programs. In other contexts, it may be more convenient to use the <a class="reference internal" href="#cppclass_leap_1_1_image_1a21051ced11b3ffc3057027fb010bc4d7"><em>Image::rectify()</em></a> and <a class="reference internal" href="#cppclass_leap_1_1_image_1a084e8bb0ebaf71c32fe1ff0f483f0165"><em>Image::warp()</em></a> functions.</p>
+<p>Distortion is caused by the lens geometry as well as imperfections in the lens and sensor window. The calibration map is created by the calibration process run for each device at the factory (and which can be rerun by the user).</p>
+<p>Note, in a future release, there will be two distortion maps per image; one containing the horizontal values and the other containing the vertical values. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1acc04d327051e1acaf9ff69e9e8be7068"></span><div class="line-block">
+<div class="line">int <strong>distortionHeight</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The distortion map height. </p>
+<p><p>Currently fixed at 64.</p>
+<p><pre class="literal-block">
+int correctionGridHeight = image.distortionHeight();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1ad322752e1a1e4126873be710a19c35fe"></span><div class="line-block">
+<div class="line">int <strong>distortionWidth</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The stride of the distortion map. </p>
+<p><p>Since each point on the 64x64 element distortion map has two values in the buffer, the stride is 2 times the size of the grid. (Stride is currently fixed at 2 * 64 = 128).</p>
+<p><pre class="literal-block">
+int correctionGridWidth = image.distortionWidth();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1ae26bcfe2f33f5873dbdfb6948cf1f59f"></span><div class="line-block">
+<div class="line">int <strong>height</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The image height. </p>
+<p><p><pre class="literal-block">
+int <a class="reference internal" href="#cppclass_leap_1_1_image_1ae26bcfe2f33f5873dbdfb6948cf1f59f"><em>height</em></a> = image.height();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1a87daef5bdd8501be1f113684cfc61074"></span><div class="line-block">
+<div class="line">int32_t <strong>id</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The image ID. </p>
+<p><p>Images with ID of 0 are from the left camera; those with an ID of 1 are from the right camera (with the device in its standard operating position with the green LED facing the operator).</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1a66d0d6da3b89580352c28d37b57df5bb"></span><div class="line-block">
+<div class="line"> <strong>Image</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> object. </p>
+<p><p>An uninitialized image is considered invalid. Get valid <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> objects from a <a class="reference internal" href="Leap.ImageList.html#cppclass_leap_1_1_image_list"><em>ImageList</em></a> object obtained from the <a class="reference internal" href="Leap.Frame.html#cppclass_leap_1_1_frame_1a85588dbb02a8ff793cf2ced9067f8263"><em>Frame::images()</em></a> method.</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1aac1b70a2ed67ead038c4d3f5ac4d8a81"></span><div class="line-block">
+<div class="line">bool <strong>isValid</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Reports whether this <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> instance contains valid data. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true, if and only if the image is valid. </dd>
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1ad11e7da4bc4290f22c3674030cd448d3"></span><div class="line-block">
+<div class="line">bool <strong>operator!=</strong>(const  <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a>  &amp;)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Compare <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> object inequality. </p>
+<p>Two <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> objects are equal if and only if both <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> objects represent the exact same <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> and both Images are valid. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1adc4fafe2d524d11278e4923bac0c8e55"></span><div class="line-block">
+<div class="line">bool <strong>operator==</strong>(const  <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a>  &amp;)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Compare <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> object equality. </p>
+<p>Two <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> objects are equal if and only if both <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> objects represent the exact same <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> and both Images are valid. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1a362c8bbd9e27224f9c0d0eeb6962ccf5"></span><div class="line-block">
+<div class="line">float <strong>rayOffsetX</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The horizontal ray offset. </p>
+<p><p>Used to convert between normalized coordinates in the range [0..1] and the ray slope range [-4..4].</p>
+<p><pre class="literal-block">
+Vector raySlopes(-3.25, 1.75, 0);
+Vector normRay =
+    Vector(raySlopes.x * image.rayScaleX() + image.rayOffsetX(),
+           raySlopes.y * image.rayScaleY() + image.rayOffsetY(), 0);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1a036e4b3cdd394e6ceb5d7ed002e88626"></span><div class="line-block">
+<div class="line">float <strong>rayOffsetY</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The vertical ray offset. </p>
+<p><p>Used to convert between normalized coordinates in the range [0..1] and the ray slope range [-4..4].</p>
+<p><pre class="literal-block">
+Vector normSlopes(.25, .98, 0);
+Vector slope((normSlopes.x - image.rayOffsetX())/image.rayScaleX(),
+             (normSlopes.y - image.rayOffsetY())/image.rayScaleY(), 0);
+
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1a7652cdb1289147a93c202edb808dd8dc"></span><div class="line-block">
+<div class="line">float <strong>rayScaleX</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The horizontal ray scale factor. </p>
+<p><p>Used to convert between normalized coordinates in the range [0..1] and the ray slope range [-4..4].</p>
+<p><pre class="literal-block">
+Vector raySlopes(-3.25, 1.75, 0);
+Vector normRay =
+    Vector(raySlopes.x * image.rayScaleX() + image.rayOffsetX(),
+           raySlopes.y * image.rayScaleY() + image.rayOffsetY(), 0);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1a8eeaf33cfbac8082bd46848a2837ff50"></span><div class="line-block">
+<div class="line">float <strong>rayScaleY</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The vertical ray scale factor. </p>
+<p><p>Used to convert between normalized coordinates in the range [0..1] and the ray slope range [-4..4].</p>
+<p><pre class="literal-block">
+Vector normSlopes(.25, .98, 0);
+Vector slope((normSlopes.x - image.rayOffsetX())/image.rayScaleX(),
+             (normSlopes.y - image.rayOffsetY())/image.rayScaleY(), 0);
+
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1a21051ced11b3ffc3057027fb010bc4d7"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Vector.html#cppstruct_leap_1_1_vector"><em>Vector</em></a> <strong>rectify</strong>(const  <a class="reference internal" href="Leap.Vector.html#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; uv)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Provides the corrected camera ray intercepting the specified point on the image. </p>
+<p><p>Given a point on the image, <tt class="docutils literal"><a class="reference internal" href="#cppclass_leap_1_1_image_1a21051ced11b3ffc3057027fb010bc4d7"><em><span class="pre">rectify()</span></em></a></tt> corrects for camera distortion and returns the true direction from the camera to the source of that image point within the Leap Motion field of view.</p>
+<p>This direction vector has an x and y component [x, y, 0], with the third element always zero. Note that this vector uses the 2D camera coordinate system where the x-axis parallels the longer (typically horizontal) dimension and the y-axis parallels the shorter (vertical) dimension. The camera coordinate system does not correlate to the 3D Leap Motion coordinate system.</p>
+<p><pre class="literal-block">
+Vector feature(127, 68, 0);
+Vector slopes = image.rectify(feature);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A <a class="reference internal" href="Leap.Vector.html#cppstruct_leap_1_1_vector"><em>Vector</em></a> containing the ray direction (the z-component of the vector is always 0). </dd>
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">uv</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#cppstruct_leap_1_1_vector"><em>Vector</em></a> containing the position of a pixel in the image. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1a3f23c97b6c9f2a88e1121d1c633ccafa"></span><div class="line-block">
+<div class="line">std::string <strong>toString</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>A string containing a brief, human readable description of the <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> object. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A description of the <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> as a string. </dd>
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1a084e8bb0ebaf71c32fe1ff0f483f0165"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Vector.html#cppstruct_leap_1_1_vector"><em>Vector</em></a> <strong>warp</strong>(const  <a class="reference internal" href="Leap.Vector.html#cppstruct_leap_1_1_vector"><em>Vector</em></a>  &amp; xy)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Provides the point in the image corresponding to a ray projecting from the camera. </p>
+<p><p>Given a ray projected from the camera in the specified direction, <tt class="docutils literal"><a class="reference internal" href="#cppclass_leap_1_1_image_1a084e8bb0ebaf71c32fe1ff0f483f0165"><em><span class="pre">warp()</span></em></a></tt> corrects for camera distortion and returns the corresponding pixel coordinates in the image.</p>
+<p>The ray direction is specified in relationship to the camera. The first vector element corresponds to the &#8220;horizontal&#8221; view angle; the second corresponds to the &#8220;vertical&#8221; view angle.</p>
+<p><pre class="literal-block">
+float horizontal_slope = tan(65 * 180/PI);
+float vertical_slope = tan(15 * 180/PI);
+Vector pixel = image.warp(Vector(horizontal_slope, vertical_slope, 0));
+int data_index = floor(pixel.y) * image.width() + floor(pixel.x);
+unsigned char brightness = image.data()[data_index];
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A <a class="reference internal" href="Leap.Vector.html#cppstruct_leap_1_1_vector"><em>Vector</em></a> containing the pixel coordinates [x, y, 0] (with z always zero). </dd>
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">xy</span></tt> - <p>A <a class="reference internal" href="Leap.Vector.html#cppstruct_leap_1_1_vector"><em>Vector</em></a> containing the ray direction. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="cppclass_leap_1_1_image_1a369399896761e31ae71db57fdd0ba431"></span><div class="line-block">
+<div class="line">int <strong>width</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The image width. </p>
+<p><p><pre class="literal-block">
+int width = image.width();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Public Static Functions</em><blockquote>
+<div><p><span class="target" id="cppclass_leap_1_1_image_1a31c91f325f76172aa3c158cc7856946a"></span><div class="line-block">
+<div class="line">const  <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a>  &amp; <strong>invalid</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Returns an invalid <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> object. </p>
+<p><p>You can use the instance returned by this function in comparisons testing whether a given <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> instance is valid or invalid. (You can also use the <a class="reference internal" href="#cppclass_leap_1_1_image_1aac1b70a2ed67ead038c4d3f5ac4d8a81"><em>Image::isValid()</em></a> function.)</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The invalid <a class="reference internal" href="#cppclass_leap_1_1_image"><em>Image</em></a> instance. </dd>
+<dt><strong>Since</strong></dt>
+<dd>2.1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">C++ Docs (v2.1)</a></li>
+          </ul><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Leap_Classes.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Leap.Arm.html">Arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Bone.html">Bone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.CircleGesture.html">CircleGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Config.html">Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Controller.html">Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Device.html">Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.DeviceList.html">DeviceList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Finger.html">Finger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.FingerList.html">FingerList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Frame.html">Frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Gesture.html">Gesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.GestureList.html">GestureList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Hand.html">Hand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.HandList.html">HandList</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ImageList.html">ImageList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.InteractionBox.html">InteractionBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.KeyTapGesture.html">KeyTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Listener.html">Listener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Matrix.html">Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Pointable.html">Pointable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.PointableList.html">PointableList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ScreenTapGesture.html">ScreenTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.SwipeGesture.html">SwipeGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Tool.html">Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ToolList.html">ToolList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Vector.html">Vector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>C++</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

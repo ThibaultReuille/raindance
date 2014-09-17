@@ -1,0 +1,661 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>LeapDelegate &mdash; Leap Motion Objective-C SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion Objective-C SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="Leap_Classes.html" />
+    <link rel="next" title="Device" href="Leap.Device.html" />
+    <link rel="prev" title="Controller" href="Leap.Controller.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'objc';
+    var hasAPI = {};
+    hasAPI.objc = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../objc/api/Leap.Delegate.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/api/Leap.Delegate.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/api/Leap.Delegate.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/api/Leap.Delegate.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/api/Leap.Delegate.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/api/Leap.Delegate.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/api/Leap.Delegate.html";
+            } else {
+                    redirectedLocation ="Leap_Classes.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../objc/api/Leap.Delegate.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Leap.Controller.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("Leap.Device.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="Leap_Classes.html?proglang=current" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      <a href="Leap_Classes.html?proglang=current" onclick="localStorage['currentAPI'] = 'csharp'">C# and Unity</a>
+    
+  </li>
+  <li>
+      <a href="Leap_Classes.html?proglang=current" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      <a href="Leap_Classes.html?proglang=current" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="Leap_Classes.html?proglang=current" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      Objective-C
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Classes.html" accesskey="U">API Reference</a>&raquo;
+  LeapDelegate
+</span> -->
+        
+  <div class="section" id="leapdelegate">
+<h1>LeapDelegate<a class="headerlink" href="#leapdelegate" title="Permalink to this headline">¶</a></h1>
+<p>In Objective-C, you can use the <a class="reference internal" href="Leap.Listener.html"><em>LeapListener protocol</em></a> to receive NSNotifications
+for Leap Motion events or use the <tt class="docutils literal"><span class="pre">LeapDelegate</span></tt> protocol to designate a single object
+to handle the events.</p>
+<style>.members {
+     -webkit-column-count:2; /* Chrome, Safari, Opera */
+     -moz-column-count:2; /* Firefox */
+     column-count:2;
+     }
+     strong {color:gray;}
+</style><p><strong>Methods:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#objcprotocol_leap_listener-p_1ad6d625724d15f74a5d82be0adec2c6a4">onConnect:</a></li>
+<li><a class="reference external" href="#objcprotocol_leap_listener-p_1a67f0873044dbe22304b894c3d7c8ca54">onDeviceChange:</a></li>
+<li><a class="reference external" href="#objcprotocol_leap_listener-p_1a9329d4c117ba026f7db3b52d6aa97d1d">onDisconnect:</a></li>
+<li><a class="reference external" href="#objcprotocol_leap_listener-p_1aee36f4ee7a14404619c2ed0aa9467748">onExit:</a></li>
+<li><a class="reference external" href="#objcprotocol_leap_listener-p_1a82dd43ab0ec8a4da57d6ac11823f3993">onFocusGained:</a></li>
+<li><a class="reference external" href="#objcprotocol_leap_listener-p_1a88717c999a1c31ae7bc31db2c458c99f">onFocusLost:</a></li>
+<li><a class="reference external" href="#objcprotocol_leap_listener-p_1ac7524d70759971568c057bb7d8696cbe">onFrame:</a></li>
+<li><a class="reference external" href="#objcprotocol_leap_listener-p_1acd9be47cc91b49145f61d7ab47b2427b">onInit:</a></li>
+<li><a class="reference external" href="#objcprotocol_leap_listener-p_1ac15696b4af83946220333d6f19501b33">onServiceConnect:</a></li>
+<li><a class="reference external" href="#objcprotocol_leap_listener-p_1ac4c70a1e328fea610d69c8ff536468d0">onServiceDisconnect:</a></li>
+</ul>
+</div>
+<div class="line-block" id="objcprotocol_leap_delegate-p">
+<div class="line"><em>protocol</em> <strong>LeapDelegate-p</strong></div>
+</div>
+<blockquote>
+<div><p>The <a class="reference internal" href="#objcprotocol_leap_delegate-p"><em>LeapDelegate</em></a> protocol defines a set of methods that you can implement in a delegate object for a <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a>. </p>
+<p><p>The <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> calls the delegate methods when Leap events occur, such as when a new frame of data is available.</p>
+<p>To use the <a class="reference internal" href="#objcprotocol_leap_delegate-p"><em>LeapDelegate</em></a> protocol, implement a class adopting the <a class="reference internal" href="#objcprotocol_leap_delegate-p"><em>LeapDelegate</em></a> protocol and assign it to a <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> instance: <div class="highlight-python"><div class="highlight"><pre>MYDelegate *delegate = [[MYDelegate alloc] init];
+LeapController *controller = [[LeapController alloc] init];
+[controller addDelegate:delegate];
+</pre></div>
+</div>
+</p>
+<p>When a new frame of data is ready, the controller calls the [<a class="reference internal" href="#objcprotocol_leap_delegate-p"><em>LeapDelegate</em></a> onFrame:] method. The other Leap events, <tt class="docutils literal"><span class="pre">onInit</span></tt>, <tt class="docutils literal"><span class="pre">onConnect</span></tt>, <tt class="docutils literal"><span class="pre">onDisconnect</span></tt>, <tt class="docutils literal"><span class="pre">onServiceConnect</span></tt>, <tt class="docutils literal"><span class="pre">onServiceDisconnect</span></tt>, <tt class="docutils literal"><span class="pre">onExit</span></tt>, <tt class="docutils literal"><span class="pre">onFocusGained</span></tt>, and <tt class="docutils literal"><span class="pre">onFocusLost</span></tt> are handled in the same manner. The Controller object is multithreaded and calls the <a class="reference internal" href="#objcprotocol_leap_delegate-p"><em>LeapDelegate</em></a> functions on its own threads, not on an application thread.</p>
+<p>Using the <a class="reference internal" href="#objcprotocol_leap_delegate-p"><em>LeapDelegate</em></a> protocol is not mandatory. You can also use NSNotifications with a <a class="reference internal" href="Leap.Listener.html#objcprotocol_leap_listener-p"><em>LeapListener</em></a> object or simply poll the controller object (as described in the <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> class overview). <dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+</dl>
+</p>
+</p>
+<em>Public Functions</em><blockquote>
+<div><p><span class="target" id="objcprotocol_leap_delegate-p_1a6ff74153dd943b188a56ae749cd18d75"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (void) <strong>onConnect</strong>:(<a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a>  *) controller </div>
+</div>
+</p>
+<blockquote>
+<div><p>Called when the <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> object connects to the Leap software, or when this ListenerDelegate object is added to a controller that is already connected. </p>
+<p><p><div class="highlight-python"><div class="highlight"><pre>- (void)onConnect:(LeapController *)controller
+{
+    NSLog(@&quot;Connected&quot;);
+    [controller enableGesture:LEAP_GESTURE_TYPE_CIRCLE enable:YES];
+    //...
+}
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">controller</span></tt> - <p>The parent <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcprotocol_leap_delegate-p_1a6fb92f55c51853d9482c81f7a0085bc6"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (void) <strong>onDeviceChange</strong>:(<a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a>  *) controller </div>
+</div>
+</p>
+<blockquote>
+<div><p>Called when a Leap Motion controller plugged in, unplugged, or the device changes state. </p>
+<p><p>State changes include changes in frame rate and entering or leaving &#8220;robust&#8221; mode. Note that there is currently no way to query whether a device is in robust mode. You can use Frame::currentFramerate() to get the framerate.</p>
+<p></p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.2 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">controller</span></tt> - <p>The Controller object invoking this callback function. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcprotocol_leap_delegate-p_1a1493e1cd81233e627128df1791d10fc5"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (void) <strong>onDisconnect</strong>:(<a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a>  *) controller </div>
+</div>
+</p>
+<blockquote>
+<div><p>Called when the <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> object disconnects from the Leap software. </p>
+<p><p>The controller can disconnect when the Leap device is unplugged, the user shuts the Leap software down, or the Leap software encounters an unrecoverable error. <div class="highlight-python"><div class="highlight"><pre>- (void)onDisconnect:(LeapController *)controller
+{
+    NSLog(@&quot;Disconnected&quot;);
+}
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">controller</span></tt> - <p>The parent <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcprotocol_leap_delegate-p_1a9d918d09e0786d91e505ab9a89e19a8f"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (void) <strong>onExit</strong>:(<a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a>  *) controller </div>
+</div>
+</p>
+<blockquote>
+<div><p>Called when this <a class="reference internal" href="#objcprotocol_leap_delegate-p"><em>LeapDelegate</em></a> object is removed from the <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> or the controller instance is destroyed. </p>
+<p><p><div class="highlight-python"><div class="highlight"><pre>- (void)onExit:(LeapController *)controller
+{
+    NSLog(@&quot;Exited&quot;);
+}
+</pre></div>
+</div>
+</p>
+<p>Note: When you launch a Leap-enabled application in a debugger, the Leap library does not disconnect from the application. This is to allow you to step through code without losing the connection because of time outs.</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">controller</span></tt> - <p>The parent <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcprotocol_leap_delegate-p_1ac6dd6bf036ee74f2c296557c9709dca9"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (void) <strong>onFocusGained</strong>:(<a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a>  *) controller </div>
+</div>
+</p>
+<blockquote>
+<div><p>Called when this application becomes the foreground application. </p>
+<p><p>Only the foreground application receives tracking data from the Leap Motion Controller. This function is only called when the controller object is in a connected state. <div class="highlight-python"><div class="highlight"><pre>- (void)onFocusGained:(LeapController *)controller
+{
+    NSLog(@&quot;Focus Gained&quot;);
+}
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">controller</span></tt> - <p>The parent <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcprotocol_leap_delegate-p_1a2fb9286f6c1a6a6458053273b9cb4a59"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (void) <strong>onFocusLost</strong>:(<a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a>  *) controller </div>
+</div>
+</p>
+<blockquote>
+<div><p>Called when this application loses the foreground focus. </p>
+<p><p>Only the foreground application receives tracking data from the Leap Motion Controller. This function is only called when the controller object is in a connected state. <div class="highlight-python"><div class="highlight"><pre>- (void)onFocusLost:(LeapController *)controller
+{
+    NSLog(@&quot;Focus Lost&quot;);
+}
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">controller</span></tt> - <p>The parent <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcprotocol_leap_delegate-p_1a9d2a5d2549a74b2c7098091d7dcf79aa"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (void) <strong>onFrame</strong>:(<a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a>  *) controller </div>
+</div>
+</p>
+<blockquote>
+<div><p>Called when a new frame of hand and finger tracking data is available. </p>
+<p><p>Access the new frame data using the [<a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> frame:] function.</p>
+<p></p>
+<p>Note, the <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> skips any pending frames while your onFrame handler executes. If your implementation takes too long to return, one or more frames can be skipped. The controller still inserts the skipped frames into the frame history. You can access recent frames by setting the history parameter when calling the [<a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> frame:] function. You can determine if any pending frames were skipped by comparing the ID of the current frame with the ID of the previous received frame.</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">controller</span></tt> - <p>The parent <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcprotocol_leap_delegate-p_1ac464625edf183c140c3a8614c2464c98"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (void) <strong>onInit</strong>:(<a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a>  *) controller </div>
+</div>
+</p>
+<blockquote>
+<div><p>Called once, when the <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> has finished initializing. </p>
+<p><p></p>
+<p><dl class="docutils">
+<dt><strong>Since 1.0</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">controller</span></tt> - <p>The parent <a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcprotocol_leap_delegate-p_1a6e908d46e11a9d17e9a189cfeecf5db8"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (void) <strong>onServiceConnect</strong>:(<a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a>  *) controller </div>
+</div>
+</p>
+<blockquote>
+<div><p>Called if the Leap Motion daemon/service disconnects from your application Controller. </p>
+<p><p>Normally, this callback is not invoked. It is only called if some external event or problem shuts down the service or otherwise interrupts the connection. <div class="highlight-python"><div class="highlight"><pre>- (void)onServiceConnect:(LeapController *)controller
+{
+    NSLog(@&quot;Service Connected&quot;);
+}
+</pre></div>
+</div>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since 1.2</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">controller</span></tt> - <p>The Controller object invoking this callback function. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="objcprotocol_leap_delegate-p_1a8326a121e2869be0365760fddf2823d6"></span><div class="line-block">
+<div class="line"><div class="line"><br /></div>
+- (void) <strong>onServiceDisconnect</strong>:(<a class="reference internal" href="Leap.Controller.html#objcinterface_leap_controller"><em>LeapController</em></a>  *) controller </div>
+</div>
+</p>
+<blockquote>
+<div><p>Called if the Leap Motion daemon/service disconnects from your application Controller. </p>
+<p><p>Normally, this callback is not invoked. It is only called if some external event or problem shuts down the service or otherwise interrupts the connection.</p>
+<p></p>
+<p><dl class="docutils">
+<dt><strong>Since 1.2</strong></dt>
+<dd></dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">controller</span></tt> - <p>The Controller object invoking this callback function. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+</div>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">Objective-C Docs (v2.1)</a></li>
+          </ul><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Leap_Classes.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Leap.Bone.html#leapbone">LeapBone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.CircleGesture.html#leapcirclegesture">LeapCircleGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Config.html#leapconfig">LeapConfig</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Controller.html#leapcontroller">LeapController</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">LeapDelegate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Device.html#leapdevice">LeapDevice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Finger.html#leapfinger">LeapFinger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Frame.html#leapframe">LeapFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Gesture.html#leapgesture">LeapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Hand.html#leaphand">LeapHand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.InteractionBox.html#leapinteractionbox">LeapInteractionBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.KeyTapGesture.html#leapkeytapgesture">LeapKeyTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Listener.html#leaplistener-protocol">LeapListener Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Matrix.html#leapmatrix">LeapMatrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Pointable.html#leappointable">LeapPointable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.PointableList.html#leappointableorhandlist-category">LeapPointableOrHandList Category</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ScreenTapGesture.html#leapscreentapgesture">LeapScreenTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.SwipeGesture.html#leapswipegesture">LeapSwipeGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Tool.html#leaptool">LeapTool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Vector.html#leapvector">LeapVector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>Objective-C</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

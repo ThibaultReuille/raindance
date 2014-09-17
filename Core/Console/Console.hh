@@ -1,6 +1,7 @@
 #pragma once
 
 #include <raindance/Core/Headers.hh>
+#include <raindance/Core/Clock.hh>
 
 class IScript
 {
@@ -42,9 +43,53 @@ private:
 	std::string m_Source;
 };
 
+class Job
+{
+public:
+	typedef unsigned long ID;
+
+	Job(ID id, IScript* script, Timecode period)
+	{
+		m_ID = id;
+		m_Script = script;
+		m_Period = period;
+
+		m_isInitialized = false;
+		m_LastRun = 0;
+	}
+
+	void initialize(float seconds)
+	{
+		m_isInitialized = true;
+		m_LastRun = seconds;
+	}
+
+	inline ID id() { return m_ID; }
+
+	inline void setScript(IScript* script) { m_Script = script; }
+	inline IScript* getScript() { return m_Script; }
+	
+	inline void setPeriod(float period) { m_Period = period; }
+	inline float getPeriod() { return m_Period; }
+
+	inline void setLastRun(float seconds) { m_LastRun = seconds; }
+	inline float getLastRun() { return m_LastRun; }
+
+	inline bool isInitialized() { return m_isInitialized; }
+
+private:
+	bool m_isInitialized;
+	ID m_ID;
+	IScript* m_Script;
+	float m_Period;
+	float m_LastRun;
+};
+
 class Console
 {
 public:
+	Console() : m_FirstIdle(true) {}
+
 	virtual ~Console()
 	{
 		std::vector<IScript*>::iterator it;
@@ -79,15 +124,61 @@ public:
 		return NULL;
 	}
 
+	Job::ID addJob(IScript* script, float period)
+	{
+		LOG("Job %p %f\n", script, period);
+		auto id = m_Jobs.size();
+		auto job = new Job(id, script, period);
+		m_Jobs.push_back(job);
+
+		return id;
+	}
+
+	void removeJob(Job::ID id)
+	{
+		SAFE_DELETE(m_Jobs[id]);
+	}
+
+	void idle(Clock& clock)
+	{
+		if (m_FirstIdle)
+		{
+			m_Seconds = clock.seconds();
+			m_FirstIdle = false;
+			return;
+		}
+
+		float seconds = clock.seconds() - m_Seconds;
+
+		for (auto job : m_Jobs)
+		{
+			if (job == NULL)
+				continue;
+
+			if (!job->isInitialized())
+				job->initialize(seconds);
+
+			else if (seconds - job->getLastRun() > job->getPeriod())
+			{
+				execute(job->getScript());
+				job->setLastRun(seconds);
+			}
+		} 
+	}
+
 	virtual void initialize() = 0;
 
+	virtual void begin() = 0;
+	virtual void end() = 0;
 	virtual bool execute(IScript* script) = 0;
 
 	inline const std::vector<IScript*>::iterator scripts_begin() { return m_Scripts.begin(); }
-
 	inline const std::vector<IScript*>::iterator scripts_end() { return m_Scripts.end(); }
 
 private:
 	std::vector<IScript*> m_Scripts;
+	float m_Seconds;
+	bool m_FirstIdle;
+	std::vector<Job*> m_Jobs;
 };
 

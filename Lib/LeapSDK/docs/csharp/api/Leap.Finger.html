@@ -1,0 +1,904 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Finger &mdash; Leap Motion C# and Unity SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion C# and Unity SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="Leap_Classes.html" />
+    <link rel="next" title="FingerList" href="Leap.FingerList.html" />
+    <link rel="prev" title="DeviceList" href="Leap.DeviceList.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'csharp';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.javascript = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../csharp/api/Leap.Finger.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/api/Leap.Finger.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/api/Leap.Finger.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/api/Leap.Finger.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/api/Leap.Finger.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/api/Leap.Finger.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/api/Leap.Finger.html";
+            } else {
+                    redirectedLocation ="Leap_Classes.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../csharp/api/Leap.Finger.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Leap.DeviceList.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("Leap.FingerList.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="../../javascript/api/Leap.Finger.html" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      C# and Unity
+    
+  </li>
+  <li>
+      <a href="../../cpp/api/Leap.Finger.html" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      <a href="../../java/api/Leap.Finger.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="../../python/api/Leap.Finger.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      <a href="../../objc/api/Leap.Finger.html" onclick="localStorage['currentAPI'] = 'objc'">Objective-C</a>
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Classes.html" accesskey="U">API Reference</a>&raquo;
+  Finger
+</span> -->
+        
+  <div class="section" id="id3">
+<h1>Finger<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h1>
+<style>.members {
+     -webkit-column-count:2; /* Chrome, Safari, Opera */
+     -moz-column-count:2; /* Firefox */
+     column-count:2;
+     }
+     strong {color:gray;}
+</style><p><strong>Properties:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1a3760f0d03c577bd8a45779cf3f9a46a8">Direction</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1a7965d86d89abc02cd0e7054c1c82342b">Frame</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1aa45c62db71eb28452cb9c3ccbb53f966">Hand</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1afe0b47b3c92f2f69ea3da50cb72553eb">Id</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_finger_1a3571a6d89a19f103e0a0f8192fd8d30a">Invalid</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1aa5f9c23366996e146de0128391996bdc">IsExtended</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1ae4e0d915069230af1c9382a2228c1499">IsFinger</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1a8c6a169e0d56ec0b73597c4ba68d0375">IsTool</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1a62885a2911b2c21274564c3d9e407c2c">IsValid</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1ab87d04698fba58ca22fe5ebecef0755e">Length</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1a8c7e51d1c84f8673ed9224cc103e6f43">StabilizedTipPosition</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1a0be30ced256bcdf3882d4f0d6929e283">TimeVisible</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1a24f882775081fa8182a7fca2877d7ed6">TipPosition</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1aa51b84d63c25aeb0fc15554f0f61e4d5">TipVelocity</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1a6c3d0b1504d2d5a452d3bad4182aefad">TouchDistance</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1a9e99f2f1873318739056355157ac88d5">TouchZone</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1a7de4690b4c35b991ee86032c52d974ab">Width</a></li>
+</ul>
+</div>
+<p><strong>Methods:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#csharpclass_leap_1_1_finger_1a963225b3ab4b062d235b49a778271db3">Bone(Bone.BoneType boneIx)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_pointable_1ae488e96b9171aa0ac0557213a2cfe156">Equals(Pointable arg0)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_finger_1aa6e4212ca6d56bbc5c01a59e6f458e24">Finger()</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_finger_1a473cb1f7fe7b2cf824516647e988f32d">Finger(Pointable arg0)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_finger_1aa93c200da2014edaf5973cae59870229">JointPosition(Finger.FingerJoint jointIx)</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_finger_1aa73e7c4dd1df5fd5fbf81c7764ee1533">ToString()</a></li>
+<li><a class="reference external" href="#csharpclass_leap_1_1_finger_1a4d7d71bc37f719353995d8d2173ba0c8">Type()</a></li>
+</ul>
+</div>
+<div class="line-block" id="csharpclass_leap_1_1_finger">
+<div class="line"><em>class</em> <strong>Leap::Finger</strong></div>
+</div>
+<blockquote>
+<div><p>The <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> class represents a tracked finger. </p>
+<p><p>Fingers are <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> objects that the Leap Motion software has classified as a finger. Get valid <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> objects from a <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> or a <a class="reference internal" href="Leap.Hand.html#csharpclass_leap_1_1_hand"><em>Hand</em></a> object.</p>
+<p>Fingers may be permanently associated to a hand. In this case the angular order of the finger IDs will be invariant. As fingers move in and out of view it is possible for the guessed ID of a finger to be incorrect. Consequently, it may be necessary for finger IDs to be exchanged. All tracked properties, such as velocity, will remain continuous in the API. However, quantities that are derived from the API output (such as a history of positions) will be discontinuous unless they have a corresponding ID exchange.</p>
+<p>Note that <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> objects can be invalid, which means that they do not contain valid tracking data and do not correspond to a physical finger. Invalid <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> objects can be the result of asking for a <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> object using an ID from an earlier frame when no <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> objects with that ID exist in the current frame. A <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> object created from the <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> constructor is also invalid. Test for validity with the Finger::isValid() function. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+<em>Public Functions</em><blockquote>
+<div><p><span class="target" id="csharpclass_leap_1_1_finger_1a963225b3ab4b062d235b49a778271db3"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Bone.html#csharpclass_leap_1_1_bone"><em>Bone</em></a> <strong>Bone</strong>(<a class="reference internal" href="Leap.Bone.html#csharpclass_leap_1_1_bone_1ac0b6411718b2d0a444dc2fa6c541fc0a"><em>Bone.BoneType</em></a> boneIx)</div>
+</div>
+</p>
+<blockquote>
+<div><p>The bone at a given bone index on this finger. </p>
+<p><p><pre class="literal-block">
+FingerList fingers = hand.Fingers;
+foreach(<a class="reference internal" href="#csharpclass_leap_1_1_finger_1aa6e4212ca6d56bbc5c01a59e6f458e24"><em>Finger</em></a> finger in fingers){
+    <a class="reference internal" href="#csharpclass_leap_1_1_finger_1a963225b3ab4b062d235b49a778271db3"><em>Bone</em></a> bone;
+    foreach (<a class="reference internal" href="#csharpclass_leap_1_1_finger_1a963225b3ab4b062d235b49a778271db3"><em>Bone</em></a>.<a class="reference internal" href="Leap.Bone.html#csharpclass_leap_1_1_bone_1ac0b6411718b2d0a444dc2fa6c541fc0a"><em>BoneType</em></a> boneType in (<a class="reference internal" href="#csharpclass_leap_1_1_finger_1a963225b3ab4b062d235b49a778271db3"><em>Bone</em></a>.<a class="reference internal" href="Leap.Bone.html#csharpclass_leap_1_1_bone_1ac0b6411718b2d0a444dc2fa6c541fc0a"><em>BoneType</em></a>[]) Enum.GetValues(typeof(<a class="reference internal" href="#csharpclass_leap_1_1_finger_1a963225b3ab4b062d235b49a778271db3"><em>Bone</em></a>.<a class="reference internal" href="Leap.Bone.html#csharpclass_leap_1_1_bone_1ac0b6411718b2d0a444dc2fa6c541fc0a"><em>BoneType</em></a>)))
+    {
+        bone = finger.Bone(boneType);
+        // ... Use bone
+    }
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The <a class="reference internal" href="Leap.Bone.html#csharpclass_leap_1_1_bone"><em>Bone</em></a> that has the specified bone type. </dd>
+<dt><strong>Since</strong></dt>
+<dd>2.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">boneIx</span></tt> - <p>An index value from the <a class="reference internal" href="Leap.Bone.html#csharpclass_leap_1_1_bone_1a034c92ea5bf6a997721a6db36e9c5115"><em>Bone::Type</em></a> enumeration identifying the bone of interest. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_pointable_1ae488e96b9171aa0ac0557213a2cfe156"></span><div class="line-block">
+<div class="line">bool <strong>Equals</strong>(<a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> arg0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Compare <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object equality. </p>
+<p><p><pre class="literal-block">
+Boolean pointableIsEqual = thisPointable == thatPointable;
+</pre>
+</p>
+<p>Two <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> objects are equal if and only if both <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> objects represent the exact same physical entities in the same frame and both <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> objects are valid. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_finger_1aa6e4212ca6d56bbc5c01a59e6f458e24"></span><div class="line-block">
+<div class="line"> <strong>Finger</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> object. </p>
+<p>An uninitialized finger is considered invalid. Get valid <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> objects from a <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> or a <a class="reference internal" href="Leap.Hand.html#csharpclass_leap_1_1_hand"><em>Hand</em></a> object. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_finger_1a473cb1f7fe7b2cf824516647e988f32d"></span><div class="line-block">
+<div class="line"> <strong>Finger</strong>(<a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> arg0)</div>
+</div>
+</p>
+<blockquote>
+<div><p>If the specified <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object represents a finger, creates a copy of it as a <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> object; otherwise, creates an invalid <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> object. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="#csharpclass_leap_1_1_finger_1aa6e4212ca6d56bbc5c01a59e6f458e24"><em>Finger</em></a> finger = new <a class="reference internal" href="#csharpclass_leap_1_1_finger_1aa6e4212ca6d56bbc5c01a59e6f458e24"><em>Finger</em></a>(pointableObject);
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_finger_1aa93c200da2014edaf5973cae59870229"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>JointPosition</strong>(Finger.FingerJoint jointIx)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Deprecated as of version 2.0 Use &#8216;bone&#8217; method instead. </p>
+<p></p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_finger_1aa73e7c4dd1df5fd5fbf81c7764ee1533"></span><div class="line-block">
+<div class="line">override string <strong>ToString</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>A string containing a brief, human readable description of the <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> object. </p>
+<p><p><pre class="literal-block">
+String description = finger.ToString();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A description of the <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> object as a string. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_finger_1a4d7d71bc37f719353995d8d2173ba0c8"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="#csharpclass_leap_1_1_finger_1a10a29d6e6abd79a9d6c8ebad0ba18b9d"><em>Finger.FingerType</em></a> <strong>Type</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The name of this finger. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="#csharpclass_leap_1_1_finger_1aa6e4212ca6d56bbc5c01a59e6f458e24"><em>Finger</em></a>.FingerType fingerType = finger.Type();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The anatomical type of this finger as a member of the <a class="reference internal" href="#csharpclass_leap_1_1_finger_1a4d7d71bc37f719353995d8d2173ba0c8"><em>Finger::Type</em></a> enumeration. </dd>
+<dt><strong>Since</strong></dt>
+<dd>2.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Property</em><blockquote>
+<div><p><span class="target" id="csharpclass_leap_1_1_pointable_1a3760f0d03c577bd8a45779cf3f9a46a8"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>Direction</strong></p>
+<blockquote>
+<div><p>The direction in which this finger or tool is pointing. </p>
+<p><p><pre class="literal-block">
+Vector pointingToward = pointable.Direction;
+</pre>
+</p>
+<p>The direction is expressed as a unit vector pointing in the same direction as the tip.</p>
+<p><img alt="api/../../../images/Leap_Finger_Model.png" src="api/../../../images/Leap_Finger_Model.png" /></p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> pointing in the same direction as the tip of this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_pointable_1a7965d86d89abc02cd0e7054c1c82342b"></span><a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> <strong>Frame</strong></p>
+<blockquote>
+<div><p>The <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> associated with this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="Leap.Tool.html#csharpclass_leap_1_1_pointable_1a7965d86d89abc02cd0e7054c1c82342b"><em>Frame</em></a> frameOfThisPointableObject = pointable.Frame;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The associated <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> object, if available; otherwise, an invalid <a class="reference internal" href="Leap.Frame.html#csharpclass_leap_1_1_frame"><em>Frame</em></a> object is returned. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_pointable_1aa45c62db71eb28452cb9c3ccbb53f966"></span><a class="reference internal" href="Leap.Hand.html#csharpclass_leap_1_1_hand"><em>Hand</em></a> <strong>Hand</strong></p>
+<blockquote>
+<div><p>The <a class="reference internal" href="Leap.Hand.html#csharpclass_leap_1_1_hand"><em>Hand</em></a> associated with a finger. </p>
+<p><p><pre class="literal-block">
+<a class="reference internal" href="Leap.Tool.html#csharpclass_leap_1_1_pointable_1aa45c62db71eb28452cb9c3ccbb53f966"><em>Hand</em></a> attachedHand = pointable.Hand;
+</pre>
+</p>
+<p>Not that in version 2+, tools are not associated with hands. For tools, this function always returns an invalid <a class="reference internal" href="Leap.Hand.html#csharpclass_leap_1_1_hand"><em>Hand</em></a> object.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The associated <a class="reference internal" href="Leap.Hand.html#csharpclass_leap_1_1_hand"><em>Hand</em></a> object, if available; otherwise, an invalid <a class="reference internal" href="Leap.Hand.html#csharpclass_leap_1_1_hand"><em>Hand</em></a> object is returned. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_pointable_1afe0b47b3c92f2f69ea3da50cb72553eb"></span>int <strong>Id</strong></p>
+<blockquote>
+<div><p>A unique ID assigned to this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object, whose value remains the same across consecutive frames while the tracked finger or tool remains visible. </p>
+<p><p>If tracking is lost (for example, when a finger is occluded by another finger or when it is withdrawn from the Leap Motion <a class="reference internal" href="Leap.Controller.html#csharpclass_leap_1_1_controller"><em>Controller</em></a> field of view), the Leap Motion software may assign a new ID when it detects the entity in a future frame.</p>
+<p><pre class="literal-block">
+int theID = pointable.Id;
+</pre>
+</p>
+<p>Use the ID value with the Frame::pointable() function to find this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object in future frames.</p>
+<p>IDs should be from 1 to 100 (inclusive). If more than 100 objects are tracked an IDs of -1 will be used until an ID in the defined range is available.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The ID assigned to this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_finger_1a3571a6d89a19f103e0a0f8192fd8d30a"></span>new  <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> <strong>Invalid</strong></p>
+<blockquote>
+<div><p>Returns an invalid <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> object. </p>
+<p><p>You can use the instance returned by this function in comparisons testing whether a given <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> instance is valid or invalid. (You can also use the Finger::isValid() function.)</p>
+<p><pre class="literal-block">
+if (finger != <a class="reference internal" href="#csharpclass_leap_1_1_finger_1aa6e4212ca6d56bbc5c01a59e6f458e24"><em>Finger</em></a>.Invalid) {
+    // use the Finger data
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The invalid <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> instance. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_pointable_1aa5f9c23366996e146de0128391996bdc"></span>bool <strong>IsExtended</strong></p>
+<blockquote>
+<div><p>Whether or not this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> is in an extended posture. </p>
+<p><p>A finger is considered extended if it is extended straight from the hand as if pointing. A finger is not extended when it is bent down and curled towards the palm. Tools are always extended.</p>
+<p><pre class="literal-block">
+int extendedFingers = 0;
+for (int f = 0; f &lt; hand.Fingers.Count; f++)
+{
+    Finger digit = hand.Fingers[f];
+    if(finger.IsExtended) extendedFingers++;
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>True, if the pointable is extended. </dd>
+<dt><strong>Since</strong></dt>
+<dd>2.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_pointable_1ae4e0d915069230af1c9382a2228c1499"></span>bool <strong>IsFinger</strong></p>
+<blockquote>
+<div><p>Whether or not this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> is classified as a finger. </p>
+<p><p><pre class="literal-block">
+if (pointable.IsTool) {
+    Tool tool = new Tool(pointable);
+} else {
+    Finger finger = new Finger(pointable);
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>True, if this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> is classified as a finger. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_pointable_1a8c6a169e0d56ec0b73597c4ba68d0375"></span>bool <strong>IsTool</strong></p>
+<blockquote>
+<div><p>Whether or not this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> is classified as a tool. </p>
+<p><p><pre class="literal-block">
+if (pointable.IsTool) {
+    Tool tool = new Tool(pointable);
+} else {
+    Finger finger = new Finger(pointable);
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>True, if this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> is classified as a tool. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_pointable_1a62885a2911b2c21274564c3d9e407c2c"></span>bool <strong>IsValid</strong></p>
+<blockquote>
+<div><p>Reports whether this is a valid <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object. </p>
+<p><p><pre class="literal-block">
+if( pointable.IsValid) {
+    //Use it...
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>True, if this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object contains valid tracking data. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_pointable_1ab87d04698fba58ca22fe5ebecef0755e"></span>float <strong>Length</strong></p>
+<blockquote>
+<div><p>The estimated length of the finger or tool in millimeters. </p>
+<p><p><pre class="literal-block">
+float apparentlength = pointable.Length;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The estimated length of this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_pointable_1a8c7e51d1c84f8673ed9224cc103e6f43"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>StabilizedTipPosition</strong></p>
+<blockquote>
+<div><p>The stabilized tip position of this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a>. </p>
+<p><p>Smoothing and stabilization is performed in order to make this value more suitable for interaction with 2D content. The stabilized position lags behind the tip position by a variable amount, depending primarily on the speed of movement.</p>
+<p><pre class="literal-block">
+Vector stabilizedPosition = pointable.StabilizedTipPosition;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A modified tip position of this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object with some additional smoothing and stabilization applied. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_pointable_1a0be30ced256bcdf3882d4f0d6929e283"></span>float <strong>TimeVisible</strong></p>
+<blockquote>
+<div><p>The duration of time this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> has been visible to the Leap Motion <a class="reference internal" href="Leap.Controller.html#csharpclass_leap_1_1_controller"><em>Controller</em></a>. </p>
+<p><p><pre class="literal-block">
+float lifetime = pointable.TimeVisible;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The duration (in seconds) that this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> has been tracked. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_pointable_1a24f882775081fa8182a7fca2877d7ed6"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>TipPosition</strong></p>
+<blockquote>
+<div><p>The tip position in millimeters from the Leap Motion origin. </p>
+<p><p><pre class="literal-block">
+Vector currentPosition = pointable.TipPosition;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> containing the coordinates of the tip position. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_pointable_1aa51b84d63c25aeb0fc15554f0f61e4d5"></span><a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> <strong>TipVelocity</strong></p>
+<blockquote>
+<div><p>The rate of change of the tip position in millimeters/second. </p>
+<p><p><pre class="literal-block">
+Vector currentSpeed = pointable.TipVelocity;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The <a class="reference internal" href="Leap.Vector.html#csharpclass_leap_1_1_vector"><em>Vector</em></a> containing the coordinates of the tip velocity. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_pointable_1a6c3d0b1504d2d5a452d3bad4182aefad"></span>float <strong>TouchDistance</strong></p>
+<blockquote>
+<div><p>A value proportional to the distance between this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object and the adaptive touch plane. </p>
+<p><p><img alt="api/../../../images/Leap_Touch_Plane.png" src="api/../../../images/Leap_Touch_Plane.png" /></p>
+<p>The touch distance is a value in the range [-1, 1]. The value 1.0 indicates the <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> is at the far edge of the hovering zone. The value 0 indicates the <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> is just entering the touching zone. A value of -1.0 indicates the <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> is firmly within the touching zone. Values in between are proportional to the distance from the plane. Thus, the touchDistance of 0.5 indicates that the <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> is halfway into the hovering zone.</p>
+<p><pre class="literal-block">
+float distance = pointable.TouchDistance;
+if (distance &gt; 0) {
+    //Handle hovering ...
+} else {
+    //Handle touching ...
+}
+</pre>
+</p>
+<p>You can use the touchDistance value to modulate visual feedback given to the user as their fingers close in on a touch target, such as a button.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The normalized touch distance of this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_pointable_1a9e99f2f1873318739056355157ac88d5"></span><a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable_1a4e3ed68e1678c0e62d62a69b903720c8"><em>Pointable.Zone</em></a> <strong>TouchZone</strong></p>
+<blockquote>
+<div><p>The current touch zone of this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object. </p>
+<p><p>The Leap Motion software computes the touch zone based on a floating touch plane that adapts to the user&#8217;s finger movement and hand posture. The Leap Motion software interprets purposeful movements toward this plane as potential touch points. When a <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> moves close to the adaptive touch plane, it enters the &#8220;hovering&#8221; zone. When a <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> reaches or passes through the plane, it enters the &#8220;touching&#8221; zone.</p>
+<p>The possible states are present in the Zone enum of this class:</p>
+<p></p>
+<p>The touchDistance value provides a normalized indication of the distance to the touch plane when the <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> is in the hovering or touching zones.</p>
+<p><pre class="literal-block">
+switch (pointable.TouchZone) {
+    case <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable_1a398664eabda6168d32738ac4fc92577f"><em>Pointable</em></a>.Zone.ZONE_NONE:
+    //Handle distant pointable
+    break;
+    case <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable_1a398664eabda6168d32738ac4fc92577f"><em>Pointable</em></a>.Zone.ZONE_HOVERING:
+    //Handle pointable near touch plane
+    break;
+    case <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable_1a398664eabda6168d32738ac4fc92577f"><em>Pointable</em></a>.Zone.ZONE_TOUCHING:
+    //Handle pointable penetrating touch plane
+    break;
+    default:
+    //Handle error cases...
+    break;
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The touch zone of this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="csharpclass_leap_1_1_pointable_1a7de4690b4c35b991ee86032c52d974ab"></span>float <strong>Width</strong></p>
+<blockquote>
+<div><p>The estimated width of the finger or tool in millimeters. </p>
+<p><p><pre class="literal-block">
+float averageThickness = pointable.Width;
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The estimated width of this <a class="reference internal" href="Leap.Pointable.html#csharpclass_leap_1_1_pointable"><em>Pointable</em></a> object. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<div class="section" id="id6">
+<h2>Finger Names<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p><span class="target" id="csharpclass_leap_1_1_finger_1a10a29d6e6abd79a9d6c8ebad0ba18b9d"></span><strong>FingerType enum</strong></p>
+<blockquote>
+<div><p>Enumerates the names of the fingers. </p>
+<p>Members of this enumeration are returned by Finger::type() to identify a <a class="reference internal" href="#csharpclass_leap_1_1_finger"><em>Finger</em></a> object. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>2.0 </dd>
+</dl>
+</p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">TYPE_THUMB</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">0</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">TYPE_INDEX</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">1</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">TYPE_MIDDLE</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">2</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">TYPE_RING</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">3</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">TYPE_PINKY</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">4</span></tt> - <p>The pinky or little finger. </p>
+</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">C# and Unity Docs (v2.1)</a></li>
+          </ul><ul>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Classes.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Arm.html#id3">Arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Bone.html#id3">Bone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.CircleGesture.html#id3">CircleGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Config.html#id2">Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Controller.html#id2">Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Device.html">Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.DeviceList.html">DeviceList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">Finger</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Finger Names</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.FingerList.html">FingerList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Frame.html">Frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Gesture.html#id2">Gesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.GestureList.html">GestureList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Hand.html">Hand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.HandList.html">HandList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ImageList.html">ImageList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.InteractionBox.html">InteractionBox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.KeyTapGesture.html">KeyTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Listener.html">Listener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Matrix.html">Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Pointable.html#id2">Pointable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.PointableList.html">PointableList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ScreenTapGesture.html">ScreenTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.SwipeGesture.html">SwipeGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Tool.html">Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ToolList.html">ToolList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Vector.html">Vector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>C# and Unity</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

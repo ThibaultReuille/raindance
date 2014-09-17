@@ -1,0 +1,868 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>KeyTapGesture &mdash; Leap Motion Java SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion Java SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="API Reference" href="Leap_Classes.html" />
+    <link rel="next" title="Listener" href="Leap.Listener.html" />
+    <link rel="prev" title="InteractionBox" href="Leap.InteractionBox.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'java';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.javascript = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../java/api/Leap.KeyTapGesture.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/api/Leap.KeyTapGesture.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/api/Leap.KeyTapGesture.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/api/Leap.KeyTapGesture.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/api/Leap.KeyTapGesture.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/api/Leap.KeyTapGesture.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/api/Leap.KeyTapGesture.html";
+            } else {
+                    redirectedLocation ="Leap_Classes.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../java/api/Leap.KeyTapGesture.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Leap.InteractionBox.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("Leap.Listener.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="../../javascript/api/Leap.KeyTapGesture.html" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      <a href="../../csharp/api/Leap.KeyTapGesture.html" onclick="localStorage['currentAPI'] = 'csharp'">C# and Unity</a>
+    
+  </li>
+  <li>
+      <a href="../../cpp/api/Leap.KeyTapGesture.html" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      Java
+    
+  </li>
+  <li>
+      <a href="../../python/api/Leap.KeyTapGesture.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      <a href="../../objc/api/Leap.KeyTapGesture.html" onclick="localStorage['currentAPI'] = 'objc'">Objective-C</a>
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Classes.html" accesskey="U">API Reference</a>&raquo;
+  KeyTapGesture
+</span> -->
+        
+  <div class="section" id="keytapgesture">
+<h1>KeyTapGesture<a class="headerlink" href="#keytapgesture" title="Permalink to this headline">¶</a></h1>
+</div>
+<style>.members {
+     -webkit-column-count:2; /* Chrome, Safari, Opera */
+     -moz-column-count:2; /* Firefox */
+     column-count:2;
+     }
+     strong {color:gray;}
+</style><p><strong>Methods:</strong></p>
+<div class="members container">
+<ul class="simple">
+<li><a class="reference external" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1a711c8065a3d20632de3e67ab7c109d29">KeyTapGesture()</a></li>
+<li><a class="reference external" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1a444d70f4a94526da13413ab127088ff5">KeyTapGesture(Gesture rhs)</a></li>
+<li><a class="reference external" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1a837d5e8d553db80a638fd4c61146adf9">classType()</a></li>
+<li><a class="reference external" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1af64662b010bb83b86bed0a30280fabff">direction()</a></li>
+<li><a class="reference external" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1a327c9145dc9f70ae50660ccd381aff5c">pointable()</a></li>
+<li><a class="reference external" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1add43904038453747ea774c721491498c">position()</a></li>
+<li><a class="reference external" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1a4f0aa3afbd6ac7dd9cb856b55e889141">progress()</a></li>
+</ul>
+</div>
+<div class="line-block" id="javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture">
+<div class="line"><em>class</em> <strong>com::leapmotion::leap::KeyTapGesture</strong></div>
+</div>
+<blockquote>
+<div><p>The <a class="reference internal" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture"><em>KeyTapGesture</em></a> class represents a tapping gesture by a finger or tool. </p>
+<p><p>A key tap gesture is recognized when the tip of a finger rotates down toward the palm and then springs back to approximately the original position, as if tapping. The tapping finger must pause briefly before beginning the tap.</p>
+<p><img alt="api/../../../images/Leap_Gesture_Tap.png" src="api/../../../images/Leap_Gesture_Tap.png" /></p>
+<p><strong>Important:</strong> To use key tap gestures in your application, you must enable recognition of the key tap gesture. You can enable recognition with:</p>
+<p><pre class="literal-block">
+controller.enableGesture(<a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a>.Type.TYPE_KEY_TAP);
+</pre>
+</p>
+<p>Key tap gestures are discrete. The <a class="reference internal" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture"><em>KeyTapGesture</em></a> object representing a tap always has the state, STATE_STOP. Only one <a class="reference internal" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture"><em>KeyTapGesture</em></a> object is created for each key tap gesture recognized.</p>
+<p>You can set the minimum finger movement and velocity required for a movement to be recognized as a key tap as well as adjust the detection window for evaluating the movement using the config attribute of a connected <a class="reference internal" href="Leap.Controller.html#javaclasscom_1_1leapmotion_1_1leap_1_1_controller"><em>Controller</em></a> object. Use the following configuration keys to configure key tap recognition:</p>
+<p><table border="1" class="docutils">
+<colgroup>
+<col width="55%" />
+<col width="15%" />
+<col width="20%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Key string</th>
+<th class="head">Value type</th>
+<th class="head">Default value</th>
+<th class="head">Units</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Gesture.KeyTap.MinDownVelocity</td>
+<td>float</td>
+<td>50</td>
+<td>mm/s</td>
+</tr>
+<tr class="row-odd"><td>Gesture.KeyTap.HistorySeconds</td>
+<td>float</td>
+<td>0.1</td>
+<td>s</td>
+</tr>
+<tr class="row-even"><td>Gesture.KeyTap.MinDistance</td>
+<td>float</td>
+<td>3.0</td>
+<td>mm</td>
+</tr>
+</tbody>
+</table>
+</p>
+<p>The following example demonstrates how to set the key tap configuration parameters:</p>
+<p><pre class="literal-block">
+controller.config().setFloat(&quot;Gesture.KeyTap.MinDownVelocity&quot;, 40.0f);
+controller.config().setFloat(&quot;Gesture.KeyTap.HistorySeconds&quot;, .2f);
+controller.config().setFloat(&quot;Gesture.KeyTap.MinDistance&quot;, 1.0f);
+controller.config().save();
+</pre>
+</p>
+<p>The <a class="reference internal" href="Leap.Controller.html#javaclasscom_1_1leapmotion_1_1leap_1_1_controller"><em>Controller</em></a> object must be connected to the Leap Motion service/daemon before setting the configuration parameters.</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+<em>Public Functions</em><blockquote>
+<div><p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1af64662b010bb83b86bed0a30280fabff"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Vector.html#javaclasscom_1_1leapmotion_1_1leap_1_1_vector"><em>Vector</em></a> <strong>direction</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The direction of finger tip motion. </p>
+<p><p><pre class="literal-block">
+Vector tapDirection = keytap.direction();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="Leap.Vector.html#javaclasscom_1_1leapmotion_1_1leap_1_1_vector"><em>Vector</em></a> A unit direction vector if the finger tip is moving; otherwise, a zero-vector. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a677e8d29a71b1c26928eff42288603eb"></span><div class="line-block">
+<div class="line">long <strong>duration</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The elapsed duration of the recognized movement up to the frame containing this <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> object, in microseconds. </p>
+<p><p><pre class="literal-block">
+float microseconds = gesture.duration();
+</pre>
+</p>
+<p>The duration reported for the first <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> in the sequence (with the STATE_START state) will typically be a small positive number since the movement must progress far enough for the Leap Motion software to recognize it as an intentional gesture.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>int64_t the elapsed duration in microseconds. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a01faab2d0a7e30ea6cac5748e76bf18d"></span><div class="line-block">
+<div class="line">float <strong>durationSeconds</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The elapsed duration in seconds. </p>
+<p><p><pre class="literal-block">
+float seconds = gesture.durationSeconds();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>See</strong></dt>
+<dd><a class="reference internal" href="Leap.SwipeGesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a677e8d29a71b1c26928eff42288603eb"><em>duration()</em></a> </dd>
+<dt><strong>Return</strong></dt>
+<dd>float the elapsed duration in seconds. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a32241f2a73d893665e0f5ab69aeffc4d"></span><div class="line-block">
+<div class="line">boolean <strong>equals</strong>(<a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Compare <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> object equality. </p>
+<p><p><pre class="literal-block">
+Boolean gestureIsEqual = thisGesture.equals(thatGesture);
+</pre>
+</p>
+<p>Two Gestures are equal if they represent the same snapshot of the same recognized movement. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a927587df126a877842a884f4a536dd8c"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Frame.html#javaclasscom_1_1leapmotion_1_1leap_1_1_frame"><em>Frame</em></a> <strong>frame</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The <a class="reference internal" href="Leap.Frame.html#javaclasscom_1_1leapmotion_1_1leap_1_1_frame"><em>Frame</em></a> containing this <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> instance. </p>
+<p> _ <pre class="literal-block">
+Frame frameOfGesture = gesture.frame();
+</pre>
+<dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="Leap.Frame.html#javaclasscom_1_1leapmotion_1_1leap_1_1_frame"><em>Frame</em></a> The parent <a class="reference internal" href="Leap.Frame.html#javaclasscom_1_1leapmotion_1_1leap_1_1_frame"><em>Frame</em></a> object. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a06e1aae4587d103bdffc62ae2f92d0b1"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.HandList.html#javaclasscom_1_1leapmotion_1_1leap_1_1_hand_list"><em>HandList</em></a> <strong>hands</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The list of hands associated with this <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a>, if any. </p>
+<p><p><pre class="literal-block">
+HandList handsForGesture = gesture.hands();
+</pre>
+</p>
+<p>If no hands are related to this gesture, the list is empty.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="Leap.HandList.html#javaclasscom_1_1leapmotion_1_1leap_1_1_hand_list"><em>HandList</em></a> the list of related <a class="reference internal" href="Leap.Hand.html#javaclasscom_1_1leapmotion_1_1leap_1_1_hand"><em>Hand</em></a> objects. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a4a716406d3d9d4fdbbe46f100e648f3b"></span><div class="line-block">
+<div class="line">int <strong>id</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The gesture ID. </p>
+<p><p>All <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> objects belonging to the same recognized movement share the same ID value. Use the ID value with the <a class="reference internal" href="Leap.Frame.html#javaclasscom_1_1leapmotion_1_1leap_1_1_frame_1a5fd6d9e82e1ce8e97d35da831b80da41"><em>Frame::gesture()</em></a> method to find updates related to this <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> object in subsequent frames.</p>
+<p><pre class="literal-block">
+int gestureToFind = gesture.id();
+GestureList manyGestures = frame.gestures(olderFrame);
+for(<a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a> gestureObject : manyGestures)
+{
+    if (gestureObject.id() == gestureToFind) {
+        //Process it...
+    }
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>int32_t the ID of this <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a>. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a487d5f454cff4db530ed7b5b690ec71d"></span><div class="line-block">
+<div class="line">boolean <strong>isValid</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Reports whether this <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> instance represents a valid <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a>. </p>
+<p><p>An invalid <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> object does not represent a snapshot of a recognized movement. Invalid <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> objects are returned when a valid object cannot be provided. For example, when you get an gesture by ID using <a class="reference internal" href="Leap.Frame.html#javaclasscom_1_1leapmotion_1_1leap_1_1_frame_1a5fd6d9e82e1ce8e97d35da831b80da41"><em>Frame::gesture()</em></a>, and there is no gesture with that ID in the current frame, then gesture() returns an Invalid <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> object (rather than a null value). Always check object validity in situations where an gesture might be invalid.</p>
+<p><pre class="literal-block">
+if (gesture.isValid()) {
+    // Process it...
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>bool True, if this is a valid <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> instance; false, otherwise. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1a711c8065a3d20632de3e67ab7c109d29"></span><div class="line-block">
+<div class="line"> <strong>KeyTapGesture</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a new <a class="reference internal" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture"><em>KeyTapGesture</em></a> object. </p>
+<p>An uninitialized <a class="reference internal" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture"><em>KeyTapGesture</em></a> object is considered invalid. Get valid instances of the <a class="reference internal" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture"><em>KeyTapGesture</em></a> class from a <a class="reference internal" href="Leap.Frame.html#javaclasscom_1_1leapmotion_1_1leap_1_1_frame"><em>Frame</em></a> object. <dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1a444d70f4a94526da13413ab127088ff5"></span><div class="line-block">
+<div class="line"> <strong>KeyTapGesture</strong>(<a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> rhs)</div>
+</div>
+</p>
+<blockquote>
+<div><p>Constructs a <a class="reference internal" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture"><em>KeyTapGesture</em></a> object from an instance of the <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> class. </p>
+<p><p><pre class="literal-block">
+if(gesture.type() == <a class="reference internal" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1a711c8065a3d20632de3e67ab7c109d29"><em>KeyTapGesture</em></a>.classType()) {
+    <a class="reference internal" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1a711c8065a3d20632de3e67ab7c109d29"><em>KeyTapGesture</em></a> keytapGesture = new <a class="reference internal" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1a711c8065a3d20632de3e67ab7c109d29"><em>KeyTapGesture</em></a>(gesture);
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">rhs</span></tt> - <p>The <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> instance to specialize. This <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> instance must be a <a class="reference internal" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture"><em>KeyTapGesture</em></a> object. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1a327c9145dc9f70ae50660ccd381aff5c"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Pointable.html#javaclasscom_1_1leapmotion_1_1leap_1_1_pointable"><em>Pointable</em></a> <strong>pointable</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The finger performing the key tap gesture. </p>
+<p><p><pre class="literal-block">
+Pointable tappingPointable = keytap.pointable();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="Leap.Pointable.html#javaclasscom_1_1leapmotion_1_1leap_1_1_pointable"><em>Pointable</em></a> A <a class="reference internal" href="Leap.Pointable.html#javaclasscom_1_1leapmotion_1_1leap_1_1_pointable"><em>Pointable</em></a> object representing the tapping finger. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a779e9bf5c81b0f6ebf06b53120fbe0fd"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.PointableList.html#javaclasscom_1_1leapmotion_1_1leap_1_1_pointable_list"><em>PointableList</em></a> <strong>pointables</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The list of fingers and tools associated with this <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a>, if any. </p>
+<p><p>If no <a class="reference internal" href="Leap.Pointable.html#javaclasscom_1_1leapmotion_1_1leap_1_1_pointable"><em>Pointable</em></a> objects are related to this gesture, the list is empty.</p>
+<p><pre class="literal-block">
+PointableList pointablesForGesture = gesture.pointables();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="Leap.PointableList.html#javaclasscom_1_1leapmotion_1_1leap_1_1_pointable_list"><em>PointableList</em></a> the list of related <a class="reference internal" href="Leap.Pointable.html#javaclasscom_1_1leapmotion_1_1leap_1_1_pointable"><em>Pointable</em></a> objects. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1add43904038453747ea774c721491498c"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Vector.html#javaclasscom_1_1leapmotion_1_1leap_1_1_vector"><em>Vector</em></a> <strong>position</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The position where the key tap is registered. </p>
+<p><p><pre class="literal-block">
+Vector tapPosition = keytap.position();
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="Leap.Vector.html#javaclasscom_1_1leapmotion_1_1leap_1_1_vector"><em>Vector</em></a> A <a class="reference internal" href="Leap.Vector.html#javaclasscom_1_1leapmotion_1_1leap_1_1_vector"><em>Vector</em></a> containing the coordinates of tap location. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1a4f0aa3afbd6ac7dd9cb856b55e889141"></span><div class="line-block">
+<div class="line">float <strong>progress</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The progress value is always 1.0 for a key tap gesture. </p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>float The value 1.0. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a424c54861f3bd585197e03f0e730ed88"></span><div class="line-block">
+<div class="line">Gesture.State <strong>state</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The gesture state. </p>
+<p><p>Recognized movements occur over time and have a beginning, a middle, and an end. The &#8216;<a class="reference internal" href="Leap.SwipeGesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a424c54861f3bd585197e03f0e730ed88"><em>state()</em></a>&#8216; attribute reports where in that sequence this <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> object falls.</p>
+<p><pre class="literal-block">
+for(<a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a> gestureObj : frame.gestures())
+{
+    switch (gesture.state()) {
+        case STATE_START:
+            //Handle starting gestures
+            break;
+        case STATE_UPDATE:
+            //Handle continuing gestures
+            break;
+        case STATE_STOP:
+            //Handle ending gestures
+            break;
+        default:
+            //Handle unrecognized states
+            break;
+    }
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="Leap.Gesture.html#javaenumcom_1_1leapmotion_1_1leap_1_1_gesture_1_1_state"><em>Gesture::State</em></a> A value from the <a class="reference internal" href="Leap.Gesture.html#javaenumcom_1_1leapmotion_1_1leap_1_1_gesture_1_1_state"><em>Gesture::State</em></a> enumeration. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1ad146fa8579a5f8a876c4688cc5a68520"></span><div class="line-block">
+<div class="line">String <strong>toString</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>A string containing a brief, human-readable description of this <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a>. </p>
+<p><p><pre class="literal-block">
+for(<a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a> gesture : frame.gestures()){
+    System.out.println(gesture.toString());
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a55a7a0d778c14d8a4c836608ed44c19a"></span><div class="line-block">
+<div class="line">Gesture.Type <strong>type</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The gesture type. </p>
+<p><p><pre class="literal-block">
+for(<a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a> gesture : frame.gestures())
+{
+    switch (gesture.type()) {
+        case TYPE_CIRCLE:
+            //Handle circle gestures
+            break;
+        case TYPE_KEY_TAP:
+            //Handle key tap gestures
+            break;
+        case TYPE_SCREEN_TAP:
+            //Handle screen tap gestures
+            break;
+        case TYPE_SWIPE:
+            //Handle swipe gestures
+            break;
+        default:
+            //Handle unrecognized gestures
+            break;
+    }
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd><a class="reference internal" href="Leap.Gesture.html#javaenumcom_1_1leapmotion_1_1leap_1_1_gesture_1_1_type"><em>Gesture::Type</em></a> A value from the <a class="reference internal" href="Leap.Gesture.html#javaenumcom_1_1leapmotion_1_1leap_1_1_gesture_1_1_type"><em>Gesture::Type</em></a> enumeration. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+<em>Public Static Functions</em><blockquote>
+<div><p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1a837d5e8d553db80a638fd4c61146adf9"></span><div class="line-block">
+<div class="line">Gesture.Type <strong>classType</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>The key tap gesture type. </p>
+<p><p><pre class="literal-block">
+if(gesture.type() == <a class="reference internal" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1a711c8065a3d20632de3e67ab7c109d29"><em>KeyTapGesture</em></a>.classType()) {
+    <a class="reference internal" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1a711c8065a3d20632de3e67ab7c109d29"><em>KeyTapGesture</em></a> keytapGesture = new <a class="reference internal" href="#javaclasscom_1_1leapmotion_1_1leap_1_1_key_tap_gesture_1a711c8065a3d20632de3e67ab7c109d29"><em>KeyTapGesture</em></a>(gesture);
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>Type The type value designating a key tap gesture. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+<p><span class="target" id="javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1ac29d1b4ec17426f6a3e0b7fa39346f7a"></span><div class="line-block">
+<div class="line"><a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> <strong>invalid</strong>()</div>
+</div>
+</p>
+<blockquote>
+<div><p>Returns an invalid <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> object. </p>
+<p><p>You can use the instance returned by this function in comparisons testing whether a given <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> instance is valid or invalid. (You can also use the <a class="reference internal" href="Leap.SwipeGesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a487d5f454cff4db530ed7b5b690ec71d"><em>Gesture::isValid()</em></a> function.)</p>
+<p><pre class="literal-block">
+<a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a> trackedGesture = frame.gesture(gestureID);
+if (!trackedGesture.equals(<a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture_1a003d8e2b689e1e80a9d9f5547f26d831"><em>Gesture</em></a>.invalid())) {
+    //Process it...
+}
+</pre>
+</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>The invalid <a class="reference internal" href="Leap.Gesture.html#javaclasscom_1_1leapmotion_1_1leap_1_1_gesture"><em>Gesture</em></a> instance. </dd>
+<dt><strong>Since</strong></dt>
+<dd>1.0 </dd>
+</dl>
+</p>
+</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">Java Docs (v2.1)</a></li>
+          </ul><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Leap_Classes.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Leap.Arm.html#id6">Arm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Bone.html#id17">Bone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.CircleGesture.html#id22">CircleGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Config.html#id7">Config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Controller.html#id15">Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Device.html">Device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.DeviceList.html">DeviceList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Finger.html#id25">Finger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.FingerList.html">FingerList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Frame.html">Frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Gesture.html#id6">Gesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.GestureList.html">GestureList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Hand.html">Hand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.HandList.html">HandList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Image.html">Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ImageList.html">ImageList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.InteractionBox.html">InteractionBox</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">KeyTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Listener.html">Listener</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Matrix.html">Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Pointable.html#id6">Pointable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.PointableList.html">PointableList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ScreenTapGesture.html">ScreenTapGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.SwipeGesture.html">SwipeGesture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Tool.html">Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.ToolList.html">ToolList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap.Vector.html">Vector</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>Java</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

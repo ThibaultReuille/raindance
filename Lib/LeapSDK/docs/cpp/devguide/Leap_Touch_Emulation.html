@@ -1,0 +1,498 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Touch Emulation &mdash; Leap Motion C++ SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion C++ SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="Using the Tracking API" href="Leap_Guides2.html" />
+    <link rel="next" title="Motions" href="Leap_Motions.html" />
+    <link rel="prev" title="Gestures" href="Leap_Gestures.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'cpp';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.javascript = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../cpp/devguide/Leap_Touch_Emulation.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/devguide/Leap_Touch_Emulation.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/devguide/Leap_Touch_Emulation.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/devguide/Leap_Touch_Emulation.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/devguide/Leap_Touch_Emulation.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/devguide/Leap_Touch_Emulation.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/devguide/Leap_Touch_Emulation.html";
+            } else {
+                    redirectedLocation ="Leap_Guides2.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../cpp/devguide/Leap_Touch_Emulation.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Leap_Gestures.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("Leap_Motions.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      <a href="../../javascript/devguide/Leap_Touch_Emulation.html" onclick="localStorage['currentAPI'] = 'javascript'">JavaScript</a>
+    
+  </li>
+  <li>
+      <a href="../../csharp/devguide/Leap_Touch_Emulation.html" onclick="localStorage['currentAPI'] = 'csharp'">C# and Unity</a>
+    
+  </li>
+  <li>
+      C++
+    
+  </li>
+  <li>
+      <a href="../../java/devguide/Leap_Touch_Emulation.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="../../python/devguide/Leap_Touch_Emulation.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      <a href="../../objc/devguide/Leap_Touch_Emulation.html" onclick="localStorage['currentAPI'] = 'objc'">Objective-C</a>
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Guides2.html" accesskey="U">Using the Tracking API</a>&raquo;
+  Touch Emulation
+</span> -->
+        
+  <div class="section" id="touch-emulation">
+<h1>Touch Emulation<a class="headerlink" href="#touch-emulation" title="Permalink to this headline">¶</a></h1>
+<p>The Leap Motion API provides information that you can use to implement touch emulation in your application. Touch information is provided by the <a class="reference external" href="../api/Leap.Pointable.html"><tt class="docutils literal"><span class="pre">Pointable</span></tt></a> class.</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The Leap defines an adaptive touch surface that you can use to orchestrate interaction with 2D elements of your application. This surface is oriented roughly parallel to the x-y plane, but adapts to the user&#8217;s finger and hand position. As the user reaches forward with a finger or tool, the Leap reports whether that pointable object is close-to or touching this imaginary surface. The API reports touches with respect to the surface with two values: the zone and the distance to the touch plane.</p>
+<div class="figure">
+<img alt="devguide/../../../images/Leap_Touch_Plane.png" src="devguide/../../../images/Leap_Touch_Plane.png" />
+<p class="caption">The virtual touch surface</p>
+</div>
+<p>The touch zone identifies whether the Leap Motion software considers a <tt class="docutils literal"><span class="pre">Pointable</span></tt> as hovering near the touch surface, as penetrating the touch surface, or as too far from the surface (or pointing in the wrong direction). The zones are &#8220;hovering,&#8221; &#8220;touching,&#8221; and &#8220;none.&#8221; The transition between zones tends to lag behind the touch distance. This lag is used to prevent abrupt and repeated transitions. If you are implementing touch interaction within an application, you may not need to consider the touch zone very often.</p>
+<p>The touch distance is valid only when a <tt class="docutils literal"><span class="pre">Pointable</span></tt> is within the hovering or touching zones. The distance is a normalized value in the range [+1..-1]. When a <tt class="docutils literal"><span class="pre">Pointable</span></tt> first enters the hovering zone, the touch distance is +1.0 and the distance decreases toward 0 as the <tt class="docutils literal"><span class="pre">Pointable</span></tt> nears the touch surface. When the <tt class="docutils literal"><span class="pre">Pointable</span></tt> penetrates the surface, the distance is 0. As the <tt class="docutils literal"><span class="pre">Pointable</span></tt> pushes deeper into the touch zone, the distance approaches, but never exceeds, -1.</p>
+<p>You can use the zone value to decide when to update UI elements based on hover or touch. You can use the distance to further modify UI elements based on proximity to the touch plane. For example, you can show the highlight state of a control when a finger is over the control and in the hovering zone and change the cursor based on distance to provide feedback about how close the user is to touching the control.</p>
+<p>As part of the touch emulation API the Leap Motion provides a stabilized position for <tt class="docutils literal"><span class="pre">Pointable</span></tt> objects in addition to the standard position. The Leap Motion software stabilizes the position using an adaptive filter that smooths and slows the motion to make it easier for the user to interact with small regions on the screen (like buttons and links). The smoothing is greater when the movement is slow so that the user can zero in and touch a particular point more easily.</p>
+</div>
+<div class="section" id="getting-the-touch-zone">
+<h2>Getting the Touch Zone<a class="headerlink" href="#getting-the-touch-zone" title="Permalink to this headline">¶</a></h2>
+<p>The touch zone is reported by the <tt class="docutils literal"><span class="pre">touchZone</span></tt> attribute of the <a class="reference external" href="../api/Leap.Pointable.html"><tt class="docutils literal"><span class="pre">Pointable</span></tt></a> class. The zones are identified using the Zone enumeration, which defines the following states:</p>
+<ul class="simple">
+<li>NONE — the pointable is either too far from the touch surface to be considered touching, or it is pointing back toward the user.</li>
+<li>HOVERING — the pointable tip has crossed into the hovering zone, but isn&#8217;t considered touching.</li>
+<li>TOUCHING — the pointable has crossed the virtual touch surface.</li>
+</ul>
+<p>The following code snippet illustrates how to retrieve the zone of the forward-most finger:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">Leap</span><span class="o">::</span><span class="n">Frame</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">leap</span><span class="p">.</span><span class="n">frame</span><span class="p">();</span>
+<span class="n">Leap</span><span class="o">::</span><span class="n">Pointable</span> <span class="n">pointable</span> <span class="o">=</span> <span class="n">frame</span><span class="p">.</span><span class="n">pointables</span><span class="p">().</span><span class="n">frontmost</span><span class="p">();</span>
+<span class="n">Leap</span><span class="o">::</span><span class="n">Pointable</span><span class="o">::</span><span class="n">Zone</span> <span class="n">zone</span> <span class="o">=</span> <span class="n">pointable</span><span class="p">.</span><span class="n">touchZone</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-the-touch-distance">
+<h2>Getting the Touch Distance<a class="headerlink" href="#getting-the-touch-distance" title="Permalink to this headline">¶</a></h2>
+<p>The touch distance is reported by the <tt class="docutils literal"><span class="pre">touchDistance</span></tt> attribute of the <a class="reference external" href="../api/Leap.Pointable.html"><tt class="docutils literal"><span class="pre">Pointable</span></tt></a> class. The distance ranges from +1 to -1 as the finger moves to and through the virtual touch surface. The distance does not represent a physical quantity, but rather how close to touching the Leap Software considers the pointable.</p>
+<p>The following code snippet illustrates how to retrieve the touch distance of the forward-most finger:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">Leap</span><span class="o">::</span><span class="n">Frame</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">leap</span><span class="p">.</span><span class="n">frame</span><span class="p">();</span>
+<span class="n">Leap</span><span class="o">::</span><span class="n">Pointable</span> <span class="n">pointable</span> <span class="o">=</span> <span class="n">frame</span><span class="p">.</span><span class="n">pointables</span><span class="p">().</span><span class="n">frontmost</span><span class="p">();</span>
+<span class="kt">float</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">pointable</span><span class="p">.</span><span class="n">touchDistance</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-the-stabilized-position-of-a-pointable">
+<h2>Getting the Stabilized Position of a Pointable<a class="headerlink" href="#getting-the-stabilized-position-of-a-pointable" title="Permalink to this headline">¶</a></h2>
+<p>The stabilized position is reported by the <tt class="docutils literal"><span class="pre">stabilizedTipPosition</span></tt> attribute of the <a class="reference external" href="../api/Leap.Pointable.html"><tt class="docutils literal"><span class="pre">Pointable</span></tt></a> class. This position is reported in reference to the standard Leap Motion coordinate system, but has a context-sensitive amount of filtering and stabilization.</p>
+<p>The following code snippet illustrates how to retrieve the stabilized position of the forward-most finger:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">Leap</span><span class="o">::</span><span class="n">Frame</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">leap</span><span class="p">.</span><span class="n">frame</span><span class="p">();</span>
+<span class="n">Leap</span><span class="o">::</span><span class="n">Pointable</span> <span class="n">pointable</span> <span class="o">=</span> <span class="n">frame</span><span class="p">.</span><span class="n">pointables</span><span class="p">().</span><span class="n">frontmost</span><span class="p">();</span>
+<span class="n">Leap</span><span class="o">::</span><span class="n">Vector</span> <span class="n">stabilizedPosition</span> <span class="o">=</span> <span class="n">pointable</span><span class="p">.</span><span class="n">stabilizedTipPosition</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="converting-from-leap-motion-coordinates-to-application-coordinates">
+<h2>Converting from Leap Motion Coordinates to Application Coordinates<a class="headerlink" href="#converting-from-leap-motion-coordinates-to-application-coordinates" title="Permalink to this headline">¶</a></h2>
+<p>When implementing touch emulation, you must map the Leap Motion coordinate space to the screen space of your application. To make this mapping easier, the Leap Motion API provides the <a class="reference external" href="../api/Leap.InteractionBox.html"><tt class="docutils literal"><span class="pre">InteractionBox</span></tt></a> class. The <tt class="docutils literal"><span class="pre">InteractionBox</span></tt> represents a rectilinear volume within the Leap Motion field of view. The class provides a function that normalizes positions within this volume to coordinates in the range [0..1]. You can normalize a position and then scale the resulting coordinate by the application dimensions to get a point in application coordinates.</p>
+<p>For example, if you have a window with a client-area size represented by the variables <tt class="docutils literal"><span class="pre">windowWidth</span></tt> and <tt class="docutils literal"><span class="pre">windowHeight</span></tt>, you can get the 2D pixel coordinates of a touch point within this window using the following code:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">Leap</span><span class="o">::</span><span class="n">Frame</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">leap</span><span class="p">.</span><span class="n">frame</span><span class="p">();</span>
+<span class="n">Leap</span><span class="o">::</span><span class="n">Finger</span> <span class="n">finger</span> <span class="o">=</span> <span class="n">frame</span><span class="p">.</span><span class="n">fingers</span><span class="p">().</span><span class="n">frontmost</span><span class="p">();</span>
+<span class="n">Leap</span><span class="o">::</span><span class="n">Vector</span> <span class="n">stabilizedPosition</span> <span class="o">=</span> <span class="n">finger</span><span class="p">.</span><span class="n">stabilizedTipPosition</span><span class="p">();</span>
+
+<span class="n">Leap</span><span class="o">::</span><span class="n">InteractionBox</span> <span class="n">iBox</span> <span class="o">=</span> <span class="n">leap</span><span class="p">.</span><span class="n">frame</span><span class="p">().</span><span class="n">interactionBox</span><span class="p">();</span>
+<span class="n">Leap</span><span class="o">::</span><span class="n">Vector</span> <span class="n">normalizedPosition</span> <span class="o">=</span> <span class="n">iBox</span><span class="p">.</span><span class="n">normalizePoint</span><span class="p">(</span><span class="n">stabilizedPosition</span><span class="p">);</span>
+<span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">normalizedPosition</span><span class="p">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">windowWidth</span><span class="p">;</span>
+<span class="kt">float</span> <span class="n">y</span> <span class="o">=</span> <span class="n">windowHeight</span> <span class="o">-</span> <span class="n">normalizedPosition</span><span class="p">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">windowHeight</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="touchpoints-example">
+<h2>TouchPoints Example<a class="headerlink" href="#touchpoints-example" title="Permalink to this headline">¶</a></h2>
+<p>The following example uses the touch emulation APIs to display the positions of all detected Pointable objects in an application window. The example uses the touch zone to set the color of the points and uses the touch distance to set the alpha value. The stabilized tip positions are mapped to the application window using the <a class="reference external" href="../api/Leap.InteractionBox.html"><tt class="docutils literal"><span class="pre">InteractionBox</span></tt></a> class.</p>
+<div class="figure">
+<img alt="devguide/../../../images/Leap_Touch_Point_Example.png" src="devguide/../../../images/Leap_Touch_Point_Example.png" />
+<p class="caption">The TouchPoints example</p>
+</div>
+<blockquote>
+<div><div class="highlight-cpp"><div class="highlight"><pre><span class="cp">#include &quot;cinder/app/AppNative.h&quot;</span>
+<span class="cp">#include &quot;cinder/gl/gl.h&quot;</span>
+<span class="cp">#include &quot;Leap.h&quot;</span>
+<span class="cp">#include &quot;LeapMath.h&quot;</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">ci</span><span class="p">;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">ci</span><span class="o">::</span><span class="n">app</span><span class="p">;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">TouchPointsApp</span> <span class="o">:</span> <span class="k">public</span> <span class="n">AppNative</span> <span class="p">{</span>
+  <span class="nl">public:</span>
+	<span class="kt">void</span> <span class="n">setup</span><span class="p">();</span>
+	<span class="kt">void</span> <span class="nf">draw</span><span class="p">();</span>
+  <span class="nl">private:</span>
+    <span class="kt">int</span> <span class="n">windowWidth</span> <span class="o">=</span> <span class="mi">800</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">windowHeight</span> <span class="o">=</span> <span class="mi">800</span><span class="p">;</span>
+    <span class="n">Leap</span><span class="o">::</span><span class="n">Controller</span> <span class="n">leap</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="n">TouchPointsApp</span><span class="o">::</span><span class="n">setup</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">setWindowSize</span><span class="p">(</span><span class="n">windowWidth</span><span class="p">,</span> <span class="n">windowHeight</span><span class="p">);</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">setFrameRate</span><span class="p">(</span><span class="mi">120</span><span class="p">);</span>
+    <span class="n">gl</span><span class="o">::</span><span class="n">enableAlphaBlending</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">TouchPointsApp</span><span class="o">::</span><span class="n">draw</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="n">gl</span><span class="o">::</span><span class="n">clear</span><span class="p">(</span> <span class="n">Color</span><span class="p">(</span> <span class="mf">.97</span><span class="p">,</span> <span class="mf">.93</span><span class="p">,</span> <span class="mf">.79</span> <span class="p">)</span> <span class="p">);</span>
+    <span class="n">Leap</span><span class="o">::</span><span class="n">PointableList</span> <span class="n">pointables</span> <span class="o">=</span> <span class="n">leap</span><span class="p">.</span><span class="n">frame</span><span class="p">().</span><span class="n">pointables</span><span class="p">();</span>
+    <span class="n">Leap</span><span class="o">::</span><span class="n">InteractionBox</span> <span class="n">iBox</span> <span class="o">=</span> <span class="n">leap</span><span class="p">.</span><span class="n">frame</span><span class="p">().</span><span class="n">interactionBox</span><span class="p">();</span>
+
+    <span class="k">for</span><span class="p">(</span> <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="n">pointables</span><span class="p">.</span><span class="n">count</span><span class="p">();</span> <span class="n">p</span><span class="o">++</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Leap</span><span class="o">::</span><span class="n">Pointable</span> <span class="n">pointable</span> <span class="o">=</span> <span class="n">pointables</span><span class="p">[</span><span class="n">p</span><span class="p">];</span>
+        <span class="n">Leap</span><span class="o">::</span><span class="n">Vector</span> <span class="n">normalizedPosition</span> <span class="o">=</span> <span class="n">iBox</span><span class="p">.</span><span class="n">normalizePoint</span><span class="p">(</span><span class="n">pointable</span><span class="p">.</span><span class="n">stabilizedTipPosition</span><span class="p">());</span>
+        <span class="kt">float</span> <span class="n">x</span> <span class="o">=</span> <span class="n">normalizedPosition</span><span class="p">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">windowWidth</span><span class="p">;</span>
+        <span class="kt">float</span> <span class="n">y</span> <span class="o">=</span> <span class="n">windowHeight</span> <span class="o">-</span> <span class="n">normalizedPosition</span><span class="p">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">windowHeight</span><span class="p">;</span>
+        
+        <span class="k">if</span><span class="p">(</span><span class="n">pointable</span><span class="p">.</span><span class="n">touchDistance</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">pointable</span><span class="p">.</span><span class="n">touchZone</span><span class="p">()</span> <span class="o">!=</span> <span class="n">Leap</span><span class="o">::</span><span class="n">Pointable</span><span class="o">::</span><span class="n">Zone</span><span class="o">::</span><span class="n">ZONE_NONE</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">gl</span><span class="o">::</span><span class="n">color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">pointable</span><span class="p">.</span><span class="n">touchDistance</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">pointable</span><span class="p">.</span><span class="n">touchDistance</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">gl</span><span class="o">::</span><span class="n">color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">pointable</span><span class="p">.</span><span class="n">touchDistance</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">gl</span><span class="o">::</span><span class="n">color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.05</span><span class="p">);</span>
+        <span class="p">}</span>
+        
+        <span class="n">gl</span><span class="o">::</span><span class="n">drawSolidCircle</span><span class="p">(</span><span class="n">Vec2f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span> <span class="mi">40</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">CINDER_APP_NATIVE</span><span class="p">(</span> <span class="n">TouchPointsApp</span><span class="p">,</span> <span class="n">RendererGl</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The example uses the <a class="reference external" href="http://libcinder.org">Cinder</a> library to create the application window and for drawing.</p>
+</div>
+</div>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">C++ Docs (v2.1)</a></li>
+          </ul><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../practices/Leap_Practices.html">Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Leap_Guides2.html">Using the Tracking API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Leap_Controllers.html">Connecting to the Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap_Tracking.html">Tracking Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap_Frames.html">Frames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap_Hand.html">Hands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap_Pointables.html">Fingers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap_Gestures.html">Gestures</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Touch Emulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-the-touch-zone">Getting the Touch Zone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-the-touch-distance">Getting the Touch Distance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-the-stabilized-position-of-a-pointable">Getting the Stabilized Position of a Pointable</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#converting-from-leap-motion-coordinates-to-application-coordinates">Converting from Leap Motion Coordinates to Application Coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#touchpoints-example">TouchPoints Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Leap_Motions.html">Motions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap_Coordinate_Mapping.html">Coordinate Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap_Images.html">Camera Images</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/Leap_Classes.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>C++</p>
+</div>
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

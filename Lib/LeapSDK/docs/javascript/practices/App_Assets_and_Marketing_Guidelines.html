@@ -1,0 +1,618 @@
+
+
+
+  
+  
+ 
+  
+  
+ 
+
+
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Application Asset and Marketing Guidelines &mdash; Leap Motion JavaScript SDK v2.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/breathe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-3.0.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.0.0/css/font-awesome.min.css"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="Leap Motion JavaScript SDK v2.1 documentation" href="../index.html" />
+    <link rel="up" title="Guidelines" href="Leap_Practices.html" />
+    <link rel="next" title="User Experience Guidelines" href="Leap_UX_Guidelines.html" />
+    <link rel="prev" title="User Orientation and Tutorial Guidelines" href="Leap_Orientation_and_Tutorial_Guidelines.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31536531-1']);
+  _gaq.push(['_setDomainName', 'leapmotion.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+<script type="text/javascript" src="../_static/kinetic.min.js"></script>
+<script type="text/javascript" src="../_static/dat.gui.min.js"></script>
+
+ 
+
+<script>
+
+    function getQueryValue(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    var requestedAPI = getQueryValue("proglang");
+    if(requestedAPI == "current") requestedAPI = localStorage["currentAPI"];
+    var pageAPI = 'javascript';
+    var hasAPI = {};
+    hasAPI.cpp = true;
+    hasAPI.csharp = true;
+    hasAPI.objc = true;
+    hasAPI.java = true;
+    hasAPI.javascript = true;
+    hasAPI.python = true;
+
+    if(requestedAPI && (requestedAPI != pageAPI))
+    {
+        if(pageAPI != 'none'){
+            var redirectedLocation = '../../javascript/practices/App_Assets_and_Marketing_Guidelines.html';
+            if( requestedAPI == 'cpp' && hasAPI.cpp){
+                redirectedLocation = "../../cpp/practices/App_Assets_and_Marketing_Guidelines.html";
+            }
+            else if( requestedAPI == 'csharp' && hasAPI.csharp){
+                redirectedLocation = "../../csharp/practices/App_Assets_and_Marketing_Guidelines.html";
+            }
+            else if( requestedAPI == 'objc' && hasAPI.objc){
+                redirectedLocation = "../../objc/practices/App_Assets_and_Marketing_Guidelines.html";
+            }
+            else if( requestedAPI == 'java' && hasAPI.java) {
+                redirectedLocation = "../../java/practices/App_Assets_and_Marketing_Guidelines.html";
+            }
+            else if( requestedAPI == 'javascript' && hasAPI.javascript){
+                redirectedLocation = "../../javascript/practices/App_Assets_and_Marketing_Guidelines.html";
+            }
+            else if( requestedAPI == 'python' && hasAPI.python) {
+                redirectedLocation = "../../python/practices/App_Assets_and_Marketing_Guidelines.html";
+            } else {
+                    redirectedLocation ="Leap_Practices.html";
+            }
+
+            //Guard against redirecting to the same page (infinitely)
+            if('../../javascript/practices/App_Assets_and_Marketing_Guidelines.html' != redirectedLocation) window.location.replace(redirectedLocation);
+        }
+    }
+
+</script>
+
+<script>
+window.addEventListener('keyup', handleKeyInput);
+function handleKeyInput(e)
+{
+    var code;
+    if (!e) var e = window.event;
+    if (e.keyCode) code = e.keyCode;
+    else if (e.which) code = e.which;
+    var character = String.fromCharCode(code);
+    if( character == "J" & e.altKey){
+            window.location.assign("Leap_Orientation_and_Tutorial_Guidelines.html");    }
+    else if( character == "K" & e.altKey){
+            window.location.assign("Leap_UX_Guidelines.html");
+    }
+
+}
+</script>
+<script type="text/javascript" src="../_static/leap.min.js"></script>
+<script type="text/javascript" src="../_static/three.min.js"></script>
+<script type="text/javascript" src="../_static/LeapExample.js"></script>
+
+<script type="text/javascript" src="/assets/standalone-header.js?r9"></script>
+<link rel="stylesheet" href="/assets/standalone-header.css?r9" type="text/css" />
+
+
+  </head>
+  <body>
+
+<div class="developer-portal-styles">
+  <header class="navbar navbar-static-top developer-navbar header beta-header">
+    <nav class="container pr">
+      <a class="logo-link pull-left" href="/">
+        <img alt="Leap Motion Developers" class="media-object pull-left white-background" src="../_static/logo.png" />
+      </a>
+      <span class="inline-block hidden-phone developer-logo-text">
+        <div class="text">
+          <a href="/">
+            <span class="more-than-1199">Developer Portal</span>
+
+          </a>
+        </div>
+      </span>
+
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <!-- Everything within here will be hidden at 940px or less, accessible via a button. -->
+      <div class="nav-collapse">
+        <ul class="nav header-navigation developer-links">
+          <li class="external-link"><a href="https://developer.leapmotion.com/features">What's new</a> </li>
+          <li class="external-link"><a href="https://developer.leapmotion.com/downloads/skeletal-beta" class="">Getting Started</a></li>
+          <li><a class="active" href="#" class="">Documentation</a></li>
+          <li class="external-link"> <a href="https://developer.leapmotion.com/gallery" class="">Examples</a> </li>
+          <li class="external-link"> <a href="https://www.leapmotion.com/blog/category/labs/" class="" target="_blank">Blog <i class='fa fa-external-link'></i></a> </li>
+          <li class="external-link"> <a href="https://community.leapmotion.com/category/beta" class="" target="_blank">Community <i class='fa fa-external-link'></i></a> </li>
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+<section class="main-wrap">
+  <div data-swiftype-index="true">
+    <div class="second_navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            
+              
+
+<ul>
+  <li>
+      JavaScript
+    
+  </li>
+  <li>
+      <a href="../../csharp/practices/App_Assets_and_Marketing_Guidelines.html" onclick="localStorage['currentAPI'] = 'csharp'">C# and Unity</a>
+    
+  </li>
+  <li>
+      <a href="../../cpp/practices/App_Assets_and_Marketing_Guidelines.html" onclick="localStorage['currentAPI'] = 'cpp'">C++</a>
+    
+  </li>
+  <li>
+      <a href="../../java/practices/App_Assets_and_Marketing_Guidelines.html" onclick="localStorage['currentAPI'] = 'java'">Java</a>
+    
+  </li>
+  <li>
+      <a href="../../python/practices/App_Assets_and_Marketing_Guidelines.html" onclick="localStorage['currentAPI'] = 'python'">Python</a>
+    
+  </li>
+  <li>
+      <a href="../../objc/practices/App_Assets_and_Marketing_Guidelines.html" onclick="localStorage['currentAPI'] = 'objc'">Objective-C</a>
+    
+  </li>
+</ul>
+            
+          </div>
+          <div class="col-md-4 search">
+            
+              <script>
+function storeThisPage(){
+    sessionStorage["pageBeforeSearch"] = window.location;
+    return true;
+}
+function doneWithSearch(){
+    var storedPage = sessionStorage["pageBeforeSearch"];
+    if(storedPage){
+        window.location = storedPage;
+    } else {
+        window.location = "index.html"; //fallback
+    }
+    return false;
+}
+</script>
+<div  style="margin-top:-4px">
+<ul style="display:inline; white-space:nowrap"><li>
+<form class="navbar-form" action="../search.html" method="get" onsubmit="storeThisPage()">
+ <div class="form-group">
+  <input type="search" results="5" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form></li>
+</ul>
+</div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        //Remove dev portal header and footer when viewing from file system
+       if(window.location.protocol == 'file:'){
+            var navNode = document.querySelector(".developer-links");
+            navNode.parentNode.removeChild(navNode);
+        }
+
+    </script>
+
+
+<div id="wrap" data-spy="scroll" data-target="#sidebar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 pull-right">
+        <!-- 
+ 
+<span id="breadcrumbs">
+  <a href="../index.html">Home</a>&raquo;
+    <a href="Leap_Practices.html" accesskey="U">Guidelines</a>&raquo;
+  Application Asset and Marketing Guidelines
+</span> -->
+        
+  <div class="section" id="application-asset-and-marketing-guidelines">
+<h1>Application Asset and Marketing Guidelines<a class="headerlink" href="#application-asset-and-marketing-guidelines" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://developer.leapmotion.com/downloads/developer-marketing-assets">You can download the following badges and image assets here.</a></p>
+<div class="section" id="app-names-and-ids">
+<h2>App Names and IDs<a class="headerlink" href="#app-names-and-ids" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Apps must have a unique name, icon, and metadata. It must be different from all other Apps within the Leap Motion app store and must not contain the words “Leap” or “Leap Motion”.</li>
+<li>Refrain from using Leap Motion company names or products in your app name, for example “Leap,” “Leap Motion”, “LM”, “Leap Motion Controller”, etc. The app store is dedicated to Leap Motion apps, so there is no need to include Leap Motion in the app name.</li>
+<li>Refrain from using variations or misspellings of Leap Motion company names or products in your app name, for example “AirSpce”, “Leep Motion”, etc.</li>
+<li>Avoid app names that might be confused with Leap Motion company names, products or general themes, for example “Lead Motion”, “Motion Control”, “Gesture Control”, etc.</li>
+</ul>
+</div>
+<div class="section" id="pricing">
+<h2>Pricing<a class="headerlink" href="#pricing" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>App pricing model should be set to either Free or One Time Fee. A price greater than or equal to $0.99 must be set for any paid apps.</li>
+<li>The maximum list price for Apps in the store is US$500 or local equivalent. Apps priced higher than the applicable maximum may be listed only under a separate agreement with Leap Motion.</li>
+</ul>
+</div>
+<div class="section" id="versions">
+<h2>Versions<a class="headerlink" href="#versions" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Apps must have one Leap Motion App ID per platform, provided by Leap Motion.</p>
+</li>
+<li><p class="first">An App Version must be assigned to each submission.</p>
+</li>
+<li><p class="first">Developers are able to submit any version number format you choose, to accommodate apps that may already exist.</p>
+<p>For new apps or new developers, a suggested format for your app is 1.000 for the first submission of an app. Subsequent submissions for the same app version could be 1.001, 1.002, etc. Updates to a published app could increment the primary version number to 2.000, 2.001, etc.</p>
+</li>
+<li><p class="first">Apps must not be disguised as other Apps or content.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="image-assets">
+<h2>Image Assets<a class="headerlink" href="#image-assets" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="app-icon">
+<h3>App Icon<a class="headerlink" href="#app-icon" title="Permalink to this headline">¶</a></h3>
+<img alt="practices/../../../images/touchless_icon.png" src="practices/../../../images/touchless_icon.png" />
+<ul class="simple">
+<li>One (1) App Icon image should be supplied. The App Icon appears in the store on the app detail page.</li>
+<li>App Icon must be a .png file on a transparent background, at least 100x100 pixels in size.</li>
+<li>This icon could also be used for the Desktop Icon.</li>
+</ul>
+</div>
+<div class="section" id="desktop-icon">
+<h3>Desktop Icon<a class="headerlink" href="#desktop-icon" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>One (1) Desktop Icon should be supplied within the executable file. This icon will appear in the user’s application dock when the app is launched.</li>
+<li>The same Desktop Icon file can be used on Mac or PC.</li>
+<li>Desktop Icons must be .png files 512x512 pixels in size.</li>
+<li>This same icon could also be used for the App Store Icon.</li>
+</ul>
+</div>
+<div class="section" id="profile-images">
+<h3>Profile Images<a class="headerlink" href="#profile-images" title="Permalink to this headline">¶</a></h3>
+<p>Your Profile Images are used within the Leap Motion App Store and in the the App Home application.</p>
+<img alt="practices/../../../images/airspace_web.jpg" src="practices/../../../images/airspace_web.jpg" />
+<ul>
+<li><p class="first">Two (2) Profile Images should be supplied:</p>
+</li>
+<li><p class="first">1 Large, 490x270px .jpg file.</p>
+<p>This asset may be used in the app store (see larger profile images above) as well as in App Home to launch the app.</p>
+</li>
+<li><p class="first">1 Small, 235x100px .jpg file.</p>
+<p>This asset is used as the default profile image in the app store.</p>
+</li>
+<li><p class="first">Profile images can be rendered key art and are not limited to actual product screens.</p>
+</li>
+</ul>
+<div class="figure">
+<img alt="practices/../../../images/touchless-tile-mac-small.jpg" src="practices/../../../images/touchless-tile-mac-small.jpg" />
+<p class="caption">Touchless Profile Image</p>
+</div>
+</div>
+<div class="section" id="screenshots">
+<h3>Screenshots<a class="headerlink" href="#screenshots" title="Permalink to this headline">¶</a></h3>
+<p>Screenshots appear on your app detail page and are a great way to show users what your app is all about.</p>
+<img alt="practices/../../../images//Touchless_Detail.jpg" src="practices/../../../images//Touchless_Detail.jpg" />
+<ul class="simple">
+<li>At least 3 screenshots should be supplied.</li>
+<li>Screenshots must be .jpg files, at least 1280x720 pixels in size (for 16:9) or 1280x800 pixels (for 16:10).</li>
+<li>Screenshots must be of the actual finished product. Enhanced or modified screenshots are not allowed.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="video-assets">
+<h2>Video Assets<a class="headerlink" href="#video-assets" title="Permalink to this headline">¶</a></h2>
+<p>You can also include a demo or trailer video on your app detail page.  This video asset will appear in the first position (as shown below).</p>
+<img alt="practices/../../../images//BoomBall_video.jpg" src="practices/../../../images//BoomBall_video.jpg" />
+<ul class="simple">
+<li>One (1) Video demo is allowed per app, and is optional.</li>
+<li>The video should be uploaded to YouTube, with the embeddable link provided in the submission form.</li>
+</ul>
+<div class="section" id="best-practices-for-app-demos-and-trailers">
+<h3>Best Practices for App Demos and Trailers<a class="headerlink" href="#best-practices-for-app-demos-and-trailers" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Short and sweet. Keep your video as short as possible, while conveying the full story of what makes your app unique and exciting. Most developers will find that 1 minute or less is ideal.</li>
+<li>Make an entrance. Include an intro splash screen or animation to introduce the name of your app, the developer/studio, and an indication that the app has been designed for the Leap Motion Controller (i.e. “Created for the Leap Motion Controller”).</li>
+<li>Show application interactions. What’s the goal of your software, and what will your users be doing? Your video should reveal the story of your app along with the fundamental interactions that your users will experience.</li>
+<li>Keep it in perspective. Make sure to include shots with both hands and the computer screen in view, so that your audience can imagine themselves using the app.</li>
+<li>Show the big picture. Your video should reveal quick views into different modes (or levels if applicable) so that people can see how the experience of the app progresses and what users will experience.</li>
+<li>Highlight key features. Show the essential actions, characters, or tools that define your software and distinguish it from the crowd.</li>
+<li>Keep it current. When submitting your video for your Leap Motion app store page, be sure to remove any “Coming Soon” messages. When people see your trailer in the store, it’s because they’re just about to download it.</li>
+</ol>
+<p>Here is a great example of a demo video that clearly shows off the app functionality and gestures (tap to launch the video).</p>
+<table>
+    <tr><td>
+            <strong>AirBeats</strong><br/>
+            Developer: Handwavy
+    </td></tr>
+    <tr><td>
+            <a href="https://www.youtube.com/watch?v=fU4ZWAPwvcM" target="_blank"><img src="../../images/Airbeats_video.jpg" width="400" /></a>
+    </td></tr>
+    <tr><td>
+            <a href="https://www.youtube.com/watch?v=fU4ZWAPwvcM" target="_blank">https://www.youtube.com/watch?v=fU4ZWAPwvcM</a>
+    </td></tr>
+</table>
+
+<p>
+
+<table>
+    <tr><td>
+            <strong>Rock Paper Scissors</strong><br/>
+            Developer: Pierre Semaan
+    </td></tr>
+    <tr><td>
+            <a href="https://www.youtube.com/watch?v=Zjcc-JT0z_w" target="_blank"><img src="../../images/RockPaperScissors.jpg" width="400" /></a>
+    </td></tr>
+    <tr><td>
+            <a href="https://www.youtube.com/watch?v=Zjcc-JT0z_w" target="_blank">https://www.youtube.com/watch?v=Zjcc-JT0z_w</a>
+    </td></tr>
+</table>
+
+<p>
+
+<table>
+    <tr><td>
+            <strong>BoomBall</strong><br/>
+            Developer: Virtual Air Guitar
+    </td></tr>
+    <tr><td>
+            <a href="https://www.youtube.com/watch?v=c4338Emvl2o" target="_blank"><img src="../../images/BoomBall.jpg" width="400" /></a>
+    </td></tr>
+    <tr><td>
+            <a href="https://www.youtube.com/watch?v=c4338Emvl2o" target="_blank">https://www.youtube.com/watch?v=c4338Emvl2o</a>
+    </td></tr>
+</table></div>
+</div>
+<div class="section" id="leap-motion-branding">
+<h2>Leap Motion Branding<a class="headerlink" href="#leap-motion-branding" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="leap-motion-company-logo">
+<h3>Leap Motion Company Logo<a class="headerlink" href="#leap-motion-company-logo" title="Permalink to this headline">¶</a></h3>
+<img alt="practices/../../../images/Leap-Motion-Logo-Usage.jpg" src="practices/../../../images/Leap-Motion-Logo-Usage.jpg" />
+<ul class="simple">
+<li>The Leap Motion company logo may be used in the splash screen of your application</li>
+<li>The Leap Motion company logo can not be the primary element on the splash page</li>
+<li>There must be space of at least 1/4 the size of the Leap Motion company logo from any other logos/icons</li>
+<li>The Leap Motion company logo should never appear smaller than 50px in height</li>
+<li>The Leap Motion company logo may not be used in any way that implies partnership with or sponsorship by Leap Motion</li>
+<li>You may not modify (other than resizing) or animate the Leap Motion company logo in any way</li>
+<li>You may not use the Leap Motion logo outside of the application without prior written permission (for example, it may not be used on your website or in other advertising)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="leap-motion-trademarks">
+<h2>Leap Motion Trademarks<a class="headerlink" href="#leap-motion-trademarks" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><em>Leap Motion (TM)</em></dt>
+<dd>When used in text, please use a ™ symbol. For consistency, please don’t use LEAP Motion, LEAP or Leap for the company name.</dd>
+<dt><em>Leap Motion (TM) Controller</em></dt>
+<dd>We call our first device the Leap Motion™ Controller. When used in text, on first mention please include a trademark symbol after Leap Motion and before Controller. For subsequent mentions, please use Leap Motion Controller, “the controller” or “the device” when discussing the product. Please don’t use “the Leap” for our product name.</dd>
+</dl>
+<div class="section" id="available-for-leap-motion-badge">
+<h3>&#8220;Available for Leap Motion&#8221; Badge<a class="headerlink" href="#available-for-leap-motion-badge" title="Permalink to this headline">¶</a></h3>
+<img alt="practices/../../../images/available-for-leap-motion&#64;1x.png" src="practices/../../../images/available-for-leap-motion&#64;1x.png" />
+<ul class="simple">
+<li>The “Available for Leap Motion” badge can be used to promote your app’s availability for the Leap Motion device.  See below for an example of appropriate usage.</li>
+<li>The badge should link to your app’s page in the Leap Motion app store.</li>
+<li>For example, the Touchless for Mac app would link here: <a class="reference external" href="https://airspace.leapmotion.com/apps/touchless-for-mac">https://airspace.leapmotion.com/apps/touchless-for-mac</a></li>
+<li>Use the badge as provided, do not modify the badge in any way.</li>
+<li>Do not alter the color, animate, rotate or skew the badge.</li>
+<li>Badge should be in subordinate position, within the layout, to your app or corporate identity.</li>
+</ul>
+<div class="figure">
+<img alt="practices/../../../images/available_badge_usage.jpg" src="practices/../../../images/available_badge_usage.jpg" />
+<p class="caption">Example of how badge should be used.</p>
+</div>
+</div>
+<div class="section" id="leap-motion-product-images">
+<h3>Leap Motion Product Images<a class="headerlink" href="#leap-motion-product-images" title="Permalink to this headline">¶</a></h3>
+<p>The following images can be used when discussing the Leap Motion Controller. <a class="reference external" href="https://developer.leapmotion.com/downloads/developer-marketing-assets">You can download the full-resolution images here.</a></p>
+<style type="text/css">
+    #leap-motion-product-images td { text-align: center; }
+    #leap-motion-product-images td * { margin: 10px; padding:10px;}
+    #leap-motion-product-images td img { max-width:500%; height:auto !important;}
+    .centered {
+        width:550px;
+        padding:10px;
+        text-align: center;
+        display: block;
+    }
+    .drop_shadow {
+        box-shadow:0px 5px 5px 2px #aaaaaa;
+    }
+</style>
+
+<table>
+    <tr>
+            <td><img src="../../images/Product-Hand-Device.png" /></td>
+            <td><img src="../../images/Product-Leap-3-quarter.png" /></td>
+    </tr>
+    <tr>
+            <td>Hand Device.png</td>
+            <td>Leap 3 quarter.png</td>
+    </tr>
+
+    <tr>
+            <td><img src="../../images/Product-Leap-Front.png" /></td>
+            <td><img src="../../images/Product-Leap-Motion-Field-Of-View.png" /></td>
+    </tr>
+    <tr>
+            <td>Leap Front.png</td>
+            <td>Product-Leap Motion Field Of View.png</td>
+    </tr>
+    <tr>
+            <td><img src="../../images/Product-Leap-Motion-Controller-with-Asus-Desktop.png" /></td>
+            <td><img src="../../images/Product-Leap-Motion-Controller-with-HP-desktop.png" /></td>
+    </tr>
+    <tr>
+            <td>Leap Motion Controller with Asus Desktop.png</td>
+            <td>Leap Motion Controller with HP desktop.png</td>
+    </tr>
+    <tr>
+            <td><img src="../../images/Product-Leap-Motion-Controller-with-Mac-Desktop.png" /></td>
+            <td><img src="../../images/Product-Leap-Motion-PC-Flocking.png" /></td>
+    </tr>
+    <tr>
+            <td>Leap Motion Controller with Mac Desktop.png</td>
+            <td>Leap Motion PC Flocking.png</td>
+    </tr>
+</table></div>
+</div>
+</div>
+
+
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+           var disqus_shortname = 'lmsdk'; // required: replace example with your forum shortname
+           //var disqus_identifier = "???";
+           (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+           })();
+           </script>
+      </div>
+      <div id="sidebar" class="col-md-3">
+        <div class="well-sidebar" data-offset-top="188">
+          <ul>
+            <li><a href="../index.html" title="Home">JavaScript Docs (v2.1)</a></li>
+          </ul><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Intro_Skeleton_API.html">Introducing the Skeletal Tracking Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Overview.html">API Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Leap_Practices.html">Guidelines</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Leap_Menu_Design_Guidelines.html">Menu Design Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Leap_Orientation_and_Tutorial_Guidelines.html">User Orientation and Tutorial Guidelines</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Application Asset and Marketing Guidelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#app-names-and-ids">App Names and IDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pricing">Pricing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#versions">Versions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#image-assets">Image Assets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#app-icon">App Icon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#desktop-icon">Desktop Icon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#profile-images">Profile Images</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#screenshots">Screenshots</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#video-assets">Video Assets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#best-practices-for-app-demos-and-trailers">Best Practices for App Demos and Trailers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#leap-motion-branding">Leap Motion Branding</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#leap-motion-company-logo">Leap Motion Company Logo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#leap-motion-trademarks">Leap Motion Trademarks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#available-for-leap-motion-badge">&#8220;Available for Leap Motion&#8221; Badge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#leap-motion-product-images">Leap Motion Product Images</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Leap_UX_Guidelines.html">User Experience Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides.html">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devguide/Leap_Guides2.html">Using the Tracking API</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://developer.leapmotion.com/downloads/javascript#plugins">LeapJS Plug-ins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/Leap_Classes.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplements/Leap_Supplements.html">Appendices</a></li>
+</ul>
+
+
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+<!--
+
+<div class="ribbon">
+    <p>JavaScript</p>
+</div>
+ -->
+
+
+<footer>
+
+  <div id="footer" class="container">
+
+  <div class="container">
+    <div class="copyright">
+      <span>Copyright &copy; 2012 - 2014, Leap Motion, Inc.</span>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>

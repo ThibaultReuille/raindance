@@ -23,6 +23,10 @@ public:
 		// TODO : Run Javascript initialization script
 	}
 
+	virtual void begin() {}
+
+	virtual void end() {}
+
 	bool execute(IScript* script)
 	{
 		emscripten_run_script(script->source().c_str());
