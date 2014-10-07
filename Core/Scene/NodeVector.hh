@@ -68,6 +68,7 @@ namespace Scene
 
         void update()
         {
+            // TODO : Find a different way to do this.
             const float c_MaxRadius = 10000.0f;
 
             glm::vec3 position;
