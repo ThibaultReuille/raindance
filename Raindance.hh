@@ -2,9 +2,8 @@
 
 #include <raindance/Core/Headers.hh>
 #include <raindance/Core/Context.hh>
-#include <raindance/Core/View.hh>
 #include <raindance/Core/GLUT.hh>
-#include <raindance/Core/Window.hh>
+#include <raindance/Core/GUI/Window.hh>
 
 class RainDance : public GLUT::IContext
 {

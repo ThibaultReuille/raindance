@@ -1,7 +1,7 @@
 #pragma once
 
 #include <raindance/Core/Headers.hh>
-#include <raindance/Core/HUD/Widgets/Widget.hh>
+#include <raindance/Core/GUI/Widgets/Widget.hh>
 #include <raindance/Core/Text.hh>
 #include <raindance/Core/Transformation.hh>
 

@@ -6,8 +6,8 @@
 #include <raindance/Core/Sequencer/Sequencer.hh>
 #include <raindance/Core/Geometry.hh>
 #include <raindance/Core/Log.hh>
-#include <raindance/Core/View.hh>
 #include <raindance/Core/Camera/Camera.hh>
+#include <raindance/Core/GUI/View.hh>
 
 class Context
 {
