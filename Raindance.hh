@@ -4,6 +4,7 @@
 #include <raindance/Core/Context.hh>
 #include <raindance/Core/GLUT.hh>
 #include <raindance/Core/GUI/Window.hh>
+#include <raindance/Core/GUI/Canvas.hh>
 
 class RainDance : public GLUT::IContext
 {
@@ -50,5 +51,6 @@ public:
 protected:
 	Context m_Context;
 	Window* m_Window;
+    bool m_Screenshot;
 };
 

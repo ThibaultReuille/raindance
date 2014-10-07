@@ -40,7 +40,7 @@ public:
 
 		m_Buffer.generate(Buffer::STATIC);
 
-		setConvolutionEffect(EMBOSS);
+		setConvolutionEffect(NORMAL);
 	}
 
 	~Canvas()
