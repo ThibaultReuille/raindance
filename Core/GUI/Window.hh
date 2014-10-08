@@ -19,7 +19,7 @@ public:
 
         glutInitWindowSize(m_Width, m_Height);
         glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-        glutCreateWindow(m_Title.c_str());
+        m_GlutID = glutCreateWindow(m_Title.c_str());
 
         #if defined(_MSC_VER) // TODO : Use Glew for Unix too ?
 			GLenum err = glewInit();
@@ -40,6 +40,8 @@ public:
 	{
 	    SAFE_DELETE(m_Canvas);
 	}
+
+	int getGlutID() { return m_GlutID; }
 
 	void fullscreen()
 	{
@@ -82,9 +84,16 @@ public:
 #endif
         {
             clear();
-
             for (auto view : m_Views)
+            {
+                auto viewport = view->getViewport();
+                if (viewport != NULL)
+                {
+                    glViewport(viewport->getPosition().x, viewport->getPosition().y,
+                               viewport->getDimension().x, viewport->getDimension().y);
+                }
                 view->draw();
+            }
         }
 
         if (m_ScreenshotFactor > 0)
@@ -112,10 +121,12 @@ public:
         m_ScreenshotFactor = factor;
         m_ScreenshotFilename = filename;
     }
+    inline int getScreenshotFactor() { return m_ScreenshotFactor; }
 
     inline void addView(View* view) { m_Views.push_back(view); }
 
 private:
+    int m_GlutID;
     std::string m_Title;
     int m_Width;
     int m_Height;

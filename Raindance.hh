@@ -3,20 +3,20 @@
 #include <raindance/Core/Headers.hh>
 #include <raindance/Core/Context.hh>
 #include <raindance/Core/GLUT.hh>
-#include <raindance/Core/GUI/Window.hh>
+#include <raindance/Core/GUI/WindowManager.hh>
 #include <raindance/Core/GUI/Canvas.hh>
 
 class RainDance : public GLUT::IContext
 {
 public:
 	RainDance()
-    : m_Window(NULL)
 	{
+	    m_WindowManager = new WindowManager();
 	}
 
 	virtual ~RainDance()
 	{
-	    SAFE_DELETE(m_Window);
+	    SAFE_DELETE(m_WindowManager);
 	}
 
 	virtual void create(int argc, char** argv)
@@ -29,17 +29,19 @@ public:
 	{
 	}
 
-	void addWindow(const char* title, unsigned int width, unsigned int height)
-	{
-	    // TODO : Multi-window system
-	    SAFE_DELETE(m_Window);
-        m_Window = new Window(title, width, height);
-	}
-
 	virtual void run()
 	{
         GLUT::setCallbacks();
 		glutMainLoop();
+	}
+
+	virtual void postRedisplay()
+	{
+        for (auto element : m_WindowManager->elements())
+        {
+            glutSetWindow(element.second->getGlutID());
+            glutPostRedisplay();
+        }
 	}
 
 	virtual void destroy()
@@ -50,7 +52,6 @@ public:
 
 protected:
 	Context m_Context;
-	Window* m_Window;
-    bool m_Screenshot;
+	WindowManager* m_WindowManager;
 };
 
