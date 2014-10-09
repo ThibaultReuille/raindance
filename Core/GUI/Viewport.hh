@@ -12,10 +12,10 @@ public:
     }
 
     inline void setPosition(const glm::vec2& position) { m_Position = position; }
-    inline const glm::vec2& getPosition() { return m_Position; }
+    inline const glm::vec2& getPosition() const { return m_Position; }
 
     inline void setDimension(const glm::vec2& dimension) { m_Dimension = dimension; }
-    inline const glm::vec2& getDimension() { return m_Dimension; }
+    inline const glm::vec2& getDimension() const { return m_Dimension; }
 
 private:
     glm::vec2 m_Position;

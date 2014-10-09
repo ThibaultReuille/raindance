@@ -34,6 +34,8 @@ public:
         m_TextureVector.add(new Texture("Color 0", m_Width, m_Height, 4));
         m_Canvas = new Canvas(width, height);
 	    m_Canvas->bind();
+
+	    m_ActiveView = 0;
 	}
 
 	virtual ~Window()
@@ -84,16 +86,7 @@ public:
 #endif
         {
             clear();
-            for (auto view : m_Views)
-            {
-                auto viewport = view->getViewport();
-                if (viewport != NULL)
-                {
-                    glViewport(viewport->getPosition().x, viewport->getPosition().y,
-                               viewport->getDimension().x, viewport->getDimension().y);
-                }
-                view->draw();
-            }
+            m_Views[m_ActiveView]->draw();
         }
 
         if (m_ScreenshotFactor > 0)
@@ -125,6 +118,18 @@ public:
 
     inline void addView(View* view) { m_Views.push_back(view); }
 
+    inline View* getActiveView(){
+        if (m_Views.empty())
+            return NULL;
+        return m_Views[m_ActiveView];
+    }
+
+    inline void nextView()
+    {
+        if (!m_Views.empty())
+            m_ActiveView = (m_ActiveView + 1) % m_Views.size();
+    }
+
 private:
     int m_GlutID;
     std::string m_Title;
@@ -140,5 +145,6 @@ private:
     glm::vec4 m_ClearColor;
 
     std::vector<View*> m_Views;
+    int m_ActiveView;
 };
 
