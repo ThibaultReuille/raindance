@@ -22,31 +22,29 @@ public:
         m_GlutID = glutCreateWindow(m_Title.c_str());
 
         #if defined(_MSC_VER) // TODO : Use Glew for Unix too ?
-			GLenum err = glewInit();
-			if (GLEW_OK != err)
-			{
-				/* Problem: glewInit failed, something is seriously wrong. */
-				fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
-			}
-			LOG("[WINDOW] Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
-		#endif
+            GLenum err = glewInit();
+            if (GLEW_OK != err)
+            {
+                /* Problem: glewInit failed, something is seriously wrong. */
+                fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+            }
+            LOG("[WINDOW] Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
+        #endif
 
         m_TextureVector.add(new Texture("Color 0", m_Width, m_Height, 4));
         m_Canvas = new Canvas(width, height);
-	    m_Canvas->bind();
+        m_Canvas->bind();
+    }
 
-	    m_ActiveView = 0;
-	}
+    virtual ~Window()
+    {
+        SAFE_DELETE(m_Canvas);
+    }
 
-	virtual ~Window()
-	{
-	    SAFE_DELETE(m_Canvas);
-	}
+    int getGlutID() { return m_GlutID; }
 
-	int getGlutID() { return m_GlutID; }
-
-	void fullscreen()
-	{
+    void fullscreen()
+    {
         m_FullScreen = !m_FullScreen;
 
         if (m_FullScreen)
@@ -56,24 +54,26 @@ public:
             glutReshapeWindow(m_Width, m_Height);
             glutPositionWindow(0, 0);
         }
-	}
+    }
 
-	void reshape(int width, int height)
-	{
+    void reshape(int width, int height)
+    {
         m_Width = width;
         m_Height = height;
         m_Canvas->reshape(width, height);
         m_TextureVector.reshape(width, height);
-	}
+    }
 
-	inline void clear()
-	{
+    inline void clear()
+    {
         glClearColor(m_ClearColor.r, m_ClearColor.g, m_ClearColor.b, m_ClearColor.a);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	}
+    }
 
-	void draw(Context* context)
-	{
+    void preDraw(Context* context)
+    {
+        (void) context;
+
         if (m_ScreenshotFactor > 0)
         {
             m_Canvas->reshape(m_Width * m_ScreenshotFactor, m_Height * m_ScreenshotFactor);
@@ -84,11 +84,12 @@ public:
         m_Canvas->bind();
         m_Canvas->bindColorTexture(m_TextureVector[0]);
 #endif
-        {
-            clear();
-            m_Views[m_ActiveView]->draw();
-        }
+    }
 
+    virtual void draw(Context* context) = 0;
+
+    void postDraw(Context* context)
+    {
         if (m_ScreenshotFactor > 0)
         {
             m_Canvas->dump(m_ScreenshotFilename.c_str(), m_TextureVector[0]);
@@ -103,9 +104,9 @@ public:
         clear();
         m_Canvas->draw(context, m_TextureVector[0]);
 #endif
-	}
+    }
 
-	inline const std::string& title() { return m_Title; }
+    inline const std::string& title() { return m_Title; }
     inline int width() { return m_Width; }
     inline int height() { return m_Height; }
     inline Canvas* canvas() { return m_Canvas; }
@@ -116,19 +117,8 @@ public:
     }
     inline int getScreenshotFactor() { return m_ScreenshotFactor; }
 
-    inline void addView(View* view) { m_Views.push_back(view); }
+protected:
 
-    inline View* getActiveView(){
-        if (m_Views.empty())
-            return NULL;
-        return m_Views[m_ActiveView];
-    }
-
-    inline void nextView()
-    {
-        if (!m_Views.empty())
-            m_ActiveView = (m_ActiveView + 1) % m_Views.size();
-    }
 
 private:
     int m_GlutID;
@@ -143,8 +133,5 @@ private:
     Canvas* m_Canvas;
     TextureVector m_TextureVector;
     glm::vec4 m_ClearColor;
-
-    std::vector<View*> m_Views;
-    int m_ActiveView;
 };
 
