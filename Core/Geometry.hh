@@ -20,6 +20,7 @@ public:
             GeometryObjects = 0;
             Frames = 0;
             DrawArrays = 0;
+            DrawArraysInstanced = 0;
             DrawElements = 0;
         }
 
@@ -28,14 +29,16 @@ public:
             LOG("[METRICS] Geometry Objects : %u\n", GeometryObjects);
             LOG("[METRICS] Frames : %u\n", Frames);
             LOG("[METRICS] DrawArrays : %u\n", DrawArrays);
+            LOG("[METRICS] DrawArraysInstanced : %u\n", DrawArraysInstanced);
             LOG("[METRICS] DrawElements : %u\n", DrawElements);
-            LOG("[METRICS] Average # of drawcalls per frame : %u\n", (DrawArrays + DrawElements) / Frames);
+            LOG("[METRICS] Average # of drawcalls per frame : %u\n", (DrawArrays + DrawArraysInstanced + DrawElements) / Frames);
             LOG("[METRICS] ---\n");
         }
 
         unsigned int GeometryObjects;
         unsigned int Frames;
         unsigned int DrawArrays;
+        unsigned int DrawArraysInstanced;
         unsigned int DrawElements;
     };
 
@@ -102,11 +105,18 @@ public:
 	{
 	}
 
-	inline void drawArrays(GLenum mode, GLint first, GLsizei count)
-	{
-	    glDrawArrays(mode, first, count);
-	    getMetrics().DrawArrays++;
-	}
+    inline void drawArrays(GLenum mode, GLint first, GLsizei count)
+    {
+        glDrawArrays(mode, first, count);
+        getMetrics().DrawArrays++;
+    }
+
+    inline void drawArraysInstanced(GLenum mode, GLint first, GLsizei count, GLsizei primcount)
+    {
+        // TODO : Add proper ifdef protection for non GL 3.3 machines
+        glDrawArraysInstancedARB(mode, first, count, primcount);
+        getMetrics().DrawArraysInstanced++;
+    }
 
 	inline void drawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid * indices)
 	{
