@@ -8,6 +8,7 @@
 # include <OpenGL/gl.h>
 # include <OpenGL/glu.h>
 # include <Glut/glut.h>
+//# include <GL/freeglut.h>
 # include <OpenCL/opencl.h>
 #endif
 
