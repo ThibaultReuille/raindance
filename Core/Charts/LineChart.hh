@@ -20,11 +20,11 @@ public:
         Graph()
         {
             m_Shader = ResourceManager::getInstance().loadShader("LineChart_Graph",
-                    Resources_Shaders_Charts_LineChartGraph_vert, sizeof(Resources_Shaders_Charts_LineChartGraph_vert),
-                    Resources_Shaders_Charts_LineChartGraph_frag, sizeof(Resources_Shaders_Charts_LineChartGraph_frag));
+                    Assets_Shaders_Charts_LineChartGraph_vert, sizeof(Assets_Shaders_Charts_LineChartGraph_vert),
+                    Assets_Shaders_Charts_LineChartGraph_frag, sizeof(Assets_Shaders_Charts_LineChartGraph_frag));
             // m_Shader->dump();
             m_Icon = new Icon();
-            m_Icon->load("chart-disk", Resources_Textures_chart_disk_png, sizeof(Resources_Textures_chart_disk_png));
+            m_Icon->load("chart-disk", Assets_Textures_chart_disk_png, sizeof(Assets_Textures_chart_disk_png));
             m_Dirty = true;
         }
 
@@ -108,8 +108,8 @@ public:
     : m_XLimits(xlimits), m_YLimits(ylimits)
     {
         m_Shader = ResourceManager::getInstance().loadShader("LineChart_Background",
-                Resources_Shaders_Charts_LineChartBackground_vert, sizeof(Resources_Shaders_Charts_LineChartBackground_vert),
-                Resources_Shaders_Charts_LineChartBackground_frag, sizeof(Resources_Shaders_Charts_LineChartBackground_frag));
+                Assets_Shaders_Charts_LineChartBackground_vert, sizeof(Assets_Shaders_Charts_LineChartBackground_vert),
+                Assets_Shaders_Charts_LineChartBackground_frag, sizeof(Assets_Shaders_Charts_LineChartBackground_frag));
         // m_Shader->dump();
 
         m_BackgroundQuad = new Quad();

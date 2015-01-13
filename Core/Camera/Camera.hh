@@ -1,14 +1,14 @@
  #pragma once
  
- #include <raindance/Core/Headers.hh>
- #include <raindance/Core/Intersection.hh>
- #include <raindance/Core/Controller.hh>
- #include <raindance/Core/Camera/Frustrum.hh>
+#include <raindance/Core/Headers.hh>
+#include <raindance/Core/Intersection.hh>
+#include <raindance/Core/Camera/Frustrum.hh>
+#include <raindance/Core/GUI/Viewport.hh>
  
- class Camera
- {
- public:
- 	enum ProjectionMode
+class Camera
+{
+public:
+	enum ProjectionMode
  	{
  		PERSPECTIVE,
  		ORTHOGRAPHIC
@@ -152,6 +152,7 @@
  		return Ray(m_Position, glm::normalize(pos - m_Position));
  	}
  
+ 	// TODO : Deprecate this, remove ASAP
  	void reshape(int width, int height)
  	{
  		m_Width = width;
@@ -159,6 +160,25 @@
  		m_Ratio = (float) width / (float) height;
  
  		glViewport(0, 0, (GLint)m_Width, (GLint)m_Height);
+ 
+ 		switch(m_ProjectionMode)
+ 		{
+ 		case PERSPECTIVE:
+ 			this->setPerspectiveProjection(60.0f, m_Ratio, 0.1f, 1024.0f);
+ 			break;
+ 		case ORTHOGRAPHIC:
+ 			this->setOrthographicProjection(m_Left, m_Right, m_Bottom, m_Top, m_NearVal, m_FarVal);
+ 			break;
+ 		};
+ 	}
+
+ 	void reshape(const Viewport& viewport)
+ 	{
+ 		m_Width = (int)viewport.getDimension()[0];
+ 		m_Height = (int)viewport.getDimension()[1];
+ 		m_Ratio = viewport.getDimension()[0] / viewport.getDimension()[1];
+ 
+ 		glViewport(0, 0, viewport.getFramebuffer().Width, viewport.getFramebuffer().Height);
  
  		switch(m_ProjectionMode)
  		{
@@ -180,12 +200,12 @@
  
  	inline ProjectionMode mode() const { return m_ProjectionMode; }
  
- private:
+private:
  	int m_Height;
  	int m_Width;
  	float m_Ratio;
  	ProjectionMode m_ProjectionMode;
- 
+
  	glm::vec3 m_Position;
  	glm::quat m_Orientation;
  	glm::mat4 m_View;
@@ -208,4 +228,4 @@
  	float m_Top;
  	float m_NearVal;
  	float m_FarVal;
- };
+};

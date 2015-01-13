@@ -7,7 +7,6 @@
 #include <raindance/Core/Geometry.hh>
 #include <raindance/Core/Log.hh>
 #include <raindance/Core/Camera/Camera.hh>
-#include <raindance/Core/GUI/View.hh>
 
 class Context
 {
@@ -30,9 +29,6 @@ private:
 	MessageQueue m_MessageQueue;
 	Sequencer m_Sequencer;
 	Geometry m_Geometry;
-
-	std::vector<View*> m_Views;
-
 	Camera* m_Camera;
 };
 

@@ -9,6 +9,12 @@ namespace GLUT
 	{
 	public:
 	    virtual ~IContext() {}
+		
+		virtual void create(int argc, char** argv)
+		{
+        	glutInit(&argc, argv);
+        	GLUT::setContext(this);
+		}
 
 		virtual void draw() = 0;
 
@@ -17,6 +23,12 @@ namespace GLUT
 	        (void) width;
 	        (void) height;
 	    }
+
+		virtual void run()
+		{
+	       	GLUT::setCallbacks();
+			glutMainLoop();
+		}
 
 	    virtual void idle()
 	    {

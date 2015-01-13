@@ -9,8 +9,8 @@ public:
     SliderWidget(const char* name, IWidget* parent, glm::vec3 position, glm::vec2 dimension)
     : IWidget(name, parent, position, dimension)
     {
-        m_Shader = ResourceManager::getInstance().loadShader("slider", Resources_Shaders_Widgets_slider_vert, sizeof(Resources_Shaders_Widgets_slider_vert),
-                                                                       Resources_Shaders_Widgets_slider_frag, sizeof(Resources_Shaders_Widgets_slider_frag));
+        m_Shader = ResourceManager::getInstance().loadShader("slider", Assets_Shaders_Widgets_slider_vert, sizeof(Assets_Shaders_Widgets_slider_vert),
+                                                                       Assets_Shaders_Widgets_slider_frag, sizeof(Assets_Shaders_Widgets_slider_frag));
         // m_Shader->dump();
 
         value(0.5f);
@@ -49,11 +49,10 @@ public:
         context->geometry().drawElements(GL_TRIANGLES, sizeof(triangles_indices) / sizeof(short int), GL_UNSIGNED_SHORT, triangles_indices);
         context->geometry().unbind(m_VertexBuffer);
     }
-    virtual void onMouseClick(MessageQueue& messages, int x, int y)
+    
+    void onMouseClick(MessageQueue& messages, const glm::vec2& pos) override
     {
-        (void) y;
-
-        value(((float) x - this->position().x) / this->dimension().x);
+        value((pos.x - this->position().x) / this->dimension().x);
         messages.push(static_cast<IMessage*>(new WidgetMessage(m_Name.c_str(), "update")));
     }
 

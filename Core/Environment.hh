@@ -10,8 +10,8 @@ public:
 	{
 		m_Texture = NULL;
 		m_Sphere = new SphereMesh(1000.0f, 20, 20);
-		m_Shader = ResourceManager::getInstance().loadShader("environment", Resources_Shaders_environment_vert, sizeof(Resources_Shaders_environment_vert),
-		                                                                    Resources_Shaders_environment_frag, sizeof(Resources_Shaders_environment_frag));
+		m_Shader = ResourceManager::getInstance().loadShader("environment", Assets_Shaders_environment_vert, sizeof(Assets_Shaders_environment_vert),
+		                                                                    Assets_Shaders_environment_frag, sizeof(Assets_Shaders_environment_frag));
 	}
 
 	~EnvironmentSphere()

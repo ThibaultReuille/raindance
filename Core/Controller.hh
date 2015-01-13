@@ -1,80 +1,77 @@
 #pragma once
 
 #include <raindance/Core/Headers.hh>
+#include <raindance/Core/GLFW.hh>
+#include <raindance/Core/Mouse.hh>
 
-class Controller
+class Controller : public GLFW::Events
 {
 public:
+
 	enum KeyEvent
 	{
-		KEY_UP,
-		KEY_DOWN
+		KEY_DOWN = 0,
+		KEY_UP = 1
 	};
 
 	Controller()
 	{
-		clock.reset();
-
-		m_MouseDelay = 250;
-		m_MouseLeftDownCount = 0;
-		m_LastMouseLeftDownTime = 0;
 	}
 
 	virtual ~Controller()
 	{
 	}
 
-	virtual void idle() = 0;
-
-	virtual void reshape(int width, int height) = 0;
-
-	virtual void onKeyboard(unsigned char key, Controller::KeyEvent event) = 0;
-
-	virtual void onSpecial(int key, Controller::KeyEvent event) = 0;
-
-	virtual void mouse(int button, int state, int x, int y)
+	virtual void idle()
 	{
-		if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-		{
-			m_MousePosition[0] = x;
-			m_MousePosition[1] = y;
-			this->onMouseDown(x, y);
+	};
 
-			auto time = clock.milliseconds();
-			m_MouseLeftDownCount = time - m_LastMouseLeftDownTime > m_MouseDelay ? 1 : m_MouseLeftDownCount + 1;
-			m_LastMouseLeftDownTime = clock.milliseconds();
-		}
-		else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
-		{
-			Timecode time = clock.milliseconds();
-			if (time - m_LastMouseLeftDownTime < m_MouseDelay)
+	// ---- Mouse Events ----
+
+	void onCursorPos(double xpos, double ypos) override
+	{
+		m_Mouse.onCursorPos(xpos, ypos);
+
+		if (m_Mouse.button() == 0 /* LEFT */ && m_Mouse.action() == 1 /* DOWN */)
+			this->onMouseMove(m_Mouse.position(), m_Mouse.delta());
+	}
+
+    void onMouseButton(int button, int action, int mods) override
+    {
+    	m_Mouse.onMouseButton(button, action, mods);
+
+    	if (m_Mouse.button() == 0 /* LEFT */)
+    	{
+    		if (m_Mouse.action() == 1 /* DOWN */)
+    			this->onMouseDown(m_Mouse.position());
+    		else if (m_Mouse.action() == 0 /* UP */ && m_Mouse.released())
 			{
-				if (m_MouseLeftDownCount == 1)
-					this->onMouseClick(x, y);
-				else if (m_MouseLeftDownCount == 2)
-					this->onMouseDoubleClick(x, y);
-				else if (m_MouseLeftDownCount == 3)
-					this->onMouseTripleClick(x, y);
+				if (m_Mouse.clicks() == 1)
+					this->onMouseClick(m_Mouse.position());
+				else if (m_Mouse.clicks() == 2)
+					this->onMouseDoubleClick(m_Mouse.position());
+				else if (m_Mouse.clicks() == 3)
+					this->onMouseTripleClick(m_Mouse.position());
 			}
-		}
-	}
+    	}
+    }
 
-	virtual void motion(int x, int y)
-	{
-		this->onMouseMove(x, y, x - m_MousePosition[0], y - m_MousePosition[1]);
-	}
+	virtual void onMouseDown(const glm::vec2& pos)
+	{ LOG("[CONTROLLER] onMouseDown(%f, %f)\n", pos.x, pos.y); }
 
-	virtual void onMouseDown(int x, int y) = 0;
-	virtual void onMouseClick(int x, int y) = 0;
-	virtual void onMouseDoubleClick(int x, int y) = 0;
-	virtual void onMouseTripleClick(int x, int y) = 0;
-	virtual void onMouseMove(int x, int y, int dx, int dy) = 0;
+	virtual void onMouseClick(const glm::vec2& pos)
+	{ LOG("[CONTROLLER] onMouseClick(%f, %f)\n", pos.x, pos.y); }
+
+	virtual void onMouseDoubleClick(const glm::vec2& pos)
+	{ LOG("[CONTROLLER] onMouseDoubleClick(%f, %f)\n", pos.x, pos.y); };
+
+	virtual void onMouseTripleClick(const glm::vec2& pos)
+	{ LOG("[CONTROLLER] onMouseTripleClick(%f, %f)\n", pos.x, pos.y); }
+
+	virtual void onMouseMove(const glm::vec2& pos, const glm::vec2& dpos)
+	{ LOG("[CONTROLLER] onMouseMove((%f, %f), (%f, %f)\n", pos.x, pos.y, dpos.x, dpos.y); }
 
 private:
-	Clock clock;
-	int m_MousePosition[2];
-	Timecode m_LastMouseLeftDownTime;
-	unsigned int m_MouseLeftDownCount;
-	Timecode m_MouseDelay;
+	Mouse m_Mouse;
 };
 

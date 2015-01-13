@@ -27,8 +27,8 @@ public:
         update();
 
         m_Shader = ResourceManager::getInstance().loadShader("Primitives/grid",
-                Resources_Shaders_Primitives_grid_vert, sizeof(Resources_Shaders_Primitives_grid_vert),
-                Resources_Shaders_Primitives_grid_frag, sizeof(Resources_Shaders_Primitives_grid_frag));
+                Assets_Shaders_Primitives_grid_vert, sizeof(Assets_Shaders_Primitives_grid_vert),
+                Assets_Shaders_Primitives_grid_frag, sizeof(Assets_Shaders_Primitives_grid_frag));
 
         m_Shader->dump();
     }
@@ -66,9 +66,9 @@ public:
         m_FirstUpdate = false;
     }
 
-    void draw(Context& context, const Camera& camera)
+    void draw(Context& context, Transformation& transformation, const Camera& camera)
     {
-        Transformation transformation;
+        transformation.push();
 
         transformation.translate(glm::vec3(m_Parameters.Origin, 0.0));
 
@@ -87,6 +87,8 @@ public:
         context.geometry().bind(m_VertexBuffer, *m_Shader);
         context.geometry().drawElements(GL_TRIANGLE_STRIP, m_TriangleBuffer.size() / sizeof(unsigned char), GL_UNSIGNED_BYTE, m_TriangleBuffer.ptr());
         context.geometry().unbind(m_VertexBuffer);
+
+        transformation.pop();
     }
 
     inline Parameters& parameters() { return m_Parameters; }

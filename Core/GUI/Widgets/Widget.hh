@@ -1,6 +1,8 @@
 #pragma once
 
 #include <raindance/Core/Headers.hh>
+#include <raindance/Core/Primitives/Quad.hh>
+#include <raindance/Core/Font.hh>
 
 class IWidget
 {
@@ -14,8 +16,8 @@ public:
 		m_Visible = true;
 
 		m_Shader = ResourceManager::getInstance().loadShader("shaders/widget",
-		        Resources_Shaders_Widgets_widget_vert, sizeof(Resources_Shaders_Widgets_widget_vert),
-		        Resources_Shaders_Widgets_widget_frag, sizeof(Resources_Shaders_Widgets_widget_frag));
+		        Assets_Shaders_Widgets_widget_vert, sizeof(Assets_Shaders_Widgets_widget_vert),
+		        Assets_Shaders_Widgets_widget_frag, sizeof(Assets_Shaders_Widgets_widget_frag));
 		// m_Shader->dump();
 
 		m_Quad.getVertexBuffer().mute("a_Normal", true);
@@ -25,6 +27,12 @@ public:
 	virtual ~IWidget()
 	{
 	    ResourceManager::getInstance().unload(m_Shader);
+	}
+
+	virtual void onMouseClick(MessageQueue& messages, const glm::vec2& pos)
+	{
+		(void) messages;
+		(void) pos;
 	}
 
 	virtual void draw(Context* context, glm::mat4 model, glm::mat4 view, glm::mat4 projection) = 0;
@@ -50,8 +58,6 @@ public:
         glDrawElements(GL_LINES, m_Quad.getLineBuffer().size(), GL_UNSIGNED_BYTE, m_Quad.getLineBuffer().ptr());
         context->geometry().unbind(m_Quad.getVertexBuffer());
     }
-
-	virtual void onMouseClick(MessageQueue& messages, int x, int y) = 0;
 
 	inline const std::string& name() { return m_Name; }
 	inline const glm::vec2 dimension() { return m_Dimension; }
@@ -109,7 +115,7 @@ public:
 		m_Origin = type;
 	}
 
-	~WidgetGroup()
+	virtual ~WidgetGroup()
 	{
 		std::vector<WidgetItem>::iterator it;
 		for (it = m_Widgets.begin(); it != m_Widgets.end(); ++it)
@@ -187,39 +193,27 @@ public:
 		}
 	}
 
-	virtual IWidget* pickWidget(int x, int y)
+	virtual IWidget* pickWidget(const glm::vec2& pos)
 	{
 		std::vector<WidgetItem>::iterator it;
 		for (it = m_Widgets.begin(); it != m_Widgets.end(); ++it)
 		{
-			glm::vec3 topleft = this->position() + it->Widget->position();
+			glm::vec2 topleft = glm::vec2(this->position() + it->Widget->position());
 			glm::vec2 dimension = it->Widget->dimension();
 
-			if (x > topleft.x && x < topleft.x + dimension.x &&
-				m_WindowHeight - y + dimension.y > topleft.y && m_WindowHeight - y < topleft.y)
-			{
+			if (pos.x > topleft.x && pos.x < topleft.x + dimension.x &&
+				m_WindowHeight - pos.y + dimension.y > topleft.y && m_WindowHeight - pos.y < topleft.y)
 				return it->Widget;
-			}
 		}
 
 		return NULL;
 	}
 
-	virtual void onMouseClick(MessageQueue& messages, int x, int y)
+	void onMouseClick(MessageQueue& messages, const glm::vec2& pos) override
 	{
-		std::vector<WidgetItem>::iterator it;
-		for (it = m_Widgets.begin(); it != m_Widgets.end(); ++it)
-		{
-			glm::vec3 topleft = this->position() + it->Widget->position();
-			glm::vec2 dimension = it->Widget->dimension();
-
-			if (x > topleft.x && x < topleft.x + dimension.x &&
-	           m_WindowHeight - y + dimension.y > topleft.y && m_WindowHeight - y < topleft.y)
-			{
-				it->Widget->onMouseClick(messages, x, y);
-				return;
-			}
-		}
+		auto pick = pickWidget(pos);
+		if (pick)
+			pick->onMouseClick(messages, pos);
 	}
 
 private:

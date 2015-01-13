@@ -26,8 +26,8 @@ public:
 		m_Camera2D.setOrthographicProjection(0.0f, (float)m_Width, 0.0f, (float)m_Height, 0.001f, 100.f);
 		m_Camera2D.lookAt(glm::vec3(0, 0, 10), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
-		m_Shader = ResourceManager::getInstance().loadShader("convolution", Resources_Shaders_convolution_vert, sizeof(Resources_Shaders_convolution_vert),
-																			Resources_Shaders_convolution_frag, sizeof(Resources_Shaders_convolution_frag));
+		m_Shader = ResourceManager::getInstance().loadShader("convolution", Assets_Shaders_convolution_vert, sizeof(Assets_Shaders_convolution_vert),
+																			Assets_Shaders_convolution_frag, sizeof(Assets_Shaders_convolution_frag));
 		//m_Shader->dump();
 
 		m_Buffer << glm::vec3(0, 1, 0) << glm::vec2(0, 1);

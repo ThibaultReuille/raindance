@@ -121,8 +121,8 @@ public:
         m_Cube->getVertexBuffer().mute("a_Normal", true);
 
         m_Shader = ResourceManager::getInstance().loadShader("octree:octant cube",
-                Resources_Shaders_Primitives_grid_vert, sizeof(Resources_Shaders_Primitives_grid_vert),
-                Resources_Shaders_Primitives_grid_frag, sizeof(Resources_Shaders_Primitives_grid_frag));
+                Assets_Shaders_Primitives_grid_vert, sizeof(Assets_Shaders_Primitives_grid_vert),
+                Assets_Shaders_Primitives_grid_frag, sizeof(Assets_Shaders_Primitives_grid_frag));
     }
 
     virtual ~Octree()

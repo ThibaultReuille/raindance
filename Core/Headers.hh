@@ -7,8 +7,7 @@
 # define EGL_EGLEXT_PROTOTYPES
 # include <OpenGL/gl.h>
 # include <OpenGL/glu.h>
-# include <Glut/glut.h>
-//# include <GL/freeglut.h>
+# include <GLFW/glfw3.h>
 # include <OpenCL/opencl.h>
 #endif
 
@@ -17,7 +16,7 @@
 # define EGL_EGLEXT_PROTOTYPES
 # include <GL/gl.h>
 # include <GL/glu.h>
-# include <GL/glut.h>
+# include <GLFW/glfw3.h>
 # include <CL/cl.h>
 #endif
 
@@ -25,7 +24,7 @@
 # define GL_GLEXT_PROTOTYPES
 # define EGL_EGLEXT_PROTOTYPES
 # include <GL/gl.h>
-# include <GL/glut.h>
+# include <GLFW/glfw3.h>
 #endif
 
 #if defined(_MSC_VER)
@@ -49,7 +48,7 @@
 # include <windows.h>
 
 # include <GL/glew.h>
-# include <GL/glut.h>
+# include <GLFW/glfw3.h>
 # include <CL/cl.h>
 
 #endif
@@ -121,7 +120,7 @@ const glm::vec3 COFFEE_BROWN =    glm::vec3(0.43, 0.30, 0.21);
 // ----- Packed Resources -----
 
 #include <raindance/Pack.hh>
-#include <raindance/Resources/Fonts/Fonts.hh>
+#include <raindance/Assets/Fonts/Fonts.hh>
 
 // ----- Others -----
 

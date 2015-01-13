@@ -8,11 +8,6 @@ class ICameraController : public Controller
 public:
 	virtual void bind(Context* context, Camera* camera) = 0;
 	virtual void updateCamera() = 0;
-	virtual void onMouseClick(int x, int y) { (void) x; (void) y; }
-	virtual void onMouseDoubleClick(int x, int y) { (void) x; (void) y; }
-	virtual void onMouseTripleClick(int x, int y) { (void) x; (void) y; }
-	virtual void idle() {}
-	virtual void reshape(int width, int height) = 0;
 };
 
 class SphericalCameraController : public ICameraController
@@ -35,15 +30,11 @@ public:
 		updateCamera();
 	}
 
-	inline void setTarget(const glm::vec3& target) { m_Target = target; }
-
-	inline void setRadius(const float radius) { m_Radius = radius; }
-
 	virtual void updateCamera()
 	{
-		Timecode time = m_Context->clock().milliseconds();
-
-		float dt = (float)(time - m_LastTime) / 1000.0f;
+		float time = m_Context->clock().seconds();
+		float dt = time - m_LastTime;
+		m_LastTime = time;
 
 		m_Angles[0] += m_Acceleration.x * dt;
 		m_Angles[1] += m_Acceleration.y * dt;
@@ -54,8 +45,10 @@ public:
 			m_Radius = c_min_radius;
 
 		m_Angles[0] = fmod(m_Angles[0], 2 * M_PI);
-		if (m_Angles[1] >= M_PI) { m_Angles[1] = M_PI - 0.001; }
-		if (m_Angles[1] <= M_PI / 10) { m_Angles[1] = M_PI / 10 + 0.001; }
+		if (m_Angles[1] >= M_PI)
+			m_Angles[1] = M_PI - 0.001;
+		if (m_Angles[1] <= M_PI / 10) 
+			m_Angles[1] = M_PI / 10 + 0.001;
 
 		m_Camera->lookAt(
 			glm::vec3(
@@ -64,49 +57,52 @@ public:
 				m_Target.z + m_Radius * sin(m_Angles[1]) * sin(m_Angles[0])),
 			m_Target,
 			glm::vec3(0, 1, 0));
-
-		m_LastTime = time;
 	}
 
-	virtual void onSpecial(int key, Controller::KeyEvent event)
-	{
-		if (key == GLUT_KEY_LEFT)
-			m_Acceleration.x = (event == Controller::KEY_DOWN ?  -1.0f : 0.0f);
-		else if (key == GLUT_KEY_RIGHT)
-			m_Acceleration.x = (event == Controller::KEY_DOWN ?   1.0f : 0.0f);
-		else if (key == GLUT_KEY_UP)
-			m_Acceleration.z = (event == Controller::KEY_DOWN ? -20.0f : 0.0f);
-		else if (key == GLUT_KEY_DOWN)
-			m_Acceleration.z = (event == Controller::KEY_DOWN ?  20.0f : 0.0f);
-	}
-	virtual void reshape(int width, int height)
+	void onWindowSize(int width, int height) override
 	{
 		m_Camera->reshape(width, height);
 	}
-	virtual void onKeyboard(unsigned char key, Controller::KeyEvent event)
-	{
-		(void) key;
 
-		if (event == Controller::KEY_DOWN)
-		{
-		}
-		else if (event == Controller::KEY_UP)
-		{
-		}
-	}
-	virtual void onMouseDown(int x, int y)
+	void onKey(int key, int scancode, int action, int mods) override
 	{
-		(void) x;
-		(void) y;
+		(void) scancode;
+		(void) mods;
+
+		bool isPressOrRepeat = action == GLFW_PRESS || action == GLFW_REPEAT;
+
+		if (key == GLFW_KEY_LEFT)
+			m_Acceleration.x = isPressOrRepeat ?  -1.0f : 0.0f;
+		else if (key == GLFW_KEY_RIGHT)
+			m_Acceleration.x = isPressOrRepeat ?   1.0f : 0.0f;
+		else if (key == GLFW_KEY_UP)
+			m_Acceleration.z = isPressOrRepeat ? -20.0f : 0.0f;
+		else if (key == GLFW_KEY_DOWN)
+			m_Acceleration.z = isPressOrRepeat ?  20.0f : 0.0f;
+	}
+	
+	void onScroll(double xoffset, double yoffset) override
+	{
+		(void) xoffset;
+		m_Acceleration.z = yoffset;
+	}
+
+	void onMouseDown(const glm::vec2& pos) override
+	{
+		m_LastDownPosition = pos;
+
 		m_AnglesCopy[0] = m_Angles[0];
 		m_AnglesCopy[1] = m_Angles[1];
 	}
-	virtual void onMouseMove(int x, int y, int dx, int dy)
+
+	void onMouseMove(const glm::vec2& pos, const glm::vec2& dpos) override
 	{
-		(void) x;
-		(void) y;
-		m_Angles[0] = m_AnglesCopy[0] + (float) dx / 50.0;
-		m_Angles[1] = m_AnglesCopy[1] + (float) dy / 50.0;
+		(void) dpos;
+
+		glm::vec2 diff = pos - m_LastDownPosition;
+
+		m_Angles[0] = m_AnglesCopy[0] + diff.x / 50.0;
+		m_Angles[1] = m_AnglesCopy[1] + diff.y / 50.0;
 	}
 
 	void playZoomSequence(glm::vec3 newTarget, float newRadius, unsigned int time)
@@ -128,13 +124,19 @@ public:
 		m_Context->sequencer().track("animation")->insert(new FloatSequence(&m_Angles[1], newAngle1, time),  Track::Event::START);
 	}
 
+	inline void setTarget(const glm::vec3& target) { m_Target = target; }
+
+	inline void setRadius(const float radius) { m_Radius = radius; }
+
 protected:
 	Camera* m_Camera;
 	Context* m_Context;
-	Timecode m_LastTime;
+	float m_LastTime;
 
 	GLfloat m_Angles[2];
 	GLfloat m_AnglesCopy[2];
+	glm::vec2 m_LastDownPosition;
+
 	GLfloat m_Radius;
 	glm::vec3 m_Target;
 	glm::vec3 m_Acceleration;
@@ -148,13 +150,11 @@ public:
 	    m_Context = context;
 		m_Camera = camera;
 
-		m_LastDx = 0;
-		m_LastDy = 0;
-
 		m_LastTime = m_Context->clock().milliseconds();
 
 		updateCamera();
 	}
+	
 	virtual void updateCamera()
 	{
 		Timecode time = m_Context->clock().milliseconds();
@@ -164,44 +164,54 @@ public:
 		m_Camera->move(m_Acceleration * dt);
 		m_LastTime = time;
 	}
-	virtual void reshape(int width, int height)
+
+	void onWindowSize(int width, int height) override
 	{
 		m_Camera->reshape(width, height);
 	}
-	virtual void onKeyboard(unsigned char key, Controller::KeyEvent event)
+	
+	void onKey(int key, int scancode, int action, int mods) override
 	{
-		if (event == Controller::KEY_DOWN)
-		{
-			if (key == ' ')
-				m_Acceleration = glm::vec3(0, 0, 0);
-		}
+		(void) scancode;
+		(void) mods;
+
+		bool isPressOrRepeat = action == GLFW_PRESS || action == GLFW_REPEAT;
+
+		if (isPressOrRepeat && key == GLFW_KEY_SPACE)
+			m_Acceleration = glm::vec3(0, 0, 0);
+		else if (key == GLFW_KEY_UP)
+			m_Acceleration.z = isPressOrRepeat ?  20.0 : 0.0;
+		else if (key == GLFW_KEY_DOWN)
+			m_Acceleration.z = isPressOrRepeat ? -20.0 : 0.0;
+		else if (key == GLFW_KEY_RIGHT)
+			m_Acceleration.x = isPressOrRepeat ?  20.0 : 0.0;
+		else if (key == GLFW_KEY_LEFT)
+			m_Acceleration.x = isPressOrRepeat ? -20.0 : 0.0;
 	}
-	virtual void onSpecial(int key, Controller::KeyEvent event)
+
+	void onScroll(double xoffset, double yoffset) override
 	{
-		if (key == GLUT_KEY_UP)
-			m_Acceleration.z = (event == KEY_DOWN ?  20.0 : 0.0);
-		else if (key == GLUT_KEY_DOWN)
-			m_Acceleration.z = (event == KEY_DOWN ? -20.0 : 0.0);
-		else if (key == GLUT_KEY_RIGHT)
-			m_Acceleration.x = (event == KEY_DOWN ?  20.0 : 0.0);
-		else if (key == GLUT_KEY_LEFT)
-			m_Acceleration.x = (event == KEY_DOWN ? -20.0 : 0.0);
+		(void) xoffset;
+		m_Acceleration.z = yoffset;
 	}
-	virtual void onMouseDown(int x, int y)
+
+	void onMouseDown(const glm::vec2& pos) override
 	{
-		(void) x;
-		(void) y;
-		m_LastDx = 0;
-		m_LastDy = 0;
+		m_LastDownPosition = pos;
+		m_LastDiff = glm::vec2(0, 0);
 	}
-	virtual void onMouseMove(int x, int y, int dx, int dy)
+
+	void onMouseMove(const glm::vec2& pos, const glm::vec2& dpos) override
 	{
-		(void) x;
-		(void) y;
-		m_Camera->rotate((float)(dx - m_LastDx) / 2, (float)(dy - m_LastDy) / 2, 0);
-		m_LastDx = dx;
-		m_LastDy = dy;
+		(void) dpos;
+
+		glm::vec2 diff = pos - m_LastDownPosition;
+		glm::vec2 deltaDiff = diff - m_LastDiff;
+
+		m_Camera->rotate(deltaDiff.x / 2, deltaDiff.y / 2, 0);
+		m_LastDiff = diff;
 	}
+
 	void sequence(glm::vec3 newTarget, float newRadius, unsigned int time)
 	{
 	    m_Context->sequencer().track("animation")->insert(new VertexSequence(m_Camera->getPositionPtr(), newTarget - newRadius * m_Camera->front(), time), Track::Event::START);
@@ -212,7 +222,8 @@ protected:
 	Camera* m_Camera;
 
 	Timecode m_LastTime;
-	int m_LastDx;
-	int m_LastDy;
+	glm::vec2 m_LastDelta;
+	glm::vec2 m_LastDownPosition;
+	glm::vec2 m_LastDiff;
 	glm::vec3 m_Acceleration;
 };

@@ -2,6 +2,7 @@
 
 #include <raindance/Core/Headers.hh>
 #include <raindance/Core/GUI/Widgets/Widget.hh>
+#include <raindance/Core/Text.hh>
 
 class TextWidget : public IWidget
 {
@@ -29,13 +30,6 @@ public:
         transformation.scale(glm::vec3(fontRatio, fontRatio, 1.0));
 
         m_Text->draw(context, projection * view * transformation.state());
-    }
-
-    virtual void onMouseClick(MessageQueue& messages, int x, int y)
-    {
-        (void) messages;
-        (void) x;
-        (void) y;
     }
 
     inline Text& text() { return *m_Text; }

@@ -21,13 +21,13 @@ public:
 	Polyline()
 	{
 		 m_LineStripShader = ResourceManager::getInstance().loadShader("shaders/primitives/polyline",
-            Resources_Shaders_Primitives_polyline_vert, sizeof(Resources_Shaders_Primitives_polyline_vert),
-            Resources_Shaders_Primitives_polyline_frag, sizeof(Resources_Shaders_Primitives_polyline_frag));
+            Assets_Shaders_Primitives_polyline_vert, sizeof(Assets_Shaders_Primitives_polyline_vert),
+            Assets_Shaders_Primitives_polyline_frag, sizeof(Assets_Shaders_Primitives_polyline_frag));
         m_LineStripShader->dump();
 
 		m_WideLineShader = ResourceManager::getInstance().loadShader("shaders/primitives/wideline",
-            Resources_Shaders_Primitives_wideline_vert, sizeof(Resources_Shaders_Primitives_wideline_vert),
-            Resources_Shaders_Primitives_wideline_frag, sizeof(Resources_Shaders_Primitives_wideline_frag));
+            Assets_Shaders_Primitives_wideline_vert, sizeof(Assets_Shaders_Primitives_wideline_vert),
+            Assets_Shaders_Primitives_wideline_frag, sizeof(Assets_Shaders_Primitives_wideline_frag));
         // m_WideLineShader->dump();
 
 		m_Mode = WIDE_LINES;

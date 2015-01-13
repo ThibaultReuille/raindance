@@ -8,8 +8,8 @@ public:
 	Box()
 	{
 		m_Shader = ResourceManager::getInstance().loadShader("Primitives/box",
-		        Resources_Shaders_Primitives_box_vert, sizeof(Resources_Shaders_Primitives_box_vert),
-		        Resources_Shaders_Primitives_box_frag, sizeof(Resources_Shaders_Primitives_box_frag));
+		        Assets_Shaders_Primitives_box_vert, sizeof(Assets_Shaders_Primitives_box_vert),
+		        Assets_Shaders_Primitives_box_frag, sizeof(Assets_Shaders_Primitives_box_frag));
 		// m_Shader->dump();
 
 		m_VertexBuffer.disable(Buffer::GPU_SYNC);

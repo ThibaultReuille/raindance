@@ -12,8 +12,8 @@ public:
 		m_Shader = ResourceManager::getInstance().loadShader
 		(
 			"monkey",
-			BlenderMonkey::Resources_monkey_vert, sizeof(BlenderMonkey::Resources_monkey_vert),
-			BlenderMonkey::Resources_monkey_frag, sizeof(BlenderMonkey::Resources_monkey_frag)
+			BlenderMonkey::Assets_monkey_vert, sizeof(BlenderMonkey::Assets_monkey_vert),
+			BlenderMonkey::Assets_monkey_frag, sizeof(BlenderMonkey::Assets_monkey_frag)
 		);
 		m_Shader->dump();
 

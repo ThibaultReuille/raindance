@@ -2,54 +2,59 @@
 
 #include <raindance/Core/Headers.hh>
 #include <raindance/Core/Context.hh>
-#include <raindance/Core/Manager.hh>
-#include <raindance/Core/GLUT.hh>
 #include <raindance/Core/GUI/WindowManager.hh>
 
-class RainDance : public GLUT::IContext
+class Raindance
 {
 public:
-	RainDance()
+	Raindance(int argc, char** argv)
 	{
+		GLFW::create(argc, argv);
+
+		m_Context = new Context();
 	}
 
-	virtual ~RainDance()
+	virtual ~Raindance()
 	{
+		GLFW::destroy();
 	}
 
-	virtual void create(int argc, char** argv)
+	virtual void add(Window* window)
 	{
-        glutInit(&argc, argv);
-        GLUT::setContext(this);
+		GLFW::setCallbacks(window);
+		auto id = m_WindowManager.add(window);
+		m_WindowManager.bind(id);
 	}
 
-	virtual void initialize()
-	{
-	}
-
-	virtual void run()
-	{
-        GLUT::setCallbacks();
-		glutMainLoop();
-	}
-
-	virtual void postRedisplay()
-	{
-        for (auto element : m_WindowManager.elements())
-        {
-            glutSetWindow(element.second->getGlutID());
-            glutPostRedisplay();
-        }
-	}
-
-	virtual void destroy()
+    virtual void run()
     {
+    	m_WindowManager.active()->initialize(m_Context);
+
+    	while (m_WindowManager.active()->state() == Window::ALIVE)
+    	{
+    		Geometry::beginFrame();
+
+	        m_WindowManager.active()->before(m_Context);
+	        m_WindowManager.active()->draw(m_Context);
+	        m_WindowManager.active()->after(m_Context);
+	   		 	
+   		 	Geometry::endFrame();
+
+	    	idle();
+
+    		checkGLErrors();
+    	}
     }
 
-	inline Context& context() { return m_Context; }
+	virtual void idle()
+	{
+		windows().active()->idle(m_Context);
+	}
+
+	inline WindowManager& windows() { return m_WindowManager; }
 
 protected:
-	Context m_Context;
-	Manager<Window> m_WindowManager;
+	Context* m_Context;
+	WindowManager m_WindowManager;
 };
 

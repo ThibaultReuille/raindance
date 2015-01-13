@@ -1,18 +1,63 @@
 #pragma once
 
 #include <raindance/Core/Headers.hh>
-#include <raindance/Core/GUI/Canvas.hh>
-#include <raindance/Core/GUI/View.hh>
+#include <raindance/Core/Context.hh>
+#include <raindance/Core/GLFW.hh>
 
-class Window
+class Window : public GLFW::Window
+{
+public:
+
+    Window(const char* title, int width, int height)
+    : GLFW::Window(title, width, height)
+    {
+        m_Title = std::string(title);
+        m_FullScreen = false;
+        m_ClearColor = glm::vec4(0.0, 0.0, 0.0, 0.0);
+    }
+
+    virtual ~Window() {}
+
+    virtual void initialize(Context* context)
+    {
+        m_Context = context;
+
+        auto viewport = getViewport();
+        this->onSetFramebufferSize(viewport.getFramebuffer().Width, viewport.getFramebuffer().Height);
+        this->onWindowSize((int)viewport.getDimension()[0], (int)viewport.getDimension()[1]);
+
+        glViewport(0, 0, viewport.getFramebuffer().Width, viewport.getFramebuffer().Height);
+    }
+
+    virtual void clear()
+    {
+        glClearColor(m_ClearColor.r, m_ClearColor.g, m_ClearColor.b, m_ClearColor.a);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    }
+
+    virtual void draw(Context* context) = 0;
+
+    virtual void idle(Context* context) = 0;
+
+    inline const std::string& title() { return m_Title; }
+
+protected:
+    Context* m_Context;
+
+    std::string m_Title;
+    bool m_FullScreen;
+
+    glm::vec4 m_ClearColor;
+};
+
+/* TODO : Reimplement Canvas + HD screenshots
+
+class Window : public IWindow
 {
 public:
 	Window(const char* title, const int width, const int height)
+    : IWindow(title, width, height)
 	{
-		m_Title = std::string(title);
-		m_Width = width;
-		m_Height = height;
-		m_FullScreen = false;
 		m_ScreenshotFactor = 0;
 		m_ScreenshotFilename = std::string("hd-shot.tga");
         m_ClearColor = glm::vec4(0.0, 0.0, 0.0, 0.0);
@@ -25,7 +70,7 @@ public:
             GLenum err = glewInit();
             if (GLEW_OK != err)
             {
-                /* Problem: glewInit failed, something is seriously wrong. */
+                // Problem: glewInit failed, something is seriously wrong.
                 fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
             }
             LOG("[WINDOW] Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
@@ -106,9 +151,6 @@ public:
 #endif
     }
 
-    inline const std::string& title() { return m_Title; }
-    inline int width() { return m_Width; }
-    inline int height() { return m_Height; }
     inline Canvas* canvas() { return m_Canvas; }
     inline void screenshot(const std::string& filename, int factor = 1)
     {
@@ -122,10 +164,6 @@ protected:
 
 private:
     int m_GlutID;
-    std::string m_Title;
-    int m_Width;
-    int m_Height;
-    bool m_FullScreen;
 
     int m_ScreenshotFactor;
     std::string m_ScreenshotFilename;
@@ -134,4 +172,5 @@ private:
     TextureVector m_TextureVector;
     glm::vec4 m_ClearColor;
 };
+*/
 

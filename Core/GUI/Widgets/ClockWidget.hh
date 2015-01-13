@@ -14,7 +14,7 @@ public:
         m_Clock = NULL;
 
         m_Icon = new Icon(glm::vec2(1.0, 1.0), glm::vec2(0.5, -0.5));
-        m_Icon->load("clock widget", Resources_Textures_clock_png, sizeof(Resources_Textures_clock_png));
+        m_Icon->load("clock widget", Assets_Textures_clock_png, sizeof(Assets_Textures_clock_png));
 
         m_TextPosition = glm::vec3(1.5 * m_Dimension.x, 3.0, 0);
 
@@ -54,13 +54,6 @@ public:
         transformation.pop();
 
         update();
-    }
-
-    virtual void onMouseClick(MessageQueue& messages, int x, int y)
-    {
-        (void) x;
-        (void) y;
-        (void) messages;
     }
 
     void update()

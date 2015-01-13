@@ -24,8 +24,8 @@ public:
     HeightMap(unsigned long width, unsigned long height)
     {
         m_Shader = ResourceManager::getInstance().loadShader("HeightMap",
-                Resources_Shaders_Charts_HeightMap_vert, sizeof(Resources_Shaders_Charts_HeightMap_vert),
-                Resources_Shaders_Charts_HeightMap_frag, sizeof(Resources_Shaders_Charts_HeightMap_frag));
+                Assets_Shaders_Charts_HeightMap_vert, sizeof(Assets_Shaders_Charts_HeightMap_vert),
+                Assets_Shaders_Charts_HeightMap_frag, sizeof(Assets_Shaders_Charts_HeightMap_frag));
         // m_Shader->dump();
 
         m_Width = width;

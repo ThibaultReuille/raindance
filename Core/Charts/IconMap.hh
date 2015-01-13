@@ -22,22 +22,22 @@ public:
         m_Height = height;
 
         m_Icon = new Icon(glm::vec2(1.0, 1.0), glm::vec2(0.5, -0.5));
-        m_Icon->load("disk",        Resources_Textures_Shapes_disk_png,         sizeof(Resources_Textures_Shapes_disk_png));
-        m_Icon->load("square",      Resources_Textures_Shapes_square_png,       sizeof(Resources_Textures_Shapes_square_png));
-        m_Icon->load("triangle",    Resources_Textures_Shapes_triangle_png,     sizeof(Resources_Textures_Shapes_triangle_png));
-        m_Icon->load("losange",     Resources_Textures_Shapes_losange_png,      sizeof(Resources_Textures_Shapes_losange_png));
-        m_Icon->load("pentagon",    Resources_Textures_Shapes_pentagon_png,     sizeof(Resources_Textures_Shapes_pentagon_png));
-        m_Icon->load("hexagon",     Resources_Textures_Shapes_hexagon_png,      sizeof(Resources_Textures_Shapes_hexagon_png));
-        m_Icon->load("octagon",     Resources_Textures_Shapes_octagon_png,      sizeof(Resources_Textures_Shapes_octagon_png));
-        m_Icon->load("star",        Resources_Textures_Shapes_star_png,         sizeof(Resources_Textures_Shapes_star_png));
-        m_Icon->load("heart",       Resources_Textures_Shapes_heart_png,        sizeof(Resources_Textures_Shapes_heart_png));
-        m_Icon->load("cross",       Resources_Textures_Shapes_cross_png,        sizeof(Resources_Textures_Shapes_cross_png));
-        m_Icon->load("cloud",       Resources_Textures_Shapes_cloud_png,        sizeof(Resources_Textures_Shapes_cloud_png));
-        m_Icon->load("semicircle",  Resources_Textures_Shapes_semicircle_png,   sizeof(Resources_Textures_Shapes_semicircle_png));
-        m_Icon->load("patch",       Resources_Textures_Shapes_patch_png,        sizeof(Resources_Textures_Shapes_patch_png));
-        m_Icon->load("house",       Resources_Textures_Shapes_house_png,        sizeof(Resources_Textures_Shapes_house_png));
-        m_Icon->load("triangle1",   Resources_Textures_Shapes_triangle1_png,    sizeof(Resources_Textures_Shapes_triangle1_png));
-        m_Icon->load("triangle2",   Resources_Textures_Shapes_triangle2_png,    sizeof(Resources_Textures_Shapes_triangle2_png));
+        m_Icon->load("disk",        Assets_Textures_Shapes_disk_png,         sizeof(Assets_Textures_Shapes_disk_png));
+        m_Icon->load("square",      Assets_Textures_Shapes_square_png,       sizeof(Assets_Textures_Shapes_square_png));
+        m_Icon->load("triangle",    Assets_Textures_Shapes_triangle_png,     sizeof(Assets_Textures_Shapes_triangle_png));
+        m_Icon->load("losange",     Assets_Textures_Shapes_losange_png,      sizeof(Assets_Textures_Shapes_losange_png));
+        m_Icon->load("pentagon",    Assets_Textures_Shapes_pentagon_png,     sizeof(Assets_Textures_Shapes_pentagon_png));
+        m_Icon->load("hexagon",     Assets_Textures_Shapes_hexagon_png,      sizeof(Assets_Textures_Shapes_hexagon_png));
+        m_Icon->load("octagon",     Assets_Textures_Shapes_octagon_png,      sizeof(Assets_Textures_Shapes_octagon_png));
+        m_Icon->load("star",        Assets_Textures_Shapes_star_png,         sizeof(Assets_Textures_Shapes_star_png));
+        m_Icon->load("heart",       Assets_Textures_Shapes_heart_png,        sizeof(Assets_Textures_Shapes_heart_png));
+        m_Icon->load("cross",       Assets_Textures_Shapes_cross_png,        sizeof(Assets_Textures_Shapes_cross_png));
+        m_Icon->load("cloud",       Assets_Textures_Shapes_cloud_png,        sizeof(Assets_Textures_Shapes_cloud_png));
+        m_Icon->load("semicircle",  Assets_Textures_Shapes_semicircle_png,   sizeof(Assets_Textures_Shapes_semicircle_png));
+        m_Icon->load("patch",       Assets_Textures_Shapes_patch_png,        sizeof(Assets_Textures_Shapes_patch_png));
+        m_Icon->load("house",       Assets_Textures_Shapes_house_png,        sizeof(Assets_Textures_Shapes_house_png));
+        m_Icon->load("triangle1",   Assets_Textures_Shapes_triangle1_png,    sizeof(Assets_Textures_Shapes_triangle1_png));
+        m_Icon->load("triangle2",   Assets_Textures_Shapes_triangle2_png,    sizeof(Assets_Textures_Shapes_triangle2_png));
 
         m_Layouts.resize(width * height, NULL);
 

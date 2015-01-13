@@ -15,14 +15,12 @@ public:
 
 	virtual const char* name() const = 0;
 
-	virtual void reshape(int width, int height)
-	{
-	    // TODO : Reshape viewport proportionally
-	}
+	virtual void onWindowSize(int width, int height)
+	{ (void) width; (void) height; }
 
 	virtual void draw() = 0;
 
-	virtual void idle() = 0;
+	virtual void idle() {}
 
     inline void setViewport(const Viewport& viewport) { m_Viewport = viewport; }
     inline const Viewport& getViewport() const { return m_Viewport; }

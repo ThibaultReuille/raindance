@@ -10,14 +10,14 @@ public:
     TimelineWidget(const char* name, IWidget* parent, glm::vec3 position, glm::vec2 dimension)
     : IWidget(name, parent, position, dimension)
     {
-        m_Shader = ResourceManager::getInstance().loadShader("timeline", Resources_Shaders_Widgets_timeline_vert, sizeof(Resources_Shaders_Widgets_timeline_vert),
-                                                                         Resources_Shaders_Widgets_timeline_frag, sizeof(Resources_Shaders_Widgets_timeline_frag));
+        m_Shader = ResourceManager::getInstance().loadShader("timeline", Assets_Shaders_Widgets_timeline_vert, sizeof(Assets_Shaders_Widgets_timeline_vert),
+                                                                         Assets_Shaders_Widgets_timeline_frag, sizeof(Assets_Shaders_Widgets_timeline_frag));
         // m_Shader->dump();
 
         m_EventIcon = new Icon(glm::vec2(7.5, 7.5));
-        m_EventIcon->load("timeline_event_start", Resources_Textures_Shapes_square_png, sizeof(Resources_Textures_Shapes_square_png));
-        m_EventIcon->load("timeline_event_stop", Resources_Textures_Shapes_triangle_png, sizeof(Resources_Textures_Shapes_triangle_png));
-        m_EventIcon->load("timeline_event_once", Resources_Particle_ball_png, sizeof(Resources_Particle_ball_png));
+        m_EventIcon->load("timeline_event_start", Assets_Textures_Shapes_square_png, sizeof(Assets_Textures_Shapes_square_png));
+        m_EventIcon->load("timeline_event_stop", Assets_Textures_Shapes_triangle_png, sizeof(Assets_Textures_Shapes_triangle_png));
+        m_EventIcon->load("timeline_event_once", Assets_Particle_ball_png, sizeof(Assets_Particle_ball_png));
 
         m_Track = NULL;
 
@@ -151,13 +151,6 @@ public:
                 ++eit;
             }
         }
-    }
-
-    virtual void onMouseClick(MessageQueue& messages, int x, int y)
-    {
-        (void) messages;
-        (void) x;
-        (void) y;
     }
 
     inline void bindTrack(Track* track) { m_Track = track; setDirty(); }

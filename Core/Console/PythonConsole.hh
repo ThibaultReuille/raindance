@@ -3,9 +3,11 @@
 #ifdef Py_PYTHON_H
 
 #include <raindance/Core/Headers.hh>
-
-#include <Python.h>
 #include <raindance/Core/Console/Console.hh>
+
+#include <stdio.h>
+#include <unistd.h>
+#include <Python.h>
 
 class PythonConsole : public Console
 {
@@ -19,11 +21,6 @@ public:
 		m_ThreadState = NULL;
 	}
 
-	virtual ~PythonConsole()
-	{
-		Py_Finalize();
-	}
-
 	void initialize()
 	{
  		// TODO : make it generic
@@ -35,6 +32,11 @@ public:
 		char mode[] = "r";
 
 		PyRun_SimpleFile(PyFile_AsFile(PyFile_FromString(start, mode)), start);
+	}
+
+	virtual ~PythonConsole()
+	{
+		Py_Finalize();
 	}
 
 	bool execute(IScript* script)

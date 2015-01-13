@@ -90,11 +90,8 @@ public:
 		{
 		    IMessage* message = m_Messages.front();
 
-			std::list<IListener*>::iterator it;
-			for (it = m_Listeners.begin(); it != m_Listeners.end(); ++it)
-			{
-				(*it)->notify(message);
-			}
+			for (auto listener : m_Listeners)
+				listener->notify(message);
 
 			m_Messages.pop_front();
 			delete message;

@@ -9,12 +9,12 @@ public:
     CheckBoxWidget(const char* name, IWidget* parent, glm::vec3 position, glm::vec2 dimension)
     : IWidget(name, parent, position, dimension)
     {
-        m_Shader = ResourceManager::getInstance().loadShader("checkbox", Resources_Shaders_Widgets_checkbox_vert, sizeof(Resources_Shaders_Widgets_checkbox_vert),
-                                                                         Resources_Shaders_Widgets_checkbox_frag, sizeof(Resources_Shaders_Widgets_checkbox_frag));
+        m_Shader = ResourceManager::getInstance().loadShader("checkbox", Assets_Shaders_Widgets_checkbox_vert, sizeof(Assets_Shaders_Widgets_checkbox_vert),
+                                                                         Assets_Shaders_Widgets_checkbox_frag, sizeof(Assets_Shaders_Widgets_checkbox_frag));
         // m_Shader->dump();
 
         m_Icon = new Icon();
-        m_Icon->load("mark", Resources_Textures_mark_png, sizeof(Resources_Textures_mark_png));
+        m_Icon->load("mark", Assets_Textures_mark_png, sizeof(Assets_Textures_mark_png));
 
         value(false);
 
@@ -58,10 +58,10 @@ public:
             m_Icon->draw(context, projection * view * m, glm::vec4(1.0, 1.0, 1.0, 1.0), 0);
         }
     }
-    virtual void onMouseClick(MessageQueue& messages, int x, int y)
+    
+    void onMouseClick(MessageQueue& messages, const glm::vec2& pos) override
     {
-        (void) x;
-        (void) y;
+        (void) pos;
 
         value(!m_Value);
         messages.push(static_cast<IMessage*>(new WidgetMessage(m_Name.c_str(), "update")));

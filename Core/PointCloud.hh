@@ -34,14 +34,14 @@ public:
 	{
 		m_Box = new Box();
 
-		m_Shader = ResourceManager::getInstance().loadShader("pointcloud", Resources_Shaders_pointcloud_vert, sizeof(Resources_Shaders_pointcloud_vert),
-		                                                                   Resources_Shaders_pointcloud_frag, sizeof(Resources_Shaders_pointcloud_frag));
+		m_Shader = ResourceManager::getInstance().loadShader("pointcloud", Assets_Shaders_pointcloud_vert, sizeof(Assets_Shaders_pointcloud_vert),
+		                                                                   Assets_Shaders_pointcloud_frag, sizeof(Assets_Shaders_pointcloud_frag));
 
-		m_LayerTexture = ResourceManager::getInstance().loadTexture("miller-bw", Resources_Earth_miller_2048x1502_bw_jpg, sizeof(Resources_Earth_miller_2048x1502_bw_jpg));
-		m_LayerShader = ResourceManager::getInstance().loadShader("world", Resources_world_vert, sizeof(Resources_world_vert), Resources_world_frag, sizeof(Resources_world_frag));
+		m_LayerTexture = ResourceManager::getInstance().loadTexture("miller-bw", Assets_Earth_miller_2048x1502_bw_jpg, sizeof(Assets_Earth_miller_2048x1502_bw_jpg));
+		m_LayerShader = ResourceManager::getInstance().loadShader("world", Assets_world_vert, sizeof(Assets_world_vert), Assets_world_frag, sizeof(Assets_world_frag));
 
 		m_PointIcon = new Icon();
-		m_PointIcon->load("disk", Resources_Particle_ball_png, sizeof(Resources_Particle_ball_png));
+		m_PointIcon->load("disk", Assets_Particle_ball_png, sizeof(Assets_Particle_ball_png));
 
 		m_DrawMode = POINTS;
 

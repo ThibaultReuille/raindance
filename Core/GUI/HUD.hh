@@ -6,20 +6,22 @@
 
 #include <raindance/Core/GUI/Widgets/Widget.hh>
 #include <raindance/Core/GUI/Widgets/ScriptWidget.hh>
+#include <raindance/Core/GUI/Widgets/TextWidget.hh>
 
 class HUD : public Controller
 {
 public:
-	HUD()
+	HUD(const Viewport& viewport)
 	{
-		m_WindowWidth = glutGet(GLUT_WINDOW_WIDTH);
-		m_WindowHeight = glutGet(GLUT_WINDOW_HEIGHT);
+		m_WindowWidth = (int) viewport.getDimension()[0];
+		m_WindowHeight = (int) viewport.getDimension()[1];
+		LOG("[HUD] Creating HUD with %ix%i viewport\n", m_WindowWidth, m_WindowHeight);
 
 		m_Camera.setOrthographicProjection(0.0f, (float)m_WindowWidth, 0.0f, (float)m_WindowHeight, 0.001f, 100.f);
 		m_Camera.lookAt(glm::vec3(0, 0, 1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
 		m_Logo = new Icon();
-		m_Logo->load("logo", Resources_Textures_umbrella_logo_png, sizeof(Resources_Textures_umbrella_logo_png));
+		m_Logo->load("logo", Assets_Textures_umbrella_logo_png, sizeof(Assets_Textures_umbrella_logo_png));
 
 		m_WidgetFont = new Font();
 		m_WidgetDimension = glm::vec2(16, 16);
@@ -33,10 +35,10 @@ public:
 		m_Context = NULL;
 	}
 
-	~HUD()
+	virtual ~HUD()
 	{
-		delete m_Logo;
-		delete m_ScriptWidgetGroup;
+		SAFE_DELETE(m_Logo);
+		SAFE_DELETE(m_ScriptWidgetGroup);
 	}
 
 	void bind(Context* context)
@@ -53,20 +55,18 @@ public:
 		std::string caption;
 		glm::vec3 tl;
 
-		if (m_ScriptWidgetGroup != NULL)
-			delete m_ScriptWidgetGroup;
-
+		SAFE_DELETE(m_ScriptWidgetGroup);
 		m_ScriptWidgetGroup = new WidgetGroup("Scripts", WidgetGroup::TOP_RIGHT);
 
 		float fontRatio = m_WidgetDimension.y / (m_WidgetFont->getSize() * m_WidgetFont->getAscender());
 
-		std::vector<IScript*>::iterator its;
 		unsigned int count = 0;
+		std::vector<IScript*>::iterator its;
 		for (its = console->scripts_begin(); its != console->scripts_end(); ++its)
 		{
 			caption = (*its)->name();
 
-			 // NOTE : Script names starting with '#' are reserved for engine callbacks
+			// NOTE : Script names starting with '#' are reserved for engine callbacks
 			if (caption.size() > 0 && caption[0] == '#')
 				continue;
 
@@ -85,40 +85,65 @@ public:
 		}
 	}
 
-	void draw(Context* context)
+	void drawLogo(Context* context)
 	{
-		glDisable(GL_DEPTH_TEST);
-		glDisable(GL_BLEND);
-
 		Transformation transformation;
-
-		if (m_ShowMenu)
-			m_ScriptWidgetGroup->draw(m_Context, transformation.state(), m_Camera.getViewMatrix(), m_Camera.getProjectionMatrix());
 
 		transformation.translate(glm::vec3(m_WindowWidth - 64 / 2 - 10, 10 + 64 / 2, 0));
 		transformation.scale(glm::vec3(64, 64, 0));
 		m_Logo->draw(context, m_Camera.getViewProjectionMatrix() * transformation.state(), glm::vec4(1.0, 1.0, 1.0, 1.0), 0);
+	}
+
+	void draw(Context* context)
+	{
+		glDisable(GL_DEPTH_TEST);
+		glDisable(GL_BLEND);
+		
+		drawLogo(context);
+
+		if (m_ShowMenu && m_ScriptWidgetGroup)
+			m_ScriptWidgetGroup->draw(m_Context, glm::mat4(), m_Camera.getViewMatrix(), m_Camera.getProjectionMatrix());
 
 		glEnable(GL_DEPTH_TEST);
 	}
 
-	void reshape(int width, int height)
+	void reshape(const Viewport& viewport)
 	{
+		m_Camera.reshape(viewport);
+
+		if (m_ScriptWidgetGroup)
+			m_ScriptWidgetGroup->reshape(viewport.getDimension()[0], viewport.getDimension()[1]);
+	}
+
+	/*
+	void onWindowSize(int width, int height) override
+	{
+		//m_Camera.onWindowSize(width, height);
 		m_WindowWidth = width;
 		m_WindowHeight = height;
 
-		m_Camera.reshape(width, height);
-		m_Camera.setOrthographicProjection(0.0f, (float)width, 0.0f, (float)height, 0.001f, 100.f);
-		m_Camera.lookAt(glm::vec3(0, 0, 1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+		LOG("HUD onWindowSize(%i, %i)\n", width, height);
 
-		m_ScriptWidgetGroup->reshape(width, height);
+		// m_Camera.reshape(width, height);
+		// m_Camera.setOrthographicProjection(0.0f, (float)width, 0.0f, (float)height, 0.001f, 100.f);
+		// m_Camera.lookAt(glm::vec3(0, 0, 1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+
+		if (m_ScriptWidgetGroup)
+			m_ScriptWidgetGroup->reshape(width, height);
 	}
 
-	IWidget* pickWidget(int x, int y)
+	void onSetFramebufferSize(int width, int height) override
+	{
+		//m_Camera.onSetFramebufferSize(width, height);
+		// m_Camera.reshape(width, height);
+	}
+	*/
+
+	IWidget* pickWidget(const glm::vec2& pos)
 	{
 		IWidget* pick = NULL;
 
-		pick = m_ScriptWidgetGroup->pickWidget(x, y);
+		pick = m_ScriptWidgetGroup->pickWidget(pos);
 		if (pick != NULL)
 			return pick;
 
@@ -127,56 +152,28 @@ public:
 
 	IWidget* getWidgetPick() { return m_WidgetPick; }
 
-	virtual void idle()
+	void onKey(int key, int scancode, int action, int mods) override
 	{
-	}
-
-	virtual void onKeyboard(unsigned char key, Controller::KeyEvent event)
-	{
-		if (event == Controller::KEY_DOWN && key == 9) // TAB
+		(void) scancode;
+		(void) mods;
+		
+		if (action == GLFW_PRESS && key == GLFW_KEY_TAB)
 		{
 			m_ShowMenu = !m_ShowMenu;
 			return;
 		}
 	}
 
-	virtual void onSpecial(int key, Controller::KeyEvent event)
+	void onMouseDown(const glm::vec2& pos) override
 	{
-		(void) key;
-		(void) event;
+		m_WidgetPick = pickWidget(pos);
 	}
 
-	virtual void onMouseDown(int x, int y)
+	void onMouseClick(const glm::vec2& pos) override
 	{
-		(void) x;
-		(void) y;
-		m_WidgetPick = NULL;
-	}
-	virtual void onMouseClick(int x, int y)
-	{
-		m_WidgetPick = m_ScriptWidgetGroup->pickWidget(x, y);
+		m_WidgetPick = pickWidget(pos);
 		if (m_WidgetPick != NULL)
-			m_WidgetPick->onMouseClick(m_Context->messages(), x, y);
-	}
-	virtual void onMouseDoubleClick(int x, int y)
-	{
-		(void) x;
-		(void) y;
-		m_WidgetPick = NULL;
-	}
-	virtual void onMouseTripleClick(int x, int y)
-	{
-		(void) x;
-		(void) y;
-		m_WidgetPick = NULL;
-	}
-	virtual void onMouseMove(int x, int y, int dx, int dy)
-	{
-		(void) x;
-		(void) y;
-		(void) dx;
-		(void) dy;
-		m_WidgetPick = NULL;
+			m_WidgetPick->onMouseClick(m_Context->messages(), pos);
 	}
 
 private:

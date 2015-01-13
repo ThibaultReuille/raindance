@@ -11,14 +11,11 @@ class Wallpaper
 public:
     Wallpaper()
     {
-        m_Shader = ResourceManager::getInstance().loadShader("wallpaper", Resources_Shaders_wallpaper_vert, sizeof(Resources_Shaders_wallpaper_vert),
-                                                                          Resources_Shaders_wallpaper_frag, sizeof(Resources_Shaders_wallpaper_frag));
+        m_Shader = ResourceManager::getInstance().loadShader("wallpaper", Assets_Shaders_wallpaper_vert, sizeof(Assets_Shaders_wallpaper_vert),
+                                                                          Assets_Shaders_wallpaper_frag, sizeof(Assets_Shaders_wallpaper_frag));
         // m_Shader->dump();
         m_Texture = NULL;
-
         m_Quad.getVertexBuffer().mute("a_Normal", true);
-
-        update();
     }
 
     virtual ~Wallpaper()
@@ -26,9 +23,13 @@ public:
         ResourceManager::getInstance().unload(m_Shader);
     }
 
-    void setTexture(Texture* texture)
+    void resize(int width, int height)
     {
-        m_Texture = texture;
+        LOG("[WALLPAPER] resize(%i, %i)\n", width, height);
+
+        m_Dimension = glm::vec2(width, height);
+        m_Camera.setOrthographicProjection(0.0f, m_Dimension[0], 0.0f, m_Dimension[1], 0.001f, 100.f);
+        m_Camera.lookAt(glm::vec3(0, 0, 1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     }
 
     void draw(Context* context)
@@ -37,7 +38,7 @@ public:
             return;
 
         Transformation transformation;
-        transformation.scale(glm::vec3(static_cast<float>(m_WindowWidth), static_cast<float>(m_WindowHeight), 1.0f));
+        transformation.scale(glm::vec3(m_Dimension, 1.0f));
 
         m_Shader->use();
         m_Shader->uniform("u_ModelViewProjection").set(m_Camera.getViewProjectionMatrix() * transformation.state());
@@ -48,19 +49,12 @@ public:
         context->geometry().unbind(m_Quad.getVertexBuffer());
     }
 
-    void update()
-    {
-        m_WindowWidth = glutGet(GLUT_WINDOW_WIDTH);
-        m_WindowHeight = glutGet(GLUT_WINDOW_HEIGHT);
-        m_Camera.setOrthographicProjection(0.0f, static_cast<float>(m_WindowWidth), 0.0f, static_cast<float>(m_WindowHeight), 0.001f, 100.f);
-        m_Camera.lookAt(glm::vec3(0, 0, 1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
-    }
+    inline void setTexture(Texture* texture) { m_Texture = texture; }
 
 private:
     Quad m_Quad;
     Shader::Program* m_Shader;
     Texture* m_Texture;
-    unsigned int m_WindowWidth;
-    unsigned int m_WindowHeight;
+    glm::vec2 m_Dimension;
     Camera m_Camera;
 };

@@ -7,8 +7,8 @@ class Icon
 public:
 	Icon(const glm::vec2& dimension = glm::vec2(1.0, 1.0), const glm::vec2& step = glm::vec2(0.0, 0.0))
 	{
-		m_Shader = ResourceManager::getInstance().loadShader("icon", Resources_Shaders_icon_vert, sizeof(Resources_Shaders_icon_vert),
-		                                                             Resources_Shaders_icon_frag, sizeof(Resources_Shaders_icon_frag));
+		m_Shader = ResourceManager::getInstance().loadShader("icon", Assets_Shaders_icon_vert, sizeof(Assets_Shaders_icon_vert),
+		                                                             Assets_Shaders_icon_frag, sizeof(Assets_Shaders_icon_frag));
 		// m_Shader->dump();
 		m_MvpUniform = &m_Shader->uniform("u_ModelViewProjection");
 		m_ColorUniform = &m_Shader->uniform("u_Color");

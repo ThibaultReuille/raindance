@@ -7,8 +7,8 @@ class Axis
 public:
 	Axis()
 	{
-		m_Shader = ResourceManager::getInstance().loadShader("axis", Resources_Shaders_Widgets_axis_vert, sizeof(Resources_Shaders_Widgets_axis_vert),
-		                                                             Resources_Shaders_Widgets_axis_frag, sizeof(Resources_Shaders_Widgets_axis_frag));
+		m_Shader = ResourceManager::getInstance().loadShader("axis", Assets_Shaders_Widgets_axis_vert, sizeof(Assets_Shaders_Widgets_axis_vert),
+		                                                             Assets_Shaders_Widgets_axis_frag, sizeof(Assets_Shaders_Widgets_axis_frag));
 		m_Shader->dump();
 
 		//          Position              Color
