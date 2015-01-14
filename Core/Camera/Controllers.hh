@@ -2,6 +2,7 @@
 
 #include <raindance/Core/Headers.hh>
 #include <raindance/Core/Camera/Camera.hh>
+#include <raindance/Core/Controller.hh>
 
 class ICameraController : public Controller
 {
@@ -71,14 +72,18 @@ public:
 
 		bool isPressOrRepeat = action == GLFW_PRESS || action == GLFW_REPEAT;
 
+		// TODO : Make accessors to these 
+		float rotation = 0.5f;
+		float zoom = 20.0f;
+
 		if (key == GLFW_KEY_LEFT)
-			m_Acceleration.x = isPressOrRepeat ?  -1.0f : 0.0f;
+			m_Acceleration.x = isPressOrRepeat ?  -rotation : 0.0f;
 		else if (key == GLFW_KEY_RIGHT)
-			m_Acceleration.x = isPressOrRepeat ?   1.0f : 0.0f;
+			m_Acceleration.x = isPressOrRepeat ?   rotation : 0.0f;
 		else if (key == GLFW_KEY_UP)
-			m_Acceleration.z = isPressOrRepeat ? -20.0f : 0.0f;
+			m_Acceleration.z = isPressOrRepeat ? -zoom : 0.0f;
 		else if (key == GLFW_KEY_DOWN)
-			m_Acceleration.z = isPressOrRepeat ?  20.0f : 0.0f;
+			m_Acceleration.z = isPressOrRepeat ?  zoom : 0.0f;
 	}
 	
 	void onScroll(double xoffset, double yoffset) override

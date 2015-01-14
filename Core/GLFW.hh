@@ -50,15 +50,25 @@ namespace GLFW
         	CLOSE
     	};
 
-		Window(const char* title, int width, int height)
+		Window(const char* title, int width, int height, bool fullscreen = false)
 		{
+			m_Title = std::string(title);
+			m_Fullscreen = fullscreen;
+
 			// TODO : Activate GL 3.3 context
 		    // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		    // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		    // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		    // glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+			
+			if (m_Fullscreen)
+			{
+				getResolution(&width, &height);
+				m_GlfwHandle = glfwCreateWindow(width, height, title, glfwGetPrimaryMonitor(), NULL);	
+			}
+			else
+				m_GlfwHandle = glfwCreateWindow(width, height, title, NULL, NULL);	
 
-		    m_GlfwHandle = glfwCreateWindow(width, height, title, NULL, NULL);
 			glfwMakeContextCurrent(m_GlfwHandle);
 		}
 
@@ -87,6 +97,13 @@ namespace GLFW
 
 		// -------------------------
 
+		virtual void getResolution(int* width, int* height)
+		{
+		    const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+			*width = mode->width;
+			*height = mode->height;
+		}
+
 		virtual Viewport getViewport()
 		{
 			int width, height;
@@ -102,7 +119,11 @@ namespace GLFW
 
 		inline GLFWwindow* getGlfwHandle() { return m_GlfwHandle; }
 
+		inline const std::string& getTitle() { return m_Title; }
+
 	private:
+		std::string m_Title;
+		bool m_Fullscreen;
 		GLFWwindow* m_GlfwHandle;
 	};
 

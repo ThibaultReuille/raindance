@@ -8,11 +8,9 @@ class Window : public GLFW::Window
 {
 public:
 
-    Window(const char* title, int width, int height)
-    : GLFW::Window(title, width, height)
+    Window(const char* title, int width, int height, bool fullscreen = false)
+    : GLFW::Window(title, width, height, fullscreen)
     {
-        m_Title = std::string(title);
-        m_FullScreen = false;
         m_ClearColor = glm::vec4(0.0, 0.0, 0.0, 0.0);
     }
 
@@ -39,13 +37,8 @@ public:
 
     virtual void idle(Context* context) = 0;
 
-    inline const std::string& title() { return m_Title; }
-
 protected:
     Context* m_Context;
-
-    std::string m_Title;
-    bool m_FullScreen;
 
     glm::vec4 m_ClearColor;
 };
