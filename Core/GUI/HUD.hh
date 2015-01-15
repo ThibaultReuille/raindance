@@ -109,35 +109,16 @@ public:
 
 	void reshape(const Viewport& viewport)
 	{
+		m_WindowWidth = viewport.getDimension()[0];
+		m_WindowHeight = viewport.getDimension()[1];
+
 		m_Camera.reshape(viewport);
+		m_Camera.setOrthographicProjection(0.0f, viewport.getDimension()[0], 0.0f,  viewport.getDimension()[1], 0.001f, 100.f);
+        m_Camera.lookAt(glm::vec3(0, 0, 1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
 		if (m_ScriptWidgetGroup)
-			m_ScriptWidgetGroup->reshape(viewport.getDimension()[0], viewport.getDimension()[1]);
+			m_ScriptWidgetGroup->reshape(m_WindowWidth, m_WindowHeight);
 	}
-
-	/*
-	void onWindowSize(int width, int height) override
-	{
-		//m_Camera.onWindowSize(width, height);
-		m_WindowWidth = width;
-		m_WindowHeight = height;
-
-		LOG("HUD onWindowSize(%i, %i)\n", width, height);
-
-		// m_Camera.reshape(width, height);
-		// m_Camera.setOrthographicProjection(0.0f, (float)width, 0.0f, (float)height, 0.001f, 100.f);
-		// m_Camera.lookAt(glm::vec3(0, 0, 1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
-
-		if (m_ScriptWidgetGroup)
-			m_ScriptWidgetGroup->reshape(width, height);
-	}
-
-	void onSetFramebufferSize(int width, int height) override
-	{
-		//m_Camera.onSetFramebufferSize(width, height);
-		// m_Camera.reshape(width, height);
-	}
-	*/
 
 	IWidget* pickWidget(const glm::vec2& pos)
 	{

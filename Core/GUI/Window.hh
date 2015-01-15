@@ -23,8 +23,6 @@ public:
         auto viewport = getViewport();
         this->onSetFramebufferSize(viewport.getFramebuffer().Width, viewport.getFramebuffer().Height);
         this->onWindowSize((int)viewport.getDimension()[0], (int)viewport.getDimension()[1]);
-
-        glViewport(0, 0, viewport.getFramebuffer().Width, viewport.getFramebuffer().Height);
     }
 
     virtual void clear()

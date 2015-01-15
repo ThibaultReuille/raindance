@@ -152,14 +152,12 @@ public:
  		return Ray(m_Position, glm::normalize(pos - m_Position));
  	}
  
- 	// TODO : Deprecate this, remove ASAP
+ 	// TODO : Deprecate this, we need to use Viewport which contains all Window info
  	void reshape(int width, int height)
  	{
  		m_Width = width;
  		m_Height = height;
  		m_Ratio = (float) width / (float) height;
- 
- 		glViewport(0, 0, (GLint)m_Width, (GLint)m_Height);
  
  		switch(m_ProjectionMode)
  		{
@@ -174,11 +172,9 @@ public:
 
  	void reshape(const Viewport& viewport)
  	{
- 		m_Width = (int)viewport.getDimension()[0];
- 		m_Height = (int)viewport.getDimension()[1];
- 		m_Ratio = viewport.getDimension()[0] / viewport.getDimension()[1];
- 
- 		glViewport(0, 0, viewport.getFramebuffer().Width, viewport.getFramebuffer().Height);
+ 		m_Width = viewport.getDimension()[0];
+ 		m_Height = viewport.getDimension()[1];
+ 		m_Ratio = (float) m_Width / m_Height;
  
  		switch(m_ProjectionMode)
  		{
