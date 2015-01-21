@@ -55,12 +55,12 @@ namespace GLFW
 			m_Title = std::string(title);
 			m_Fullscreen = fullscreen;
 
-			// TODO : Activate GL 3.3 context
-		    // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-		    // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-		    // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		    // glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-			
+			LOG("[GLFW] Creating %ix%i window with title '%s'...\n", width, height, title);
+		    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+		    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 			if (m_Fullscreen)
 			{
 				getResolution(&width, &height);
@@ -70,6 +70,24 @@ namespace GLFW
 				m_GlfwHandle = glfwCreateWindow(width, height, title, NULL, NULL);	
 
 			glfwMakeContextCurrent(m_GlfwHandle);
+
+			glewExperimental = GL_TRUE;
+		    GLenum err = glewInit();
+		    if (err != GLEW_OK)   
+		    {  
+		        LOG("GLEW Error: %s\n", glewGetErrorString(err));  
+		        return;  
+		    }
+		    LOG("\nGLEW Version: %s\n", glewGetString(GLEW_VERSION));  
+
+			const GLubyte* renderer = glGetString(GL_RENDERER);
+			const GLubyte* version = glGetString(GL_VERSION);
+			LOG("OpenGL Renderer: %s\n", renderer);
+			LOG("OpenGL version: %s\n\n", version);
+
+	        GLuint vao;
+	        glGenVertexArrays(1, &vao);
+	        glBindVertexArray(vao);
 		}
 
 		virtual ~Window()

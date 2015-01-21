@@ -5,8 +5,7 @@
 #ifdef __APPLE__
 # define GL_GLEXT_PROTOTYPES
 # define EGL_EGLEXT_PROTOTYPES
-# include <OpenGL/gl.h>
-# include <OpenGL/glu.h>
+# include <GL/glew.h>
 # include <GLFW/glfw3.h>
 # include <OpenCL/opencl.h>
 #endif
@@ -14,8 +13,7 @@
 #ifdef __linux__
 # define GL_GLEXT_PROTOTYPES
 # define EGL_EGLEXT_PROTOTYPES
-# include <GL/gl.h>
-# include <GL/glu.h>
+# include <GL/glew.h>
 # include <GLFW/glfw3.h>
 # include <CL/cl.h>
 #endif
@@ -23,7 +21,7 @@
 #ifdef EMSCRIPTEN
 # define GL_GLEXT_PROTOTYPES
 # define EGL_EGLEXT_PROTOTYPES
-# include <GL/gl.h>
+# include <GL/glew.h>
 # include <GLFW/glfw3.h>
 #endif
 

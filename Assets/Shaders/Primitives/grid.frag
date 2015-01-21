@@ -1,14 +1,18 @@
+#version 330
+
 #ifdef GL_ES
 precision mediump float;
 #endif
 
-varying vec2 v_Texcoord;
+in vec2 v_Texcoord;
 
-varying vec2 v_Step;
-varying vec2 v_Division;
+in vec2 v_Step;
+in vec2 v_Division;
 
-varying vec4 v_Color;
-varying vec4 v_BackgroundColor;
+in vec4 v_Color;
+in vec4 v_BackgroundColor;
+
+out vec4 FragColor;
 
 vec2 computeModuloDistance(vec2 position, vec2 step)
 {
@@ -33,7 +37,7 @@ void main(void)
 
 	if (d.x <= threshold || d.y <= threshold)
 	{
-	    gl_FragColor = v_Color;
+	    FragColor = v_Color;
 	}
 	else
 	{
@@ -43,11 +47,11 @@ void main(void)
 
 		if (d.x <= threshold || d.y <= threshold)
 		{
-			gl_FragColor = 0.7 * v_Color;
+			FragColor = 0.7 * v_Color;
 		}
 		else
 		{
-			gl_FragColor = v_BackgroundColor;
+			FragColor = v_BackgroundColor;
 		}
 	}
 }

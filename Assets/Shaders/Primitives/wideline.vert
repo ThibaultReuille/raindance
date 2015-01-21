@@ -1,5 +1,7 @@
-attribute vec2 a_Position;
-attribute vec4 a_Color;
+#version 330
+
+layout(location = 0) in vec2 a_Position;
+layout(location = 1) in vec4 a_Color;
 
 uniform mat4 u_ModelViewProjection;
 
@@ -10,9 +12,9 @@ uniform vec3 u_ExtrudeDirection;
 
 uniform vec4 u_Tint;
 
-varying vec4 v_Color;
-varying vec2 v_Texcoord;
-varying float v_Mode;
+out vec4 v_Color;
+out vec2 v_Texcoord;
+out float v_Mode;
 
 void main(void)
 {

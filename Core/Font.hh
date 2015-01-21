@@ -3,14 +3,16 @@
 #include <raindance/Core/Headers.hh>
 
 const std::string g_VertexShader =
-"attribute vec2 a_Position;"
-"attribute vec2 a_Texcoord;"
+"#version 330\n"
+""
+"layout(location = 0) in vec2 a_Position;"
+"layout(location = 1) in vec2 a_Texcoord;"
 ""
 "uniform mat4 u_ModelViewProjection;"
 "uniform vec4 u_Color;"
 ""
-"varying vec2 v_Texcoord;"
-"varying vec4 v_Color;"
+"out vec2 v_Texcoord;"
+"out vec4 v_Color;"
 ""
 "void main(void)"
 "{"
@@ -20,22 +22,26 @@ const std::string g_VertexShader =
 "}";
 
 const std::string g_FragmentShader =
+"#version 330\n"
+""
 "#ifdef GL_ES              \n"
 "precision mediump float;  \n"
 "#endif                    \n"
 ""
 "uniform sampler2D u_Font;"
 ""
-"varying vec2 v_Texcoord;"
-"varying vec4 v_Color;"
+"in vec2 v_Texcoord;"
+"in vec4 v_Color;"
+""
+"out vec4 FragColor;"
 ""
 "void main()"
 "{"
-"    vec4 tx = texture2D(u_Font, v_Texcoord);"
+"    vec4 tx = texture(u_Font, v_Texcoord);"
 "    float mask = tx.r;"
 "    float delta = 0.3;"
 "    float finalalpha = smoothstep(0.5 - delta, 0.5 + delta, mask);"
-"    gl_FragColor = vec4(vec3(v_Color), finalalpha);"
+"    FragColor = vec4(vec3(v_Color), finalalpha);"
 "}";
 
 class Font

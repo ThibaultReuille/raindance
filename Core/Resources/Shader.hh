@@ -370,7 +370,7 @@ public:
 				{
 					char* infoLog = reinterpret_cast<char*>(malloc(sizeof(char) * infoLogLength));
 					glGetShaderInfoLog(shader, infoLogLength, NULL, infoLog);
-					LOG("[SHADER] Compilation Error :\n%s\n", infoLog);
+					LOG("[SHADER] '%s' Compilation Error :\n%s\n", m_Name.c_str(), infoLog);
 					free(infoLog);
 				}
 

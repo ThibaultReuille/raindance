@@ -1,9 +1,11 @@
-attribute vec3 a_Position;
-attribute vec2 a_Texcoord;
+#version 330
+
+layout(location = 0) in vec3 a_Position;
+layout(location = 1) in vec2 a_Texcoord;
 
 uniform mat4 u_ModelViewProjection;
 
-varying vec2 v_Texcoord;
+out vec2 v_Texcoord;
 
 void main(void)
 {

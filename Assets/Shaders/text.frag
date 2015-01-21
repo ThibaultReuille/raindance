@@ -1,15 +1,19 @@
+#version 330
+
 #ifdef GL_ES
 precision mediump float;
 #endif
 
 uniform sampler2D u_Font;
 
-varying vec2 v_Texcoord;
-varying vec4 v_Color;
+in vec2 v_Texcoord;
+in vec4 v_Color;
+
+out vec4 FragColor;
 
 void main(void)
 {
-    vec4 c = texture2D(u_Font, v_Texcoord);
+    vec4 c = texture(u_Font, v_Texcoord);
 
     if (c.a < 0.2)
     {
@@ -17,6 +21,6 @@ void main(void)
     }
     else
     {
-        gl_FragColor = c.a * v_Color;
+        FragColor = c.a * v_Color;
     }
 }

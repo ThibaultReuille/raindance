@@ -1,4 +1,6 @@
-attribute vec2 a_Position;
+#version 330
+
+layout(location = 0) in vec2 a_Position;
 
 uniform mat4 u_ModelViewProjection;
 uniform vec4 u_Color;
@@ -7,12 +9,12 @@ uniform vec2 u_Step;
 uniform vec2 u_Division;
 uniform vec2 u_Shift;
 
-varying vec2 v_Texcoord;
+out vec2 v_Texcoord;
 
-varying vec2 v_Step;
-varying vec2 v_Division;
-varying vec4 v_Color;
-varying vec4 v_BackgroundColor;
+out vec2 v_Step;
+out vec2 v_Division;
+out vec4 v_Color;
+out vec4 v_BackgroundColor;
 
 void main(void)
 {

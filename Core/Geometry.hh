@@ -64,23 +64,15 @@ public:
 
 		glBindBuffer(GL_ARRAY_BUFFER, buffer.vbo());
 
-		for (it = buffer.descriptions_begin(); it != buffer.descriptions_end(); ++it)
-		{
-		    if (it->Mute)
-		        continue;
-
-			if (it->Location == -1)
-			{
-				it->Location = shader.attribute(it->Attribute.c_str()).location();
-			}
-			glVertexAttribPointer(it->Location, it->Size, it->Type, GL_FALSE, it->Stride, reinterpret_cast<void*>(it->Offset));
-		}
-
-		for (it = buffer.descriptions_begin(); it != buffer.descriptions_end(); ++it)
-		{
+        for (it = buffer.descriptions_begin(); it != buffer.descriptions_end(); ++it)
+        {
             if (it->Mute)
                 continue;
-			glEnableVertexAttribArray(it->Location);
+            if (it->Location == -1)
+                it->Location = shader.attribute(it->Attribute.c_str()).location();
+ 
+            glEnableVertexAttribArray(it->Location);
+			glVertexAttribPointer(it->Location, it->Size, it->Type, GL_FALSE, it->Stride, reinterpret_cast<void*>(it->Offset));
 		}
 	}
 

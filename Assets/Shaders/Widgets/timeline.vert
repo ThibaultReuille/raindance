@@ -1,9 +1,11 @@
-attribute vec3 a_Position;
+#version 330
+
+layout(location = 0) in vec3 a_Position;
 
 uniform mat4 u_ModelViewProjection;
 uniform vec4 u_Color;
 
-varying vec4 v_Color;
+out vec4 v_Color;
 
 void main(void)
 {
