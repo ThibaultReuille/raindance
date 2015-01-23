@@ -1,6 +1,7 @@
 #pragma once
 
 #include <raindance/Core/Headers.hh>
+#include <raindance/Core/FS.hh>
 
 class Icon
 {
@@ -54,6 +55,11 @@ public:
 	        m_TextureMap[sname] = m_Textures.size() - 1;
 	        return m_Textures.size() - 1;
 	    }
+	}
+
+	unsigned long load(const char* name, const FS::BinaryFile& file)
+	{
+		return load(name, (unsigned char*)file.content().data(), file.content().size());
 	}
 
 	void draw(Context* context, glm::mat4 mvp, glm::vec4 color, unsigned int mode)

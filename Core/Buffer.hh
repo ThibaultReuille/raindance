@@ -239,6 +239,11 @@ public:
 		push(glm::value_ptr(v), sizeof(glm::vec4));
 		return *this;
 	}
+	Buffer& operator<<(glm::mat4 m)
+	{
+		push(glm::value_ptr(m), sizeof(glm::mat4));
+		return *this;
+	}
 
 private:
 	std::vector<unsigned char> m_Data;

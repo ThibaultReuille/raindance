@@ -82,8 +82,8 @@ namespace GLFW
 
 			const GLubyte* renderer = glGetString(GL_RENDERER);
 			const GLubyte* version = glGetString(GL_VERSION);
-			LOG("OpenGL Renderer: %s\n", renderer);
-			LOG("OpenGL version: %s\n\n", version);
+			LOG("GL Renderer: %s\n", renderer);
+			LOG("GL version: %s\n\n", version);
 
 	        GLuint vao;
 	        glGenVertexArrays(1, &vao);
