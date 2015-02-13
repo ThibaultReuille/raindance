@@ -111,15 +111,17 @@ public:
 		return item->m_Texture;
 	}
 
-	Shader::Program* loadShader(const char* name, const unsigned char* vertex, unsigned long vertexSize, const unsigned char* fragment, unsigned long fragmentSize)
+	Shader::Program* loadShader(const char* name, const unsigned char* vs, unsigned long vs_size,
+												  const unsigned char* fs, unsigned long fs_size,
+												  const unsigned char* gs = NULL, unsigned long gs_size = 0)
 	{
 		ResourceItem* item = findResource(name);
 		if (item == NULL)
 		{
 			Shader::Program* shader = new Shader::Program();
-			shader->load(name, vertex, vertexSize, fragment, fragmentSize);
+			shader->load(name, vs, vs_size, fs, fs_size, gs, gs_size);
 			item = addResource(shader);
-			LOG("[RESOURCE] loadShader('%s', %p, %lu, %p, %lu)\n", name, vertex, vertexSize, fragment, fragmentSize);
+			LOG("[RESOURCE] loadShader('%s', %p, %lu, %p, %lu %p, %lu)\n", name, vs, vs_size, fs, fs_size, gs, gs_size);
 		}
 		else
 		    item->m_RefCount++;
@@ -127,10 +129,18 @@ public:
 		return item->m_Shader;
 	}
 
-	Shader::Program* loadShader(const char* name, const std::string& vertex, const std::string& fragment)
+	Shader::Program* loadShader(const char* name, const std::string& vs, const std::string& fs)
 	{
-		return loadShader(name, reinterpret_cast<const unsigned char*>(vertex.data()), vertex.size(),
-								reinterpret_cast<const unsigned char*>(fragment.data()), fragment.size());
+		return loadShader(name, reinterpret_cast<const unsigned char*>(vs.data()), vs.size(),
+								reinterpret_cast<const unsigned char*>(fs.data()), fs.size(),
+								NULL, 0);
+	}
+
+	Shader::Program* loadShader(const char* name, const std::string& vs, const std::string& fs, const std::string& gs)
+	{
+		return loadShader(name, reinterpret_cast<const unsigned char*>(vs.data()), vs.size(),
+								reinterpret_cast<const unsigned char*>(fs.data()), fs.size(),
+								reinterpret_cast<const unsigned char*>(gs.data()), gs.size());
 	}
 
 	bool unload(IResource* resource)

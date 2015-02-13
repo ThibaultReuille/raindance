@@ -267,7 +267,10 @@ public:
 		}
 
 	private:
-		void load(const char* name, const char* vertex, unsigned long vertex_length, const char* fragment, unsigned long fragment_length)
+		void load(const char* name,
+				  const char* vs, unsigned long vs_length,
+				  const char* fs, unsigned long fs_length,
+				  const char* gs = NULL, unsigned long gs_length = 0)
 		{
 			m_Name = std::string(name);
 
@@ -275,15 +278,24 @@ public:
 			if (m_Object == 0)
 				LOG("[SHADER] Couldn't create shader program !\n");
 
-			if (vertex != NULL)
-				m_VertexShader = loadShader(GL_VERTEX_SHADER, vertex, vertex_length);
+			if (vs != NULL)
+			{
+				m_VertexShader = loadShader(GL_VERTEX_SHADER, vs, vs_length);
+				glAttachShader(m_Object, m_VertexShader);
+			}
 
-			if (fragment != NULL)
-				m_FragmentShader = loadShader(GL_FRAGMENT_SHADER, fragment, fragment_length);
+			if (fs != NULL)
+			{
+				m_FragmentShader = loadShader(GL_FRAGMENT_SHADER, fs, fs_length);
+				glAttachShader(m_Object, m_FragmentShader);
+			}
 
-			glAttachShader(m_Object, m_VertexShader);
-			glAttachShader(m_Object, m_FragmentShader);
-
+			if (gs != NULL)
+			{
+				m_GeometryShader = loadShader(GL_GEOMETRY_SHADER, gs, gs_length);
+				glAttachShader(m_Object, m_GeometryShader);
+			}
+			
 			glLinkProgram(m_Object);
 			glGetProgramiv(m_Object, GL_LINK_STATUS, &m_Linked);
 			if (!m_Linked)
@@ -342,9 +354,13 @@ public:
 			glUseProgram(m_Object);
 		}
 
-		void load(const char* name, const unsigned char* vertex, unsigned long vertexSize, const unsigned char* fragment, unsigned long fragmentSize)
+		void load(const char* name, const unsigned char* vs, unsigned long vs_size,
+									const unsigned char* fs, unsigned long fs_size,
+									const unsigned char* gs = NULL, unsigned long gs_size = 0)
 		{
-			load(name, (const char*) vertex, vertexSize, (const char*) fragment, fragmentSize);
+			load(name, (const char*) vs, vs_size,
+					   (const char*) fs, fs_size,
+					   (const char*) gs, gs_size);
 		}
 
 		GLuint loadShader(GLenum type, const char* source, unsigned long length)
@@ -383,6 +399,7 @@ public:
 
 		std::string m_Name;
 		GLuint m_Object;
+		GLuint m_GeometryShader;
 		GLuint m_VertexShader;
 		GLuint m_FragmentShader;
 		GLint m_Linked;

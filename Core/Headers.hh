@@ -92,11 +92,15 @@
     if ((ptr) != NULL)    \
     {                     \
         delete (ptr);     \
-	ptr = NULL;       \
+		ptr = NULL;       \
     }                     \
 
-#define RANDOM_FLOAT(A, B)                                           \
-    ((((B) - (A)) * (static_cast<float>(rand()) / RAND_MAX)) + (A))  \
+#define RANDOM_FLOAT(A, B)                                          \
+    ((((B) - (A)) * (static_cast<float>(rand()) / RAND_MAX)) + (A)) \
+
+#define RANDOM_INT(A, B)                                            \
+    ((A) + rand() % ((B) - (A) + 1))								\
+
 
 #define HEX_COLOR(C)                                                \
     glm::vec3(static_cast<float>(((C) & 0xFF0000) >> 16) / 255.0f,  \
