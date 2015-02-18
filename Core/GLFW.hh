@@ -36,7 +36,10 @@ namespace GLFW
 	    
 	    virtual void onKey(int key, int scancode, int action, int mods)
 	    { LOG("[GLFW] onKey(%i, %i, %i, %i)\n", key, scancode, action, mods); }
-	    
+
+	    virtual void onChar(unsigned int codepoint)
+	    { LOG("[GLFW] onChar(%u)\n", codepoint); }
+    
 	    // virtual void onDrop(int count, const char** paths)
 	    // { LOG("[GLFW] onDrop(%i, %p)\n", count, paths); }
 	};
@@ -60,6 +63,7 @@ namespace GLFW
 		    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 		    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		    glfwWindowHint(GLFW_SAMPLES, 4);
 
 			if (m_Fullscreen)
 			{
@@ -192,6 +196,9 @@ namespace GLFW
 	
 	static void onKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 	{ g_Windows[window]->onKey(key, scancode, action, mods); }
+
+	static void onCharCallback(GLFWwindow* window, unsigned int codepoint)
+	{ g_Windows[window]->onChar(codepoint); }
 	
 	// static void onDropCallback(GLFWwindow* window, int count, const char** paths)
 	// { g_Windows[window]->onDrop(count, paths); }
@@ -217,6 +224,9 @@ namespace GLFW
 	    glfwSetScrollCallback(handle, onScrollCallback);
 	    
 	    glfwSetKeyCallback(handle, onKeyCallback);
+        glfwSetCharCallback(handle, onCharCallback);
+	
+
 	    // TODO : glfwSetDropCallback(handle, onDropCallback);
 	}
 }
