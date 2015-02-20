@@ -1,6 +1,7 @@
 #pragma once
 
 #include <raindance/Core/Headers.hh>
+#include <raindance/Core/Transformation.hh>
 #include <raindance/Core/Text.hh>
 #include <raindance/Core/Font.hh>
 
@@ -38,7 +39,14 @@ public:
         switch(key)
         {
             case GLFW_KEY_ENTER:
-                execute();
+            	execute(*m_History.begin());
+				if (m_History.begin()->size() > 0)
+					m_History.insert(m_History.begin(), std::string(""));
+				else
+					m_History.begin()->clear();
+				m_Current = m_History.begin();
+				m_Scroll = m_History.begin();
+				m_Cursor = 0;
                 break;
 
             case GLFW_KEY_BACKSPACE:
@@ -63,9 +71,8 @@ public:
             	if (std::next(m_Scroll, 1) != m_History.end())
             	{
             		++m_Scroll;
-            		*m_Current = "";
-            		m_Cursor = 0;
-            		send(*m_Scroll);
+            		clear();
+            		write(*m_Scroll);
             	}
             	break;
 
@@ -73,9 +80,8 @@ public:
             	if (m_Scroll != m_History.begin())
             	{
             		--m_Scroll;
-            		*m_Current = "";
-            		m_Cursor = 0;
-            		send(*m_Scroll);
+            		clear();
+            		write(*m_Scroll);
             	}
             	break;
 
@@ -92,34 +98,37 @@ public:
 		
 		if (command.find_first_not_of(m_Characters) != std::string::npos)
 			return;
-
         
-		send(command);
+		write(command);
     }
 
-	virtual void send(const std::string& str)
+    virtual void clear()
+    {
+		*m_Current = "";
+		m_Cursor = 0;
+    }
+
+	virtual void write(const std::string& str)
 	{
 		m_Current->insert(m_Cursor, str);
 		m_Cursor += str.size();
 	}
 
-	virtual void execute()
+	virtual void print(const std::string& str)
 	{
-		LOG("SHELL Execute: %s\n", m_History.begin()->c_str());
-		if (m_History.begin()->size() > 0)
-			m_History.insert(m_History.begin(), std::string(""));
-		else
-			m_History.begin()->clear();
-		m_Current = m_History.begin();
-		m_Scroll = m_History.begin();
-		m_Cursor = 0;
-
-		m_Lines.push_front(std::string("."));
+		m_Lines.push_front(str);
 	}
 
+	virtual void execute(const std::string& command)
+	{
+		print(command);
+	}
 
 	virtual void draw(Context* context, const Camera& camera, Transformation& transformation)
 	{
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
+
 		transformation.push();
 
 			transformation.scale(glm::vec3(0.4, 0.4, 0.4));

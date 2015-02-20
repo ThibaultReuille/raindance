@@ -33,6 +33,9 @@ public:
 			std::cout << "Error : Text font is not set !" << std::endl;
 			return;
 		}
+		
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
 
 		m_Font->shader().use();
 		m_Font->shader().uniform("u_ModelViewProjection").set(mvp);

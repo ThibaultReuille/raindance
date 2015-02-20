@@ -4,11 +4,11 @@
 precision mediump float;
 #endif
 
-in vec4 v_Color;
+in vec4 gs_Color;
 
 out vec4 FragColor;
 
 void main(void)
 {
-    FragColor = v_Color;
+    FragColor = gs_Color;
 }

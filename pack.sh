@@ -59,6 +59,7 @@ xxd -i Assets/Shaders/Widgets/widget.frag >> Pack.hh
 
 xxd -i Assets/Shaders/Widgets/slider.vert >> Pack.hh
 xxd -i Assets/Shaders/Widgets/slider.frag >> Pack.hh
+xxd -i Assets/Shaders/Widgets/slider.geom >> Pack.hh
 
 xxd -i Assets/Shaders/Widgets/checkbox.vert >> Pack.hh
 xxd -i Assets/Shaders/Widgets/checkbox.frag >> Pack.hh

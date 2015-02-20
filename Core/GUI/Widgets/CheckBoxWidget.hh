@@ -29,10 +29,10 @@ public:
     {
         m_VertexBuffer.clear();
 
-        m_VertexBuffer << glm::vec3( 0.0, -1.0, 0);
-        m_VertexBuffer << glm::vec3( 0.0,  0.0, 0);
-        m_VertexBuffer << glm::vec3( 1.0,  0.0, 0);
-        m_VertexBuffer << glm::vec3( 1.0, -1.0, 0);
+        m_VertexBuffer << glm::vec3(0.0,  0.0, 0);
+        m_VertexBuffer << glm::vec3(1.0,  0.0, 0);
+        m_VertexBuffer << glm::vec3(0.0, -1.0, 0);
+        m_VertexBuffer << glm::vec3(1.0, -1.0, 0);
 
        m_VertexBuffer.describe("a_Position", 3, GL_FLOAT, 3 * sizeof(GLfloat), 0);
 
@@ -41,12 +41,10 @@ public:
 
     virtual void draw(Context* context, glm::mat4 model, glm::mat4 view, glm::mat4 projection)
     {
-        static unsigned short int lines_indices[] = { 0, 1, 2, 3 };
-
         m_Shader->use();
         m_Shader->uniform("u_ModelViewProjection").set(projection * view * glm::scale(model, glm::vec3(m_Dimension, 1.0)));
         context->geometry().bind(m_VertexBuffer, *m_Shader);
-        context->geometry().drawElements(GL_LINE_LOOP, sizeof(lines_indices) / sizeof(short int), GL_UNSIGNED_SHORT, lines_indices);
+        context->geometry().drawArrays(GL_TRIANGLE_STRIP, 0, m_VertexBuffer.size() / sizeof(glm::vec3));
         context->geometry().unbind(m_VertexBuffer);
 
         if (m_Value)

@@ -3,6 +3,7 @@
 #include <raindance/Core/Headers.hh>
 #include <raindance/Core/Transformation.hh>
 #include <raindance/Core/Icon.hh>
+#include <raindance/Core/Console/Shell.hh>
 
 #include <raindance/Core/GUI/Widgets/Widget.hh>
 #include <raindance/Core/GUI/Widgets/ScriptWidget.hh>
@@ -27,9 +28,11 @@ public:
 		m_WidgetDimension = glm::vec2(16, 16);
 		m_WidgetSpacing = 10;
 
+		m_Shell = new Shell();
+
 		m_ScriptWidgetGroup = NULL;
 
-		m_ShowMenu = true;
+		m_ShowShell = true;
 
 		m_WidgetPick = NULL;
 		m_Context = NULL;
@@ -37,6 +40,7 @@ public:
 
 	virtual ~HUD()
 	{
+		SAFE_DELETE(m_Shell);
 		SAFE_DELETE(m_Logo);
 		SAFE_DELETE(m_ScriptWidgetGroup);
 	}
@@ -85,24 +89,32 @@ public:
 		}
 	}
 
-	void drawLogo(Context* context)
+	void draw(Context* context)
 	{
 		Transformation transformation;
 
-		transformation.translate(glm::vec3(m_WindowWidth - 64 / 2 - 10, 10 + 64 / 2, 0));
-		transformation.scale(glm::vec3(64, 64, 0));
-		m_Logo->draw(context, m_Camera.getViewProjectionMatrix() * transformation.state(), glm::vec4(1.0, 1.0, 1.0, 1.0), 0);
-	}
-
-	void draw(Context* context)
-	{
 		glDisable(GL_DEPTH_TEST);
 		glDisable(GL_BLEND);
 		
-		drawLogo(context);
+		// Draw Logo
+		transformation.push();
+			transformation.translate(glm::vec3(m_WindowWidth - 64 / 2 - 10, 10 + 64 / 2, 0));
+			transformation.scale(glm::vec3(64, 64, 0));
+			m_Logo->draw(m_Context, m_Camera.getViewProjectionMatrix() * transformation.state(), glm::vec4(1.0, 1.0, 1.0, 1.0), 0);
+		transformation.pop();
 
-		if (m_ShowMenu && m_ScriptWidgetGroup)
+		// TODO : Deprecate Menu
+		if (m_ScriptWidgetGroup && m_ShowShell)
 			m_ScriptWidgetGroup->draw(m_Context, glm::mat4(), m_Camera.getViewMatrix(), m_Camera.getProjectionMatrix());
+
+		// Draw Shell
+		if (m_ShowShell)
+		{
+			transformation.push();
+				transformation.translate(glm::vec3(10, 10, 0));
+				m_Shell->draw(m_Context, m_Camera, transformation);
+			transformation.pop();
+		}
 
 		glEnable(GL_DEPTH_TEST);
 	}
@@ -139,11 +151,16 @@ public:
 		(void) mods;
 		
 		if (action == GLFW_PRESS && key == GLFW_KEY_TAB)
-		{
-			m_ShowMenu = !m_ShowMenu;
-			return;
-		}
+			m_ShowShell = !m_ShowShell;
+
+		if (m_ShowShell)
+			m_Shell->onKey(key, scancode, action, mods);
 	}
+    
+    void onChar(unsigned codepoint) override
+    {
+        m_Shell->onChar(codepoint);
+    }
 
 	void onMouseDown(const glm::vec2& pos) override
 	{
@@ -160,6 +177,8 @@ public:
 private:
 	Context* m_Context;
 
+	Shell* m_Shell;
+
 	int m_WindowWidth;
 	int m_WindowHeight;
 
@@ -173,5 +192,5 @@ private:
 
 	IWidget* m_WidgetPick;
 
-	bool m_ShowMenu;
+	bool m_ShowShell;
 };

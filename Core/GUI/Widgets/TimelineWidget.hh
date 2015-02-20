@@ -74,7 +74,7 @@ public:
             m_Shader->uniform("u_Color").set(glm::vec4(0.2, 0.2, 0.2, 0.7));
             context->geometry().drawElements(GL_TRIANGLES, sizeof(triangles_indices) / sizeof(short int), GL_UNSIGNED_SHORT, triangles_indices);
             m_Shader->uniform("u_Color").set(glm::vec4(1.0, 1.0, 1.0, 1.0));
-            context->geometry().drawElements(GL_LINES, sizeof(lines_indices) / sizeof(short int), GL_UNSIGNED_SHORT, lines_indices);
+            context->geometry().drawElements(GL_TRIANGLE_STRIP, sizeof(lines_indices) / sizeof(short int), GL_UNSIGNED_SHORT, lines_indices);
             context->geometry().unbind(m_VertexBuffer);
         }
         transformation.pop();
