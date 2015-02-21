@@ -11,7 +11,8 @@ public:
     : IWidget(name, parent, position, dimension)
     {
         m_Shader = ResourceManager::getInstance().loadShader("timeline", Assets_Shaders_Widgets_timeline_vert, sizeof(Assets_Shaders_Widgets_timeline_vert),
-                                                                         Assets_Shaders_Widgets_timeline_frag, sizeof(Assets_Shaders_Widgets_timeline_frag));
+                                                                         Assets_Shaders_Widgets_timeline_frag, sizeof(Assets_Shaders_Widgets_timeline_frag),
+                                                                         Assets_Shaders_Widgets_timeline_geom, sizeof(Assets_Shaders_Widgets_timeline_geom));
         // m_Shader->dump();
 
         m_EventIcon = new Icon(glm::vec2(7.5, 7.5));
@@ -39,26 +40,13 @@ public:
     void update()
     {
         m_VertexBuffer.clear();
-
-        m_VertexBuffer << glm::vec3( 0.0, -1.0, 0);
-        m_VertexBuffer << glm::vec3( 0.0,  0.0, 0);
-        m_VertexBuffer << glm::vec3( 1.0,  0.0, 0);
-        m_VertexBuffer << glm::vec3( 1.0, -1.0, 0);
-
-        float x = (float) m_Before / ((float)m_Before + (float)m_After);
-        m_VertexBuffer << glm::vec3(x, -1.0, 0);
-        m_VertexBuffer << glm::vec3(x,  0.0, 0);
-
-        m_VertexBuffer.describe("a_Position", 3, GL_FLOAT, 3 * sizeof(GLfloat), 0);
-
-        m_VertexBuffer.generate(Buffer::DYNAMIC);
+        m_VertexBuffer << glm::vec2(0.0, 0.0);
+        m_VertexBuffer.describe("a_Position", 2, GL_FLOAT, sizeof(glm::vec2), 0);
+        m_VertexBuffer.generate(Buffer::STATIC);
     }
 
     virtual void draw(Context* context, glm::mat4 model, glm::mat4 view, glm::mat4 projection)
     {
-        static unsigned short int lines_indices[] = { 0, 1, 1, 2, 2, 3, 3, 0, 4, 5 };
-        static unsigned short int triangles_indices[] = { 0, 1, 2, 0, 2, 3 };
-
         Transformation transformation;
 
         glm::mat4 viewProjection = projection * view;
@@ -69,12 +57,12 @@ public:
             transformation.scale(glm::vec3(m_Dimension, 1.0));
 
             m_Shader->use();
-            m_Shader->uniform("u_ModelViewProjection").set(viewProjection * transformation.state());
-            context->geometry().bind(m_VertexBuffer, *m_Shader);
+            m_Shader->uniform("u_ProjectionMatrix").set(projection);
+            m_Shader->uniform("u_ModelViewMatrix").set(view * glm::scale(model, glm::vec3(m_Dimension, 1.0)));
             m_Shader->uniform("u_Color").set(glm::vec4(0.2, 0.2, 0.2, 0.7));
-            context->geometry().drawElements(GL_TRIANGLES, sizeof(triangles_indices) / sizeof(short int), GL_UNSIGNED_SHORT, triangles_indices);
-            m_Shader->uniform("u_Color").set(glm::vec4(1.0, 1.0, 1.0, 1.0));
-            context->geometry().drawElements(GL_TRIANGLE_STRIP, sizeof(lines_indices) / sizeof(short int), GL_UNSIGNED_SHORT, lines_indices);
+            m_Shader->uniform("u_Value").set((float) m_Before / ((float)m_Before + (float)m_After));
+            context->geometry().bind(m_VertexBuffer, *m_Shader);
+            context->geometry().drawArrays(GL_POINTS, 0, m_VertexBuffer.size() / sizeof(glm::vec2));
             context->geometry().unbind(m_VertexBuffer);
         }
         transformation.pop();

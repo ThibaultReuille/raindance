@@ -66,6 +66,7 @@ xxd -i Assets/Shaders/Widgets/checkbox.frag >> Pack.hh
 
 xxd -i Assets/Shaders/Widgets/timeline.vert >> Pack.hh
 xxd -i Assets/Shaders/Widgets/timeline.frag >> Pack.hh
+xxd -i Assets/Shaders/Widgets/timeline.geom >> Pack.hh
 
 echo "- Packing Shaders/Charts"
 
