@@ -160,7 +160,9 @@ public:
 
 			else if (seconds - job->getLastRun() > job->getPeriod())
 			{
-				execute(job->getScript());
+				auto script = job->getScript();
+				if (script != NULL)
+					execute(script->source());
 				job->setLastRun(seconds);
 			}
 		} 
@@ -170,7 +172,8 @@ public:
 
 	virtual void begin() = 0;
 	virtual void end() = 0;
-	virtual bool execute(IScript* script) = 0;
+	
+	virtual bool execute(const std::string& command) = 0;
 
 	inline const std::vector<IScript*>::iterator scripts_begin() { return m_Scripts.begin(); }
 	inline const std::vector<IScript*>::iterator scripts_end() { return m_Scripts.end(); }

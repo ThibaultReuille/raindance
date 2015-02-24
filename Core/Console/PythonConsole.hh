@@ -39,11 +39,11 @@ public:
 		Py_Finalize();
 	}
 
-	bool execute(IScript* script)
+	virtual bool execute(const std::string& command)
 	{
 		end();
 
-		PyRun_SimpleString(script->source().c_str());
+		PyRun_SimpleString(command.c_str());
 
 		begin();
 		

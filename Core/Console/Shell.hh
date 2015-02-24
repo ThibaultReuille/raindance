@@ -4,6 +4,7 @@
 #include <raindance/Core/Transformation.hh>
 #include <raindance/Core/Text.hh>
 #include <raindance/Core/Font.hh>
+#include <raindance/Core/Console/Console.hh>
 
 class Shell
 {
@@ -24,11 +25,17 @@ public:
         	"!@#$%ˆ&*()-_=+{}[]|';:<>,./? "
         	"\\\");");
 
+        m_Console = NULL;
 	}
 
 	virtual ~Shell()
 	{
 		SAFE_DELETE(m_Font);
+	}
+
+	void bind(Console* console)
+	{
+		m_Console = console;
 	}
 
     void onKey(int key, int scancode, int action, int mods) // TODO: override
@@ -121,7 +128,10 @@ public:
 
 	virtual void execute(const std::string& command)
 	{
-		print(command);
+		if (m_Console == NULL)
+			print(command);
+		else
+			m_Console->execute(command);
 	}
 
 	virtual void draw(Context* context, const Camera& camera, Transformation& transformation)
@@ -177,4 +187,5 @@ private:
 	std::string m_Characters;
 	Text m_Text;
 	Font* m_Font;
+	Console* m_Console;
 };

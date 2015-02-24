@@ -174,6 +174,8 @@ public:
 			m_WidgetPick->onMouseClick(m_Context->messages(), pos);
 	}
 
+	inline Shell* getShell() { return m_Shell; }
+
 private:
 	Context* m_Context;
 
