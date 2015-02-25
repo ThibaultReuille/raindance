@@ -43,7 +43,14 @@ public:
 	{
 		end();
 
-		PyRun_SimpleString(command.c_str());
+		auto callback = getScript(std::string("#console"));
+		if (callback != NULL)
+		{
+			std::string eval = callback->source() + "(\"" + command + "\")"; 
+			PyRun_SimpleString(eval.c_str());
+		}
+		else
+			PyRun_SimpleString(command.c_str());
 
 		begin();
 		
