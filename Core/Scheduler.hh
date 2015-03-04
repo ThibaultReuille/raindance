@@ -16,6 +16,7 @@ public:
 		SCRIPT = 1,
 		WIDGET = 2,
 		SEQUENCER = 3,
+		CONSOLE = 4,
 
 		CUSTOM = 100
 	};
@@ -48,6 +49,13 @@ struct SequencerMessage : public IMessage
     SequencerMessage(const char* track, const char* message) : Track(track), Message(message) {}
     unsigned int type() { return IMessage::SEQUENCER; }
     std::string Track;
+    std::string Message;
+};
+
+struct ConsoleMessage : public IMessage
+{
+    ConsoleMessage(const std::string& message) : Message(message) {}
+    unsigned int type() { return IMessage::CONSOLE; }
     std::string Message;
 };
 

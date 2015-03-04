@@ -158,7 +158,7 @@ public:
 		//	LOG("[RESOURCE] Resource '%s' (RefCount : %u)\n", item->m_Resource->name().c_str(), item->m_RefCount);
 		if (item->m_RefCount <= 0)
 		{
-			LOG("[RESOURCE] Destroying resource '%s' ...\n", item->m_Resource->name().c_str());
+			// DEBUG: LOG("[RESOURCE] Destroying resource '%s' ...\n", item->m_Resource->name().c_str());
 			delete item->m_Resource;
 			m_Resources.erase(item);
 		}

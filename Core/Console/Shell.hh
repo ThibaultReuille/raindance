@@ -4,16 +4,12 @@
 #include <raindance/Core/Transformation.hh>
 #include <raindance/Core/Text.hh>
 #include <raindance/Core/Font.hh>
-#include <raindance/Core/Console/Console.hh>
 
 class Shell
 {
 public:
 	Shell()
-	{
-        m_Font = new Font();
-        m_Text.set("$ ", m_Font);
-        
+	{        
         m_Cursor = 0;
         m_History.push_back(std::string());
         m_Current = m_History.begin();
@@ -22,10 +18,13 @@ public:
         	"abcdefghijklmnopqrstuvwxyz"
         	"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         	"01234567890"
-        	"!@#$%ˆ&*()-_=+{}[]|';:<>,./? "
+        	"!@#$%%ˆ&*()-_=+{}[]|';:<>,./? "
         	"\\\");");
+        m_Prompt = "$ ";
 
-        m_Console = NULL;
+		m_HistoryFontFactor = 0.75;
+        m_Font = new Font();
+        m_Text.set(m_Prompt.c_str(), m_Font);
 	}
 
 	virtual ~Shell()
@@ -33,13 +32,11 @@ public:
 		SAFE_DELETE(m_Font);
 	}
 
-	void bind(Console* console)
-	{
-		m_Console = console;
-	}
-
     void onKey(int key, int scancode, int action, int mods) // TODO: override
     {
+    	(void) scancode;
+    	(void) mods;
+
         if (action != GLFW_PRESS)
             return;
 
@@ -128,10 +125,7 @@ public:
 
 	virtual void execute(const std::string& command)
 	{
-		if (m_Console == NULL)
-			print(command);
-		else
-			m_Console->execute(command);
+		print(command);
 	}
 
 	virtual void draw(Context* context, const Camera& camera, Transformation& transformation)
@@ -165,12 +159,13 @@ public:
 				if (it.size() > 0)
 				{
 					transformation.push();
+						transformation.scale(glm::vec3(m_HistoryFontFactor, m_HistoryFontFactor, 1.0));
 						m_Text.set(it.c_str(), m_Font);
 						m_Text.draw(*context, camera.getProjectionMatrix() * camera.getViewMatrix() * transformation.state());
 					transformation.pop();
 				}
 				
-				transformation.translate(glm::vec3(0.0, m_Font->getSize(), 0.0));
+				transformation.translate(glm::vec3(0.0, m_Font->getSize() * m_HistoryFontFactor, 0.0));
 			}
 
 		transformation.pop();
@@ -183,9 +178,10 @@ private:
 	std::list<std::string>::iterator m_Current;
 	std::list<std::string>::iterator m_Scroll;
 	std::list<std::string> m_History;
+	float m_HistoryFontFactor;
 	std::list<std::string> m_Lines;
 	std::string m_Characters;
+	std::string m_Prompt;
 	Text m_Text;
 	Font* m_Font;
-	Console* m_Console;
 };
