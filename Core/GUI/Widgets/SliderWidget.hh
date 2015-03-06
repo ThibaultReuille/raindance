@@ -20,7 +20,8 @@ public:
         m_VertexBuffer.describe("a_Position", 2, GL_FLOAT, 2 * sizeof(GLfloat), 0);
         m_VertexBuffer.generate(Buffer::STATIC);
 
-        value(0.5f);
+        m_Precision = 0.1;
+        setValue(0.5f);
     }
     virtual ~SliderWidget()
     {
@@ -33,7 +34,7 @@ public:
         m_Shader->uniform("u_ProjectionMatrix").set(projection);
         m_Shader->uniform("u_ModelViewMatrix").set(view * glm::scale(model, glm::vec3(m_Dimension, 1.0)));
         m_Shader->uniform("u_Color").set(m_Color);
-        m_Shader->uniform("u_Value").set(m_Value);
+        m_Shader->uniform("u_Value").set(getValue());
         context->geometry().bind(m_VertexBuffer, *m_Shader);
         context->geometry().drawArrays(GL_POINTS, 0, m_VertexBuffer.size() / sizeof(glm::vec2));
         context->geometry().unbind(m_VertexBuffer);
@@ -41,17 +42,25 @@ public:
     
     void onMouseClick(MessageQueue& messages, const glm::vec2& pos) override
     {
-        value((pos.x - this->position().x) / this->dimension().x);
+        setValue((pos.x - this->position().x) / this->dimension().x);
         messages.push(static_cast<IMessage*>(new WidgetMessage(m_Name.c_str(), "update")));
     }
 
-    inline void value(const float value) { m_Value = value; }
-    inline float value() { return m_Value; }
+    inline float roundWithPrecision(float value, float precision)
+    {
+        return floor(value * (1.0f / precision) + 0.5) / (1.0f / precision);
+    }
+
+    inline void setValue(float value) { m_Value = value; }
+    inline float getValue() { return roundWithPrecision(m_Value, m_Precision); }
+
+    inline void setPrecision(float precision) { m_Precision = precision; }
+    inline float getPrecision() { return m_Precision; }
 
 private:
     Buffer m_VertexBuffer;
     Shader::Program* m_Shader;
     glm::vec4 m_Color;
     float m_Value;
-
+    float m_Precision;
 };

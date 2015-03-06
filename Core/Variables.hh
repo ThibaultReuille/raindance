@@ -23,14 +23,12 @@ public:
 	inline VariableType type() const { return m_Type; }
 	inline void type(VariableType type) { m_Type = type; }
 
-	inline const std::string& name() const { return m_Name; }
-	inline void name(const std::string& name) { m_Name = name; }
-
 	virtual void set(const std::string& str) = 0;
 	virtual IVariable* duplicate() = 0;
+
 protected:
 	VariableType m_Type;
-	std::string m_Name;
+	// std::string m_Name;
 };
 
 class StringVariable : public IVariable
@@ -41,7 +39,6 @@ public:
 	virtual IVariable* duplicate()
 	{
 	    StringVariable* variable = new StringVariable();
-	    variable->name(m_Name);
 	    variable->set(m_Value);
 	    return variable;
 	}
@@ -53,13 +50,12 @@ class IntVariable : public IVariable
 {
 public:
 	inline virtual void set(const std::string& str) { m_Type = RD_INT; m_Value = atoi(str.c_str()); }
-   //inline virtual void set(int value) { m_Type = RD_INT; m_Value = value; }
     inline virtual void set(long value) { m_Type = RD_INT; m_Value = value; }
 	inline long value() { return m_Value; }
 	virtual IVariable* duplicate()
 	{
         IntVariable* variable = new IntVariable();
-        variable->name(m_Name);
+        // variable->name(m_Name);
         variable->set(m_Value);
         return variable;
 	}
@@ -83,7 +79,6 @@ public:
 	virtual BooleanVariable* duplicate()
 	{
 	    BooleanVariable* variable = new BooleanVariable();
-	    variable->name(m_Name);
 	    variable->set(m_Value);
 	    return variable;
 	}
@@ -100,7 +95,6 @@ public:
 	virtual IVariable* duplicate()
 	{
 	    FloatVariable* variable = new FloatVariable();
-	    variable->name(m_Name);
 	    variable->set(m_Value);
 	    return variable;
 	}
@@ -122,7 +116,6 @@ public:
 	virtual IVariable* duplicate()
 	{
 	    Vec2Variable* variable = new Vec2Variable();
-	    variable->name(m_Name);
 	    variable->set(m_Value);
 	    return variable;
 	}
@@ -144,7 +137,6 @@ public:
     virtual IVariable* duplicate()
     {
         Vec3Variable* variable = new Vec3Variable();
-        variable->name(m_Name);
         variable->set(m_Value);
         return variable;
     }
@@ -166,7 +158,6 @@ public:
     virtual IVariable* duplicate()
     {
         Vec4Variable* variable = new Vec4Variable();
-        variable->name(m_Name);
         variable->set(m_Value);
         return variable;
     }
@@ -174,67 +165,33 @@ private:
     glm::vec4 m_Value;
 };
 
+
 class Variables
 {
 public:
-    Variables()
-    {
-    }
+	Variables() {}
 
-    virtual ~Variables()
-    {
-        /* TODO : Deleting the variables here leads to crashes ! Why ?
-        while(!m_Variables.empty())
-        {
-            delete m_Variables.back();
-            m_Variables.pop_back();
-        }
-        */
-    }
-
-    const IVariable* add(IVariable* var)
-    {
-        std::string name = var->name();
-
-        std::vector<IVariable*>::iterator it;
-        for (it = m_Variables.begin(); it != m_Variables.end(); ++it)
-        {
-            if (name == (*it)->name())
-            {
-                LOG("[VARIABLES] Variable name '%s' already exists!\n", name.c_str());
-                return NULL;
-            }
-        }
-
-        IVariable* newVar = var->duplicate();
-        m_Variables.push_back(newVar);
-
-        return newVar;
-    }
-
-	const IVariable* set(const std::string& name, VariableType type, const std::string& value)
+	virtual ~Variables()
 	{
-		// TODO : All of this can be optimized with a hash table
+	}
 
-		std::vector<IVariable*>::iterator it;
-		for (it = m_Variables.begin(); it != m_Variables.end(); ++it)
+	virtual IVariable* set(const std::string& name, IVariable* variable)
+	{
+		if (m_Symbols.find(name) == m_Symbols.end())
+			m_Symbols[name] = variable;
+		else
 		{
-			if (name == (*it)->name())
-			{
-				if (type != (*it)->type())
-				{
-					LOG("[VARIABLES] Variable type mismatches !\n");
-					return NULL;
-				}
-				else
-				{
-					(*it)->set(value);
-					return *it;
-				}
-			}
+			delete m_Symbols[name];
+			m_Symbols[name] = variable;
 		}
 
+		return variable;
+	}
+
+	virtual IVariable* set(const std::string& name, VariableType type, const std::string& value)
+	{
 		IVariable* variable = NULL;
+
 		switch(type)
 		{
 		case RD_STRING:
@@ -262,130 +219,55 @@ public:
 			LOG("[VARIABLES] Unknown variable type !\n");
 			return NULL;
 		}
-		variable->name(name);
+		
 		variable->set(value);
-		m_Variables.push_back(variable);
-
-		return variable;
+		
+		return set(name, variable);
 	}
 
-	const IVariable* set(const char* name, VariableType type, std::string& value)
+	virtual IVariable* get(const std::string& name) const
 	{
-	    return this->set(std::string(name), type, value);
+		auto element = m_Symbols.find(name);
+		return (element != m_Symbols.end() ? element->second : NULL);
 	}
 
-	IVariable* get(const std::string& name) const
-	{
-		std::vector<IVariable*>::const_iterator it;
-		for (it = m_Variables.begin(); it != m_Variables.end(); ++it)
-		{
-			if (name == (*it)->name())
-				return *it;
-		}
-		return NULL;
-	}
 
-	IVariable* get(const char* name) const
-	{
-		return this->get(std::string(name));
-	}
-
-    bool getString(const char* name, std::string& variable) const
-    {
-        IVariable* var = get(name);
-        if (var == NULL || var->type() != RD_STRING)
-            return false;
-        variable.assign(static_cast<StringVariable*>(var)->value());
-        return true;
-    }
-
-    bool getInt(const char* name, long* variable) const
-    {
-        IVariable* var = get(name);
-        if (var == NULL || var->type() != RD_INT)
-            return false;
-        *variable = static_cast<IntVariable*>(var)->value();
-        return true;
-    }
-
-    bool getFloat(const char* name, float* variable) const
-    {
-        IVariable* var = get(name);
-        if (var == NULL || var->type() != RD_FLOAT)
-            return false;
-        *variable = static_cast<FloatVariable*>(var)->value();
-        return true;
-    }
-
-    bool getBoolean(const char* name, bool* variable) const
-    {
-        IVariable* var = get(name);
-        if (var == NULL || var->type() != RD_BOOLEAN)
-            return false;
-        *variable = static_cast<BooleanVariable*>(var)->value();
-        return true;
-    }
-
-    bool getVec2(const char* name, glm::vec2* variable) const
-    {
-        IVariable* var = get(name);
-        if (var == NULL || var->type() != RD_VEC2)
-            return false;
-        *variable = static_cast<Vec2Variable*>(var)->value();
-        return true;
-    }
-
-    bool getVec3(const char* name, glm::vec3* variable) const
-    {
-        IVariable* var = get(name);
-        if (var == NULL || var->type() != RD_VEC3)
-            return false;
-        *variable = static_cast<Vec3Variable*>(var)->value();
-        return true;
-    }
-
-    bool getVec4(const char* name, glm::vec4* variable) const
-    {
-        IVariable* var = get(name);
-        if (var == NULL || var->type() != RD_VEC4)
-            return false;
-        *variable = static_cast<Vec4Variable*>(var)->value();
-        return true;
-    }
-
-	void dump() const
+	virtual void dump() const
 	{
 	    glm::vec2 v2;
 	    glm::vec3 v3;
 	    glm::vec4 v4;
 
-	    for (auto v : m_Variables)
+	    for (auto it : m_Symbols)
 	    {
-	        switch(v->type())
+	    	auto name = it.first;
+	    	auto value = it.second;
+
+	        switch(value->type())
 	        {
 	        case RD_STRING:
-	            LOG("[VARIABLES] string %s = %s\n", v->name().c_str(), static_cast<StringVariable*>(v)->value().c_str());
+	            LOG("[VARIABLES] string %s = %s\n", name.c_str(), static_cast<StringVariable*>(value)->value().c_str());
 	            break;
 	        case RD_INT:
-	            LOG("[VARIABLES] int %s = %lu\n", v->name().c_str(), static_cast<IntVariable*>(v)->value());
+	            LOG("[VARIABLES] int %s = %lu\n", name.c_str(), static_cast<IntVariable*>(value)->value());
 	            break;
 	        case RD_FLOAT:
-	            LOG("[VARIABLES] float %s = %f\n", v->name().c_str(), static_cast<FloatVariable*>(v)->value());
+	            LOG("[VARIABLES] float %s = %f\n", name.c_str(), static_cast<FloatVariable*>(value)->value());
 	            break;
 	        case RD_BOOLEAN:
-	            LOG("[VARIABLES] bool %s = %i\n", v->name().c_str(), static_cast<BooleanVariable*>(v)->value());
+	            LOG("[VARIABLES] bool %s = %i\n", name.c_str(), static_cast<BooleanVariable*>(value)->value());
 	            break;
 	        case RD_VEC2:
-	            v2 = static_cast<Vec2Variable*>(v)->value();
-	            LOG("[VARIABLES] vec2 %s = (%f, %f)\n", v->name().c_str(), v2.x, v2.y);
+	            v2 = static_cast<Vec2Variable*>(value)->value();
+	            LOG("[VARIABLES] vec2 %s = (%f, %f)\n", name.c_str(), v2.x, v2.y);
 	            break;
 	        case RD_VEC3:
-	            v3 = static_cast<Vec3Variable*>(v)->value();
-	            LOG("[VARIABLES] vec3 %s = (%f, %f, %f)\n", v->name().c_str(), v3.x, v3.y, v3.z);
+	            v3 = static_cast<Vec3Variable*>(value)->value();
+	            LOG("[VARIABLES] vec3 %s = (%f, %f, %f)\n", name.c_str(), v3.x, v3.y, v3.z);
 	            break;
 	        case RD_VEC4:
-	            v4 = static_cast<Vec4Variable*>(v)->value();
-	            LOG("[VARIABLES] vec4 %s = (%f, %f, %f, %f)\n", v->name().c_str(), v4.x, v4.y, v4.z, v4.w);
+	            v4 = static_cast<Vec4Variable*>(value)->value();
+	            LOG("[VARIABLES] vec4 %s = (%f, %f, %f, %f)\n", name.c_str(), v4.x, v4.y, v4.z, v4.w);
 	            break;
 	        default:
 	            LOG("[VARIABLES] Unknown type!\n");
@@ -394,10 +276,73 @@ public:
 	    }
 	}
 
-	inline std::vector<IVariable*>::iterator begin() { return m_Variables.begin(); }
-	inline std::vector<IVariable*>::iterator end() { return m_Variables.end(); }
+	inline const std::unordered_map<std::string, IVariable*>& symbols() { return m_Symbols; }
+
+	// ----- Specialized Getters -----
+
+    bool get(const char* name, std::string& output) const
+    {
+        IVariable* var = get(name);
+        if (var == NULL || var->type() != RD_STRING)
+            return false;
+        output.assign(static_cast<StringVariable*>(var)->value());
+        return true;
+    }
+
+    bool get(const char* name, long* output) const
+    {
+        IVariable* var = get(name);
+        if (var == NULL || var->type() != RD_INT)
+            return false;
+        *output = static_cast<IntVariable*>(var)->value();
+        return true;
+    }
+
+    bool get(const char* name, float* output) const
+    {
+        IVariable* var = get(name);
+        if (var == NULL || var->type() != RD_FLOAT)
+            return false;
+        *output = static_cast<FloatVariable*>(var)->value();
+        return true;
+    }
+
+    bool get(const char* name, bool* output) const
+    {
+        IVariable* var = get(name);
+        if (var == NULL || var->type() != RD_BOOLEAN)
+            return false;
+        *output = static_cast<BooleanVariable*>(var)->value();
+        return true;
+    }
+
+    bool get(const char* name, glm::vec2* output) const
+    {
+        IVariable* var = get(name);
+        if (var == NULL || var->type() != RD_VEC2)
+            return false;
+        *output = static_cast<Vec2Variable*>(var)->value();
+        return true;
+    }
+
+    bool get(const char* name, glm::vec3* output) const
+    {
+        IVariable* var = get(name);
+        if (var == NULL || var->type() != RD_VEC3)
+            return false;
+        *output = static_cast<Vec3Variable*>(var)->value();
+        return true;
+    }
+
+    bool get(const char* name, glm::vec4* output) const
+    {
+        IVariable* var = get(name);
+        if (var == NULL || var->type() != RD_VEC4)
+            return false;
+        *output = static_cast<Vec4Variable*>(var)->value();
+        return true;
+    }
 
 private:
-	std::vector<IVariable*> m_Variables;
+	std::unordered_map<std::string, IVariable*> m_Symbols;
 };
-

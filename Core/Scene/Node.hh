@@ -10,7 +10,7 @@ namespace Scene
     {
     public:
         Node()
-            : m_Mark(0), m_LOD(1.0), m_PositionLock(false)
+            : m_Pass(0), m_LOD(1.0), m_PositionLock(false)
         {
             setPosition(glm::vec3(0, 0, 0));
             setOrientation(glm::quat());
@@ -36,8 +36,8 @@ namespace Scene
         inline void setDirection(const glm::vec3& direction, bool normalize) { m_Direction = normalize ? glm::normalize(direction) : direction; }
         inline const glm::vec3& getDirection() const { return m_Direction; }
 
-        inline void setMark(int mark) { m_Mark = mark; }
-        inline int getMark() { return m_Mark; }
+        inline void setPass(int pass) { m_Pass = pass; }
+        inline int getPass() { return m_Pass; }
 
         inline void setLOD(float lod) { m_LOD = lod; }
         inline float getLOD() { return m_LOD; }
@@ -82,7 +82,7 @@ private:
 
         glm::vec3 m_Direction;
 
-        int m_Mark;
+        int m_Pass;
         float m_LOD;
 
         bool m_PositionLock;
