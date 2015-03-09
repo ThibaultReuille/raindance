@@ -53,11 +53,12 @@
 
 #define GLM_SWIZZLE
 #define GLM_FORCE_RADIANS
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <glm/gtx/quaternion.hpp>
-#include <glm/gtx/norm.hpp>
+
+#include <raindance/Lib/glm-0.9.5.4/glm/glm.hpp>
+#include <raindance/Lib/glm-0.9.5.4/glm/gtc/matrix_transform.hpp>
+#include <raindance/Lib/glm-0.9.5.4/glm/gtc/type_ptr.hpp>
+#include <raindance/Lib/glm-0.9.5.4/glm/gtx/quaternion.hpp>
+#include <raindance/Lib/glm-0.9.5.4/glm/gtx/norm.hpp>
 
 #include <string>
 #include <limits>
