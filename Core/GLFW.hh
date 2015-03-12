@@ -61,8 +61,8 @@ namespace GLFW
 			LOG("[GLFW] Creating %ix%i window with title '%s'...\n", width, height, title);
 		    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-		    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 		    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 		    glfwWindowHint(GLFW_SAMPLES, 4);
 
 			if (m_Fullscreen)
@@ -82,10 +82,14 @@ namespace GLFW
 		        LOG("GLEW Error: %s\n", glewGetErrorString(err));  
 		        return;  
 		    }
-		    LOG("\nGLEW Version: %s\n", glewGetString(GLEW_VERSION));  
+
+		    // NOTE : glewInit raises GL errors, we silently ignore and clear them here.
+		    checkGLErrors(true);
 
 			const GLubyte* renderer = glGetString(GL_RENDERER);
 			const GLubyte* version = glGetString(GL_VERSION);
+
+		    LOG("\nGLEW Version: %s\n", glewGetString(GLEW_VERSION));
 			LOG("GL Renderer: %s\n", renderer);
 			LOG("GL version: %s\n\n", version);
 
@@ -226,7 +230,6 @@ namespace GLFW
 	    glfwSetKeyCallback(handle, onKeyCallback);
         glfwSetCharCallback(handle, onCharCallback);
 	
-
 	    // TODO : glfwSetDropCallback(handle, onDropCallback);
 	}
 }

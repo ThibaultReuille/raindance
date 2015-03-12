@@ -1,7 +1,6 @@
 #pragma once
 
 #include <raindance/Core/Headers.hh>
-// TODO : #include <raindance/OpenCL/cl.hpp>
 
 class OpenCL
 {
@@ -26,6 +25,7 @@ public:
         std::string Vendor;
         std::string Version;
         std::string DriverVersion;
+        std::string Extensions;
     };
 
     struct Context
@@ -166,14 +166,30 @@ public:
             for (cl_uint j = 0; j < deviceCount; j++)
             {
                 Device* device = new Device();
+                
                 device->ID = deviceIDs[j];
+                
                 device->Name = getDeviceInfoString(deviceIDs[j], CL_DEVICE_NAME);
+                
                 clGetDeviceInfo(deviceIDs[j], CL_DEVICE_PLATFORM, sizeof(cl_platform_id), &device->Platform, NULL);
+                
                 device->Profile = getDeviceInfoString(deviceIDs[j], CL_DEVICE_PROFILE);
+                
                 clGetDeviceInfo(deviceIDs[j], CL_DEVICE_TYPE, sizeof(cl_device_type), &device->Type, NULL);
+                
                 device->Vendor = getDeviceInfoString(deviceIDs[j], CL_DEVICE_VENDOR);
+                
                 device->Version = getDeviceInfoString(deviceIDs[j], CL_DEVICE_VERSION);
+
                 device->DriverVersion = getDeviceInfoString(deviceIDs[j], CL_DRIVER_VERSION);
+                
+                /*
+                char extensions[2048];
+                clGetDeviceInfo(deviceIDs[j], CL_DEVICE_EXTENSIONS, sizeof(extensions), static_cast<void*>(extensions));
+                device->Extensions = std::string(extensions);
+                */
+
+                device->Extensions = getDeviceInfoString(deviceIDs[j], CL_DEVICE_EXTENSIONS);
 
                 m_Devices.push_back(device);
             }
@@ -186,20 +202,35 @@ public:
         LOG("[OpenCL] %i platform(s) and %i device(s) detected.\n", static_cast<int>(m_Platforms.size()), static_cast<int>(m_Devices.size()));
     }
 
+    void getContextProperties(const Device& device, std::vector<cl_context_properties>& properties)
+    {
+        /*
+        #if defined (__APPLE__) || defined(MACOSX)
+            CGLContextObj kCGLContext = CGLGetCurrentContext();
+            CGLShareGroupObj kCGLShareGroup = CGLGetShareGroup(kCGLContext);
+            
+            properties.push_back(CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE);
+            properties.push_back((cl_context_properties) kCGLShareGroup);
+        #else
+        */
+            properties.push_back(CL_CONTEXT_PLATFORM);
+            properties.push_back((cl_context_properties) device.Platform);
+            
+        //#endif
+
+       properties.push_back(0);
+    }
+
     Context* createContext(const Device& device)
     {
         LOG("[OpenCL] Creating context using %s ...\n", device.Name.c_str());
 
         cl_int error;
 
-        cl_context_properties properties[] =
-        {
-                CL_CONTEXT_PLATFORM,
-                (cl_context_properties) device.Platform,
-                0
-        };
+        std::vector<cl_context_properties> properties;
+        getContextProperties(device, properties);
 
-        cl_context object = clCreateContext(properties, 1, &device.ID, NULL, NULL, &error);
+        cl_context object = clCreateContext(properties.data(), 1, &device.ID, NULL, NULL, &error);
         if (error != CL_SUCCESS)
         {
             LOG("[OpenCL] Error: Failed to create a compute context!\n");
@@ -488,7 +519,6 @@ public:
             LOG("[OpenCL]     Version :     %s\n", p->Version.c_str());
             LOG("[OpenCL]     Name :        %s\n", p->Name.c_str());
             LOG("[OpenCL]     Vendor :      %s\n", p->Vendor.c_str());
-            LOG("[OpenCL]     Extensions :  %s\n", p->Profile.c_str());
             count++;
         }
 
@@ -496,10 +526,6 @@ public:
         for (auto d : m_Devices)
         {
             LOG("[OpenCL] Device #%u (id : %p)\n", count, d->ID);
-
-            LOG("[OpenCL]     Name :           %s\n", d->Name.c_str());
-            LOG("[OpenCL]     Platform :       %p\n", d->Platform);
-            LOG("[OpenCL]     Profile :        %s\n", d->Profile.c_str());
 
             LOG("[OpenCL]     Type :           ");
             switch(d->Type)
@@ -524,9 +550,16 @@ public:
                 break;
             }
 
+            LOG("[OpenCL]     Name :           %s\n", d->Name.c_str());
+            LOG("[OpenCL]     Platform :       %p\n", d->Platform);
+            LOG("[OpenCL]     Profile :        %s\n", d->Profile.c_str());
+
             LOG("[OpenCL]     Vendor :         %s\n", d->Vendor.c_str());
             LOG("[OpenCL]     Version :        %s\n", d->Version.c_str());
             LOG("[OpenCL]     DriverVersion :  %s\n", d->DriverVersion.c_str());
+
+            LOG("[OpenCL]     Extensions :     %s\n", d->Extensions.c_str());
+
             count++;
         }
     }

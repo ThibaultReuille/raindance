@@ -8,6 +8,7 @@
 # include <GL/glew.h>
 # include <GLFW/glfw3.h>
 # include <OpenCL/opencl.h>
+# include <OpenCL/cl_gl.h>
 #endif
 
 #ifdef __linux__
@@ -16,6 +17,7 @@
 # include <GL/glew.h>
 # include <GLFW/glfw3.h>
 # include <CL/cl.h>
+# include <CL/cl_gl.h>
 #endif
 
 #ifdef EMSCRIPTEN
@@ -42,13 +44,11 @@
 # define M_SQRT1_2  0.707106781186547524401  // 1 / sqrt(2)
 
 # define GL_GLEXT_PROTOTYPES
-
 # include <windows.h>
-
 # include <GL/glew.h>
 # include <GLFW/glfw3.h>
 # include <CL/cl.h>
-
+# include <CL/cl_gl.h>
 #endif
 
 #define GLM_SWIZZLE
@@ -93,14 +93,14 @@
     if ((ptr) != NULL)    \
     {                     \
         delete (ptr);     \
-		ptr = NULL;       \
+		ptr = NULL;           \
     }                     \
 
 #define RANDOM_FLOAT(A, B)                                          \
     ((((B) - (A)) * (static_cast<float>(rand()) / RAND_MAX)) + (A)) \
 
 #define RANDOM_INT(A, B)                                            \
-    ((A) + rand() % ((B) - (A) + 1))								\
+    ((A) + rand() % ((B) - (A) + 1))							                	\
 
 
 #define HEX_COLOR(C)                                                \

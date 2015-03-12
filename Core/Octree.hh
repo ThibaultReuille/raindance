@@ -118,11 +118,14 @@ public:
         m_ElementCount = 0;
 
         m_Cube = new Cube();
-        m_Cube->getVertexBuffer().mute("a_Normal", true);
+        m_Cube->getLineVertexBuffer().mute("a_Normal", true);
 
         m_Shader = ResourceManager::getInstance().loadShader("octree:octant cube",
                 Assets_Shaders_Primitives_grid_vert, sizeof(Assets_Shaders_Primitives_grid_vert),
                 Assets_Shaders_Primitives_grid_frag, sizeof(Assets_Shaders_Primitives_grid_frag));
+    
+        m_Shader->use();
+        m_Shader->uniform("u_Color").set(glm::vec4(0.5, 0.5, 0.5, 0.5));
     }
 
     virtual ~Octree()
@@ -249,14 +252,14 @@ public:
 
                 Transformation transformation;
                 transformation.translate(current.Node->getCenter());
-                transformation.scale(2.0f * current.Node->getHalfDimension());
+                transformation.scale(2.0f * 2.0f * current.Node->getHalfDimension());
 
                 m_Shader->use();
                 m_Shader->uniform("u_ModelViewProjection").set(projection * view * model * transformation.state());
-                m_Shader->uniform("u_Color").set(glm::vec4(0.5, 0.5, 0.5, 0.5));
-                context->geometry().bind(m_Cube->getVertexBuffer(), *m_Shader);
-                context->geometry().drawElements(GL_LINES, m_Cube->getLineBuffer().size() / sizeof(short int), GL_UNSIGNED_SHORT, m_Cube->getLineBuffer().ptr());
-                context->geometry().unbind(m_Cube->getVertexBuffer());
+
+                context->geometry().bind(m_Cube->getLineVertexBuffer(), *m_Shader);        
+                context->geometry().drawArrays(GL_LINES, 0, m_Cube->getLineVertexBuffer().size() / sizeof(Cube::Vertex));
+                context->geometry().unbind(m_Cube->getLineVertexBuffer());
             }
             else
             {

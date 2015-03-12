@@ -2,7 +2,7 @@
 
 #include <raindance/Core/Headers.hh>
 
-static void checkGLErrors()
+static void checkGLErrors(bool mute = false)
 {
 	static int failures = 0;
 	if (failures >= 3)
@@ -11,6 +11,9 @@ static void checkGLErrors()
 	GLenum err;
 	while ((err = glGetError()) != GL_NO_ERROR)
 	{
+		if (mute)
+			continue;
+
 		std::cerr << "OpenGL error (" << err << ") : ";
 		failures++;
 
