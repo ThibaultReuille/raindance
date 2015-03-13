@@ -65,6 +65,8 @@ namespace GLFW
 		    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 		    glfwWindowHint(GLFW_SAMPLES, 4);
 
+		    // TODO : glfwWindowHint(GLFW_STEREO, GL_TRUE);
+
 			if (m_Fullscreen)
 			{
 				getResolution(&width, &height);

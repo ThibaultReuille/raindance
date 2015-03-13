@@ -110,6 +110,10 @@
 
 const glm::vec3 BLACK =           HEX_COLOR(0x000000);
 const glm::vec3 WHITE =           HEX_COLOR(0xFFFFFF);
+const glm::vec3 RED =             HEX_COLOR(0xFF0000);
+const glm::vec3 GREEN =           HEX_COLOR(0x00FF00);
+const glm::vec3 BLUE =            HEX_COLOR(0x0000FF);
+
 const glm::vec3 AQUAMARINE =      HEX_COLOR(0x4E78A0);
 const glm::vec3 NEON_PINK =       glm::vec3(0.96, 0.20, 0.66);
 const glm::vec3 SKY_BLUE =        glm::vec3(0.50, 0.79, 1.00);
