@@ -12,7 +12,7 @@ public:
         m_Shader = ResourceManager::getInstance().loadShader("slider", Assets_Shaders_Widgets_slider_vert, sizeof(Assets_Shaders_Widgets_slider_vert),
                                                                        Assets_Shaders_Widgets_slider_frag, sizeof(Assets_Shaders_Widgets_slider_frag),
                                                                        Assets_Shaders_Widgets_slider_geom, sizeof(Assets_Shaders_Widgets_slider_geom));
-        m_Shader->dump();
+        //m_Shader->dump();
 
         m_Color = glm::vec4(0.5, 0.5, 0.5, 1.0);
 

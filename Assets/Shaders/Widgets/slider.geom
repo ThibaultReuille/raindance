@@ -14,15 +14,15 @@ void main()
 {	
 	vec2 pos[4] = vec2[]
 	(
-		vec2(0.0,  0.0),
-        vec2(1.0,  0.0),
-        vec2(0.0, -1.0),
-        vec2(1.0, -1.0)
+		gl_in[0].gl_Position.xy + vec2(0.0,  0.0),
+        gl_in[0].gl_Position.xy + vec2(1.0,  0.0),
+        gl_in[0].gl_Position.xy + vec2(0.0, -1.0),
+        gl_in[0].gl_Position.xy + vec2(1.0, -1.0)
     );
 
 	for (int i = 0; i < 4; i++)
 	{
-		gl_Position = u_ProjectionMatrix * u_ModelViewMatrix * (gl_in[0].gl_Position + vec4(pos[i], 0.0, 1.0));
+		gl_Position = u_ProjectionMatrix * u_ModelViewMatrix * vec4(pos[i], 0.0, 1.0);
 		gs_Color = u_Color;
 		EmitVertex();
 	}
@@ -30,7 +30,7 @@ void main()
 	
 	for (int i = 0; i < 4; i++)
 	{
-		gl_Position = u_ProjectionMatrix * u_ModelViewMatrix * (gl_in[0].gl_Position + vec4(pos[i].x * u_Value, pos[i].y, 0.0, 1.0));
+		gl_Position = u_ProjectionMatrix * u_ModelViewMatrix * vec4(pos[i].x * u_Value, pos[i].y, 0.0, 1.0);
 		gs_Color = u_Color;
 		EmitVertex();
 	}
