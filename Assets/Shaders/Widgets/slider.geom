@@ -22,7 +22,7 @@ void main()
 
 	for (int i = 0; i < 4; i++)
 	{
-		gl_Position = u_ProjectionMatrix * u_ModelViewMatrix * vec4(pos[i], 0.0, 1.0);
+		gl_Position = u_ProjectionMatrix * u_ModelViewMatrix * (gl_in[0].gl_Position + vec4(pos[i], 0.0, 1.0));
 		gs_Color = u_Color;
 		EmitVertex();
 	}
@@ -30,7 +30,7 @@ void main()
 	
 	for (int i = 0; i < 4; i++)
 	{
-		gl_Position = u_ProjectionMatrix * u_ModelViewMatrix * vec4(pos[i].x * u_Value, pos[i].y, 0.0, 1.0);
+		gl_Position = u_ProjectionMatrix * u_ModelViewMatrix * (gl_in[0].gl_Position + vec4(pos[i].x * u_Value, pos[i].y, 0.0, 1.0));
 		gs_Color = u_Color;
 		EmitVertex();
 	}
