@@ -76,6 +76,7 @@ public:
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
+
 		switch(components)
 		{
 		case 1:
@@ -92,9 +93,10 @@ public:
 		}
 
 #ifndef EMSCRIPTEN
-		glHint(GL_GENERATE_MIPMAP_HINT, GL_NICEST);
+		// glHint(GL_GENERATE_MIPMAP_HINT, GL_NICEST); // TODO : Raises GL errors, Deprecated?
 		glGenerateMipmap(GL_TEXTURE_2D);
 #endif
+
 	}
 
 	void update()

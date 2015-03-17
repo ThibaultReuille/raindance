@@ -202,35 +202,36 @@ public:
         LOG("[OpenCL] %i platform(s) and %i device(s) detected.\n", static_cast<int>(m_Platforms.size()), static_cast<int>(m_Devices.size()));
     }
 
-    void getContextProperties(const Device& device, std::vector<cl_context_properties>& properties)
-    {
-        /*
-        #if defined (__APPLE__) || defined(MACOSX)
-            CGLContextObj kCGLContext = CGLGetCurrentContext();
-            CGLShareGroupObj kCGLShareGroup = CGLGetShareGroup(kCGLContext);
-            
-            properties.push_back(CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE);
-            properties.push_back((cl_context_properties) kCGLShareGroup);
-        #else
-        */
-            properties.push_back(CL_CONTEXT_PLATFORM);
-            properties.push_back((cl_context_properties) device.Platform);
-            
-        //#endif
-
-       properties.push_back(0);
-    }
-
     Context* createContext(const Device& device)
     {
         LOG("[OpenCL] Creating context using %s ...\n", device.Name.c_str());
 
         cl_int error;
 
-        std::vector<cl_context_properties> properties;
-        getContextProperties(device, properties);
+        #if defined (__APPLE__) || defined(MACOSX)
 
-        cl_context object = clCreateContext(properties.data(), 1, &device.ID, NULL, NULL, &error);
+            CGLContextObj kCGLContext = CGLGetCurrentContext(); 
+            CGLShareGroupObj kCGLShareGroup = CGLGetShareGroup(kCGLContext);
+
+            cl_context_properties properties[] =
+            {
+                CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE,
+                (cl_context_properties) kCGLShareGroup,
+                0
+            };
+
+        #else
+
+            cl_context_properties properties[] =
+            {
+                CL_CONTEXT_PLATFORM,
+                (cl_context_properties) device.Platform,
+                0
+            }; 
+
+        #endif
+
+        cl_context object = clCreateContext(properties, 1, &device.ID, NULL, NULL, &error);
         if (error != CL_SUCCESS)
         {
             LOG("[OpenCL] Error: Failed to create a compute context!\n");
@@ -344,6 +345,28 @@ public:
         m_Buffers.push_back(buffer);
 
         return buffer;
+    }
+
+    Memory* createFromGLBuffer(const Context& context, cl_mem_flags flags, GLuint bufobj)
+    {
+         cl_int error;
+
+        LOG("[OpenCL] Creating buffer from GL VBO<%u>' ...\n", bufobj);
+        cl_mem object = clCreateFromGLBuffer(context.Object, flags, bufobj, &error);
+        if (error != CL_SUCCESS)
+        {
+            LOG("[OpenCL] Error: Failed to create buffer!\n");
+            throw;
+        }
+
+        Memory* buffer = new Memory();
+        buffer->Object = object;
+        buffer->Context = context.Object;
+        buffer->Size = 0; // NOTE : 0 = From GL Buffer
+
+        m_Buffers.push_back(buffer);
+
+        return buffer;   
     }
 
     void destroyBuffer(Memory** memory)
@@ -507,29 +530,101 @@ public:
         }
     }
 
-    void dump()
+
+
+    void enqueueAcquireGLObjects(const CommandQueue& queue,
+                                 cl_uint num_objects,
+                                 const cl_mem *mem_objects,
+                                 cl_uint num_events_in_wait_list,
+                                 const cl_event *event_wait_list,
+                                 cl_event *event)
     {
-        unsigned int count;
-
-        count = 0;
-        for (auto p : m_Platforms)
+        cl_int error = clEnqueueAcquireGLObjects(queue.Object, num_objects, mem_objects, num_events_in_wait_list, event_wait_list, event);
+        if (error != CL_SUCCESS)
         {
-            LOG("[OpenCL] Platform #%u (id : %p)\n", count, p->ID);
-            LOG("[OpenCL]     Profile :     %s\n", p->Profile.c_str());
-            LOG("[OpenCL]     Version :     %s\n", p->Version.c_str());
-            LOG("[OpenCL]     Name :        %s\n", p->Name.c_str());
-            LOG("[OpenCL]     Vendor :      %s\n", p->Vendor.c_str());
-            count++;
-        }
-
-        count = 0;
-        for (auto d : m_Devices)
-        {
-            LOG("[OpenCL] Device #%u (id : %p)\n", count, d->ID);
-
-            LOG("[OpenCL]     Type :           ");
-            switch(d->Type)
+            switch(error)
             {
+            case CL_INVALID_VALUE:
+                LOG("CL_INVALID_VALUE\n");
+                break;
+            case CL_INVALID_MEM_OBJECT:
+                LOG("CL_INVALID_MEM_OBJECT\n");
+                break;
+            case CL_INVALID_COMMAND_QUEUE:
+                LOG("CL_INVALID_COMMAND_QUEUE\n");
+                break;
+            case CL_INVALID_CONTEXT:
+                LOG("CL_INVALID_CONTEXT\n");
+                break;
+            case CL_INVALID_GL_OBJECT:
+                LOG("CL_INVALID_GL_OBJECT\n");
+                break;
+            case CL_INVALID_EVENT_WAIT_LIST:
+                LOG("CL_INVALID_EVENT_WAIT_LIST\n");
+                break;
+            case CL_OUT_OF_RESOURCES:
+                LOG("CL_OUT_OF_RESOURCES\n");
+                break;
+            case CL_OUT_OF_HOST_MEMORY: 
+                LOG("CL_OUT_OF_HOST_MEMORY\n");
+                break;
+            default:
+                break;
+            }
+            throw;
+        }
+    }   
+
+    void enqueueReleaseGLObjects(const CommandQueue& queue,
+                                   cl_uint num_objects,
+                                   const cl_mem *mem_objects,
+                                   cl_uint num_events_in_wait_list,
+                                   const cl_event *event_wait_list,
+                                   cl_event *event)
+    {
+        cl_int error = clEnqueueReleaseGLObjects(queue.Object, num_objects, mem_objects, num_events_in_wait_list, event_wait_list, event);
+        if (error != CL_SUCCESS)
+        {
+            switch(error)
+            {
+            case CL_INVALID_VALUE:
+                LOG("CL_INVALID_VALUE\n");
+                break;
+            case CL_INVALID_MEM_OBJECT:
+                LOG("CL_INVALID_MEM_OBJECT\n");
+                break;
+            case CL_INVALID_COMMAND_QUEUE:
+                LOG("CL_INVALID_COMMAND_QUEUE\n");
+                break;
+            case CL_INVALID_CONTEXT:
+                LOG("CL_INVALID_CONTEXT\n");
+                break;
+            case CL_INVALID_GL_OBJECT:
+                LOG("CL_INVALID_GL_OBJECT\n");
+                break;
+            case CL_INVALID_EVENT_WAIT_LIST:
+                LOG("CL_INVALID_EVENT_WAIT_LIST\n");
+                break;
+            case CL_OUT_OF_RESOURCES:
+                LOG("CL_OUT_OF_RESOURCES\n");
+                break;
+            case CL_OUT_OF_HOST_MEMORY: 
+                LOG("CL_OUT_OF_HOST_MEMORY\n");
+                break;
+            default:
+                break;
+            }
+            throw;
+        }
+    }   
+
+    void dump(const Device& device)
+    {
+        LOG("%s (id: %p)\n", device.Name.c_str(), device.ID);
+
+        LOG("\tType :           ");
+        switch(device.Type)
+        {
             case CL_DEVICE_TYPE_DEFAULT:
                 LOG("Default\n");
                 break;
@@ -548,18 +643,43 @@ public:
             default:
                 LOG("Unknown\n");
                 break;
-            }
+        };
 
-            LOG("[OpenCL]     Name :           %s\n", d->Name.c_str());
-            LOG("[OpenCL]     Platform :       %p\n", d->Platform);
-            LOG("[OpenCL]     Profile :        %s\n", d->Profile.c_str());
+        LOG("\tVendor :         %s\n", device.Vendor.c_str());
+        LOG("\tVersion :        %s\n", device.Version.c_str());
+        LOG("\tDriverVersion :  %s\n", device.DriverVersion.c_str());
+        LOG("\tProfile :        %s\n", device.Profile.c_str());
+        LOG("\tPlatform :       %p\n", device.Platform);
+        
 
-            LOG("[OpenCL]     Vendor :         %s\n", d->Vendor.c_str());
-            LOG("[OpenCL]     Version :        %s\n", d->Version.c_str());
-            LOG("[OpenCL]     DriverVersion :  %s\n", d->DriverVersion.c_str());
+        LOG("\tExtensions : %s\n", device.Extensions.c_str()); 
+    }
 
-            LOG("[OpenCL]     Extensions :     %s\n", d->Extensions.c_str());
+    void dump(const Platform& platform)
+    {
+        LOG("%s (id: %p)\n", platform.Name.c_str(), platform.ID);
+        LOG("\tVendor :      %s\n", platform.Vendor.c_str());
+        LOG("\tVersion :     %s\n", platform.Version.c_str());
+        LOG("\tProfile :     %s\n", platform.Profile.c_str());
+    }
 
+    void dump()
+    {
+        unsigned int count;
+
+        count = 0;
+        for (auto platform : m_Platforms)
+        {
+            LOG("\n[OpenCL] Platform #%u\n", count);
+            dump(*platform);
+            count++;
+        }
+
+        count = 0;
+        for (auto device : m_Devices)
+        {
+            LOG("\n[OPENCL] Device #%u\n", count);
+            dump(*device);
             count++;
         }
     }

@@ -2,6 +2,11 @@
 
 #include <raindance/Core/Headers.hh>
 
+// Required for draw call
+#include <raindance/Core/Transformation.hh>
+#include <raindance/Core/Resources/Shader.hh>
+#include <raindance/Core/Camera/Camera.hh>
+
 class Cube
 {
 public:

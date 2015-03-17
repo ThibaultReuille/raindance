@@ -7,6 +7,7 @@
 # define EGL_EGLEXT_PROTOTYPES
 # include <GL/glew.h>
 # include <GLFW/glfw3.h>
+# include <OpenGL/OpenGL.h>
 # include <OpenCL/opencl.h>
 # include <OpenCL/cl_gl.h>
 #endif
