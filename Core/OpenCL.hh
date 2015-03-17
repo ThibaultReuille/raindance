@@ -182,12 +182,6 @@ public:
                 device->Version = getDeviceInfoString(deviceIDs[j], CL_DEVICE_VERSION);
 
                 device->DriverVersion = getDeviceInfoString(deviceIDs[j], CL_DRIVER_VERSION);
-                
-                /*
-                char extensions[2048];
-                clGetDeviceInfo(deviceIDs[j], CL_DEVICE_EXTENSIONS, sizeof(extensions), static_cast<void*>(extensions));
-                device->Extensions = std::string(extensions);
-                */
 
                 device->Extensions = getDeviceInfoString(deviceIDs[j], CL_DEVICE_EXTENSIONS);
 
@@ -221,6 +215,17 @@ public:
             };
 
         #else
+        # if defined (__linux__)
+
+            cl_context_properties properties[] =
+            {
+                CL_GL_CONTEXT_KHR, (cl_context_properties) glXGetCurrentContext(),
+                CL_GLX_DISPLAY_KHR, (cl_context_properties) glXGetCurrentDisplay(),
+                CL_CONTEXT_PLATFORM, (cl_context_properties) device.Platform, 
+                0
+            }; 
+
+        # else
 
             cl_context_properties properties[] =
             {
@@ -229,6 +234,7 @@ public:
                 0
             }; 
 
+        # endif
         #endif
 
         cl_context object = clCreateContext(properties, 1, &device.ID, NULL, NULL, &error);
