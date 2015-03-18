@@ -28,7 +28,7 @@ public:
 	    m_InitialValue = m_Camera->getPosition() + m_Camera->front();
 	}
 
-	virtual Status play(Timecode timecode)
+	virtual SequenceStatus play(Timecode timecode)
 	{
 		Timecode deltaTime = timecode - m_StartTime;
 

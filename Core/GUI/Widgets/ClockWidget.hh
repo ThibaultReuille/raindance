@@ -18,7 +18,7 @@ public:
 
         m_TextPosition = glm::vec3(1.5 * m_Dimension.x, 3.0, 0);
 
-        m_Font = new Font();
+        m_Font = new rd::Font();
         m_TextWidget = new TextWidget("clock text widget", NULL , pos, dimension);
         m_TextWidget->text().set("Clock", m_Font);
 
@@ -79,7 +79,7 @@ public:
 private:
     TextWidget* m_TextWidget;
     glm::vec3 m_TextPosition;
-    Font* m_Font;
+    rd::Font* m_Font;
     Clock* m_Clock;
     Timecode m_LastValue;
     bool m_NeedsUpdate;
