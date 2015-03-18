@@ -4,6 +4,9 @@
 #include <raindance/Core/Context.hh>
 #include <raindance/Core/GLFW.hh>
 
+namespace rd
+{
+
 class Window : public GLFW::Window
 {
 public:
@@ -40,6 +43,8 @@ protected:
 
     glm::vec4 m_ClearColor;
 };
+
+}
 
 /* TODO : Reimplement Canvas + HD screenshots
 

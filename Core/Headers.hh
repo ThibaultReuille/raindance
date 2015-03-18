@@ -16,7 +16,12 @@
 # define GL_GLEXT_PROTOTYPES
 # define EGL_EGLEXT_PROTOTYPES
 # include <GL/glew.h>
+
 # include <GLFW/glfw3.h>
+# define GLFW_EXPOSE_NATIVE_X11
+# define GLFW_EXPOSE_NATIVE_GLX
+# include <GLFW/glfw3native.h>
+
 # include <CL/cl.h>
 # include <CL/cl_gl.h>
 #endif

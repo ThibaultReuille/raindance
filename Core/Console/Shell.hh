@@ -23,7 +23,7 @@ public:
         m_Prompt = "$ ";
 
 		m_HistoryFontFactor = 0.75;
-        m_Font = new Font();
+        m_Font = new rd::Font();
         m_Text.set(m_Prompt.c_str(), m_Font);
 	}
 
@@ -183,5 +183,5 @@ private:
 	std::string m_Characters;
 	std::string m_Prompt;
 	Text m_Text;
-	Font* m_Font;
+	rd::Font* m_Font;
 };

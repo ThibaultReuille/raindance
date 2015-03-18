@@ -19,7 +19,7 @@ public:
 		GLFW::destroy();
 	}
 
-	virtual void add(Window* window)
+	virtual void add(rd::Window* window)
 	{
 		GLFW::setCallbacks(window);
 		auto id = m_WindowManager.add(window);
@@ -30,7 +30,7 @@ public:
     {
     	m_WindowManager.active()->initialize(m_Context);
 
-    	while (m_WindowManager.active()->state() == Window::ALIVE)
+    	while (m_WindowManager.active()->state() == rd::Window::ALIVE)
     	{
     		Geometry::beginFrame();
 

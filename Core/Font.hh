@@ -44,6 +44,9 @@ const std::string g_FragmentShader =
 "    FragColor = vec4(vec3(v_Color), finalalpha);"
 "}";
 
+namespace rd
+{
+
 class Font
 {
 public:
@@ -291,3 +294,5 @@ private:
     float m_Ascender;
     float m_Descender;
 };
+
+}

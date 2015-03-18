@@ -7,7 +7,7 @@ class Sequence
 public:
     typedef unsigned long ID;
 
-    enum Status
+    enum SequenceStatus
     {
         LIVE,
         KILL
@@ -21,7 +21,7 @@ public:
     virtual ~Sequence() {}
 
     virtual void start(Timecode timecode) = 0;
-    virtual Status play(Timecode timecode) = 0;
+    virtual SequenceStatus play(Timecode timecode) = 0;
     virtual void stop(Timecode timecode) = 0;
 
     inline ID id() const { return m_ID; }
@@ -57,7 +57,7 @@ public:
         LOG("%lu > %s START\n", timecode, name().c_str());
     }
 
-    virtual Status play(Timecode timecode)
+    virtual SequenceStatus play(Timecode timecode)
     {
         Timecode deltaTime = timecode - m_StartTime;
 
@@ -112,7 +112,7 @@ public:
         LOG("%lu > %s START\n", timecode, name().c_str());
     }
 
-    virtual Status play(Timecode timecode)
+    virtual SequenceStatus play(Timecode timecode)
     {
         if (m_Iteration == 0)
         {

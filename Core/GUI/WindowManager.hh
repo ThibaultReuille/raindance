@@ -3,6 +3,6 @@
 #include <raindance/Core/Manager.hh>
 #include <raindance/Core/GUI/Window.hh>
 
-class WindowManager : public Manager<Window>
+class WindowManager : public Manager<rd::Window>
 {
 };

@@ -19,7 +19,7 @@ public:
 		m_Font = NULL;
 	}
 
-	void set(const char* caption, Font* font)
+	void set(const char* caption, rd::Font* font)
 	{
 		m_Font = font;
 		m_Text = std::string(caption);
@@ -55,10 +55,10 @@ public:
 
 	inline float getWidth() { return m_TextWidth; }
 
-	inline Font* getFont() { return m_Font; }
+	inline rd::Font* getFont() { return m_Font; }
 
 private:
-	Font* m_Font;
+	rd::Font* m_Font;
 	glm::vec4 m_Color;
 	std::string m_Text;
 	float m_TextWidth;
