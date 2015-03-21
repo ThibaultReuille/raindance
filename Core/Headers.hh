@@ -119,6 +119,13 @@ const glm::vec3 WHITE =           HEX_COLOR(0xFFFFFF);
 const glm::vec3 RED =             HEX_COLOR(0xFF0000);
 const glm::vec3 GREEN =           HEX_COLOR(0x00FF00);
 const glm::vec3 BLUE =            HEX_COLOR(0x0000FF);
+const glm::vec3 YELLOW =          HEX_COLOR(0xFFFF00);
+const glm::vec3 CYAN =            HEX_COLOR(0x00FFFF);
+const glm::vec3 MAGENTA =         HEX_COLOR(0xFF00FF);
+const glm::vec3 PINK =            HEX_COLOR(0xFFC0CB);
+const glm::vec3 ORANGE =          HEX_COLOR(0xFFA500);
+const glm::vec3 PURPLE =          HEX_COLOR(0x800080);
+const glm::vec3 BROWN =           HEX_COLOR(0xA52A2A);
 
 const glm::vec3 AQUAMARINE =      HEX_COLOR(0x4E78A0);
 const glm::vec3 NEON_PINK =       glm::vec3(0.96, 0.20, 0.66);
