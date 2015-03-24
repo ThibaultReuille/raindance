@@ -1,5 +1,7 @@
-attribute vec3 a_Position;
-attribute vec3 a_Color;
+#version 330
+
+layout (location = 0) in vec3 a_Position;
+layout (location = 1) in vec3 a_Color;
 
 struct Box
 {
@@ -9,9 +11,9 @@ struct Box
 
 struct Filter
 {
-    int active;
-    float value;
-    float threshold;
+    int Active;
+    float Value;
+    float Threshold;
 };
 
 uniform mat4 u_ModelViewProjection;
@@ -20,8 +22,8 @@ uniform Filter u_FilterX;
 uniform Filter u_FilterY;
 uniform Filter u_FilterZ;
 
-varying vec4 v_Color;
-varying vec3 v_Alpha;
+out vec4 vs_Color;
+out vec3 vs_Alpha;
 
 void main(void)
 {
@@ -31,14 +33,14 @@ void main(void)
     pos.y = (a_Position.y - u_Box.min.y) / diff.y;
     pos.z = (a_Position.z - u_Box.min.z) / diff.z;
 
-    if (u_FilterX.active > 0)
-        v_Alpha.x = max(0.0, 1.0 - abs(pos.x - u_FilterX.value));
-    if (u_FilterY.active > 0)
-        v_Alpha.y = max(0.0, 1.0 - abs(pos.y - u_FilterY.value));
-    if (u_FilterZ.active > 0)
-        v_Alpha.z = max(0.0, 1.0 - abs(pos.z - u_FilterZ.value));
+    if (u_FilterX.Active > 0)
+        vs_Alpha.x = max(0.0, 1.0 - abs(pos.x - u_FilterX.Value));
+    if (u_FilterY.Active > 0)
+        vs_Alpha.y = max(0.0, 1.0 - abs(pos.y - u_FilterY.Value));
+    if (u_FilterZ.Active > 0)
+        vs_Alpha.z = max(0.0, 1.0 - abs(pos.z - u_FilterZ.Value));
 
-    v_Color = vec4(a_Color, 1.0); 
+    vs_Color = vec4(a_Color, 1.0); 
 
     gl_Position = u_ModelViewProjection * vec4(a_Position, 1.0);
 }

@@ -84,9 +84,9 @@ public:
 			// m_Shader->uniform("u_FilterY.value").set(0.5f);
 			// m_Shader->uniform("u_FilterY.threshold").set(0.9f);
 
-			m_Shader->uniform("u_FilterZ.active").set(m_FilterZ.Active ? 1 : 0);
-			m_Shader->uniform("u_FilterZ.value").set(m_FilterZ.Value);
-			m_Shader->uniform("u_FilterZ.threshold").set(m_FilterZ.Threshold);
+			m_Shader->uniform("u_FilterZ.Active").set(m_FilterZ.Active ? 1 : 0);
+			m_Shader->uniform("u_FilterZ.Value").set(m_FilterZ.Value);
+			m_Shader->uniform("u_FilterZ.Threshold").set(m_FilterZ.Threshold);
 
 			context->geometry().bind(m_VertexBuffer, *m_Shader);
 			context->geometry().drawArrays(GL_POINTS, 0, m_VertexBuffer.size() / sizeof(PointVertex));
