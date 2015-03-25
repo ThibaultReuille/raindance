@@ -21,12 +21,6 @@ public:
 		float Threshold;
 		float Value;
 	};
-
-	enum DrawMode
-	{
-		POINTS,
-		ICONS
-	}
 ;
 	Filter m_FilterZ;
 
@@ -42,8 +36,6 @@ public:
 
 		m_PointIcon = new Icon();
 		m_PointIcon->load("disk", Assets_Particle_ball_png, sizeof(Assets_Particle_ball_png));
-
-		m_DrawMode = POINTS;
 
 		update();
 	}
@@ -66,66 +58,33 @@ public:
 
 		m_Box->draw(context, projection * view * model);
 
-		switch(m_DrawMode)
-		{
-		case POINTS:
-			glPointSize(2.0f);
+		glPointSize(2.0f);
 
-			m_Shader->use();
-			m_Shader->uniform("u_ModelViewProjection").set(projection * view * model);
-			m_Shader->uniform("u_Box.min").set(m_Box->min());
-			m_Shader->uniform("u_Box.max").set(m_Box->max());
+		m_Shader->use();
+		m_Shader->uniform("u_ModelViewProjection").set(projection * view * model);
+		m_Shader->uniform("u_Box.min").set(m_Box->min());
+		m_Shader->uniform("u_Box.max").set(m_Box->max());
 
-			// m_Shader->uniform("u_FilterX.active").set(1.0f);
-			// m_Shader->uniform("u_FilterX.value").set(value);
-			// m_Shader->uniform("u_FilterX.threshold").set(0.5f);
+		// m_Shader->uniform("u_FilterX.active").set(1.0f);
+		// m_Shader->uniform("u_FilterX.value").set(value);
+		// m_Shader->uniform("u_FilterX.threshold").set(0.5f);
 
-			// m_Shader->uniform("u_FilterY.active").set(1.0f);
-			// m_Shader->uniform("u_FilterY.value").set(0.5f);
-			// m_Shader->uniform("u_FilterY.threshold").set(0.9f);
+		// m_Shader->uniform("u_FilterY.active").set(1.0f);
+		// m_Shader->uniform("u_FilterY.value").set(0.5f);
+		// m_Shader->uniform("u_FilterY.threshold").set(0.9f);
 
-			m_Shader->uniform("u_FilterZ.Active").set(m_FilterZ.Active ? 1 : 0);
-			m_Shader->uniform("u_FilterZ.Value").set(m_FilterZ.Value);
-			m_Shader->uniform("u_FilterZ.Threshold").set(m_FilterZ.Threshold);
+		m_Shader->uniform("u_FilterZ.Active").set(m_FilterZ.Active ? 1 : 0);
+		m_Shader->uniform("u_FilterZ.Value").set(m_FilterZ.Value);
+		m_Shader->uniform("u_FilterZ.Threshold").set(m_FilterZ.Threshold);
 
-			context->geometry().bind(m_VertexBuffer, *m_Shader);
-			context->geometry().drawArrays(GL_POINTS, 0, m_VertexBuffer.size() / sizeof(PointVertex));
-			context->geometry().unbind(m_VertexBuffer);
-			break;
-
-		case ICONS:
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_ONE, GL_ONE);
-			float iconSize = 0.5;
-			PointVertex point;
-			unsigned int size = m_VertexBuffer.size() / sizeof(PointVertex);
-			for (unsigned int i = 0; i < size; i++)
-			{
-				m_VertexBuffer.get(i, &point, sizeof(PointVertex));
-
-				glm::mat4 modelView = view * glm::translate(transformation.state(), point.Position);
-				modelView = glm::scale(Geometry::billboard(modelView), glm::vec3(iconSize, iconSize, iconSize));
-				m_PointIcon->draw(context, projection * modelView, point.Color, 0);
-			}
-			glDisable(GL_BLEND);
-			break;
-		}
-
-		/*
-		{
-			static unsigned short int indices[] = { 0, 1, 2, 0, 2, 3 };
-			m_LayerShader->use();
-			m_LayerShader->uniform("u_ModelViewProjection").set(mvp);
-			m_LayerShader->uniform("u_Texture").set(*m_LayerTexture);
-			context->geometry().bind(m_LayerVertexBuffer, *m_LayerShader);
-			context->geometry().drawElements(GL_TRIANGLES, sizeof(indices) / sizeof(unsigned short int), GL_UNSIGNED_SHORT, indices);
-			context->geometry().unbind(m_LayerVertexBuffer);
-		}
-		*/
+		context->geometry().bind(m_VertexBuffer, *m_Shader);
+		context->geometry().drawArrays(GL_POINTS, 0, m_VertexBuffer.size() / sizeof(PointVertex));
+		context->geometry().unbind(m_VertexBuffer);
 	}
 
 	unsigned long addPoint(PointVertex& point)
 	{
+		LOG("addPoint(%f, %f, %f)\n", point.Position.x, point.Position.y, point.Position.z);
 		m_VertexBuffer.push(&point, sizeof(PointVertex));
 		return m_VertexBuffer.size() / sizeof(PointVertex);
 	}
@@ -145,19 +104,15 @@ public:
 
 		if (updateCount == 0)
 		{
-			m_VertexBuffer.enable(Buffer::GPU_SYNC);
 			m_VertexBuffer.describe("a_Position", 3, GL_FLOAT, sizeof(PointVertex), 0);
 			m_VertexBuffer.describe("a_Color", 4, GL_FLOAT, sizeof(PointVertex), 3 * sizeof(GLfloat));
 			m_VertexBuffer.generate(Buffer::DYNAMIC);
-			m_VertexBuffer.disable(Buffer::GPU_SYNC);
 		}
 		else
 		{
-			m_VertexBuffer.enable(Buffer::GPU_SYNC);
 			m_VertexBuffer.update();
 			m_VertexBuffer.describe("a_Position", 3, GL_FLOAT, sizeof(PointVertex), 0);
 			m_VertexBuffer.describe("a_Color", 4, GL_FLOAT, sizeof(PointVertex), 3 * sizeof(GLfloat));
-			m_VertexBuffer.disable(Buffer::GPU_SYNC);
 		}
 
 		m_LayerVertexBuffer.clear();
@@ -169,19 +124,15 @@ public:
 		m_LayerVertexBuffer << glm::vec3(min.x, max.y, min.z) << glm::vec2(0.0, 0.0);
 		if (updateCount == 0)
 		{
-			m_LayerVertexBuffer.enable(Buffer::GPU_SYNC);
 			m_LayerVertexBuffer.describe("a_Position", 3, GL_FLOAT, 5 * sizeof(GLfloat), 0);
 			m_LayerVertexBuffer.describe("a_Texcoord", 2, GL_FLOAT, 5 * sizeof(GLfloat), 3 * sizeof(GLfloat));
 			m_LayerVertexBuffer.generate(Buffer::DYNAMIC);
-			m_LayerVertexBuffer.disable(Buffer::GPU_SYNC);
 		}
 		else
 		{
-			m_LayerVertexBuffer.enable(Buffer::GPU_SYNC);
 			m_LayerVertexBuffer.update();
 			m_LayerVertexBuffer.describe("a_Position", 3, GL_FLOAT, 5 * sizeof(GLfloat), 0);
 			m_LayerVertexBuffer.describe("a_Texcoord", 2, GL_FLOAT, 5 * sizeof(GLfloat), 3 * sizeof(GLfloat));
-			m_LayerVertexBuffer.disable(Buffer::GPU_SYNC);
 		}
 
 		updateCount++;
@@ -237,8 +188,6 @@ public:
 
 private:
 	Box* m_Box;
-
-	DrawMode m_DrawMode;
 
 	Buffer m_VertexBuffer;
 	Shader::Program* m_Shader;

@@ -1,13 +1,15 @@
-attribute vec3 a_Position;
-attribute vec4 a_Color;
+#version 330
 
-uniform mat4 u_ModelViewProjection;
+layout (location = 0) in vec3 a_Position;
+layout (location = 1) in vec4 a_Color;
 
-varying vec4 v_Color;
+uniform mat4 u_ModelViewProjectionMatrix;
+
+out vec4 vs_Color;
 
 void main(void)
 {
-    v_Color = a_Color;
-    gl_Position = u_ModelViewProjection * vec4(a_Position, 1.0);
+    gl_Position = u_ModelViewProjectionMatrix * vec4(a_Position, 1.0);
+    vs_Color = a_Color;
 }
 
