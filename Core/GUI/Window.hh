@@ -3,6 +3,7 @@
 #include <raindance/Core/Headers.hh>
 #include <raindance/Core/Context.hh>
 #include <raindance/Core/GLFW.hh>
+#include <raindance/Core/Interface/Document.hh>
 
 namespace rd
 {
@@ -15,9 +16,15 @@ public:
     : GLFW::Window(title, width, height, fullscreen)
     {
         m_ClearColor = glm::vec4(0.0, 0.0, 0.0, 0.0);
+
+        m_Body.content().X = glm::vec2(0.0, (float)width);
+        m_Body.content().Y = glm::vec2(0.0, (float)height);
+        m_Body.content().Z = glm::vec2(0.0, 0.0);
     }
 
-    virtual ~Window() {}
+    virtual ~Window()
+    {
+    }
 
     virtual void initialize(Context* context)
     {
@@ -30,16 +37,32 @@ public:
 
     virtual void clear()
     {
+        glViewport(0, 0, getViewport().getDimension()[0], getViewport().getDimension()[1]);
+
         glClearColor(m_ClearColor.r, m_ClearColor.g, m_ClearColor.b, m_ClearColor.a);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    }
+
+    void onCursorPos(double xpos, double ypos) override
+    { 
+        m_Body.onCursorPos(xpos, getViewport().getDimension()[1] - ypos);
+    }
+
+    void onMouseButton(int button, int action, int mods) override
+    {
+        m_Body.onMouseButton(button, action, mods);
     }
 
     virtual void draw(Context* context) = 0;
 
     virtual void idle(Context* context) = 0;
 
+    inline DocumentCollection& body() { return m_Body; }
+
 protected:
     Context* m_Context;
+
+    DocumentCollection m_Body;
 
     glm::vec4 m_ClearColor;
 };

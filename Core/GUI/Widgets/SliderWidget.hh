@@ -20,7 +20,7 @@ public:
         m_VertexBuffer.describe("a_Position", 2, GL_FLOAT, 2 * sizeof(GLfloat), 0);
         m_VertexBuffer.generate(Buffer::STATIC);
 
-        m_Precision = 0.1;
+        m_Precision = 0.05;
         setValue(0.5f);
     }
     virtual ~SliderWidget()

@@ -23,12 +23,11 @@ public:
         ResourceManager::getInstance().unload(m_Shader);
     }
 
-    void resize(int width, int height)
+    void onResize(const Viewport& viewport) // TODO: override
     {
-        LOG("[WALLPAPER] resize(%i, %i)\n", width, height);
+        auto dimension = viewport.getDimension();
 
-        m_Dimension = glm::vec2(width, height);
-        m_Camera.setOrthographicProjection(0.0f, m_Dimension[0], 0.0f, m_Dimension[1], 0.001f, 100.f);
+        m_Camera.setOrthographicProjection(0.0f, dimension.x, 0.0f, dimension.y, 0.001f, 100.f);
         m_Camera.lookAt(glm::vec3(0, 0, 1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     }
 

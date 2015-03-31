@@ -152,29 +152,11 @@ public:
  		return Ray(m_Position, glm::normalize(pos - m_Position));
  	}
  
- 	// TODO : Deprecate this, we need to use Viewport which contains all Window info
- 	void reshape(int width, int height)
+	void resize(int width, int height)
  	{
  		m_Width = width;
  		m_Height = height;
  		m_Ratio = (float) width / (float) height;
- 
- 		switch(m_ProjectionMode)
- 		{
- 		case PERSPECTIVE:
- 			this->setPerspectiveProjection(60.0f, m_Ratio, 0.1f, 1024.0f);
- 			break;
- 		case ORTHOGRAPHIC:
- 			this->setOrthographicProjection(m_Left, m_Right, m_Bottom, m_Top, m_NearVal, m_FarVal);
- 			break;
- 		};
- 	}
-
- 	void reshape(const Viewport& viewport)
- 	{
- 		m_Width = viewport.getDimension()[0];
- 		m_Height = viewport.getDimension()[1];
- 		m_Ratio = (float) m_Width / m_Height;
  
  		switch(m_ProjectionMode)
  		{

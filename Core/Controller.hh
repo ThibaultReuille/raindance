@@ -71,7 +71,7 @@ public:
 	virtual void onMouseMove(const glm::vec2& pos, const glm::vec2& dpos)
 	{ LOG("[CONTROLLER] onMouseMove((%f, %f), (%f, %f)\n", pos.x, pos.y, dpos.x, dpos.y); }
 
-private:
+protected:
 	Mouse m_Mouse;
 };
 

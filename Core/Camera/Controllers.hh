@@ -60,9 +60,10 @@ public:
 			glm::vec3(0, 1, 0));
 	}
 
-	void onWindowSize(int width, int height) override
+	void onResize(const Viewport& viewport)
 	{
-		m_Camera->reshape(width, height);
+		auto framebuffer = viewport.getFramebuffer();
+		m_Camera->resize(framebuffer.Width, framebuffer.Height);
 	}
 
 	void onKey(int key, int scancode, int action, int mods) override
@@ -170,9 +171,10 @@ public:
 		m_LastTime = time;
 	}
 
-	void onWindowSize(int width, int height) override
+	void onResize(const Viewport& viewport)
 	{
-		m_Camera->reshape(width, height);
+		auto framebuffer = viewport.getFramebuffer();
+		m_Camera->resize(framebuffer.Width, framebuffer.Height);
 	}
 	
 	void onKey(int key, int scancode, int action, int mods) override

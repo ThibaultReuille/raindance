@@ -10,11 +10,13 @@ public:
     {
         Framebuffer(int width, int height) : Width(width), Height(height) {}
 
+        inline glm::vec2 getDimension() const { return glm::vec2(Width, Height); }
+
         int Width;
         int Height;
     };
 
-    Viewport(const glm::vec2& pos, const glm::vec2& dim)
+    Viewport(const glm::vec2& pos = glm::vec2(0.0, 0.0), const glm::vec2& dim = glm::vec2(0.0, 0.0))
     : m_Position(pos), m_Dimension(dim), m_Framebuffer((int) dim.x, (int) dim.y)
     {
     }
