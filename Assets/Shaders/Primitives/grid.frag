@@ -29,7 +29,7 @@ vec2 computeModuloDistance(vec2 position, vec2 step)
 
 void main(void)
 {
-	float threshold = 0.70;
+	float threshold = 0.40;
 
 	vec2 d;
 

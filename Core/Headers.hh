@@ -6,7 +6,12 @@
 # define GL_GLEXT_PROTOTYPES
 # define EGL_EGLEXT_PROTOTYPES
 # include <GL/glew.h>
+
 # include <GLFW/glfw3.h>
+# define GLFW_EXPOSE_NATIVE_COCOA
+# define GLFW_EXPOSE_NATIVE_NSGL
+# include <GLFW/glfw3native.h>
+
 # include <OpenGL/OpenGL.h>
 # include <OpenCL/opencl.h>
 # include <OpenCL/cl_gl.h>
@@ -94,6 +99,8 @@
 #include <raindance/Lib/picojson.h>
 
 // ----- Macros / Constants Definitions ----
+
+#define OG_OCULUS_RIFT true // Activate the Oculus Rift controller, this requires the OculusSDK
 
 #define SAFE_DELETE(ptr)  \
     if ((ptr) != NULL)    \

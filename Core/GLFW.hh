@@ -53,7 +53,7 @@ namespace GLFW
         	CLOSE
     	};
 
-		Window(const char* title, int width, int height, bool fullscreen = false)
+		Window(const char* title, int width, int height, bool fullscreen = false, GLFWmonitor* monitor = NULL)
 		{
 			m_Title = std::string(title);
 			m_Fullscreen = fullscreen;
@@ -63,17 +63,20 @@ namespace GLFW
 		    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-		    glfwWindowHint(GLFW_SAMPLES, 4);
+		    //glfwWindowHint(GLFW_SAMPLES, 4);
 
-		    // TODO : glfwWindowHint(GLFW_STEREO, GL_TRUE);
+		    // TODO: glfwWindowHint(GLFW_STEREO, GL_TRUE);
+
+		    if (monitor == NULL)
+		    	monitor = glfwGetPrimaryMonitor();
 
 			if (m_Fullscreen)
 			{
-				getResolution(&width, &height);
-				m_GlfwHandle = glfwCreateWindow(width, height, title, glfwGetPrimaryMonitor(), NULL);	
+				getResolution(monitor, &width, &height);
+				m_GlfwHandle = glfwCreateWindow(width, height, title, monitor, NULL);	
 			}
 			else
-				m_GlfwHandle = glfwCreateWindow(width, height, title, NULL, NULL);	
+				m_GlfwHandle = glfwCreateWindow(width, height, title, NULL, NULL);
 
 			glfwMakeContextCurrent(m_GlfwHandle);
 
@@ -125,9 +128,9 @@ namespace GLFW
 
 		// -------------------------
 
-		virtual void getResolution(int* width, int* height)
+		virtual void getResolution(GLFWmonitor* monitor, int* width, int* height)
 		{
-		    const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+		    const GLFWvidmode* mode = glfwGetVideoMode(monitor);
 			*width = mode->width;
 			*height = mode->height;
 		}

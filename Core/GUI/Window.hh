@@ -12,14 +12,9 @@ class Window : public GLFW::Window
 {
 public:
 
-    Window(const char* title, int width, int height, bool fullscreen = false)
-    : GLFW::Window(title, width, height, fullscreen)
+    Window(const char* title, int width, int height, bool fullscreen = false, GLFWmonitor* monitor = NULL)
+    : GLFW::Window(title, width, height, fullscreen, monitor)
     {
-        m_ClearColor = glm::vec4(0.0, 0.0, 0.0, 0.0);
-
-        m_Body.content().X = glm::vec2(0.0, (float)width);
-        m_Body.content().Y = glm::vec2(0.0, (float)height);
-        m_Body.content().Z = glm::vec2(0.0, 0.0);
     }
 
     virtual ~Window()
@@ -30,9 +25,18 @@ public:
     {
         m_Context = context;
 
+        m_ClearColor = glm::vec4(0.0, 0.0, 0.0, 0.0);
+
         auto viewport = getViewport();
-        this->onSetFramebufferSize(viewport.getFramebuffer().Width, viewport.getFramebuffer().Height);
-        this->onWindowSize((int)viewport.getDimension()[0], (int)viewport.getDimension()[1]);
+        auto framebuffer = viewport.getFramebuffer();
+        auto dimension = viewport.getDimension();
+
+        m_Body.content().X = glm::vec2(0.0, dimension.x);
+        m_Body.content().Y = glm::vec2(0.0, dimension.y);
+        m_Body.content().Z = glm::vec2(0.0, 0.0);
+
+        this->onSetFramebufferSize(framebuffer.Width, framebuffer.Height);
+        this->onWindowSize((int)dimension.x, (int)dimension.y);
     }
 
     virtual void clear()

@@ -85,6 +85,12 @@ public:
  
  		updateViewMatrix();
  	}
+
+ 	void rotate(const glm::quat& rotation)
+ 	{
+ 		m_Orientation = rotation * m_Orientation;
+ 		updateViewMatrix();
+ 	}
  
  	inline const glm::mat4& getViewMatrix() const { return m_View; }
  

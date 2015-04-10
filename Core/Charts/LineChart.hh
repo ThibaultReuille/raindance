@@ -119,7 +119,7 @@ public:
         m_BorderColor = glm::vec4(WHITE, 1.0);
         m_ShowBorder = true;
 
-        m_Font = new Font();
+        m_Font = new rd::Font();
         m_Title.set("Untitled", m_Font);
         m_ShowTitle = true;
     }
@@ -234,7 +234,7 @@ private:
 
     Text m_Title;
     bool m_ShowTitle;
-    Font* m_Font;
+    rd::Font* m_Font;
 
     std::vector<Graph*> m_Graphs;
 };

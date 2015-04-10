@@ -41,7 +41,7 @@ public:
 
         m_Layouts.resize(width * height, NULL);
 
-        m_Font = new Font();
+        m_Font = new rd::Font();
         m_Shader = NULL;
     }
 
@@ -110,7 +110,7 @@ private:
     Shader::Program* m_Shader;
     Icon* m_Icon;
 
-    Font* m_Font;
+    rd::Font* m_Font;
 
     std::vector<Layout*> m_Layouts;
 };

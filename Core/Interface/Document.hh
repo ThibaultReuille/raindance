@@ -51,6 +51,9 @@ public:
 
 	virtual void setVirtualPosition(const Viewport& viewport, rd::Box& box, const glm::vec2& vpos)
 	{
+		(void) viewport;
+		(void) box;
+		(void) vpos;
 	}
 
 	virtual void setVirtualDimension(const Viewport& viewport, rd::Box& box, const glm::vec2& vdim)
