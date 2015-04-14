@@ -160,7 +160,7 @@ public:
 		glEnable(GL_DEPTH_TEST);
 	}
 
-	virtual void reshape(int width, int height)
+	virtual void resize(int width, int height)
 	{
 		m_WindowWidth = width;
 		m_WindowHeight = height;

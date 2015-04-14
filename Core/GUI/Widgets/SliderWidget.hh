@@ -42,6 +42,8 @@ public:
     
     void onMouseClick(MessageQueue& messages, const glm::vec2& pos) override
     {
+        LOG("SliderWidget::onMouseClick(%f, %f)\n", pos.x, pos.y);
+        
         setValue((pos.x - this->position().x) / this->dimension().x);
         messages.push(static_cast<IMessage*>(new WidgetMessage(m_Name.c_str(), "update")));
     }

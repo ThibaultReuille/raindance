@@ -39,14 +39,6 @@ public:
         this->onWindowSize((int)dimension.x, (int)dimension.y);
     }
 
-    virtual void clear()
-    {
-        glViewport(0, 0, getViewport().getDimension()[0], getViewport().getDimension()[1]);
-
-        glClearColor(m_ClearColor.r, m_ClearColor.g, m_ClearColor.b, m_ClearColor.a);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    }
-
     void onCursorPos(double xpos, double ypos) override
     { 
         m_Body.onCursorPos(xpos, getViewport().getDimension()[1] - ypos);

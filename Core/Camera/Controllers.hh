@@ -62,8 +62,8 @@ public:
 
 	void onResize(const Viewport& viewport)
 	{
-		auto framebuffer = viewport.getFramebuffer();
-		m_Camera->resize(framebuffer.Width, framebuffer.Height);
+		auto dimension = viewport.getDimension();
+		m_Camera->resize(dimension.x, dimension.y);
 	}
 
 	void onKey(int key, int scancode, int action, int mods) override
@@ -173,8 +173,8 @@ public:
 
 	void onResize(const Viewport& viewport)
 	{
-		auto framebuffer = viewport.getFramebuffer();
-		m_Camera->resize(framebuffer.Width, framebuffer.Height);
+		auto dimension = viewport.getDimension();
+		m_Camera->resize(dimension.x, dimension.y);
 	}
 	
 	void onKey(int key, int scancode, int action, int mods) override
