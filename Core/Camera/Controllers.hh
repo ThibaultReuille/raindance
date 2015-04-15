@@ -4,233 +4,122 @@
 #include <raindance/Core/Camera/Camera.hh>
 #include <raindance/Core/Controller.hh>
 
-class ICameraController : public Controller
+class CameraControllerBase : public Controller
 {
 public:
+	CameraControllerBase() : Controller() {}
 	virtual void bind(Context* context, Camera* camera) = 0;
 	virtual void updateCamera() = 0;
+	virtual void zoom(glm::vec3 newTarget, float newRadius, unsigned int time) = 0;
 };
 
-class SphericalCameraController : public ICameraController
+#include <raindance/Core/Camera/Controllers/FirstPersonCameraController.hh>
+#include <raindance/Core/Camera/Controllers/SphericalCameraController.hh>
+#include <raindance/Core/Camera/Controllers/OculusRiftCameraController.hh>
+
+class CameraController : public CameraControllerBase
 {
 public:
-	virtual void bind(Context* context, Camera* camera)
+	enum Type
 	{
-        m_Context = context;
-        m_Camera = camera;
+		FIRST_PERSON,
+		SPHERICAL,
+		OCULUS_RIFT
+	};
 
-		m_Angles[0] = 0;
-		m_Angles[1] = M_PI / 2;
-		m_Radius = 50;
-		m_Target = glm::vec3(0, 0, 0);
-
-		m_Acceleration = glm::vec3(0, 0, 0);
-
-		m_LastTime = m_Context->clock().milliseconds();
-
-		updateCamera();
+	CameraController()
+	: CameraControllerBase()
+	{
+		select(FIRST_PERSON);
 	}
 
-	virtual void updateCamera()
-	{
-		float time = m_Context->clock().seconds();
-		float dt = time - m_LastTime;
-		m_LastTime = time;
-
-		m_Angles[0] += m_Acceleration.x * dt;
-		m_Angles[1] += m_Acceleration.y * dt;
-		m_Radius += m_Acceleration.z * dt;
-
-		const float c_min_radius = 0.001;
-		if (m_Radius < c_min_radius)
-			m_Radius = c_min_radius;
-
-		m_Angles[0] = fmod(m_Angles[0], 2 * M_PI);
-		if (m_Angles[1] >= M_PI)
-			m_Angles[1] = M_PI - 0.001;
-		if (m_Angles[1] <= M_PI / 10) 
-			m_Angles[1] = M_PI / 10 + 0.001;
-
-		m_Camera->lookAt(
-			glm::vec3(
-				m_Target.x + m_Radius * sin(m_Angles[1]) * cos(m_Angles[0]),
-				m_Target.y + m_Radius * cos(m_Angles[1]),
-				m_Target.z + m_Radius * sin(m_Angles[1]) * sin(m_Angles[0])),
-			m_Target,
-			glm::vec3(0, 1, 0));
+	void select(Type type)
+	{	
+		switch(type)
+		{
+			case FIRST_PERSON:
+				m_ActiveController = &m_FirstPerson;
+				break;
+			case SPHERICAL:
+				m_ActiveController = &m_Spherical;
+				break;
+			case OCULUS_RIFT:
+				m_ActiveController = &m_OculusRift;
+				break;
+			default:
+				m_ActiveController = NULL;
+				break;
+		}
 	}
 
-	void onResize(const Viewport& viewport)
+	void bind(Context* context, Camera* camera)
 	{
-		auto dimension = viewport.getDimension();
-		m_Camera->resize(dimension.x, dimension.y);
+		m_FirstPerson.bind(context, camera);
+		m_Spherical.bind(context, camera);
+	}
+
+	void updateCamera() override
+	{
+		m_ActiveController->updateCamera();
+	}
+ 
+	void zoom(glm::vec3 newTarget, float newRadius, unsigned int time) override
+	{
+		m_ActiveController->zoom(newTarget, newRadius, time);
+	}
+
+	// ----- Events -----
+
+	void onResize(const Viewport& viewport) override
+	{
+		m_ActiveController->onResize(viewport);
 	}
 
 	void onKey(int key, int scancode, int action, int mods) override
 	{
-		(void) scancode;
-		(void) mods;
-
-		bool isPressOrRepeat = action == GLFW_PRESS || action == GLFW_REPEAT;
-
-		// TODO : Make accessors to these 
-		float rotation = 0.5f;
-		float zoom = 20.0f;
-
-		if (key == GLFW_KEY_LEFT)
-			m_Acceleration.x = isPressOrRepeat ?  -rotation : 0.0f;
-		else if (key == GLFW_KEY_RIGHT)
-			m_Acceleration.x = isPressOrRepeat ?   rotation : 0.0f;
-		else if (key == GLFW_KEY_UP)
-			m_Acceleration.z = isPressOrRepeat ? -zoom : 0.0f;
-		else if (key == GLFW_KEY_DOWN)
-			m_Acceleration.z = isPressOrRepeat ?  zoom : 0.0f;
+		m_ActiveController->onKey(key, scancode, action, mods);
 	}
 	
 	void onScroll(double xoffset, double yoffset) override
 	{
-		(void) xoffset;
-		m_Acceleration.z = yoffset;
+		m_ActiveController->onScroll(xoffset, yoffset);
+	}
+	
+	void onMouseMove(const glm::vec2& pos, const glm::vec2& dpos) override
+	{
+		m_ActiveController->onMouseMove(pos, dpos);
 	}
 
 	void onMouseDown(const glm::vec2& pos) override
 	{
-		m_LastDownPosition = pos;
-
-		m_AnglesCopy[0] = m_Angles[0];
-		m_AnglesCopy[1] = m_Angles[1];
+		m_ActiveController->onMouseDown(pos);
 	}
 
-	void onMouseMove(const glm::vec2& pos, const glm::vec2& dpos) override
+	void onMouseClick(const glm::vec2& pos) override
 	{
-		(void) dpos;
-
-		glm::vec2 diff = pos - m_LastDownPosition;
-
-		m_Angles[0] = m_AnglesCopy[0] + diff.x / 50.0;
-		m_Angles[1] = m_AnglesCopy[1] + diff.y / 50.0;
+		m_ActiveController->onMouseClick(pos);
 	}
 
-	void playZoomSequence(glm::vec3 newTarget, float newRadius, unsigned int time)
+	void onMouseDoubleClick(const glm::vec2& pos) override
 	{
-		m_Context->sequencer().track("animation")->insert(new VertexSequence(&m_Target, newTarget, time), Track::Event::START);
-		m_Context->sequencer().track("animation")->insert(new FloatSequence(&m_Radius, newRadius, time), Track::Event::START);
+		m_ActiveController->onMouseDoubleClick(pos);
 	}
 
-	void playAimSequence(glm::vec3 newTarget, unsigned int time)
+	void onMouseTripleClick(const glm::vec2& pos) override
 	{
-		float newRadius = glm::length(m_Camera->getPosition() - newTarget);
-		glm::vec3 newPos = m_Camera->getPosition() - newTarget;
-		float newAngle0 = acos(newPos.y / newRadius);
-		float newAngle1 = atan(-newPos.z / newPos.x);
-
-		m_Context->sequencer().track("animation")->insert(new VertexSequence(&m_Target, newTarget, time),    Track::Event::START);
-		m_Context->sequencer().track("animation")->insert(new FloatSequence(&m_Radius, newRadius, time),     Track::Event::START);
-		m_Context->sequencer().track("animation")->insert(new FloatSequence(&m_Angles[0], newAngle0, time),  Track::Event::START);
-		m_Context->sequencer().track("animation")->insert(new FloatSequence(&m_Angles[1], newAngle1, time),  Track::Event::START);
+		m_ActiveController->onMouseTripleClick(pos);
 	}
 
-	inline void setTarget(const glm::vec3& target) { m_Target = target; }
+	// ----- Accessors -----
 
-	inline void setRadius(const float radius) { m_Radius = radius; }
+	inline FirstPersonCameraController& getFirstPerson() { return m_FirstPerson; }
+	inline SphericalCameraController& getSpherical() { return m_Spherical; }
+	inline OculusRiftCameraController& getOculusRift() { return m_OculusRift; }
 
-protected:
-	Camera* m_Camera;
-	Context* m_Context;
-	float m_LastTime;
+private:
+	CameraControllerBase* m_ActiveController;
 
-	GLfloat m_Angles[2];
-	GLfloat m_AnglesCopy[2];
-	glm::vec2 m_LastDownPosition;
-
-	GLfloat m_Radius;
-	glm::vec3 m_Target;
-	glm::vec3 m_Acceleration;
-};
-
-class FirstPersonCameraController : public ICameraController
-{
-public:
-	virtual void bind(Context* context, Camera* camera)
-	{
-	    m_Context = context;
-		m_Camera = camera;
-
-		m_LastTime = m_Context->clock().milliseconds();
-
-		updateCamera();
-	}
-	
-	virtual void updateCamera()
-	{
-		Timecode time = m_Context->clock().milliseconds();
-
-		float dt = (float)(time - m_LastTime) / 1000.0f;
-
-		m_Camera->move(m_Acceleration * dt);
-		m_LastTime = time;
-	}
-
-	void onResize(const Viewport& viewport)
-	{
-		auto dimension = viewport.getDimension();
-		m_Camera->resize(dimension.x, dimension.y);
-	}
-	
-	void onKey(int key, int scancode, int action, int mods) override
-	{
-		(void) scancode;
-		(void) mods;
-
-		bool isPressOrRepeat = action == GLFW_PRESS || action == GLFW_REPEAT;
-
-		if (isPressOrRepeat && key == GLFW_KEY_SPACE)
-			m_Acceleration = glm::vec3(0, 0, 0);
-		else if (key == GLFW_KEY_UP)
-			m_Acceleration.z = isPressOrRepeat ?  20.0 : 0.0;
-		else if (key == GLFW_KEY_DOWN)
-			m_Acceleration.z = isPressOrRepeat ? -20.0 : 0.0;
-		else if (key == GLFW_KEY_RIGHT)
-			m_Acceleration.x = isPressOrRepeat ?  20.0 : 0.0;
-		else if (key == GLFW_KEY_LEFT)
-			m_Acceleration.x = isPressOrRepeat ? -20.0 : 0.0;
-	}
-
-	void onScroll(double xoffset, double yoffset) override
-	{
-		(void) xoffset;
-		m_Acceleration.z = yoffset;
-	}
-
-	void onMouseDown(const glm::vec2& pos) override
-	{
-		m_LastDownPosition = pos;
-		m_LastDiff = glm::vec2(0, 0);
-	}
-
-	void onMouseMove(const glm::vec2& pos, const glm::vec2& dpos) override
-	{
-		(void) dpos;
-
-		glm::vec2 diff = pos - m_LastDownPosition;
-		glm::vec2 deltaDiff = diff - m_LastDiff;
-
-		m_Camera->rotate(deltaDiff.x / 2, deltaDiff.y / 2, 0);
-		m_LastDiff = diff;
-	}
-
-	void sequence(glm::vec3 newTarget, float newRadius, unsigned int time)
-	{
-	    m_Context->sequencer().track("animation")->insert(new VertexSequence(m_Camera->getPositionPtr(), newTarget - newRadius * m_Camera->front(), time), Track::Event::START);
-	}
-
-protected:
-	Context* m_Context;
-	Camera* m_Camera;
-
-	Timecode m_LastTime;
-	glm::vec2 m_LastDelta;
-	glm::vec2 m_LastDownPosition;
-	glm::vec2 m_LastDiff;
-	glm::vec3 m_Acceleration;
+	FirstPersonCameraController m_FirstPerson;
+	SphericalCameraController m_Spherical;
+	OculusRiftCameraController m_OculusRift;
 };

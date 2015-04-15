@@ -2,7 +2,6 @@
 
 #include <raindance/Core/Headers.hh>
 #include <raindance/Core/Camera/Camera.hh>
-
 #include <OVR.h>
 
 class OculusRift
@@ -53,7 +52,7 @@ public:
                     return monitors[i];
             
             #elif defined(__APPLE__)
-                if (glfwGetCocoaMonitor(monitors[i]) == m_HMD->DisplayId)
+                if (glfwGetCocoaMonitor(monitors[i]) == static_cast<unsigned int>(m_HMD->DisplayId))
                     return monitors[i];
 
             #elif defined(__linux__)

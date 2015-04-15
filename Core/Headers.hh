@@ -100,8 +100,6 @@
 
 // ----- Macros / Constants Definitions ----
 
-#define OG_OCULUS_RIFT true // Activate the Oculus Rift controller, this requires the OculusSDK
-
 #define SAFE_DELETE(ptr)  \
     if ((ptr) != NULL)    \
     {                     \

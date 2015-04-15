@@ -41,7 +41,7 @@ public:
 
     void onCursorPos(double xpos, double ypos) override
     { 
-        m_Body.onCursorPos(xpos, getViewport().getDimension()[1] - ypos);
+        m_Body.onCursorPos(xpos, ypos);
     }
 
     void onMouseButton(int button, int action, int mods) override

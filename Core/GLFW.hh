@@ -10,6 +10,8 @@ namespace GLFW
 	class Events
 	{
 	public:
+
+		// TODO: This function should call onResize with the proper Viewport
 		virtual void onWindowSize(int width, int height)
 		{ LOG("[GLFW] onWindowSize(%i, %i)\n", width, height); }
 
@@ -19,6 +21,7 @@ namespace GLFW
 	    virtual void onWindowFocus(int focus)
 	    { LOG("[GLFW] onWindowFocus(%i)\n", focus); }
 
+		// TODO: This function should call onResize with the proper Viewport
 	    virtual void onSetFramebufferSize(int width, int height)
 	    { LOG("[GLFW] onSetFramebufferSize(%i, %i)\n", width, height); }
 
@@ -42,6 +45,11 @@ namespace GLFW
     
 	    // virtual void onDrop(int count, const char** paths)
 	    // { LOG("[GLFW] onDrop(%i, %p)\n", count, paths); }
+
+		virtual void onResize(const Viewport& viewport)
+		{
+			(void) viewport;
+		}
 	};
 
 	class Window : public Events
