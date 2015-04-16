@@ -15,17 +15,30 @@ public:
 
 		m_LastTime = m_Context->clock().milliseconds();
 
-		updateCamera();
+		#ifdef RD_OCULUS_RIFT
+			context->rift()->configure(*m_Camera, OculusRift::LEFT);
+		#endif
+			
+		update();
 	}
 	
-	void updateCamera() override
+	void update() override
 	{
-		Timecode time = m_Context->clock().milliseconds();
+		#ifdef RD_OCULUS_RIFT
+			glm::vec3 pos = glm::vec3(0.0, 0.0, 20.0);
+			glm::vec3 target = glm::vec3(0.0, 0.0, 0.0);
+			glm::vec3 up = glm::vec3(0.0, 1.0, 0.0);
 
-		float dt = (float)(time - m_LastTime) / 1000.0f;
+			m_Context->rift()->lookAt(OculusRift::LEFT, pos, target, up, *m_Camera);
+			m_Context->rift()->idle();
+		#else
+			Timecode time = m_Context->clock().milliseconds();
 
-		m_Camera->move(m_Acceleration * dt);
-		m_LastTime = time;
+			float dt = (float)(time - m_LastTime) / 1000.0f;
+
+			m_Camera->move(m_Acceleration * dt);
+			m_LastTime = time;
+		#endif
 	}
 
 	void onResize(const Viewport& viewport)
@@ -78,7 +91,8 @@ public:
 
 	void zoom(glm::vec3 newTarget, float newRadius, unsigned int time) override
 	{
-	    m_Context->sequencer().track("animation")->insert(new VertexSequence(m_Camera->getPositionPtr(), newTarget - newRadius * m_Camera->front(), time), Track::Event::START);
+		auto sequence = new VertexSequence(m_Camera->getPositionPtr(), newTarget - newRadius * m_Camera->front(), time);
+	    m_Context->sequencer().track("animation")->insert(sequence, Track::Event::START);
 	}
 
 protected:

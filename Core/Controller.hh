@@ -24,7 +24,7 @@ public:
 
 	virtual void idle()
 	{
-	};
+	}
 
 	// ---- Mouse Events ----
 
@@ -69,7 +69,7 @@ public:
 	{ LOG("[CONTROLLER] onMouseTripleClick(%f, %f)\n", pos.x, pos.y); }
 
 	virtual void onMouseMove(const glm::vec2& pos, const glm::vec2& dpos)
-	{ LOG("[CONTROLLER] onMouseMove((%f, %f), (%f, %f)\n", pos.x, pos.y, dpos.x, dpos.y); }
+	{ LOG("[CONTROLLER] onMouseMove((%f, %f), (%f, %f))\n", pos.x, pos.y, dpos.x, dpos.y); }
 
 protected:
 	Mouse m_Mouse;

@@ -14,10 +14,10 @@ public:
 
 		m_LastTime = m_Context->clock().milliseconds();
 
-		updateCamera();
+		update();
 	}
 	
-	virtual void updateCamera()
+	virtual void update()
 	{
 		Timecode time = m_Context->clock().milliseconds();
 

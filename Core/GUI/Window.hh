@@ -8,12 +8,18 @@
 namespace rd
 {
 
+
 class Window : public GLFW::Window
 {
 public:
 
-    Window(const char* title, int width, int height, bool fullscreen = false, GLFWmonitor* monitor = NULL)
-    : GLFW::Window(title, width, height, fullscreen, monitor)
+    struct Settings : GLFW::Window::Settings
+    {
+        // TODO: Add rd::Window specific members here
+    };
+
+    Window(Settings* settings)
+    : GLFW::Window(settings)
     {
     }
 

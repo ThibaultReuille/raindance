@@ -117,7 +117,7 @@ public:
  	inline const glm::vec3& getPosition() const { return m_Position; }
  	inline glm::vec3* getPositionPtr() { return &m_Position; }
  
-	inline void setPerspectiveProjection(float fovy, float aspect, float nearValue, float farValue)
+	void setPerspectiveProjection(float fovy, float aspect, float nearValue, float farValue)
  	{
  		m_ProjectionMode = PERSPECTIVE;
  		m_FovY = fovy;
@@ -127,7 +127,7 @@ public:
 		m_Projection = glm::perspective(glm::radians(fovy), aspect, nearValue, farValue);
  	}
  
-	inline void setOrthographicProjection(float left, float right, float bottom, float top, float nearVal, float farVal)
+	void setOrthographicProjection(float left, float right, float bottom, float top, float nearVal, float farVal)
  	{
  		m_ProjectionMode = ORTHOGRAPHIC;
  		m_Left = left;
@@ -163,14 +163,14 @@ public:
  		m_Width = width;
  		m_Height = height;
  		m_Ratio = (float) width / (float) height;
- 
+ 		
  		switch(m_ProjectionMode)
  		{
  		case PERSPECTIVE:
- 			this->setPerspectiveProjection(60.0f, m_Ratio, 0.1f, 1024.0f);
+ 			setPerspectiveProjection(60.0f, m_Ratio, 0.1f, 1024.0f);
  			break;
  		case ORTHOGRAPHIC:
- 			this->setOrthographicProjection(m_Left, m_Right, m_Bottom, m_Top, m_NearVal, m_FarVal);
+ 			setOrthographicProjection(m_Left, m_Right, m_Bottom, m_Top, m_NearVal, m_FarVal);
  			break;
  		};
  	}

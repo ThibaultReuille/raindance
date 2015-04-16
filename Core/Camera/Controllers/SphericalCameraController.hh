@@ -21,10 +21,10 @@ public:
 
 		m_LastTime = m_Context->clock().milliseconds();
 
-		updateCamera();
+		update();
 	}
 
-	virtual void updateCamera()
+	virtual void update()
 	{
 		float time = m_Context->clock().seconds();
 		float dt = time - m_LastTime;

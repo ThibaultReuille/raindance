@@ -61,12 +61,29 @@ namespace GLFW
         	CLOSE
     	};
 
-		Window(const char* title, int width, int height, bool fullscreen = false, GLFWmonitor* monitor = NULL)
-		{
-			m_Title = std::string(title);
-			m_Fullscreen = fullscreen;
+	    struct Settings
+	    {
+	    	Settings()
+	    	{
+	    		Title = std::string("Raindance Window");
+	    		Width = 1024;
+	    		Height = 728;
+	    		Fullscreen = false;
+	    		Monitor = NULL;
+	    	}
 
-			LOG("[GLFW] Creating %ix%i window with title '%s'...\n", width, height, title);
+	        std::string Title;
+	        int Width;
+	        int Height;
+	        bool Fullscreen;
+	        GLFWmonitor* Monitor;
+	    };
+
+		Window(Settings* settings)
+		{
+			m_Settings = *settings;
+
+			LOG("[GLFW] Creating %ix%i window with title '%s'...\n", m_Settings.Width, m_Settings.Height, m_Settings.Title.c_str());
 		    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -75,16 +92,16 @@ namespace GLFW
 
 		    // TODO: glfwWindowHint(GLFW_STEREO, GL_TRUE);
 
-		    if (monitor == NULL)
-		    	monitor = glfwGetPrimaryMonitor();
+		    if (m_Settings.Monitor == NULL)
+		    	m_Settings.Monitor = glfwGetPrimaryMonitor();
 
-			if (m_Fullscreen)
+			if (m_Settings.Fullscreen)
 			{
-				getResolution(monitor, &width, &height);
-				m_GlfwHandle = glfwCreateWindow(width, height, title, monitor, NULL);	
+				getResolution(m_Settings.Monitor, &m_Settings.Width, &m_Settings.Height);
+				m_GlfwHandle = glfwCreateWindow(m_Settings.Width, m_Settings.Height, m_Settings.Title.c_str(), m_Settings.Monitor, NULL);	
 			}
 			else
-				m_GlfwHandle = glfwCreateWindow(width, height, title, NULL, NULL);
+				m_GlfwHandle = glfwCreateWindow(m_Settings.Width, m_Settings.Height, m_Settings.Title.c_str(), NULL, NULL);
 
 			glfwMakeContextCurrent(m_GlfwHandle);
 
@@ -158,11 +175,10 @@ namespace GLFW
 
 		inline GLFWwindow* getGlfwHandle() { return m_GlfwHandle; }
 
-		inline const std::string& getTitle() { return m_Title; }
+		inline const Settings& getSettings() { return m_Settings; }
 
 	private:
-		std::string m_Title;
-		bool m_Fullscreen;
+		Settings m_Settings;
 		GLFWwindow* m_GlfwHandle;
 	};
 

@@ -31,8 +31,6 @@ public:
             LOG("[OVR] Unable to locate Rift sensor device!\n");
             return;
         }
-
-        m_Camera.setPerspectiveProjection(74, (0.5f * (float)m_HMD->Resolution.w) / (float)m_HMD->Resolution.h, 0.1f, 1024.0f);
     }
 
     virtual ~OculusRift()
@@ -84,6 +82,12 @@ public:
         }
     }
 
+    void configure(Camera& camera, EyeType type)
+    {
+        (void) type;
+        camera.setPerspectiveProjection(74, (0.5f * (float)m_HMD->Resolution.w) / (float)m_HMD->Resolution.h, 0.1f, 1024.0f);
+    }
+
     void lookAt(EyeType type, const glm::vec3& position, const glm::vec3& target, const glm::vec3& up, Camera& camera)
     {
         camera.lookAt(position, target, up);
@@ -107,7 +111,6 @@ public:
 
 private:
     ovrHmd m_HMD;
-    Camera m_Camera;
 
     glm::vec3 m_Position;
 
