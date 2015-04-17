@@ -31,6 +31,8 @@ public:
             LOG("[OVR] Unable to locate Rift sensor device!\n");
             return;
         }
+
+        m_Position = glm::vec3(0.0, 0.0, 0.0);
     }
 
     virtual ~OculusRift()
@@ -90,12 +92,12 @@ public:
 
     void lookAt(EyeType type, const glm::vec3& position, const glm::vec3& target, const glm::vec3& up, Camera& camera)
     {
-        camera.lookAt(position, target, up);
+        camera.lookAt(m_Position + position, m_Position + target, up);
         camera.rotate(m_HeadOrientation);
 
-        if (false)
+        if (true)
         {
-            float ipd = 0.20; // Inter-Pupillary Distance
+            float ipd = 0.5; //0.20; // Inter-Pupillary Distance
 
             glm::vec3 step = 0.5f * ipd * camera.right();
 
@@ -108,6 +110,9 @@ public:
 
     glm::vec3 toGLM(ovrVector3f v) { return glm::vec3(v.x, v.y, v.z); }
     glm::quat toGLM(ovrQuatf q) { return glm::quat(q.z, -q.y, q.x, q.w); }
+
+    const glm::vec3& getPosition() { return m_Position; }
+    void setPosition(const glm::vec3& position) { m_Position = position; }
 
 private:
     ovrHmd m_HMD;

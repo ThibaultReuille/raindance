@@ -66,6 +66,13 @@ namespace Scene
                     (*it)->draw(context, projection, view, model);
         }
 
+        void draw(Context* context, const Camera& camera, Transformation& transformation)
+        {
+            for (auto node : m_Nodes)
+                if (node != NULL)
+                    node->draw(context, camera, transformation);
+        }
+
         void update()
         {
             // TODO : Find a different way to do this.

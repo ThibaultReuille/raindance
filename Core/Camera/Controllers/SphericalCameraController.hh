@@ -24,6 +24,11 @@ public:
 		update();
 	}
 
+	void bind(Context* context, CameraVector* cameras) override
+	{
+		bind(context, cameras->elements()[0]);
+	}
+
 	virtual void update()
 	{
 		float time = m_Context->clock().seconds();

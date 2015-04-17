@@ -34,7 +34,7 @@ public:
         m_VertexBuffer << glm::vec3(0.0, -1.0, 0);
         m_VertexBuffer << glm::vec3(1.0, -1.0, 0);
 
-       m_VertexBuffer.describe("a_Position", 3, GL_FLOAT, 3 * sizeof(GLfloat), 0);
+        m_VertexBuffer.describe("a_Position", 3, GL_FLOAT, 3 * sizeof(GLfloat), 0);
 
         m_VertexBuffer.generate(Buffer::DYNAMIC);
     }

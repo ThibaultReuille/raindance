@@ -17,6 +17,11 @@ public:
 		update();
 	}
 	
+	virtual void bind(Context* context, CameraVector* cameras)
+	{
+		bind(context, cameras->elements()[0]);
+	}
+
 	virtual void update()
 	{
 		Timecode time = m_Context->clock().milliseconds();

@@ -8,7 +8,7 @@ class CameraControllerBase : public Controller
 {
 public:
 	CameraControllerBase() : Controller() {}
-	virtual void bind(Context* context, Camera* camera) = 0;
+	virtual void bind(Context* context, CameraVector* cameras) = 0;
 	virtual void update() = 0;
 	virtual void zoom(glm::vec3 newTarget, float newRadius, unsigned int time) = 0;
 };
@@ -52,11 +52,11 @@ public:
 		}
 	}
 
-	void bind(Context* context, Camera* camera)
+	void bind(Context* context, CameraVector* cameras) override
 	{
-		m_FirstPerson.bind(context, camera);
-		m_Spherical.bind(context, camera);
-		m_OculusRift.bind(context, camera); 
+		m_FirstPerson.bind(context, cameras);
+		m_Spherical.bind(context, cameras);
+		m_OculusRift.bind(context, cameras); 
 	}
 
 	void update() override

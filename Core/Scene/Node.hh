@@ -22,7 +22,18 @@ namespace Scene
         {
         }
 
-        virtual void draw(Context* context, const glm::mat4& projection, const glm::mat4& view, const glm::mat4& model) = 0;
+        virtual void draw(Context* context, const glm::mat4& projection, const glm::mat4& view, const glm::mat4& model)
+        {
+            (void) context;
+            (void) projection;
+            (void) view;
+            (void) model;
+        }
+
+        virtual void draw(Context* context, const Camera& camera, Transformation& transformation)
+        {
+            draw(context, camera.getProjectionMatrix(), camera.getViewMatrix(), transformation.state());
+        }
 
         inline void setPosition(const glm::vec3& position) { m_Position = position; m_DirtyModelMatrix = true; }
         inline const glm::vec3& getPosition() const { return m_Position; }

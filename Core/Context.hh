@@ -16,7 +16,6 @@ class Context
 {
 public:
 	Context()
-	: m_Camera(NULL)
 	{
 		#ifdef RD_OCULUS_RIFT
 			m_Rift = new OculusRift();
@@ -35,8 +34,8 @@ public:
 	inline Sequencer& sequencer() { return m_Sequencer; }
 	inline Geometry& geometry() { return m_Geometry; }
 
-	inline void setCamera(Camera* camera) { m_Camera = camera; }
-	inline Camera* getCamera() { return m_Camera; }
+	// inline void setCamera(Camera* camera) { m_Camera = camera; }
+	// inline Camera* getCamera() { return m_Camera; }
 
 	#ifdef RD_OCULUS_RIFT
 		inline OculusRift* rift() { return m_Rift; }
@@ -47,7 +46,8 @@ private:
 	MessageQueue m_MessageQueue;
 	Sequencer m_Sequencer;
 	Geometry m_Geometry;
-	Camera* m_Camera;
+	
+	// Camera* m_Camera;
 
 	#ifdef RD_OCULUS_RIFT
 		OculusRift* m_Rift;

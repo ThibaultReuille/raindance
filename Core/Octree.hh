@@ -234,10 +234,12 @@ public:
         }
     }
 
-    void draw(Context* context, const glm::mat4& projection, const glm::mat4& view, const glm::mat4& model)
+    void draw(Context* context, const Camera& camera, Transformation& transformation)
     {
         std::stack<StackElement> stack;
         StackElement current;
+
+        glm::mat4 mvp = camera.getViewProjectionMatrix() * transformation.state();
 
         stack.push(StackElement(NULL, m_Root, 0));
         while(!stack.empty())
@@ -250,12 +252,12 @@ public:
                 if(current.Node->getElements().size() == 0)
                     continue;
 
-                Transformation transformation;
-                transformation.translate(current.Node->getCenter());
-                transformation.scale(2.0f * 2.0f * current.Node->getHalfDimension());
+                Transformation t;
+                t.translate(current.Node->getCenter());
+                t.scale(2.0f * 2.0f * current.Node->getHalfDimension());
 
                 m_Shader->use();
-                m_Shader->uniform("u_ModelViewProjection").set(projection * view * model * transformation.state());
+                m_Shader->uniform("u_ModelViewProjection").set(mvp * t.state());
 
                 context->geometry().bind(m_Cube->getLineVertexBuffer(), *m_Shader);        
                 context->geometry().drawArrays(GL_LINES, 0, m_Cube->getLineVertexBuffer().size() / sizeof(Cube::Vertex));

@@ -5,7 +5,28 @@
 #include <raindance/Core/Camera/Frustrum.hh>
 #include <raindance/Core/GUI/Viewport.hh>
  
-class Camera
+
+class ICamera
+{
+public:
+	virtual void resize(int width, int height) = 0;
+
+	virtual void lookAt(const glm::vec3& position, const glm::vec3& target, const glm::vec3& up) = 0;
+
+	virtual void move(const glm::vec3 direction) = 0;
+
+ 	virtual void rotate(const glm::quat& rotation) = 0;
+
+ 	virtual void rotate(float yaw, float pitch, float roll) = 0;
+
+	virtual void update() = 0;
+
+	virtual void setPerspectiveProjection(float fovy, float aspect, float nearValue, float farValue) = 0;
+
+	virtual void setOrthographicProjection(float left, float right, float bottom, float top, float nearVal, float farVal) = 0;
+};
+
+class Camera : public ICamera
 {
 public:
 	enum ProjectionMode
@@ -19,7 +40,11 @@ public:
  		lookAt(glm::vec3(0.0, 0.0, 0.0), glm::vec3(1.0, .0, 0.0), glm::vec3(0.0, 1.0, 0.0));
  	}
  
- 	void lookAt(const glm::vec3& position, const glm::vec3& target, const glm::vec3& up)
+ 	virtual ~Camera()
+ 	{
+ 	}
+
+ 	void lookAt(const glm::vec3& position, const glm::vec3& target, const glm::vec3& up) override
  	{
  		m_Position = position;
  
@@ -55,12 +80,12 @@ public:
  		lookAt(m_Position, target, m_AxisY);
  	}
  
- 	void move(const glm::vec3 direction)
+ 	void move(const glm::vec3 direction) override
  	{
  		m_Position += direction.x * right();
  		m_Position += direction.y * up();
  		m_Position += direction.z * front();
- 		updateViewMatrix();
+ 		update();
  	}
  
  	void rotate(float yaw, float pitch, float roll)
@@ -83,18 +108,18 @@ public:
  			m_Orientation = rotation * m_Orientation;
  		}
  
- 		updateViewMatrix();
+ 		update();
  	}
 
- 	void rotate(const glm::quat& rotation)
+ 	void rotate(const glm::quat& rotation) override
  	{
  		m_Orientation = rotation * m_Orientation;
- 		updateViewMatrix();
+ 		update();
  	}
  
  	inline const glm::mat4& getViewMatrix() const { return m_View; }
  
- 	void updateViewMatrix()
+ 	void update() override
  	{
  	    // Reconstruct the view matrix from orientation and position
  
@@ -117,7 +142,7 @@ public:
  	inline const glm::vec3& getPosition() const { return m_Position; }
  	inline glm::vec3* getPositionPtr() { return &m_Position; }
  
-	void setPerspectiveProjection(float fovy, float aspect, float nearValue, float farValue)
+	void setPerspectiveProjection(float fovy, float aspect, float nearValue, float farValue) override
  	{
  		m_ProjectionMode = PERSPECTIVE;
  		m_FovY = fovy;
@@ -127,7 +152,7 @@ public:
 		m_Projection = glm::perspective(glm::radians(fovy), aspect, nearValue, farValue);
  	}
  
-	void setOrthographicProjection(float left, float right, float bottom, float top, float nearVal, float farVal)
+	void setOrthographicProjection(float left, float right, float bottom, float top, float nearVal, float farVal) override
  	{
  		m_ProjectionMode = ORTHOGRAPHIC;
  		m_Left = left;
@@ -158,7 +183,7 @@ public:
  		return Ray(m_Position, glm::normalize(pos - m_Position));
  	}
  
-	void resize(int width, int height)
+	void resize(int width, int height) override
  	{
  		m_Width = width;
  		m_Height = height;
