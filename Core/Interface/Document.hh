@@ -6,7 +6,75 @@
 #include <raindance/Core/Interface/Box.hh>
 #include <raindance/Core/GUI/Viewport.hh> // TODO: Move Viewport.hh inside Interface/
 
-class Document : public Controller
+namespace Document
+{
+
+struct Length
+{
+public:
+	enum Mode
+	{
+		PIXELS,
+		PERCENTS
+	};
+
+	Length(Mode mode, float value)
+	: m_Mode(mode), m_Value(value)
+	{
+	}
+
+	inline Mode mode() { return m_Mode; }
+	inline float value() { return m_Value; }
+
+private:
+	Mode m_Mode;
+	float m_Value;
+};
+
+struct Style
+{
+	enum PositionType
+	{
+		ABSOLUTE,
+		RELATIVE
+	};
+
+	enum AlignType
+	{
+		LEFT,
+		RIGHT,
+		CENTER
+	};
+
+	Style()
+	: 	Position(RELATIVE),
+		Align(LEFT),
+		Left(Length::PIXELS, 0.0),
+		// TODO: Right(Length::PIXELS, 0.0),
+		Top(Length::PIXELS, 0.0),
+		// TODO: Bottom(Length::PIXELS, 0.0),
+		Width(Length::PERCENTS, 1.0),
+		Height(Length::PERCENTS, 1.0)
+	{
+	}
+
+	virtual ~Style()
+	{
+	}
+
+	PositionType Position;
+	AlignType Align;
+
+	Length Left;
+	// TODO: Length Right;
+	Length Top;
+	// TODO: Length Bottom;
+
+	Length Width;
+	Length Height;
+};
+
+class Node : public Controller
 {
 public:
 
@@ -19,57 +87,124 @@ public:
 		CONTENT = 3
 	};
 
-	Document(const glm::vec3& dimension = glm::vec3(0.0, 0.0, 0.0))
+	Node(Node* parent = NULL)
 	{
-		content().X = glm::vec2(0, dimension.x);
-		content().Y = glm::vec2(0, dimension.y);
-		content().Z = glm::vec2(0, dimension.z);
-		content().Color = glm::vec4(WHITE, 1.0);
+		m_Parent = parent;
 
-		padding().X = glm::vec2(0, 0); 
-		padding().Y = glm::vec2(0, 0); 
-		padding().Z = glm::vec2(0, 0); 
-		padding().Color = glm::vec4(WHITE, 0.0);
-
-		border().X = glm::vec2(0, 0); 
-		border().Y = glm::vec2(0, 0); 
-		border().Z = glm::vec2(0, 0); 
-		border().Color = glm::vec4(BLACK, 1.0);
-
-		margin().X = glm::vec2(0, 0); 
-		margin().Y = glm::vec2(0, 0); 
-		margin().Z = glm::vec2(0, 0); 
-		margin().Color = glm::vec4(WHITE, 0.0);
-
-		m_Refresh = true;
 		m_Clicks = 0;
+	
+		m_Refresh = true;
 	}
 
-	virtual ~Document()
+	virtual ~Node()
 	{
 	}
 
-	virtual void setVirtualPosition(const Viewport& viewport, rd::Box& box, const glm::vec2& vpos)
+	virtual void draw(Context* context)
 	{
-		(void) viewport;
-		(void) box;
-		(void) vpos;
+		(void) context;
 	}
 
-	virtual void setVirtualDimension(const Viewport& viewport, rd::Box& box, const glm::vec2& vdim)
+	virtual void idle(Context* context)
 	{
-		auto framebuffer = viewport.getFramebuffer();
-
-        box.X = glm::vec2(0, framebuffer.Width * vdim.x);
-        box.Y = glm::vec2(0, framebuffer.Height * vdim.y);
-        box.Z = glm::vec2(0, 0);
+		(void) context;
 	}
 
-	virtual void draw() {}
+	virtual void update()
+	{
+		// Update Dimensions
+		{
+			if (style().Width.mode() == Length::PIXELS)
+				content().X = glm::vec2(0.0, style().Width.value());
+			else if (style().Width.mode() == Length::PERCENTS && parent() != NULL)
+				content().X = glm::vec2(0.0, style().Width.value() * parent()->content().getWidth());
+			else
+			{
+				LOG("Error: Document has relative width but no parent!\n");
+			}
 
-	virtual void idle() {}
+			if (style().Height.mode() == Length::PIXELS)
+				content().Y = glm::vec2(0.0, style().Height.value());
+			else if (style().Height.mode() == Length::PERCENTS && parent() != NULL)
+				content().Y = glm::vec2(0.0, style().Height.value() * parent()->content().getHeight());
+			else
+			{
+				LOG("Error: Document has relative height but no parent!\n");
+			}
 
-	virtual Document* pick(const glm::vec2& position, PickRegion* region)
+			content().Z = glm::vec2(0.0, 0.0);
+
+			padding().X = glm::vec2(0, 0); 
+			padding().Y = glm::vec2(0, 0); 
+			padding().Z = glm::vec2(0, 0); 
+			
+			border().X = glm::vec2(0, 0); 
+			border().Y = glm::vec2(0, 0); 
+			border().Z = glm::vec2(0, 0); 
+			
+			margin().X = glm::vec2(0, 0); 
+			margin().Y = glm::vec2(0, 0); 
+			margin().Z = glm::vec2(0, 0); 
+		}
+
+		// NOTE: Update Position
+		{
+			glm::vec3 pos(0.0, 0.0, 0.0);
+			if (style().Position == Style::RELATIVE)
+			{
+       			pos = parent()->position() +
+       				glm::vec3
+       				(
+		            	parent()->margin().left() +   parent()->border().left() +   parent()->padding().left(),
+		            	parent()->margin().bottom() + parent()->border().bottom() + parent()->padding().bottom(),
+		            	0
+		            );
+       		}
+
+       		if (style().Align == Style::LEFT)
+       		{
+       		}
+			if (style().Align == Style::RIGHT && parent() != NULL)
+				pos.x += parent()->content().getWidth() - getDimension().x;
+			else if (style().Align == Style::CENTER && parent() != NULL)
+				pos.x += parent()->content().getWidth() / 2 - getDimension().x / 2;
+			else
+			{
+				LOG("Error: Can't compute alignment, document has no parent!\n");
+			}
+
+
+			if (style().Left.mode() == Length::PIXELS)
+				pos.x += style().Left.value();
+			else if (style().Left.mode() == Length::PERCENTS && parent() != NULL)
+				pos.x += style().Left.value() * parent()->content().getWidth();
+			else
+			{
+				LOG("Error: Document has relative 'left' property but no parent!\n");
+			}
+
+			if (style().Top.mode() == Length::PIXELS)
+				pos.y -= style().Top.value();
+			else if (style().Top.mode() == Length::PERCENTS && parent() != NULL)
+				pos.y -= style().Top.value() * parent()->content().getHeight();
+			else
+			{
+				LOG("Error: Document has relative 'right' property but no parent!\n");
+			}
+
+			position(pos);
+		}
+
+		// Update Colors
+		{
+			content().Color = glm::vec4(WHITE, 1.0);
+			padding().Color = glm::vec4(WHITE, 0.0);
+			border().Color = glm::vec4(BLACK, 1.0);
+			margin().Color = glm::vec4(WHITE, 0.0);
+		}
+	}
+
+	virtual Node* pick(const glm::vec2& position, PickRegion* region)
 	{
 		auto box_position = glm::vec2(0, 0);
 		auto box_dimension = getDimension().xy();
@@ -94,13 +229,6 @@ public:
 		return this;
 	}
 
-	virtual void onResize(const Viewport& viewport)
-	{
-		LOG("[DEBUG] Document::onResize(window: %f x %f, framebuffer: %i x %i)\n",
-			viewport.getDimension().x, viewport.getDimension().y,
-			viewport.getFramebuffer().Width, viewport.getFramebuffer().Height);
-	}
-
 	void onMouseClick(const glm::vec2& pos) override
 	{
 		PickRegion region;
@@ -118,16 +246,19 @@ public:
 			border().Color = content().Color;
 	}
 
-	inline rd::Box& box(int i) { return m_Boxes[i]; }
+    virtual void onKey(int key, int scancode, int action, int mods)
+    {     
+    	(void) key;
+    	(void) scancode;
+    	(void) action;
+    	(void) mods;
+    }
 
-	inline rd::Box& margin() { return m_Boxes[0]; }
-	inline rd::Box& border() { return m_Boxes[1]; }
-	inline rd::Box& padding() { return m_Boxes[2]; }
-	inline rd::Box& content() { return m_Boxes[3]; }
-
-	inline const glm::vec3& position() { return m_Position; }
-	inline void position(const glm::vec3& position) { m_Position = position; }
-
+    virtual void onChar(unsigned codepoint)
+    {
+    	(void) codepoint;
+    }
+	
 	virtual glm::vec3 getDimension()
 	{
 		return glm::vec3(
@@ -137,147 +268,34 @@ public:
 		);
 	}
 
+	inline Document::Box& box(int i) { return m_Boxes[i]; }
+
+	inline Document::Box& margin() { return m_Boxes[0]; }
+	inline Document::Box& border() { return m_Boxes[1]; }
+	inline Document::Box& padding() { return m_Boxes[2]; }
+	inline Document::Box& content() { return m_Boxes[3]; }
+
+	inline const glm::vec3& position() { return m_Position; }
+	inline void position(const glm::vec3& position) { m_Position = position; }
+
 	inline bool refresh() { return m_Refresh; }
 	inline void refresh(bool r) { m_Refresh = r; }
 
+	inline void parent(Node* parent) { m_Parent = parent; }
+	inline Node* parent() { return m_Parent; }
+
+	inline void style(const Style& style) { m_Style = style; }
+	inline Style& style() { return m_Style; }
+
 protected:
+	Node* m_Parent;
+	Style m_Style;
+
 	int m_Clicks;
 	bool m_Refresh;
 	glm::vec3 m_Position;
-	rd::Box m_Boxes[4]; // Margin, Border, Padding, Content
+	Document::Box m_Boxes[4]; // NOTE: Margin, Border, Padding, Content
 };
 
-class DocumentCollection : public Document
-{
-public:
-	DocumentCollection(const glm::vec3& dimension = glm::vec3(0, 0, 0))
-	: Document(dimension)
-	{
-		m_Hover = NULL;
-	}
+}
 
-	virtual ~DocumentCollection()
-	{
-	}
-
-	virtual void arrange(glm::vec3 cursor, glm::vec3 dimension)
-	{
-        auto max_width = 0;
-
-        for (auto doc : m_Elements)
-        {
-            auto doc_dim = doc->getDimension();
-
-            if (doc_dim.x > max_width)
-                max_width = doc_dim.x;
-
-            if (cursor.y + doc_dim.y > dimension.y)
-            {
-                cursor.x += max_width;
-                cursor.y = 0;
-                max_width = 0;
-            }
-
-            doc->position(cursor);
-
-            cursor.y += doc_dim.y;
-        }
-	}
-
-	void draw() override
-	{
-		for (auto doc : m_Elements)
-			doc->draw();
-	}
-
-	void idle() override
-	{
-		for (auto doc : m_Elements)
-			doc->idle();
-	}
-
-	Document* pick(const glm::vec2& position, PickRegion* region) override
-	{
-		for (auto doc : m_Elements)
-        {
-            auto pick = doc->pick(position - doc->position().xy(), region);
-            if (pick != NULL)
-            	return pick;
-        }
-        if (region != NULL)
-        	*region = OUTSIDE;
-
-        return NULL;
-	}
-
-    void onResize(const Viewport& viewport) override
-    {
-       	for (auto doc : m_Elements)
-			doc->onResize(viewport);
-    } 
-
-	void onMouseDown(const glm::vec2& pos) override
-	{
-		auto doc = pick(pos, NULL);
-		if (doc != NULL)
-			doc->onMouseDown(pos - doc->position().xy());
-	}
-
-	void onMouseClick(const glm::vec2& pos) override
-	{ 
-		auto doc = pick(pos, NULL);
-		if (doc != NULL)
-			doc->onMouseClick(pos - doc->position().xy());
-	}
-
-	void onMouseDoubleClick(const glm::vec2& pos) override
-	{
-		auto doc = pick(pos, NULL);
-		if (doc != NULL)
-			doc->onMouseDoubleClick(pos - doc->position().xy());
-	}
-
-	void onMouseTripleClick(const glm::vec2& pos) override
-	{ 
-		auto doc = pick(pos, NULL);
-		if (doc != NULL)
-			doc->onMouseTripleClick(pos - doc->position().xy());
-	}
-
-	void onMouseMove(const glm::vec2& pos, const glm::vec2& dpos) override
-	{
-		auto doc = pick(pos, NULL);
-		if (doc != NULL)
-			doc->onMouseMove(
-				pos - doc->position().xy(),
-				dpos - doc->position().xy());
-	}
-
-	void onKey(int key, int scancode, int action, int mods) override
-	{
-		// TODO: Route keys to the active element
-		for (auto doc : m_Elements)
-			doc->onKey(key, scancode, action, mods);
-	}
-
-    void onScroll(double xoffset, double yoffset) override
-    {
-    	// TODO: Route scroll to the active element
-		for (auto doc : m_Elements)
-			doc->onScroll(xoffset, yoffset);
-    }
-
-	bool refresh()
-	{ 
-		for (auto doc : m_Elements)
-			if (doc->refresh())
-				return true;
-		return false;
-	}
-
-	inline std::vector<Document*>& elements() { return m_Elements; }
-
-protected:
-	Document* m_Hover;
-	std::vector<Document*> m_Elements;
-};

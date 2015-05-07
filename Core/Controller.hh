@@ -22,8 +22,14 @@ public:
 	{
 	}
 
-	virtual void idle()
+	virtual void draw(Context* context)
 	{
+		(void) context;
+	}
+
+	virtual void idle(Context* context)
+	{
+		(void) context;
 	}
 
 	// ---- Mouse Events ----

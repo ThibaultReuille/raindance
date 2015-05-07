@@ -3,11 +3,10 @@
 #include <raindance/Core/Headers.hh>
 #include <raindance/Core/Context.hh>
 #include <raindance/Core/GLFW.hh>
-#include <raindance/Core/Interface/Document.hh>
+#include <raindance/Core/Interface/DocumentCollection.hh>
 
 namespace rd
 {
-
 
 class Window : public GLFW::Window
 {
@@ -21,6 +20,7 @@ public:
     Window(Settings* settings)
     : GLFW::Window(settings)
     {
+        m_Viewport = getViewport();
     }
 
     virtual ~Window()
@@ -31,18 +31,38 @@ public:
     {
         m_Context = context;
 
-        m_ClearColor = glm::vec4(0.0, 0.0, 0.0, 0.0);
-
         auto viewport = getViewport();
         auto framebuffer = viewport.getFramebuffer();
         auto dimension = viewport.getDimension();
 
-        m_Body.content().X = glm::vec2(0.0, dimension.x);
-        m_Body.content().Y = glm::vec2(0.0, dimension.y);
-        m_Body.content().Z = glm::vec2(0.0, 0.0);
-
         this->onSetFramebufferSize(framebuffer.Width, framebuffer.Height);
         this->onWindowSize((int)dimension.x, (int)dimension.y);
+    }
+
+    void onWindowSize(int width, int height) override
+    {
+        m_Viewport.setDimension(glm::vec2((float) width, (float) height));
+        onResize(m_Viewport);
+    }
+
+    void onSetFramebufferSize(int width, int height) override
+    {
+        m_Viewport.setFramebuffer(width, height);
+        onResize(m_Viewport);
+    }
+
+    virtual void onResize(const Viewport& viewport)
+    {
+        auto framebuffer = viewport.getFramebuffer();
+
+        m_Body.style().Position = Document::Style::ABSOLUTE;
+        m_Body.style().Left = Document::Length(Document::Length::PIXELS, 0.0);
+        m_Body.style().Top = Document::Length(Document::Length::PIXELS, 0.0);
+        m_Body.style().Width = Document::Length(Document::Length::PIXELS, framebuffer.Width);
+        m_Body.style().Height = Document::Length(Document::Length::PIXELS, framebuffer.Height);
+        m_Body.update();
+
+        m_Body.onResize(viewport);
     }
 
     void onCursorPos(double xpos, double ypos) override
@@ -59,14 +79,14 @@ public:
 
     virtual void idle(Context* context) = 0;
 
-    inline DocumentCollection& body() { return m_Body; }
+    inline Document::Group& body() { return m_Body; }
+
+    inline const Viewport& viewport() { return m_Viewport; }
 
 protected:
     Context* m_Context;
-
-    DocumentCollection m_Body;
-
-    glm::vec4 m_ClearColor;
+    Viewport m_Viewport;
+    Document::Group m_Body;
 };
 
 }

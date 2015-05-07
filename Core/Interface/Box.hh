@@ -2,7 +2,7 @@
 
 #include <raindance/Core/Headers.hh>
 
-namespace rd
+namespace Document
 {
 
 /*
@@ -83,7 +83,5 @@ public:
 
 	glm::vec4 Color;
 };
-
-
 
 }

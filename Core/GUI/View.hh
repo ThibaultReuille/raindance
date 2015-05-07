@@ -18,9 +18,15 @@ public:
 	virtual void onWindowSize(int width, int height)
 	{ (void) width; (void) height; }
 
-	virtual void draw() = 0;
+	virtual void draw(Context* context)
+	{
+		(void) context;
+	}
 
-	virtual void idle() {}
+	virtual void idle(Context* context)
+	{
+		(void) context;
+	}
 
     inline void setViewport(const Viewport& viewport) { m_Viewport = viewport; }
     inline const Viewport& getViewport() const { return m_Viewport; }

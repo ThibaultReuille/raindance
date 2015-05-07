@@ -4,11 +4,13 @@
 #include <raindance/Core/Transformation.hh>
 #include <raindance/Core/Text.hh>
 #include <raindance/Core/Font.hh>
+#include <raindance/Core/Camera/Camera.hh>
 
-class Shell
+class Shell : public Document::Node
 {
 public:
-	Shell()
+	Shell(Document::Node* parent = NULL)
+	: Document::Node(parent)
 	{        
         m_Cursor = 0;
         m_History.push_back(std::string());
@@ -32,7 +34,7 @@ public:
 		SAFE_DELETE(m_Font);
 	}
 
-    void onKey(int key, int scancode, int action, int mods) // TODO: override
+    void onKey(int key, int scancode, int action, int mods) override
     {
     	(void) scancode;
     	(void) mods;
@@ -94,7 +96,7 @@ public:
         }
     }
 
-    void onChar(unsigned int codepoint) // TODO: override
+    void onChar(unsigned int codepoint) override
     {   
         std::string command;
         char c = (char) codepoint;
@@ -128,47 +130,59 @@ public:
 		print(command);
 	}
 
-	virtual void draw(Context* context, const Camera& camera, Transformation& transformation)
+	void draw(Context* context) override
 	{
+        // glClearColor(0.1, 0.1, 0.2, 0.3);
+        // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        float ratio = 2.0;
+
+		m_Camera.setOrthographicProjection(0, ratio * this->content().getWidth(), 0, ratio * this->content().getHeight(), 0, 1);
+		m_Camera.lookAt(glm::vec3(0, 0, 1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+
+		glDisable(GL_DEPTH_TEST);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
 
-		transformation.push();
+		Transformation transformation;
 
-			transformation.scale(glm::vec3(0.4, 0.4, 0.4));
-			transformation.translate(glm::vec3(0.0, - m_Font->getDescender() * m_Font->getSize(), 0.0));
+		// transformation.scale(glm::vec3(0.5, 0.5, 0.5));
+		transformation.translate(glm::vec3(0.0, - m_Font->getDescender() * m_Font->getSize(), 0.0));
 
-			// Command Prompt
-			m_Text.set("$", m_Font);
-			m_Text.draw(*context, camera.getProjectionMatrix() * camera.getViewMatrix() * transformation.state());
-			
-			// Command Line
-			if (m_History.begin()->size() > 0)
+		// Command Prompt
+		m_Text.set("$", m_Font);
+		m_Text.draw(*context, m_Camera.getViewProjectionMatrix() * transformation.state());
+		
+		// Command Line
+		if (m_History.begin()->size() > 0)
+		{
+			transformation.push();
+				transformation.translate(glm::vec3(m_Font->getSize(), 0, 0));
+				m_Text.set(m_History.begin()->c_str(), m_Font);
+				m_Text.draw(*context, m_Camera.getViewProjectionMatrix() * transformation.state());
+			transformation.pop();
+		}
+		transformation.translate(glm::vec3(0.0, m_Font->getSize(), 0.0));
+
+		// Log
+		for (auto it : m_Lines)
+		{
+			if (it.size() > 0)
 			{
 				transformation.push();
-					transformation.translate(glm::vec3(m_Font->getSize(), 0, 0));
-					m_Text.set(m_History.begin()->c_str(), m_Font);
-					m_Text.draw(*context, camera.getProjectionMatrix() * camera.getViewMatrix() * transformation.state());
+					transformation.scale(glm::vec3(m_HistoryFontFactor, m_HistoryFontFactor, 1.0));
+					m_Text.set(it.c_str(), m_Font);
+					m_Text.draw(*context, m_Camera.getViewProjectionMatrix() * transformation.state());
 				transformation.pop();
 			}
-			transformation.translate(glm::vec3(0.0, m_Font->getSize(), 0.0));
+			
+			transformation.translate(glm::vec3(0.0, m_Font->getSize() * m_HistoryFontFactor, 0.0));
+		}
+	}
 
-			// Log
-			for (auto it : m_Lines)
-			{
-				if (it.size() > 0)
-				{
-					transformation.push();
-						transformation.scale(glm::vec3(m_HistoryFontFactor, m_HistoryFontFactor, 1.0));
-						m_Text.set(it.c_str(), m_Font);
-						m_Text.draw(*context, camera.getProjectionMatrix() * camera.getViewMatrix() * transformation.state());
-					transformation.pop();
-				}
-				
-				transformation.translate(glm::vec3(0.0, m_Font->getSize() * m_HistoryFontFactor, 0.0));
-			}
-
-		transformation.pop();
+	void idle(Context* context) override
+	{
+		(void) context;
 	}
 
 	inline const std::list<std::string>& getHistory() { return m_History; }
@@ -184,4 +198,5 @@ private:
 	std::string m_Prompt;
 	Text m_Text;
 	rd::Font* m_Font;
+	Camera m_Camera;
 };
