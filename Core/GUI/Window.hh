@@ -3,7 +3,7 @@
 #include <raindance/Core/Headers.hh>
 #include <raindance/Core/Context.hh>
 #include <raindance/Core/GLFW.hh>
-#include <raindance/Core/Interface/DocumentCollection.hh>
+#include <raindance/Core/Interface/DocumentGroup.hh>
 
 namespace rd
 {

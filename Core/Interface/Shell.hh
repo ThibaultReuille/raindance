@@ -5,6 +5,7 @@
 #include <raindance/Core/Text.hh>
 #include <raindance/Core/Font.hh>
 #include <raindance/Core/Camera/Camera.hh>
+#include <raindance/Core/Interface/TextArea.hh>
 
 class Shell : public Document::Node
 {
@@ -27,11 +28,18 @@ public:
 		m_HistoryFontFactor = 0.75;
         m_Font = new rd::Font();
         m_Text.set(m_Prompt.c_str(), m_Font);
+
+        m_Output = NULL;
 	}
 
 	virtual ~Shell()
 	{
 		SAFE_DELETE(m_Font);
+	}
+
+	void attach(TextArea* output)
+	{
+		m_Output = output;
 	}
 
     void onKey(int key, int scancode, int action, int mods) override
@@ -122,7 +130,8 @@ public:
 
 	virtual void print(const std::string& str)
 	{
-		m_Lines.push_front(str);
+		if (m_Output != NULL)
+			m_Output->print(str);
 	}
 
 	virtual void execute(const std::string& command)
@@ -132,8 +141,8 @@ public:
 
 	void draw(Context* context) override
 	{
-        // glClearColor(0.1, 0.1, 0.2, 0.3);
-        // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClearColor(0.2, 0.2, 0.3, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         float ratio = 2.0;
 
@@ -146,7 +155,6 @@ public:
 
 		Transformation transformation;
 
-		// transformation.scale(glm::vec3(0.5, 0.5, 0.5));
 		transformation.translate(glm::vec3(0.0, - m_Font->getDescender() * m_Font->getSize(), 0.0));
 
 		// Command Prompt
@@ -156,47 +164,26 @@ public:
 		// Command Line
 		if (m_History.begin()->size() > 0)
 		{
-			transformation.push();
-				transformation.translate(glm::vec3(m_Font->getSize(), 0, 0));
-				m_Text.set(m_History.begin()->c_str(), m_Font);
-				m_Text.draw(*context, m_Camera.getViewProjectionMatrix() * transformation.state());
-			transformation.pop();
+			transformation.translate(glm::vec3(m_Font->getSize(), 0, 0));
+			m_Text.set(m_History.begin()->c_str(), m_Font);
+			m_Text.draw(*context, m_Camera.getViewProjectionMatrix() * transformation.state());
 		}
-		transformation.translate(glm::vec3(0.0, m_Font->getSize(), 0.0));
-
-		// Log
-		for (auto it : m_Lines)
-		{
-			if (it.size() > 0)
-			{
-				transformation.push();
-					transformation.scale(glm::vec3(m_HistoryFontFactor, m_HistoryFontFactor, 1.0));
-					m_Text.set(it.c_str(), m_Font);
-					m_Text.draw(*context, m_Camera.getViewProjectionMatrix() * transformation.state());
-				transformation.pop();
-			}
-			
-			transformation.translate(glm::vec3(0.0, m_Font->getSize() * m_HistoryFontFactor, 0.0));
-		}
-	}
-
-	void idle(Context* context) override
-	{
-		(void) context;
 	}
 
 	inline const std::list<std::string>& getHistory() { return m_History; }
 
 private:
+	Camera m_Camera;
+	rd::Font* m_Font;
+	Text m_Text;
+	std::string m_Characters;
+
+	float m_HistoryFontFactor;
+	std::string m_Prompt;
 	unsigned int m_Cursor;
 	std::list<std::string>::iterator m_Current;
 	std::list<std::string>::iterator m_Scroll;
 	std::list<std::string> m_History;
-	float m_HistoryFontFactor;
-	std::list<std::string> m_Lines;
-	std::string m_Characters;
-	std::string m_Prompt;
-	Text m_Text;
-	rd::Font* m_Font;
-	Camera m_Camera;
+
+	TextArea* m_Output;
 };
