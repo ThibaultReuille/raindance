@@ -52,6 +52,10 @@ xxd -i Assets/Shaders/Primitives/wideline.frag >> Pack.hh
 xxd -i Assets/Shaders/Primitives/polyline.vert >> Pack.hh
 xxd -i Assets/Shaders/Primitives/polyline.frag >> Pack.hh
 
+xxd -i Assets/Shaders/Primitives/rectangle.vert >> Pack.hh
+xxd -i Assets/Shaders/Primitives/rectangle.geom >> Pack.hh
+xxd -i Assets/Shaders/Primitives/rectangle.frag >> Pack.hh
+
 echo "- Packing Shaders/Widgets"
 
 xxd -i Assets/Shaders/Widgets/widget.vert >> Pack.hh

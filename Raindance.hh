@@ -2,7 +2,7 @@
 
 #include <raindance/Core/Headers.hh>
 #include <raindance/Core/Context.hh>
-#include <raindance/Core/GUI/WindowManager.hh>
+#include <raindance/Core/Interface/WindowManager.hh>
 
 class Raindance
 {

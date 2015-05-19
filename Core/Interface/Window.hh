@@ -66,8 +66,17 @@ public:
     }
 
     void onCursorPos(double xpos, double ypos) override
-    { 
-        m_Body.onCursorPos(xpos, ypos);
+    {
+        // NOTE: Convert window coordinates to viewport coordinates
+        
+        auto framebuffer = m_Viewport.getFramebuffer();
+
+        auto ratio = glm::vec2(
+            framebuffer.Width / m_Viewport.getDimension().x,
+            framebuffer.Height / m_Viewport.getDimension().y
+        );
+
+        m_Body.onCursorPos(xpos * ratio.x, framebuffer.Height - ypos * ratio.y);
     }
 
     void onMouseButton(int button, int action, int mods) override

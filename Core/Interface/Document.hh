@@ -50,9 +50,8 @@ struct Style
 	: 	Position(RELATIVE),
 		Align(LEFT),
 		Left(Length::PIXELS, 0.0),
-		// TODO: Right(Length::PIXELS, 0.0),
 		Top(Length::PIXELS, 0.0),
-		// TODO: Bottom(Length::PIXELS, 0.0),
+		Near(Length::PIXELS, 0.0),
 		Width(Length::PERCENTS, 1.0),
 		Height(Length::PERCENTS, 1.0)
 	{
@@ -66,9 +65,8 @@ struct Style
 	AlignType Align;
 
 	Length Left;
-	// TODO: Length Right;
 	Length Top;
-	// TODO: Length Bottom;
+	Length Near;
 
 	Length Width;
 	Length Height;
@@ -90,9 +88,7 @@ public:
 	Node(Node* parent = NULL)
 	{
 		m_Parent = parent;
-
 		m_Clicks = 0;
-	
 		m_Refresh = true;
 	}
 
@@ -164,7 +160,7 @@ public:
        		if (style().Align == Style::LEFT)
        		{
        		}
-			if (style().Align == Style::RIGHT && parent() != NULL)
+			else if (style().Align == Style::RIGHT && parent() != NULL)
 				pos.x += parent()->content().getWidth() - getDimension().x;
 			else if (style().Align == Style::CENTER && parent() != NULL)
 				pos.x += parent()->content().getWidth() / 2 - getDimension().x / 2;
@@ -189,7 +185,16 @@ public:
 				pos.y -= style().Top.value() * parent()->content().getHeight();
 			else
 			{
-				LOG("Error: Document has relative 'right' property but no parent!\n");
+				LOG("Error: Document has relative 'top' property but no parent!\n");
+			}
+
+			if (style().Near.mode() == Length::PIXELS)
+				pos.z += style().Near.value();
+			else if (style().Top.mode() == Length::PERCENTS && parent() != NULL)
+				pos.z += style().Near.value() * parent()->content().getDepth();
+			else
+			{
+				LOG("Error: Document has relative 'near' property but no parent!\n");
 			}
 
 			position(pos);
@@ -226,6 +231,7 @@ public:
 
 		if (region != NULL)
 			*region = CONTENT;
+		
 		return this;
 	}
 
