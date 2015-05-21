@@ -84,7 +84,6 @@ xxd -i Assets/Shaders/Charts/HeightMap.frag >> Pack.hh
 
 echo "- Packing Textures"
 
-xxd -i Assets/Textures/umbrella-logo.png >> Pack.hh
 xxd -i Assets/Textures/script.png >> Pack.hh
 xxd -i Assets/Textures/mark.png >> Pack.hh
 xxd -i Assets/Textures/chart-disk.png >> Pack.hh

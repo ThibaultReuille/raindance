@@ -141,9 +141,6 @@ public:
 
 	void draw(Context* context) override
 	{
-        glClearColor(0.2, 0.2, 0.3, 1.0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
         float ratio = 2.0;
 
 		m_Camera.setOrthographicProjection(0, ratio * this->content().getWidth(), 0, ratio * this->content().getHeight(), 0, 1);

@@ -11,6 +11,7 @@ public:
 	Group(Node* parent = NULL)
 	: Node(parent)
 	{
+		m_ActiveElement = NULL;
 	}
 
 	virtual ~Group()
@@ -31,6 +32,7 @@ public:
 		    glViewport(position.x, position.y, doc->content().getWidth(), doc->content().getHeight());
 		    glScissor(position.x, position.y, doc->content().getWidth(), doc->content().getHeight());
 
+		    doc->background().draw(context);
 		    doc->draw(context);
 		}
 

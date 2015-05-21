@@ -6,6 +6,9 @@
 #include <raindance/Core/Interface/Box.hh>
 #include <raindance/Core/GUI/Viewport.hh> // TODO: Move Viewport.hh inside Interface/
 
+#include <raindance/Core/Primitives/Rectangle.hh>
+#include <raindance/Core/FS.hh>
+
 namespace Document
 {
 
@@ -53,7 +56,9 @@ struct Style
 		Top(Length::PIXELS, 0.0),
 		Near(Length::PIXELS, 0.0),
 		Width(Length::PERCENTS, 1.0),
-		Height(Length::PERCENTS, 1.0)
+		Height(Length::PERCENTS, 1.0),
+		BackgroundColor(glm::vec4(1.0, 1.0, 1.0, 1.0)),
+		Pickable(true)
 	{
 	}
 
@@ -70,6 +75,58 @@ struct Style
 
 	Length Width;
 	Length Height;
+
+	glm::vec4 BackgroundColor;
+
+	bool Pickable;
+};
+
+class Background
+{
+public:
+	Background()
+	{
+		m_Color = glm::vec4(1.0, 1.0, 1.0, 1.0);
+		m_Texture = NULL;
+
+		m_Camera.setOrthographicProjection(0, 1, 0, 1, 0, 1);
+		m_Camera.lookAt(glm::vec3(0, 0, 1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	}
+
+	virtual ~Background()
+	{
+		if (m_Texture != NULL)
+			ResourceManager::getInstance().unload(m_Texture);
+	}
+
+	void loadImage(const char* name, const FS::BinaryFile& image)
+	{
+		m_Texture = ResourceManager::getInstance().loadTexture(name, (unsigned char*)image.content().data(), image.content().size());
+		m_Rectangle.setTexture(m_Texture);
+	}
+
+	void draw(Context* context)
+	{
+		glDisable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+		
+		Transformation transformation;
+
+		m_Rectangle.draw(context, m_Camera, transformation);
+	}
+
+	inline void setColor(const glm::vec4& color)
+	{
+		m_Color = color;
+		m_Rectangle.setColor(m_Color);
+	}
+
+private:
+	Camera m_Camera;
+	Rectangle m_Rectangle;
+	glm::vec4 m_Color;
+	Texture* m_Texture;
 };
 
 class Node : public Controller
@@ -169,7 +226,6 @@ public:
 				LOG("Error: Can't compute alignment, document has no parent!\n");
 			}
 
-
 			if (style().Left.mode() == Length::PIXELS)
 				pos.x += style().Left.value();
 			else if (style().Left.mode() == Length::PERCENTS && parent() != NULL)
@@ -206,11 +262,17 @@ public:
 			padding().Color = glm::vec4(WHITE, 0.0);
 			border().Color = glm::vec4(BLACK, 1.0);
 			margin().Color = glm::vec4(WHITE, 0.0);
+
+			background().setColor(style().BackgroundColor);
 		}
 	}
 
+
 	virtual Node* pick(const glm::vec2& position, PickRegion* region)
 	{
+		if (!style().Pickable)
+			return NULL;
+
 		auto box_position = glm::vec2(0, 0);
 		auto box_dimension = getDimension().xy();
 
@@ -293,9 +355,12 @@ public:
 	inline void style(const Style& style) { m_Style = style; }
 	inline Style& style() { return m_Style; }
 
+	inline Background& background() { return m_Background; }
+
 protected:
 	Node* m_Parent;
 	Style m_Style;
+	Background m_Background;
 
 	int m_Clicks;
 	bool m_Refresh;

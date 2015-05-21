@@ -22,6 +22,12 @@ public:
 		setPosition(position);
 		setDimension(dimension);
 		setColor(glm::vec4(1.0, 1.0, 1.0, 1.0));
+		setTexture(NULL);
+	}
+
+	virtual ~Rectangle()
+	{
+		ResourceManager::getInstance().unload(m_Shader);
 	}
 
 	void draw(Context* context, Camera& camera, Transformation& transformation)
@@ -30,40 +36,31 @@ public:
 
         m_Shader->uniform("u_ModelViewMatrix").set(camera.getViewMatrix() * transformation.state());
         m_Shader->uniform("u_ProjectionMatrix").set(camera.getProjectionMatrix());
-        m_Shader->uniform("u_Texture").set(*m_Texture);
+
+		m_Shader->uniform("u_Position").set(m_Position);
+		m_Shader->uniform("u_Dimension").set(m_Dimension);
+
+		m_Shader->uniform("u_Color").set(m_Color);
+		if (m_Texture == NULL)
+			m_Shader->uniform("u_Textured").set(0);
+		else
+		{
+			m_Shader->uniform("u_Textured").set(1);
+			m_Shader->uniform("u_Texture").set(*m_Texture);
+		}
 
         context->geometry().bind(m_VertexBuffer, *m_Shader);
         context->geometry().drawArrays(GL_POINTS, 0, m_VertexBuffer.size() / sizeof(glm::vec3));        
         context->geometry().unbind(m_VertexBuffer);
 	}
 
-	void setPosition(const glm::vec3& position)
-	{
-		m_Position = position;
-		m_Shader->use();
-		m_Shader->uniform("u_Position").set(m_Position);
-	}
+	inline void setPosition(const glm::vec3& position) { m_Position = position; }
 
-	void setDimension(const glm::vec2& dimension)
-	{
-		m_Dimension = dimension;
-		m_Shader->use();
-		m_Shader->uniform("u_Dimension").set(m_Dimension);
-	}
+	inline void setDimension(const glm::vec2& dimension) { m_Dimension = dimension; }
 
-	void setColor(const glm::vec4& color)
-	{
-		m_Color = color;
-		m_Shader->use();
-		m_Shader->uniform("u_Color").set(m_Color);
-	}
+	inline void setColor(const glm::vec4& color) { m_Color = color; }
 
-	void setTexture(Texture* texture)
-	{
-		m_Texture = texture;
-		m_Shader->use();
-		m_Shader->uniform("u_Texture").set(*m_Texture);
-	}
+	inline void setTexture(Texture* texture) { m_Texture = texture; }
 
 private:
 	glm::vec3 m_Position;

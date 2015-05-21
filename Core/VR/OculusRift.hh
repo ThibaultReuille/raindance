@@ -97,7 +97,7 @@ public:
 
         if (true)
         {
-            float ipd = 0.5; //0.20; // Inter-Pupillary Distance
+            float ipd = 0.5; // Inter-Pupillary Distance
 
             glm::vec3 step = 0.5f * ipd * camera.right();
 
