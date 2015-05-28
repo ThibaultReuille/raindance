@@ -30,13 +30,14 @@ public:
 			LOG("[ENVIRONMENT] Environment sphere needs to be assigned a texture !\n");
 
 		Buffer& vertexBuffer = m_Sphere->getVertexBuffer();
-		Buffer& indexBuffer = m_Sphere->getIndexBuffer();
+		//Buffer& indexBuffer = m_Sphere->getIndexBuffer();
 
 		m_Shader->use();
 		m_Shader->uniform("u_ModelViewProjection").set(camera.getProjectionMatrix() * camera.getViewMatrix() * glm::translate(glm::mat4(), camera.getPosition()));
 		m_Shader->uniform("u_Texture").set(*m_Texture);
 		context->geometry().bind(vertexBuffer, *m_Shader);
-		context->geometry().drawElements(GL_TRIANGLES, indexBuffer.size() / sizeof(unsigned short int), GL_UNSIGNED_SHORT, indexBuffer.ptr());
+		//TODO: context->geometry().drawElements(GL_TRIANGLES, indexBuffer.size() / sizeof(unsigned short int), GL_UNSIGNED_SHORT, indexBuffer.ptr());
+		context->geometry().drawArrays(GL_TRIANGLES, 0, vertexBuffer.size() / sizeof(SphereMesh::Vertex));
 		context->geometry().unbind(vertexBuffer);
 	}
 

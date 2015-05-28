@@ -16,8 +16,8 @@ void main()
 	(
 		gl_in[0].gl_Position.xy + vec2(0.0,  0.0),
         gl_in[0].gl_Position.xy + vec2(1.0,  0.0),
-        gl_in[0].gl_Position.xy + vec2(0.0, -1.0),
-        gl_in[0].gl_Position.xy + vec2(1.0, -1.0)
+        gl_in[0].gl_Position.xy + vec2(0.0,  1.0),
+        gl_in[0].gl_Position.xy + vec2(1.0,  1.0)
     );
 
 	for (int i = 0; i < 4; i++)

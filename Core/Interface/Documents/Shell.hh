@@ -5,7 +5,7 @@
 #include <raindance/Core/Text.hh>
 #include <raindance/Core/Font.hh>
 #include <raindance/Core/Camera/Camera.hh>
-#include <raindance/Core/Interface/TextArea.hh>
+#include <raindance/Core/Interface/Documents/TextArea.hh>
 
 class Shell : public Document::Node
 {

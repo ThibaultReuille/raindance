@@ -128,7 +128,7 @@ public:
                 transformation.push();
 
                 cursor.x = m_Dimension.x * ((float)timecode - (float) current + (float) m_Before) / ((float)m_Before + (float)m_After);
-                cursor.y = - m_Dimension.y / 2 + simultaneous * m_Dimension.y / 5;
+                cursor.y = m_Dimension.y / 2 + simultaneous * m_Dimension.y / 5;
 
                 transformation.translate(cursor);
                 m_EventIcon->draw(context, viewProjection * model * transformation.state(), color, mode);

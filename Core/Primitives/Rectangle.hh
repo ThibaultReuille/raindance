@@ -13,7 +13,7 @@ public:
 			Assets_Shaders_Primitives_rectangle_vert, sizeof(Assets_Shaders_Primitives_rectangle_vert),
 			Assets_Shaders_Primitives_rectangle_frag, sizeof(Assets_Shaders_Primitives_rectangle_frag),
 			Assets_Shaders_Primitives_rectangle_geom, sizeof(Assets_Shaders_Primitives_rectangle_geom));
-		m_Shader->dump();
+		//m_Shader->dump();
 
 		m_VertexBuffer << glm::vec3(0.0, 0.0, 0.0);
 		m_VertexBuffer.describe("a_Zero", 3, GL_FLOAT, sizeof(glm::vec3), 0);
