@@ -44,6 +44,7 @@ xxd -i Assets/Shaders/Primitives/box.vert >> Pack.hh
 xxd -i Assets/Shaders/Primitives/box.frag >> Pack.hh
 
 xxd -i Assets/Shaders/Primitives/grid.vert >> Pack.hh
+xxd -i Assets/Shaders/Primitives/grid.geom >> Pack.hh
 xxd -i Assets/Shaders/Primitives/grid.frag >> Pack.hh
 
 xxd -i Assets/Shaders/Primitives/wideline.vert >> Pack.hh

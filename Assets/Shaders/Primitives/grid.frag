@@ -4,13 +4,12 @@
 precision mediump float;
 #endif
 
-in vec2 v_Texcoord;
+uniform vec2 u_Step;
+uniform vec2 u_Division;
 
-in vec2 v_Step;
-in vec2 v_Division;
+uniform vec4 u_Color;
 
-in vec4 v_Color;
-in vec4 v_BackgroundColor;
+in vec2 gs_UV;
 
 out vec4 FragColor;
 
@@ -29,29 +28,29 @@ vec2 computeModuloDistance(vec2 position, vec2 step)
 
 void main(void)
 {
-	float threshold = 0.40;
+	float threshold = 1.0;
 
 	vec2 d;
 
-	d = computeModuloDistance(v_Texcoord, v_Step);
+	d = computeModuloDistance(gs_UV, u_Step);
 
 	if (d.x <= threshold || d.y <= threshold)
 	{
-	    FragColor = v_Color;
+	    FragColor = u_Color;
 	}
 	else
 	{
-		vec2 divStep = vec2(v_Step.x / v_Division.x, v_Step.y / v_Division.y);
+		vec2 divStep = vec2(u_Step.x / u_Division.x, u_Step.y / u_Division.y);
 
-		d = computeModuloDistance(v_Texcoord, divStep);
+		d = computeModuloDistance(gs_UV, divStep);
 
 		if (d.x <= threshold || d.y <= threshold)
 		{
-			FragColor = 0.7 * v_Color;
+			FragColor = 0.7 * u_Color;
 		}
 		else
 		{
-			FragColor = v_BackgroundColor;
+			discard;
 		}
 	}
 }

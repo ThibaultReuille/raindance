@@ -116,23 +116,11 @@ public:
         m_MaxElementsPerLeaf = 128;
         m_MaxDepth = 10;
         m_ElementCount = 0;
-
-        m_Cube = new Cube();
-        m_Cube->getLineVertexBuffer().mute("a_Normal", true);
-
-        m_Shader = ResourceManager::getInstance().loadShader("octree:octant cube",
-                Assets_Shaders_Primitives_grid_vert, sizeof(Assets_Shaders_Primitives_grid_vert),
-                Assets_Shaders_Primitives_grid_frag, sizeof(Assets_Shaders_Primitives_grid_frag));
-    
-        m_Shader->use();
-        m_Shader->uniform("u_Color").set(glm::vec4(0.5, 0.5, 0.5, 0.5));
     }
 
     virtual ~Octree()
     {
         SAFE_DELETE(m_Root);
-
-        ResourceManager::getInstance().unload(m_Shader);
     }
 
     void insert(OctreeElement* element, OctreeNode* root = NULL)
@@ -256,12 +244,10 @@ public:
                 t.translate(current.Node->getCenter());
                 t.scale(2.0f * 2.0f * current.Node->getHalfDimension());
 
-                m_Shader->use();
-                m_Shader->uniform("u_ModelViewProjection").set(mvp * t.state());
-
-                context->geometry().bind(m_Cube->getLineVertexBuffer(), *m_Shader);        
-                context->geometry().drawArrays(GL_LINES, 0, m_Cube->getLineVertexBuffer().size() / sizeof(Cube::Vertex));
-                context->geometry().unbind(m_Cube->getLineVertexBuffer());
+                // TODO : m_Cube->draw(context, camera, t, CUBE_SHADER, Cube::LINES)
+                (void) mvp;
+                (void) context;
+                (void) transformation;
             }
             else
             {
@@ -306,7 +292,4 @@ private:
     unsigned int m_ElementCount;
     unsigned int m_MaxElementsPerLeaf;
     unsigned int m_MaxDepth;
-
-    Cube* m_Cube;
-    Shader::Program* m_Shader;
 };

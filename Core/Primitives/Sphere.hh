@@ -61,28 +61,6 @@ public:
 		m_VertexBuffer.describe("a_Texcoord", 2, GL_FLOAT, sizeof(Vertex), sizeof(glm::vec3) * 2);
 		m_VertexBuffer.generate(Buffer::STATIC);
 	}
-	/*
-
-	Vertex computeVertex(float radius, unsigned int ring, unsigned int sector, unsigned int total_rings, unsigned int total_sectors)
-	{
-		float R = 1.0f / (float)(rings - 1);
-		float S = 1.0f / (float)(sectors - 1);
-
-		Vertex vertex;
-
-		vertex.Normal = glm::vec3
-		(
-			cos(2 * M_PI * sector * S) * sin(M_PI * ring * R),
-			sin(-M_PI_2 + M_PI * ring * R),
-			sin(2 * M_PI * sector * S) * sin(M_PI * ring * R)
-		);
-		vertex.Position = radius * vertex.Normal;
-		vertex.Texcoord = glm::vec2(s * S, ring * R);
-
-		return vertex;
-	}
-	*/
-
 
 	inline Buffer& getVertexBuffer() { return m_VertexBuffer; }
 	//inline Buffer& getIndexBuffer() { return m_IndexBuffer; }
