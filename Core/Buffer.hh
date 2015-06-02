@@ -34,6 +34,7 @@ public:
 		m_Generated = false;
 		m_Synchronized = true;
 		m_Usage = GL_NONE;
+		m_BlockSize = 0;
 	}
 
 	virtual ~Buffer()
@@ -49,6 +50,8 @@ public:
 
 	void generate(BufferUsage usage)
 	{
+		resolveStrides();
+
 		switch(usage)
 		{
 		case DYNAMIC:
@@ -71,6 +74,58 @@ public:
 		m_Generated = true;
 	}
 
+	int sizeOfGLenum(GLenum type)
+	{
+		switch(type)
+		{
+			case GL_FLOAT:
+				return sizeof(float);
+			case GL_INT:
+				return sizeof(int);
+			case GL_SHORT:
+				return sizeof(short int);
+			case GL_BYTE:
+				return sizeof(char);
+			default:
+				LOG("[ERROR] Buffer::sizeOfGLenum Unknown GLenum!\n");
+				return 0;
+		}
+	}
+
+	void resolveStrides()
+	{
+		if (m_Descriptions.size() == 0)
+			return;
+
+		auto total = m_Descriptions.back().Offset + sizeOfGLenum(m_Descriptions.back().Type);
+		for (auto& desc : m_Descriptions)
+			if (desc.Stride == -1)
+				desc.Stride = total;
+		m_BlockSize = total;
+	}
+
+	void describe(const char* attribute, GLenum type, int count)
+	{
+		GLuint offset = 0;
+		if (m_Descriptions.size() > 0)
+		{
+			auto last = m_Descriptions.back();
+			offset = last.Offset + last.Size * sizeOfGLenum(last.Type);
+		}
+		
+		Description description;
+
+		description.Size = count;
+		description.Type = type;
+		description.Stride = -1;
+		description.Offset = offset;
+		description.Attribute = std::string(attribute);
+		description.Location = -1;
+		description.Mute = false;
+
+		m_Descriptions.push_back(description);
+	}
+
 	void describe(const char* attribute, GLsizei size, GLenum type, GLsizei stride, GLuint offset)
 	{
 		Description description;
@@ -82,6 +137,8 @@ public:
 		description.Attribute = std::string(attribute);
 		description.Location = -1;
 		description.Mute = false;
+
+		m_BlockSize = stride;
 
 		m_Descriptions.push_back(description);
 	}
@@ -198,6 +255,7 @@ public:
 	inline GLuint vbo() const { return m_VBO; }
 
 	inline GLuint size() const { return static_cast<GLuint>(m_Data.size()); }
+	inline GLuint blocksize() const { return m_BlockSize; }
 
 	inline unsigned char* ptr() { return m_Data.data(); }
 
@@ -248,6 +306,7 @@ public:
 private:
 	std::vector<unsigned char> m_Data;
 	std::vector<Description> m_Descriptions;
+	GLuint m_BlockSize;
 	GLuint m_VBO;
 	GLenum m_Usage;
 	bool m_Generated;

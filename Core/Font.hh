@@ -108,7 +108,6 @@ public:
             json_data_len = Robotica_json_len;
             */
 
-
             /*
             png_data = America_Sans_png;
             png_data_len = America_Sans_png_len;
@@ -221,7 +220,7 @@ public:
 
             if (v.is<picojson::null>())
             {
-                LOG("[FONT] Warning : No glyph for characted '%c' !\n", s[i]);
+                LOG("[FONT] Warning: No glyph for characted '%c' !\n", s[i]);
                 p.x += m_SpaceAdvance;
                 continue;
             }
