@@ -69,36 +69,3 @@ public:
 private:
 	std::vector<DrawCall*> m_DrawCalls;
 };
-
-/*
-int main()
-{
-	auto buffer0 = new Buffer();
-	buffer0 << glm::vec2(0, 0);
-	buffer0 << glm::vec2(1, 0);
-	buffer0 << glm::vec2(0, 1);
-	buffer0 << glm::vec2(1, 1);
-	buffer0->describe("a_Position")
-
-	auto buffer1 = new Buffer();
-	for (int i = 0; i < 128; i++)
-		buffer1 << glm::vec3(i / 16, i % 16, 0);
-	buffer1->generate(Buffer::STATIC);
-
-    FS::TextFile vert("Assets/TimeSeries/timevector.vert");
-    FS::TextFile geom("Assets/TimeSeries/timevector.geom");
-    FS::TextFile frag("Assets/TimeSeries/timevector.frag");
-    auto shader1 = ResourceManager::getInstance().loadShader("test/test", vert.content(), frag.content(), geom.content());
-	
-	auto drawcall = new Drawcall();	
-	drawcall->shader(shader1);
-	drawcall->uniform()
-	drawcall->texture()
-	drawcall->buffer(buffer1)
-
-	auto batch = new Batch();
-	batch.add(drawcall1);
-
-	batch->execute();
-}
-*/
