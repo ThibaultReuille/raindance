@@ -64,6 +64,9 @@ public:
 	// TODO : Use/Implement a true circular buffer with appropriate iterators
 	void drawLineStrip(Context& context, Camera& camera, Transformation transformation, const std::vector<Vertex>& vertices, size_t begin, size_t end)
 	{
+		(void) context;
+		(void) vertices;
+		
 		m_LineStripShader->use();
 		m_LineStripShader->uniform("u_ModelViewProjection").set(camera.getViewProjectionMatrix() * transformation.state());
 

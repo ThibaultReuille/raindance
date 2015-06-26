@@ -56,7 +56,7 @@ public:
 	{
 		m_FirstPerson.bind(context, cameras);
 		m_Spherical.bind(context, cameras);
-		m_OculusRift.bind(context, cameras); 
+		m_OculusRift.bind(context, cameras);
 	}
 
 	void update() override

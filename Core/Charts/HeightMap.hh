@@ -71,13 +71,13 @@ public:
                     continue;
                 else if (i == 0 && j > 0 && j < (m_Height - 1))
                 {
-                    unsigned short int a = static_cast<unsigned short int>(i + j * m_Width);
+                    unsigned short int a = static_cast<unsigned short int>(i + j *       m_Width);
                     unsigned short int b = static_cast<unsigned short int>(i + (j + 1) * m_Width);
                     m_LineBuffer << a << b;
                 }
                 else if (j == 0 && i > 0 && i < (m_Width - 1))
                 {
-                    unsigned short int a = static_cast<unsigned short int>(i + j * m_Width);
+                    unsigned short int a = static_cast<unsigned short int>(i + j *       m_Width);
                     unsigned short int b = static_cast<unsigned short int>((i + 1) + j * m_Width);
                     m_LineBuffer << a << b;
                 }

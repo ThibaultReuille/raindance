@@ -8,6 +8,7 @@
 
 #include <raindance/Core/Primitives/Rectangle.hh>
 #include <raindance/Core/FS.hh>
+#include <raindance/Core/Variables.hh>
 
 namespace Document
 {
@@ -161,6 +162,12 @@ public:
 	virtual void idle(Context* context)
 	{
 		(void) context;
+	}
+
+	virtual void request(const Variables& input, Variables& output)
+	{
+		(void) input;
+		(void) output;	
 	}
 
 	virtual void update()
