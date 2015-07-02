@@ -46,6 +46,11 @@ public:
     	}
     }
 
+    virtual void stop()
+    {
+    	windows().active()->close();
+    }
+
 	virtual void idle()
 	{
 		windows().active()->idle(m_Context);
