@@ -173,6 +173,11 @@ namespace GLFW
 			return viewport;
 		}
 
+		virtual void close()
+		{
+			glfwSetWindowShouldClose(m_GlfwHandle, CLOSE);
+		}
+
 		inline GLFWwindow* getGlfwHandle() { return m_GlfwHandle; }
 
 		inline const Settings& getSettings() { return m_Settings; }
