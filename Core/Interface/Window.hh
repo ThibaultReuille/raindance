@@ -84,6 +84,11 @@ public:
         m_Body.onMouseButton(button, action, mods);
     }
 
+    virtual void focus(Document::Node* node)
+    {
+    	m_Body.setActiveElement(node);
+    }
+
     virtual void draw(Context* context) = 0;
 
     virtual void idle(Context* context) = 0;

@@ -143,6 +143,7 @@ public:
 		m_Elements.push_back(document);
 	}
 
+	inline void setActiveElement(Node* node) { m_ActiveElement = node; }
 	inline std::vector<Node*>& getElements() { return m_Elements; }
 
 protected:
