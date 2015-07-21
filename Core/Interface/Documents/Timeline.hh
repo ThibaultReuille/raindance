@@ -53,6 +53,7 @@ public:
             transformation.scale(glm::vec3(this->content().getWidth(), this->content().getHeight(), 1.0));
 
             m_Shader->use();
+            m_Shader->uniform("u_ProjectionMatrix").set(m_Camera.getProjectionMatrix());
             m_Shader->uniform("u_ModelViewMatrix").set(m_Camera.getViewMatrix() * transformation.state());
             m_Shader->uniform("u_Color").set(glm::vec4(0.2, 0.2, 0.2, 0.7));
             m_Shader->uniform("u_Value").set((float) m_Before / ((float)m_Before + (float)m_After));
