@@ -10,6 +10,8 @@
 #include <raindance/Core/FS.hh>
 #include <raindance/Core/Variables.hh>
 
+#include <raindance/Core/Interface/Visitors/IVisitor.hh>
+
 namespace Document
 {
 
@@ -158,6 +160,12 @@ public:
 	{
 		(void) context;
 	}
+
+    virtual void accept(IVisitor* visitor)
+    {
+        (void) visitor;
+    }
+
 
 	virtual void idle(Context* context)
 	{
@@ -363,6 +371,7 @@ public:
 	inline Style& style() { return m_Style; }
 
 	inline Background& background() { return m_Background; }
+
 
 protected:
 	Node* m_Parent;

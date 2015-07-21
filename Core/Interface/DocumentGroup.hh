@@ -39,6 +39,11 @@ public:
     	glDisable(GL_SCISSOR_TEST);
 	}
 
+    void accept(IVisitor* visitor) override
+    {
+        visitor->visit(this);
+    }
+
 	void idle(Context* context) override
 	{
 		for (auto doc : m_Elements)

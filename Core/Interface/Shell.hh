@@ -139,6 +139,11 @@ public:
 		print(command);
 	}
 
+	virtual void accept(IVisitor& visitor) override
+	{
+	    visitor.visit()
+	}
+
 	void draw(Context* context) override
 	{
         float ratio = 2.0;

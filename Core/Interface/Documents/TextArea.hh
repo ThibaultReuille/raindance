@@ -38,6 +38,11 @@ public:
 		m_Lines.push_front(str);
 	}
 
+	void accept (IVisitor* visitor) override
+    {
+	    visitor->visit(this);
+    }
+
 	void draw(Context* context) override
 	{
         float ratio = 2.0;
@@ -68,10 +73,17 @@ public:
 		}
 	}
 
+    inline virtual void setFontFactor (float factor) { m_FontFactor = factor; }
+    inline virtual float fontFactor () { return m_FontFactor; }
+    inline virtual Camera camera () { return m_Camera; }
+    inline virtual std::list<std::string> lines () { return m_Lines; }
+    inline virtual Text text () { return m_Text; }
+    inline virtual rd::Font* getFont () { return m_Font; }
+
 private:
 	Camera m_Camera;
-
 	float m_FontFactor;
+
 	std::list<std::string> m_Lines;
 	std::string m_Characters;
 	Text m_Text;
