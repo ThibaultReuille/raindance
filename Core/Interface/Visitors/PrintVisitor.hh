@@ -7,7 +7,7 @@
 class PrintVisitor : public IVisitor
 {
     public:
-        PrintVisitor(Context* context = NULL)
+        PrintVisitor(Context* context = NULL) : indents (0)
         {
             m_Context = context;
         }
@@ -21,12 +21,15 @@ class PrintVisitor : public IVisitor
         void visit(Document::Node* node) override
         {
             (void) node;
-            LOG("Visited Node");
+            printWhiteSpaces();
+            LOG("[Node]");
         }
 
         void visit(Document::Group* group) override
         {
-            LOG("Visited Document Group");
+            printWhiteSpaces();
+            LOG("[Group]");
+            m_Indents++;
 
             for (auto element : group->getElements())
             {
@@ -37,24 +40,37 @@ class PrintVisitor : public IVisitor
         void visit(TextArea* textArea) override
         {
             (void) textArea;
-            LOG("Visited TextArea node");
+            printWhiteSpaces();
+            LOG("[TextArea]");
         }
 
         void visit(CheckBox* checkBox) override
         {
             (void) checkBox;
-            LOG("Visited CheckBox node");
+            printWhiteSpaces();
+            LOG("[CheckBox]");
         }
 
         void visit(Shell* shell) override
         {
             (void) shell;
-            LOG("Visited CheckBox node");
+            printWhiteSpaces();
+            LOG("[Shell]");
         }
 
         inline Context* getContext() { return m_Context; }
+        inline void reset () { m_Idents = 0; }
 
+    private:
+        void printWhiteSpaces ()
+        {
+            for(int i = 0; i < m_Indents; i++)
+                LOG("   ");
+        }
 
     protected:
         Context* m_Context;
+
+    private:
+        int m_Indents;
 };

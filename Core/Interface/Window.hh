@@ -5,6 +5,7 @@
 #include <raindance/Core/GLFW.hh>
 #include <raindance/Core/Interface/DocumentGroup.hh>
 
+
 namespace rd
 {
 
@@ -101,6 +102,8 @@ protected:
     Context* m_Context;
     Viewport m_Viewport;
     Document::Group m_Body;
+
+    PrintVisitor m_PrintVisitor;
 };
 
 }

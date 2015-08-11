@@ -139,9 +139,9 @@ public:
 		print(command);
 	}
 
-	void accept(IVisitor* visitor) override
+    void accept(IVisitor* visitor) override
     {
-	    visitor->visit(this);
+        visitor->visit(this);
     }
 
 	void draw(Context* context) override
