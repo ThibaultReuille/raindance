@@ -7,7 +7,7 @@
 class PrintVisitor : public IVisitor
 {
     public:
-        PrintVisitor(Context* context = NULL) : indents (0)
+        PrintVisitor(Context* context = NULL) : m_IndentLevel (0)
         {
             m_Context = context;
         }
@@ -17,60 +17,61 @@ class PrintVisitor : public IVisitor
             m_Context = 0;
         }
 
-
         void visit(Document::Node* node) override
         {
             (void) node;
-            printWhiteSpaces();
-            LOG("[Node]");
+            insertWhiteSpaces();
+            LOG("[Node]\n");
         }
 
         void visit(Document::Group* group) override
         {
-            printWhiteSpaces();
-            LOG("[Group]");
-            m_Indents++;
+            insertWhiteSpaces();
+            LOG("[Group]\n");
+            m_IndentLevel++;
 
             for (auto element : group->getElements())
             {
                 element->accept(this);
             }
+
+            m_IndentLevel--;
         }
 
         void visit(TextArea* textArea) override
         {
             (void) textArea;
-            printWhiteSpaces();
-            LOG("[TextArea]");
+            insertWhiteSpaces();
+            LOG("[TextArea]\n");
         }
 
         void visit(CheckBox* checkBox) override
         {
             (void) checkBox;
-            printWhiteSpaces();
-            LOG("[CheckBox]");
+            insertWhiteSpaces();
+            LOG("[CheckBox]\n");
         }
 
         void visit(Shell* shell) override
         {
             (void) shell;
-            printWhiteSpaces();
-            LOG("[Shell]");
+            insertWhiteSpaces();
+            LOG("[Shell]\n");
         }
 
         inline Context* getContext() { return m_Context; }
-        inline void reset () { m_Idents = 0; }
+        inline void setContext(Context* context) { m_Context = context; }
 
     private:
-        void printWhiteSpaces ()
+        void insertWhiteSpaces ()
         {
-            for(int i = 0; i < m_Indents; i++)
-                LOG("   ");
+            for(int i = 0; i < m_IndentLevel; i++)
+                LOG("       ");
         }
 
     protected:
         Context* m_Context;
 
     private:
-        int m_Indents;
+        int m_IndentLevel;
 };
