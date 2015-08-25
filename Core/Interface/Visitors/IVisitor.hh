@@ -10,7 +10,6 @@ class TextArea;
 class CheckBox;
 class Shell;
 
-
 class IVisitor
 {
     public:

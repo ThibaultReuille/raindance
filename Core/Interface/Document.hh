@@ -161,11 +161,6 @@ public:
         (void) context;
     }
 
-    virtual void accept(IVisitor* visitor)
-    {
-        (void) visitor;
-    }
-
     virtual void idle(Context* context)
     {
         (void) context;
@@ -175,6 +170,11 @@ public:
     {
         (void) input;
         (void) output;
+    }
+
+    virtual void accept(IVisitor* visitor)
+    {
+        visitor->visit(this);
     }
 
     virtual void update()

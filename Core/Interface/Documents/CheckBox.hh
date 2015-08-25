@@ -14,6 +14,7 @@ public:
                                     Assets_Shaders_Widgets_checkbox_frag, sizeof(Assets_Shaders_Widgets_checkbox_frag));
 
         m_Shader->dump();
+
         m_Icon = new Icon();
         m_Icon->load("mark", Assets_Textures_mark_png, sizeof(Assets_Textures_mark_png));
         value(false);
@@ -50,7 +51,7 @@ public:
         context->geometry().drawArrays(GL_TRIANGLE_STRIP, 0, m_VertexBuffer.size() / sizeof(glm::vec3));
         context->geometry().unbind(m_VertexBuffer);
 
-        if (true)
+        if (m_Value)
         {
             glm::mat4 m;
             m = glm::translate(model, glm::vec3(m_Dimension.x / 2, m_Dimension.y / 2, 0));

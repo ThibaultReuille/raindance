@@ -74,4 +74,5 @@ class PrintVisitor : public IVisitor
 
     private:
         int m_IndentLevel;
+
 };
