@@ -4,6 +4,8 @@
 #include <raindance/Core/Context.hh>
 #include <raindance/Core/GLFW.hh>
 #include <raindance/Core/Interface/DocumentGroup.hh>
+#include <raindance/Core/Interface/Visitors/PrintVisitor.hh>
+
 
 namespace rd
 {
@@ -30,6 +32,7 @@ public:
     virtual void initialize(Context* context)
     {
         m_Context = context;
+        m_PrintVisitor.setContext(context);
 
         auto viewport = getViewport();
         auto framebuffer = viewport.getFramebuffer();
@@ -93,6 +96,8 @@ public:
 
     virtual void idle(Context* context) = 0;
 
+    virtual void print() { m_PrintVisitor.visit(&m_Body); }
+
     inline Document::Group& body() { return m_Body; }
 
     inline const Viewport& viewport() { return m_Viewport; }
@@ -101,6 +106,8 @@ protected:
     Context* m_Context;
     Viewport m_Viewport;
     Document::Group m_Body;
+    PrintVisitor m_PrintVisitor;
+
 };
 
 }

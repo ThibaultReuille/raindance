@@ -9,71 +9,83 @@
 class TextArea : public Document::Node
 {
 public:
-	TextArea(Document::Node* parent = NULL)
-	: Document::Node(parent)
-	{        
+    TextArea(Document::Node* parent = NULL)
+    : Document::Node(parent)
+    {
         m_Characters = std::string(
-        	"abcdefghijklmnopqrstuvwxyz"
-        	"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        	"01234567890"
-        	"!@#$%%ˆ&*()-_=+{}[]|';:<>,./? "
-        	"\\\");");
+                "abcdefghijklmnopqrstuvwxyz"
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                "01234567890"
+                "!@#$%%ˆ&*()-_=+{}[]|';:<>,./? "
+                "\\\");");
 
-		m_FontFactor = 0.75;
+        m_FontFactor = 0.75;
         m_Font = new rd::Font();
-	}
+    }
 
-	virtual ~TextArea()
-	{
-		SAFE_DELETE(m_Font);
-	}
+    virtual ~TextArea()
+    {
+        SAFE_DELETE(m_Font);
+    }
 
     virtual void clear()
     {
-		m_Lines.clear();
+        m_Lines.clear();
     }
 
-	virtual void print(const std::string& str)
-	{
-		m_Lines.push_front(str);
-	}
+    virtual void print(const std::string& str)
+    {
+        m_Lines.push_front(str);
+    }
 
-	void draw(Context* context) override
-	{
+    void accept (IVisitor* visitor) override
+    {
+        visitor->visit(this);
+    }
+
+    void draw(Context* context) override
+    {
         float ratio = 2.0;
 
-		m_Camera.setOrthographicProjection(0, ratio * this->content().getWidth(), 0, ratio * this->content().getHeight(), 0, 1);
-		m_Camera.lookAt(glm::vec3(0, 0, 1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+        m_Camera.setOrthographicProjection(0, ratio * this->content().getWidth(), 0, ratio * this->content().getHeight(), 0, 1);
+        m_Camera.lookAt(glm::vec3(0, 0, 1), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
-		glDisable(GL_DEPTH_TEST);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
+        glDisable(GL_DEPTH_TEST);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
 
-		Transformation transformation;
+        Transformation transformation;
 
-		transformation.translate(glm::vec3(0.0, - m_Font->getDescender() * m_Font->getSize(), 0.0));
+        transformation.translate(glm::vec3(0.0, - m_Font->getDescender() * m_Font->getSize(), 0.0));
 
-		for (auto it : m_Lines)
-		{
-			if (it.size() > 0)
-			{
-				transformation.push();
-					transformation.scale(glm::vec3(m_FontFactor, m_FontFactor, 1.0));
-					m_Text.set(it.c_str(), m_Font);
-					m_Text.draw(*context, m_Camera.getViewProjectionMatrix() * transformation.state());
-				transformation.pop();
-			}
-			
-			transformation.translate(glm::vec3(0.0, m_Font->getSize() * m_FontFactor, 0.0));
-		}
-	}
+        for (auto it : m_Lines)
+        {
+            if (it.size() > 0)
+            {
+                transformation.push();
+                    transformation.scale(glm::vec3(m_FontFactor, m_FontFactor, 1.0));
+                    m_Text.set(it.c_str(), m_Font);
+                    m_Text.draw(*context, m_Camera.getViewProjectionMatrix() * transformation.state());
+                transformation.pop();
+            }
+
+            transformation.translate(glm::vec3(0.0, m_Font->getSize() * m_FontFactor, 0.0));
+        }
+    }
+
+    inline virtual void setFontFactor (float factor) { m_FontFactor = factor; }
+    inline virtual float fontFactor () { return m_FontFactor; }
+    inline virtual Camera camera () { return m_Camera; }
+    inline virtual std::list<std::string> lines () { return m_Lines; }
+    inline virtual Text text () { return m_Text; }
+    inline virtual rd::Font* getFont () { return m_Font; }
 
 private:
-	Camera m_Camera;
+    Camera m_Camera;
+    float m_FontFactor;
 
-	float m_FontFactor;
-	std::list<std::string> m_Lines;
-	std::string m_Characters;
-	Text m_Text;
-	rd::Font* m_Font;
+    std::list<std::string> m_Lines;
+    std::string m_Characters;
+    Text m_Text;
+    rd::Font* m_Font;
 };
