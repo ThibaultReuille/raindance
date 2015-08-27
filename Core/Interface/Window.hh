@@ -102,7 +102,7 @@ public:
 
     inline const Viewport& viewport() { return m_Viewport; }
 
-protected:;
+protected:
     Context* m_Context;
     Viewport m_Viewport;
     Document::Group m_Body;

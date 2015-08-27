@@ -39,14 +39,14 @@ public:
         glm::mat4 model = glm::mat4();
         glm::mat4 view = m_Camera.getViewMatrix();
         glm::mat4 projection = m_Camera.getProjectionMatrix();
-        glm::vec2 m_Dimension = glm::vec2(this->content().getWidth(), this->content().getHeight());
+        glm::vec2 dimension = glm::vec2(this->content().getWidth(), this->content().getHeight());
 
         glDisable(GL_DEPTH_TEST);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
 
         m_Shader->use();
-        m_Shader->uniform("u_ModelViewProjection").set(projection * view * glm::scale(model, glm::vec3(m_Dimension, 1.0)));
+        m_Shader->uniform("u_ModelViewProjection").set(projection * view * glm::scale(model, glm::vec3(dimension, 1.0)));
         context->geometry().bind(m_VertexBuffer, *m_Shader);
         context->geometry().drawArrays(GL_TRIANGLE_STRIP, 0, m_VertexBuffer.size() / sizeof(glm::vec3));
         context->geometry().unbind(m_VertexBuffer);
@@ -54,8 +54,8 @@ public:
         if (m_Value)
         {
             glm::mat4 m;
-            m = glm::translate(model, glm::vec3(m_Dimension.x / 2, m_Dimension.y / 2, 0));
-            m = glm::scale(m, glm::vec3(1.2f * m_Dimension, 1.0));
+            m = glm::translate(model, glm::vec3(dimension.x / 2, dimension.y / 2, 0));
+            m = glm::scale(m, glm::vec3(1.2f * dimension, 1.0));
             m_Icon->draw(context, projection * view * m, glm::vec4(1.0, 1.0, 1.0, 1.0), 0);
         }
 
