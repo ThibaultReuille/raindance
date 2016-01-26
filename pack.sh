@@ -17,8 +17,8 @@ xxd -i Assets/Shaders/ray.frag >> Pack.hh
 xxd -i Assets/Shaders/pointcloud.vert >> Pack.hh
 xxd -i Assets/Shaders/pointcloud.frag >> Pack.hh
 
-xxd -i Assets/Shaders/convolution.vert >> Pack.hh
-xxd -i Assets/Shaders/convolution.frag >> Pack.hh
+xxd -i Assets/Shaders/canvas.vert >> Pack.hh
+xxd -i Assets/Shaders/canvas.frag >> Pack.hh
 
 xxd -i Assets/Shaders/wallpaper.vert >> Pack.hh
 xxd -i Assets/Shaders/wallpaper.frag >> Pack.hh

@@ -218,7 +218,7 @@ public:
 		return m_Textures.size() - 1;
 	}
 
-	void reshape(unsigned int width, unsigned int height)
+	void resize(unsigned int width, unsigned int height)
 	{
 		std::vector<Texture*>::iterator it;
 		for (it = m_Textures.begin(); it != m_Textures.end(); ++it)

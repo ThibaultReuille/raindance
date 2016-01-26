@@ -34,10 +34,26 @@ public:
     	{
     		Geometry::beginFrame();
 
-	        m_WindowManager.active()->before(m_Context);
-	        m_WindowManager.active()->draw(m_Context);
-	        m_WindowManager.active()->after(m_Context);
-	   		 	
+    		auto window = m_WindowManager.active();
+
+	        window->before(m_Context);
+
+	        window->canvas()->bind();
+
+	        window->draw(m_Context);
+	        
+	        window->canvas()->unbind();
+	        window->canvas()->draw(m_Context);
+
+	        /*
+	        static int count = 0;
+	        if (count == 100)
+	        	window->canvas()->dump("test.tga");
+	   		count++;
+			*/
+			
+	        window->after(m_Context);
+
    		 	Geometry::endFrame();
 
 	    	idle();
