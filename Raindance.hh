@@ -12,6 +12,9 @@ public:
 		GLFW::create(argc, argv);
 
 		m_Context = new Context();
+
+		m_Screenshot = false;
+		m_ScreenshotFactor = 1.0;
 	}
 
 	virtual ~Raindance()
@@ -38,6 +41,10 @@ public:
 
 	        window->before(m_Context);
 
+	        //if (m_Screenshot)
+	        //{
+	        //}
+
 	        window->canvas()->bind();
 
 	        window->draw(m_Context);
@@ -45,13 +52,12 @@ public:
 	        window->canvas()->unbind();
 	        window->canvas()->draw(m_Context);
 
-	        /*
-	        static int count = 0;
-	        if (count == 100)
-	        	window->canvas()->dump("test.tga");
-	   		count++;
-			*/
-			
+	        if (m_Screenshot)
+			{
+				window->canvas()->dump(m_ScreenshotFilename.c_str());
+				m_Screenshot = false;
+			}
+
 	        window->after(m_Context);
 
    		 	Geometry::endFrame();
@@ -74,8 +80,19 @@ public:
 
 	inline WindowManager& windows() { return m_WindowManager; }
 
+	void screenshot(const std::string& filename, float factor = 1.0)
+	{
+		m_Screenshot = true;
+		m_ScreenshotFilename = filename;
+		m_ScreenshotFactor = factor;
+	}
+
 protected:
 	Context* m_Context;
 	WindowManager m_WindowManager;
+
+	bool m_Screenshot;
+	std::string m_ScreenshotFilename;
+	float m_ScreenshotFactor;
 };
 
