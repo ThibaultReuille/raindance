@@ -24,6 +24,9 @@ public:
 
 		for (auto doc : m_Elements)
 		{
+			if (!doc->style().Visible)
+				continue;
+
 	        auto position = doc->position() + glm::vec3(
 	            doc->margin().left() + doc->border().left() + doc->padding().left(),
 	            doc->margin().bottom() + doc->border().bottom() + doc->padding().bottom(),
@@ -78,6 +81,12 @@ public:
 	{
 		for (auto doc : m_Elements)
 			doc->onResize(viewport);
+	}
+
+	void onScreenshot(bool enter) override
+	{
+		for (auto doc : m_Elements)
+			doc->onScreenshot(enter);
 	}
 
 	void onMouseDown(const glm::vec2& pos) override

@@ -24,7 +24,6 @@ public:
         auto framebuffer = getViewport().getFramebuffer();
 
         m_Canvas = new Canvas(framebuffer.Width, framebuffer.Height);
-        m_Canvas->bind();
     }
 
     virtual ~Window()
@@ -70,6 +69,11 @@ public:
         m_Body.update();
 
         m_Body.onResize(viewport);
+    }
+
+    virtual void onScreenshot(bool enter)
+    {
+        m_Body.onScreenshot(enter);
     }
 
     void onCursorPos(double xpos, double ypos) override

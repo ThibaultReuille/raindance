@@ -59,7 +59,8 @@ struct Style
 		Width(Length::PERCENTS, 1.0),
 		Height(Length::PERCENTS, 1.0),
 		BackgroundColor(glm::vec4(1.0, 1.0, 1.0, 1.0)),
-		Pickable(true)
+		Pickable(true),
+		Visible(true)
 	{
 	}
 
@@ -80,6 +81,7 @@ struct Style
 	glm::vec4 BackgroundColor;
 
 	bool Pickable;
+	bool Visible;
 };
 
 class Background
@@ -319,6 +321,11 @@ public:
 			border().Color = glm::vec4(ORANGE, 1.0);
 		else
 			border().Color = content().Color;
+	}
+
+	virtual void onScreenshot(bool enter)
+	{
+		(void) enter;
 	}
 
     virtual void onKey(int key, int scancode, int action, int mods)

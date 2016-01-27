@@ -41,9 +41,16 @@ public:
 
 	        window->before(m_Context);
 
-	        //if (m_Screenshot)
-	        //{
-	        //}
+	        auto canvasWidth = window->canvas()->width();
+	        auto canvasHeight = window->canvas()->height();
+
+	        if (m_Screenshot)
+	        {
+	        	window->onScreenshot(true);
+	        	window->onSetFramebufferSize(
+	        		static_cast<unsigned int>(canvasWidth * m_ScreenshotFactor),
+	        		static_cast<unsigned int>(canvasHeight * m_ScreenshotFactor));
+	        }
 
 	        window->canvas()->bind();
 
@@ -55,7 +62,9 @@ public:
 	        if (m_Screenshot)
 			{
 				window->canvas()->dump(m_ScreenshotFilename.c_str());
+				window->onSetFramebufferSize(canvasWidth, canvasHeight);
 				m_Screenshot = false;
+				window->onScreenshot(false);
 			}
 
 	        window->after(m_Context);

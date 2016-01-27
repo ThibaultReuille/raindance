@@ -132,6 +132,9 @@ public:
 		m_Texture->dump(filename);
 	}
 
+	unsigned int width() const { return m_Width; }
+	unsigned int height() const { return m_Height; }
+
 private:
 	GLuint m_Width;
 	GLuint m_Height;
